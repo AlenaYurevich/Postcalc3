@@ -21,11 +21,15 @@ def read_movies_from_exel(filepath):
             'director': director,
             'genre': genre
         }
-        movies.apend(movie)
+        movies.append(movie)
 
     return movies
 
 
+def movies_view(request):
+    file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/movies.xlsx')
+    movies = read_movies_from_exel(file_path)
+    return render(request, 'index.html', {'movies': movies})
 
 
 

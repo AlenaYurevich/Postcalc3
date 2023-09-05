@@ -5,6 +5,15 @@
     <title>Title</title>
 </head>
 <body>
-    <h1>{{ greeting }}</h1>
+    <h1>Топ-250 лучших фильмов</h1>
+    {% for movie in movies %}
+        <div>
+            <h2>{{ movie.title }}</h2>
+            <p>Год выпуска: {{ movie.year }}</p>
+            <p>Режиссер: {{ movie.director }}</p>
+            <p>Жанр: {{ movie.genre }}</p>
+            <p> </p>
+        </div>
+    {% endfor %}
 </body>
 </html>
