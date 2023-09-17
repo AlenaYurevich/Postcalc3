@@ -16,7 +16,7 @@ for i in range(3, max_rows+1):
     print(name, rate)
 
 
-def letter(weight):
+def my_letter(weight):
     letter = sheet['B3'].value
     next_20_gram = sheet['B5'].value
     letter_cost = letter + next_20_gram * (math.ceil(weight / 20) - 1)

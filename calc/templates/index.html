@@ -5,16 +5,13 @@
     <title>Title</title>
 </head>
 <body>
-    <h1>Топ-250 лучших фильмов</h1>
-<!--    {% for movie in movies %}-->
-<!--        <div>-->
-<!--            <h2>{{ movie.title }}</h2>-->
-<!--            <p>Год выпуска: {{ movie.year }}</p>-->
-<!--            <p>Режиссер: {{ movie.director }}</p>-->
-<!--            <p>Жанр: {{ movie.genre }}</p>-->
-<!--            <p> </p>-->
-<!--        </div>-->
-<!--    {% endfor %}-->
+    <h1>Стоимость пересылки: </h1>
+    {% for rates in price_list %}
+        <div>
+            <h2>{{ rates.item }}</h2>
+            <p>Стоимость: {{ rates.cost }}</p>
+        </div>
+    {% endfor %}
 
 </body>
 </html>
