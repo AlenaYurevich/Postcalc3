@@ -1,35 +1,30 @@
+# import math
 import os
 from django.shortcuts import render
 from openpyxl import load_workbook
 
 
-def hello_world(request):
-    return render(request, "index.html", {'greeting':'Hello, world!'})
-
-
-def read_movies_from_exel(filepath):
-    movies = []
+def read_letter_from_exel(filepath):
+    price_list = []
 
     workbook = load_workbook(filename=filepath)
     sheet = workbook.active
 
-    for row in sheet.iter_rows(min_row=2, values_only=True):
-        title, year, director, genre = row
-        movie = {
-            'title': title,
-            'year': int(year),
-            'director': director,
-            'genre': genre
-        }
-        movies.append(movie)
+    for row in sheet.iter_rows(min_row=3, values_only=True):
+        item, cost = row
+        rates = {
+            'item': item,
+            'cost': cost
+                    }
+        price_list.append(rates)
 
-    return movies
+    return price_list
 
 
 def movies_view(request):
-    file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/movies.xlsx')
-    movies = read_movies_from_exel(file_path)
-    return render(request, 'index.html', {'movies': movies})
+    file_path2 = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/letter.xlsx')
+    price_list = read_letter_from_exel(file_path2)
+    return render(request, 'index.html', {'price_list': price_list})
 
 
 
