@@ -21,7 +21,7 @@ def read_letter_from_exel(filepath):
     return price_list
 
 
-def movies_view(request):
+def calculation_view(request):
     file_path2 = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/letter.xlsx')
     price_list = read_letter_from_exel(file_path2)
     return render(request, 'index.html', {'price_list': price_list})
