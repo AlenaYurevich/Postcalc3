@@ -56,25 +56,35 @@
     <p>{{ cost_of_delivery }} руб.</p>
 
 
+<!--    <div class="row row-cols-1 row-cols-md-3 mb-3">-->
+<!--      <form class="needs-validation" action = "" method = "POST" novalidate>-->
+<!--        {% csrf_token %}-->
+
+<!--            <div class="col">-->
+<!--              <label for="weight" class="form-label">Введите массу отправления, грамм</label>-->
+<!--              <input type="text" class="form-control" id="weight" name="weight" placeholder="20" required>-->
+<!--              <div class="invalid-feedback">-->
+<!--                Максимальный вес 30,0 кг-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="col">-->
+<!--              <label for="declared_value" class="form-label">Сумма объявленной ценности, руб.</label>-->
+<!--              <input type="text" class="form-control" id="declared_value" name="declared_value" placeholder="0,0">-->
+<!--            </div>-->
+<!--            <button class="col-md-6 btn btn-lg btn-primary mt-4 mb-4" type="submit" name="send" >Рассчитать</button>-->
+<!--       </form>-->
+<!--    </div>-->
     <div class="row row-cols-1 row-cols-md-3 mb-3">
-      <form class="needs-validation" action = "" method = "POST" novalidate>
-        {% csrf_token %}
-
-            <div class="col">
-              <label for="weight" class="form-label">Введите массу отправления, грамм</label>
-              <input type="text" class="form-control" id="weight" name="weight" placeholder="20" required>
-              <div class="invalid-feedback">
-                Максимальный вес 30,0 кг
-              </div>
-            </div>
-            <div class="col">
-              <label for="declared_value" class="form-label">Сумма объявленной ценности, руб.</label>
-              <input type="text" class="form-control" id="declared_value" name="declared_value" placeholder="0,0">
-            </div>
-            <button class="col-md-6 btn btn-lg btn-primary mt-4 mb-4" type="submit" name="send" value = "Узнать">Рассчитать</button>
-       </form>
+      <form method="POST" action="">
+       {% csrf_token %}
+       <label for="mass">Масса:</label>
+       <input type="text" name="mass">
+       <button class="col-md-6 btn btn-lg btn-primary mt-4 mb-4" type="submit" name="send" >Рассчитать</button>
+      </form>
+   {% if result %}
+       <p>Результат: {{ result }}</p>
+   {% endif %}
     </div>
-
 
     <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
       <div class="col">
@@ -83,7 +93,11 @@
             <h4 class="my-0 fw-normal">Письмо простое</h4><br>
           </div>
           <div class="card-body">
-            <h1 class="card-title pricing-card-title">{{ cost_of_delivery }}<small class="text-body-secondary fw-light"> руб.</small></h1>
+            {% if cost_of_delivery %}
+            <h1 class="card-title pricing-card-title">
+           {{ cost_of_delivery }}
+             <small class="text-body-secondary fw-light"> руб.</small></h1>
+            {% endif %}
             <ul class="list-unstyled mt-3 mb-4">
               <li>10 users included</li>
               <li>2 GB of storage</li>
@@ -227,6 +241,6 @@
     </div>
   </footer>
 </div>
-<script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>
 </html>
