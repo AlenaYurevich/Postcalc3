@@ -2,7 +2,6 @@ import math
 import os
 # import requests
 from django.shortcuts import render
-# from django.http import HttpResponse
 from openpyxl import load_workbook
 
 
@@ -37,8 +36,8 @@ def calculation_view(request):
     file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/letter.xlsx')
     price_list = read_letter_from_exel(file_path)
     if request.method == 'POST':
-        mass = float(request.POST.get('mass'))
-        cost_of_delivery = cost_of_letter(mass)
+        item_weight = float(request.POST.get('weight'))
+        cost_of_delivery = cost_of_letter(item_weight)
         return render(request, 'index.html', {'price_list': price_list, 'cost_of_delivery': cost_of_delivery,
                                               })  # внутри фигурных скобок
     else:
