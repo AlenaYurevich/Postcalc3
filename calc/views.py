@@ -1,8 +1,10 @@
 import math
 import os
 # import requests
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from openpyxl import load_workbook
+from .forms import PostForm
 
 
 def read_letter_from_exel(filepath):
@@ -20,9 +22,6 @@ def read_letter_from_exel(filepath):
     return price_list
 
 
-# weight1 = 69
-
-
 def cost_of_letter(item_weight):
     file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/letter.xlsx')
     workbook = load_workbook(filename=file_path)
@@ -35,10 +34,14 @@ def cost_of_letter(item_weight):
 def calculation_view(request):
     file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/letter.xlsx')
     price_list = read_letter_from_exel(file_path)
-    if request.method == 'POST':
-        item_weight = float(request.POST.get('weight'))
-        cost_of_delivery = cost_of_letter(item_weight)
-        return render(request, 'index.html', {'price_list': price_list, 'cost_of_delivery': cost_of_delivery,
-                                              })  # внутри фигурных скобок
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            item_weight = int(request.POST.get('weight'))
+            cost_of_delivery = cost_of_letter(item_weight)
+        return render(request, 'index.html', {'price_list': price_list, 'form': form,
+                                              'cost_of_delivery': cost_of_delivery})  # внутри фигурных скобок
     else:
+        form = PostForm()
         return render(request, 'index.html', {'price_list': price_list})  # внутри фигурных скобок
+
