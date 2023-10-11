@@ -42,7 +42,8 @@
 
     <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
       <h1 class="display-4 fw-normal text-body-emphasis">Расчет стоимости пересылки по Беларуси</h1>
-      <p class="fs-5 text-body-secondary">Какое почтовое отправление самое быстрое, какое самое надежное, какое самое доступное? Введите вес отправления в граммах и таблица покажет все возможные варианты </p>
+      <p class="fs-5 text-body-secondary">Какое почтовое отправление самое быстрое, какое самое надежное, какое самое доступное?
+        Введите вес отправления в граммах и таблица покажет все возможные варианты пересылки РУП "Белпочта" </p>
     </div>
   </header>
 
@@ -87,10 +88,9 @@
 <!--   {% if result %}-->
 <!--       <p>Результат: {{ result }}</p>-->
 <!--   {% endif %}-->
-    <form method="POST" class="post-form">{% csrf_token %}
+    <form method="POST" class="PostForm">{% csrf_token %}
       <div class="col">
-        {{ form.as_p }}
-
+        {{ form }}
         <button class=" btn btn-lg btn-primary mt-4 mb-4" type="submit" name="send" >Рассчитать</button>
       </div>
     </form>
@@ -117,8 +117,8 @@
             <td>{{ cost_of_delivery }}</td>
             <td>{{ cost_of_delivery }}</td>
             <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-            <td>{{ vat }}</td>
-            <td></td>
+            <td>{{ declared_value }}</td>
+            <td>нет</td>
           </tr>
           <tr>
             <th scope="row" class="text-start">Письмо заказное</th>
@@ -179,7 +179,7 @@
               <li>Д + 3</li>
               <li>в почтовый ящик</li>
             </ul>
-            <label type="button" class="w-100 btn btn-lg btn-outline-primary">доступный вариант</label>
+            <label class="w-100 btn btn-lg btn-outline-primary">доступный вариант</label>
           </div>
         </div>
       </div>

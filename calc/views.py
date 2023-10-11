@@ -1,6 +1,6 @@
 import math
 import os
-# import requests
+import requests
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from openpyxl import load_workbook
@@ -38,10 +38,10 @@ def calculation_view(request):
         form = PostForm(request.POST)
         if form.is_valid():
             item_weight = int(request.POST.get('weight'))
+            declared_value = request.POST.get('declared_value')
             cost_of_delivery = cost_of_letter(item_weight)
-        return render(request, 'index.html', {'price_list': price_list, 'form': form,
-                                              'cost_of_delivery': cost_of_delivery})  # внутри фигурных скобок
+            return render(request, 'index.html', {'price_list': price_list,
+                                                  'form': form, 'cost_of_delivery': cost_of_delivery, 'declared_value': declared_value})  #  Внутри фиг скобок
     else:
         form = PostForm()
-        return render(request, 'index.html', {'price_list': price_list})  # внутри фигурных скобок
-
+        return render(request, 'index.html', {'price_list': price_list, 'form': form})  # внутри фигурных скобок
