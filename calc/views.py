@@ -1,10 +1,11 @@
 import math
 import os
-import requests
-from django.http import HttpResponseRedirect
+# import requests
+# from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from openpyxl import load_workbook
 from .forms import PostForm
+from .letter import cost_of_simple
 
 
 def read_letter_from_exel(filepath):
@@ -13,22 +14,27 @@ def read_letter_from_exel(filepath):
     sheet = workbook.active
 
     for row in sheet.iter_rows(min_row=3, values_only=True):
-        item, cost = row
+        item, cost_fiz, cost_yur = row
         rates = {
             'item': item,
-            'cost': cost
+            'cost_fiz': cost_fiz,
+            'cost_yur': cost_yur
                     }
         price_list.append(rates)
     return price_list
 
 
-def cost_of_letter(item_weight):
-    file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/letter.xlsx')
+def weight_step(item_weight):
+    return math.ceil((item_weight - 20) / 20)
+
+
+def cost_of_registered(item_weight):
+    file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/letter2.xlsx')
     workbook = load_workbook(filename=file_path)
     sheet = workbook.active
-    weight_step = math.ceil((item_weight - 20) / 20)
-    cost_of_delivery = str("{:.2f}".format(sheet['B4'].value + sheet['B5'].value * weight_step)).replace('.', ',')
-    return cost_of_delivery
+    fiz = sheet['D10'].value + sheet['D18'].value * weight_step(item_weight)
+    yur = (sheet['H10'].value + sheet['H18'].value * weight_step(item_weight)) * 1.2
+    return [fiz, yur]
 
 
 def calculation_view(request):
@@ -39,9 +45,21 @@ def calculation_view(request):
         if form.is_valid():
             item_weight = int(request.POST.get('weight'))
             declared_value = request.POST.get('declared_value')
-            cost_of_delivery = cost_of_letter(item_weight)
+            if declared_value:
+                for_declared_value = int(declared_value) * 3 / 100
+            else:
+                for_declared_value = 0
+            cost_of_letter_fiz = str("{:.2f}".format(cost_of_simple(item_weight)[0]).replace('.', ','))
+            cost_of_letter_yur = str("{:.2f}".format(cost_of_simple(item_weight)[1]).replace('.', ','))
+            cost_of_reg_fiz = str("{:.2f}".format(cost_of_registered(item_weight)[0]).replace('.', ','))
+            cost_of_reg_yur = str("{:.2f}".format(cost_of_registered(item_weight)[1]).replace('.', ','))
+            # cost_of_delivery = cost_of_letter_fiz + for_declared_value
             return render(request, 'index.html', {'price_list': price_list,
-                                                  'form': form, 'cost_of_delivery': cost_of_delivery, 'declared_value': declared_value})  #  Внутри фиг скобок
+                                                  'form': form, 'cost_of_letter_fiz': cost_of_letter_fiz,
+                                                  'cost_of_letter_yur': cost_of_letter_yur,
+                                                  'cost_of_reg_fiz': cost_of_reg_fiz,
+                                                  'cost_of_reg_yur': cost_of_reg_yur,
+                                                  'for_declared_value': for_declared_value})  # Внутри фиг скобок
     else:
         form = PostForm()
         return render(request, 'index.html', {'price_list': price_list, 'form': form})  # внутри фигурных скобок
