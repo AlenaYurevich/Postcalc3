@@ -6,6 +6,7 @@ from django.shortcuts import render
 from openpyxl import load_workbook
 from .forms import PostForm
 from .letter import cost_of_simple
+from .letter import cost_of_registered
 
 
 def read_letter_from_exel(filepath):
@@ -28,13 +29,8 @@ def weight_step(item_weight):
     return math.ceil((item_weight - 20) / 20)
 
 
-def cost_of_registered(item_weight):
-    file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/letter2.xlsx')
-    workbook = load_workbook(filename=file_path)
-    sheet = workbook.active
-    fiz = sheet['D10'].value + sheet['D18'].value * weight_step(item_weight)
-    yur = (sheet['H10'].value + sheet['H18'].value * weight_step(item_weight)) * 1.2
-    return [fiz, yur]
+def formatted(num):
+    return str("{:.2f}".format(num).replace('.', ','))
 
 
 def calculation_view(request):
@@ -49,16 +45,20 @@ def calculation_view(request):
                 for_declared_value = int(declared_value) * 3 / 100
             else:
                 for_declared_value = 0
-            cost_of_letter_fiz = str("{:.2f}".format(cost_of_simple(item_weight)[0]).replace('.', ','))
-            cost_of_letter_yur = str("{:.2f}".format(cost_of_simple(item_weight)[1]).replace('.', ','))
-            cost_of_reg_fiz = str("{:.2f}".format(cost_of_registered(item_weight)[0]).replace('.', ','))
-            cost_of_reg_yur = str("{:.2f}".format(cost_of_registered(item_weight)[1]).replace('.', ','))
+            cost_of_letter_fiz = formatted(cost_of_simple(item_weight)[0])
+            cost_of_letter_yur = formatted(cost_of_simple(item_weight)[1])
+            vat_simple = formatted(cost_of_simple(item_weight)[2])
+            cost_of_reg_fiz = formatted(cost_of_registered(item_weight)[0])
+            cost_of_reg_yur = formatted(cost_of_registered(item_weight)[1])
+            vat_registered = formatted(cost_of_registered(item_weight)[2])
             # cost_of_delivery = cost_of_letter_fiz + for_declared_value
             return render(request, 'index.html', {'price_list': price_list,
                                                   'form': form, 'cost_of_letter_fiz': cost_of_letter_fiz,
                                                   'cost_of_letter_yur': cost_of_letter_yur,
+                                                  'vat_simple': vat_simple,
                                                   'cost_of_reg_fiz': cost_of_reg_fiz,
                                                   'cost_of_reg_yur': cost_of_reg_yur,
+                                                  'vat_registered': vat_registered,
                                                   'for_declared_value': for_declared_value})  # Внутри фиг скобок
     else:
         form = PostForm()

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -78,17 +79,6 @@
 <!--       </form>-->
 <!--    </div>-->
     <div class="row row-cols-1 row-cols-md-3 mb-3">
-<!--      <form id = "multiply_form" class="needs-validation" method="POST" action="" novalidate>-->
-<!--       {% csrf_token %}-->
-<!--      <div class="col">-->
-<!--       <label for="weight">Масса отправления, грамм:</label>-->
-<!--       <input type="text" class="form-control" id="weight" name="weight">-->
-<!--       <button class=" btn btn-lg btn-primary mt-4 mb-4" type="submit" name="send" >Рассчитать</button>-->
-<!--      </div>-->
-<!--      </form>-->
-<!--   {% if result %}-->
-<!--       <p>Результат: {{ result }}</p>-->
-<!--   {% endif %}-->
     <form method="POST" class="PostForm">{% csrf_token %}
       <div class="col">
         {{ form }}
@@ -117,7 +107,7 @@
             <th scope="row" class="text-start">Письмо простое, бандероль простая</th>
             <td>{{ cost_of_letter_fiz }}</td>
             <td>{{ cost_of_letter_yur }}</td>
-            <td></td>
+            <td>{{ vat_simple }}</td>
             <td></td>
             <td>нет</td>
           </tr>
@@ -125,7 +115,7 @@
             <th scope="row" class="text-start">Письмо заказное, бандероль заказная</th>
             <td>{{ cost_of_reg_fiz }}</td>
             <td>{{ cost_of_reg_yur }}</td>
-            <td></td>
+            <td>{{ vat_registered }}</td>
             <td></td>
             <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
           </tr>
