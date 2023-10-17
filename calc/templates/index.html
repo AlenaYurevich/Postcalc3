@@ -104,7 +104,7 @@
         </thead>
         <tbody>
           <tr>
-            <th scope="row" class="text-start">Письмо простое, бандероль простая</th>
+            <th scope="row" class="text-start">Письмо, бандероль, мелкий пакет простые</th>
             <td>{{ cost_of_letter_fiz }}</td>
             <td>{{ cost_of_letter_yur }}</td>
             <td>{{ vat_simple }}</td>
@@ -124,9 +124,9 @@
         <tbody>
           <tr>
             <th scope="row" class="text-start">Письмо с объявленной ценностью</th>
-            <td>{{ cost_of_delivery }}</td>
-            <td>{{ cost_of_delivery }}</td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+            <td>{{ cost_of_value_fiz }}</td>
+            <td>{{ cost_of_value_yur }}</td>
+            <td>{{ vat_value_letter }}</td>
             <td>{{ for_declared_value }}</td>
             <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
           </tr>
@@ -156,7 +156,7 @@
       <div class="col">
         <div class="card mb-4 rounded-3 shadow-sm">
           <div class="card-header py-3">
-            <h4 class="my-0 fw-normal">Письмо простое</h4><br>
+            <h4 class="my-0 fw-normal">Письмо, бандероль, мелкий пакет простые</h4><br>
           </div>
           <div class="card-body">
             {% if cost_of_letter_fiz %}
@@ -186,6 +186,7 @@
               <li>отслеживание</li>
               <li>прием оператором</li>
               <li>Д + 3</li>
+              <li>возмещение при утрате</li>
               <li>вручение лично в руки</li>
             </ul>
             <button type="button" class="w-100 btn btn-lg btn-primary">надежный вариант</button>
@@ -198,10 +199,12 @@
             <h4 class="my-0 fw-normal">Письмо с объявленной ценностью</h4>
           </div>
           <div class="card-body">
-            <h1 class="card-title pricing-card-title">$29<small class="text-body-secondary fw-light">/mo</small></h1>
+            <h1 class="card-title pricing-card-title">{{ cost_of_value_fiz }}
+              <small class="text-body-secondary fw-light">руб.</small></h1>
             <ul class="list-unstyled mt-3 mb-4">
               <li>отслеживание</li>
               <li>прием оператором</li>
+              <li>Д + 3</li>
               <li>возмещение при утрате</li>
               <li>вручение лично в руки</li>
             </ul>
