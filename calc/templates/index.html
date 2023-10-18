@@ -105,9 +105,11 @@
         <tbody>
           <tr>
             <th scope="row" class="text-start">Письмо, бандероль, мелкий пакет простые</th>
-            <td>{{ cost_of_letter_fiz }}</td>
-            <td>{{ cost_of_letter_yur }}</td>
-            <td>{{ vat_simple }}</td>
+            {% for rate in simple %}
+            <td> {{ rate.fiz }}</td>
+            <td> {{ rate.yur }}</td>
+            <td> {{ rate.item_vat }}</td>
+            {% endfor %}
             <td></td>
             <td>нет</td>
           </tr>
@@ -131,7 +133,7 @@
             <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
           </tr>
           <tr>
-            <th scope="row" class="text-start">Мелкий пакет простой</th>
+            <th scope="row" class="text-start">Мелкий пакет заказной</th>
             <td></td>
             <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
             <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
@@ -159,11 +161,16 @@
             <h4 class="my-0 fw-normal">Письмо, бандероль, мелкий пакет простые</h4><br>
           </div>
           <div class="card-body">
-            {% if cost_of_letter_fiz %}
+<!--            {% if cost_of_letter_fiz %}-->
+             {% for rate in simple %}
             <h1 class="card-title pricing-card-title">
-           {{ cost_of_letter_fiz }}
+
+            {{ rate.fiz }}
+
+
              <small class="text-body-secondary fw-light"> руб.</small></h1>
-            {% endif %}
+            {% endfor %}
+<!--            {% endif %}-->
             <ul class="list-unstyled mt-3 mb-4">
               <li>нет отслеживания</li>
               <li>оплата марками</li>

@@ -1,12 +1,10 @@
 import math
-import os
 # import requests
 # from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from openpyxl import load_workbook
 from .forms import PostForm
-from .letter import cost_of_simple
-from .letter import cost_of_registered, cost_of_value_letter, cost_for_declared_value
+from .letter import cost_of_simple, cost_of_registered, cost_of_value_letter, cost_for_declared_value
 
 
 def read_letter_from_exel(filepath):
@@ -34,8 +32,8 @@ def formatted(num):
 
 
 def calculation_view(request):
-    file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/letter.xlsx')
-    price_list = read_letter_from_exel(file_path)
+    # file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/letter.xlsx')
+    # price_list = read_letter_from_exel(file_path)
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
@@ -51,23 +49,22 @@ def calculation_view(request):
                 cost_of_value_yur = ""
                 vat_value_letter = ""
                 for_declared_value = ""
-            cost_of_letter_fiz = formatted(cost_of_simple(item_weight)[0])
-            cost_of_letter_yur = formatted(cost_of_simple(item_weight)[1])
-            vat_simple = formatted(cost_of_simple(item_weight)[2])
+            # cost_of_letter_fiz = formatted(cost_of_simple(item_weight)[0])
+            # cost_of_letter_yur = formatted(cost_of_simple(item_weight)[1])
+            # vat_simple = formatted(cost_of_simple(item_weight)[2])
+            simple = cost_of_simple(item_weight)
             cost_of_reg_fiz = formatted(cost_of_registered(item_weight)[0])
             cost_of_reg_yur = formatted(cost_of_registered(item_weight)[1])
             vat_registered = formatted(cost_of_registered(item_weight)[2])
-            return render(request, 'index.html', {'price_list': price_list,
-                                                  'form': form, 'cost_of_letter_fiz': cost_of_letter_fiz,
-                                                  'cost_of_letter_yur': cost_of_letter_yur,
-                                                  'vat_simple': vat_simple,
-                                                  'cost_of_reg_fiz': cost_of_reg_fiz,
-                                                  'cost_of_reg_yur': cost_of_reg_yur,
-                                                  'vat_registered': vat_registered,
-                                                  'cost_of_value_fiz': cost_of_value_fiz,
-                                                  'cost_of_value_yur': cost_of_value_yur,
-                                                  'vat_value_letter': vat_value_letter,
-                                                  'for_declared_value': for_declared_value})  # Внутри фиг скобок
+            context = {'form': form, 'simple': simple,
+                       'cost_of_reg_fiz': cost_of_reg_fiz,
+                       'cost_of_reg_yur': cost_of_reg_yur,
+                       'vat_registered': vat_registered,
+                       'cost_of_value_fiz': cost_of_value_fiz,
+                       'cost_of_value_yur': cost_of_value_yur,
+                       'vat_value_letter': vat_value_letter,
+                       'for_declared_value': for_declared_value}
+            return render(request, 'index.html', context)  # Внутри фиг скобок
     else:
         form = PostForm()
-        return render(request, 'index.html', {'price_list': price_list, 'form': form})  # внутри фигурных скобок
+        return render(request, 'index.html', {'form': form})  # внутри фигурных скобок

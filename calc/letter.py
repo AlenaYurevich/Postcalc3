@@ -11,6 +11,10 @@ def vat(num):
     return round(num * 0.2, 2)  # расчет НДС 20 %
 
 
+def formatted(num):
+    return str("{:.2f}".format(num).replace('.', ','))
+
+
 def cost_for_declared_value(declared_value):
     if declared_value:
         fiz = float(declared_value) * 3.6 / 100
@@ -24,10 +28,23 @@ def cost_of_simple(item_weight):
     file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/letter.xlsx')  # первый файл
     workbook = load_workbook(filename=file_path)
     sheet = workbook.active
+    price_list = []
     fiz = sheet['B5'].value + sheet['B6'].value * weight_step(item_weight)
     yur = sheet['C5'].value + sheet['C6'].value * weight_step(item_weight)
-    yur += vat(yur)
-    return [fiz, yur, vat(yur)]
+    item_vat = vat(yur)
+    yur += item_vat
+    rate = {
+        'fiz': fiz,
+        'yur': yur,
+        'item_vat': item_vat
+    }
+    for i in rate:
+        rate[i] = formatted(rate[i])
+    price_list.append(rate)
+    return price_list
+
+
+print(cost_of_simple(20))
 
 
 def cost_of_registered(item_weight):
