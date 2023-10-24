@@ -161,16 +161,13 @@
             <h4 class="my-0 fw-normal">Письмо, бандероль, мелкий пакет простые</h4><br>
           </div>
           <div class="card-body">
-<!--            {% if cost_of_letter_fiz %}-->
-             {% for rate in simple %}
             <h1 class="card-title pricing-card-title">
-
-            {{ rate.fiz }}
-
-
-             <small class="text-body-secondary fw-light"> руб.</small></h1>
+            {% for rate in simple %}
+           {{ rate.fiz }}{{ rate.rub }}
             {% endfor %}
-<!--            {% endif %}-->
+            </h1>
+
+
             <ul class="list-unstyled mt-3 mb-4">
               <li>нет отслеживания</li>
               <li>оплата марками</li>
@@ -184,7 +181,7 @@
       <div class="col">
         <div class="card mb-4 rounded-3 shadow-sm">
           <div class="card-header py-3">
-            <h4 class="my-0 fw-normal">Письмо заказное</h4><br>
+            <h4 class="my-0 fw-normal">Письмо, бандероль заказные</h4><br>
           </div>
           <div class="card-body">
             <h1 class="card-title pricing-card-title">{{ cost_of_reg_fiz }}

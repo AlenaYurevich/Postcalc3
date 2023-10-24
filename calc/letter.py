@@ -12,7 +12,10 @@ def vat(num):
 
 
 def formatted(num):
-    return str("{:.2f}".format(num).replace('.', ','))
+    if num == str(num):
+        return num
+    else:
+        return str("{:.2f}".format(num).replace('.', ','))
 
 
 def cost_for_declared_value(declared_value):
@@ -25,26 +28,32 @@ def cost_for_declared_value(declared_value):
 
 
 def cost_of_simple(item_weight):
-    file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/letter.xlsx')  # первый файл
-    workbook = load_workbook(filename=file_path)
-    sheet = workbook.active
     price_list = []
-    fiz = sheet['B5'].value + sheet['B6'].value * weight_step(item_weight)
-    yur = sheet['C5'].value + sheet['C6'].value * weight_step(item_weight)
-    item_vat = vat(yur)
-    yur += item_vat
-    rate = {
-        'fiz': fiz,
-        'yur': yur,
-        'item_vat': item_vat
-    }
-    for i in rate:
-        rate[i] = formatted(rate[i])
-    price_list.append(rate)
+    if item_weight <= 2000:
+        file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/letter.xlsx')  # первый файл
+        workbook = load_workbook(filename=file_path)
+        sheet = workbook.active
+        fiz = sheet['B5'].value + sheet['B6'].value * weight_step(item_weight)
+        yur = sheet['C5'].value + sheet['C6'].value * weight_step(item_weight)
+        item_vat = vat(yur)
+        yur += item_vat
+        rate = {
+            'fiz': fiz,
+            'yur': yur,
+            'item_vat': item_vat,
+            'rub': " руб."
+        }
+        for i in rate:
+            rate[i] = formatted(rate[i])
+        price_list.append(rate)
+    else:
+        fiz = "Макс. вес 2 кг"
+        price_list.append({'fiz': fiz})
+
     return price_list
 
 
-print(cost_of_simple(20))
+print(cost_of_simple(2001))
 
 
 def cost_of_registered(item_weight):

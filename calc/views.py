@@ -49,10 +49,8 @@ def calculation_view(request):
                 cost_of_value_yur = ""
                 vat_value_letter = ""
                 for_declared_value = ""
-            # cost_of_letter_fiz = formatted(cost_of_simple(item_weight)[0])
-            # cost_of_letter_yur = formatted(cost_of_simple(item_weight)[1])
-            # vat_simple = formatted(cost_of_simple(item_weight)[2])
             simple = cost_of_simple(item_weight)
+            print(simple)
             cost_of_reg_fiz = formatted(cost_of_registered(item_weight)[0])
             cost_of_reg_yur = formatted(cost_of_registered(item_weight)[1])
             vat_registered = formatted(cost_of_registered(item_weight)[2])
