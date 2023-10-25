@@ -115,9 +115,11 @@
           </tr>
           <tr>
             <th scope="row" class="text-start">Письмо заказное, бандероль заказная</th>
-            <td>{{ cost_of_reg_fiz }}</td>
-            <td>{{ cost_of_reg_yur }}</td>
-            <td>{{ vat_registered }}</td>
+            {% for rate in registered %}
+            <td> {{ rate.fiz }}</td>
+            <td> {{ rate.yur }}</td>
+            <td> {{ rate.item_vat }}</td>
+            {% endfor %}
             <td></td>
             <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
           </tr>
@@ -126,10 +128,12 @@
         <tbody>
           <tr>
             <th scope="row" class="text-start">Письмо с объявленной ценностью</th>
-            <td>{{ cost_of_value_fiz }}</td>
-            <td>{{ cost_of_value_yur }}</td>
-            <td>{{ vat_value_letter }}</td>
-            <td>{{ for_declared_value }}</td>
+            {% for rate in value_letter %}
+            <td> {{ rate.fiz }}</td>
+            <td> {{ rate.yur }}</td>
+            <td> {{ rate.item_vat }}</td>
+            <td> {{ rate.for_declared }}</td>
+            {% endfor %}
             <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
           </tr>
           <tr>
@@ -158,21 +162,21 @@
       <div class="col">
         <div class="card mb-4 rounded-3 shadow-sm">
           <div class="card-header py-3">
-            <h4 class="my-0 fw-normal">Письмо, бандероль, мелкий пакет простые</h4><br>
+            <h4 class="my-0 fw-normal">Письмо, бандероль, мелкий пакет простые</h4>
           </div>
           <div class="card-body">
             <h1 class="card-title pricing-card-title">
-            {% for rate in simple %}
-           {{ rate.fiz }}{{ rate.rub }}
-            {% endfor %}
+             {% for rate in simple %}
+             {{ rate.fiz }}
+             <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
+             {% endfor %}
             </h1>
-
-
             <ul class="list-unstyled mt-3 mb-4">
               <li>нет отслеживания</li>
               <li>оплата марками</li>
               <li>Д + 3</li>
               <li>в почтовый ящик</li>
+              <br>
             </ul>
             <label class="w-100 btn btn-lg btn-outline-primary">доступный вариант</label>
           </div>
@@ -181,11 +185,15 @@
       <div class="col">
         <div class="card mb-4 rounded-3 shadow-sm">
           <div class="card-header py-3">
-            <h4 class="my-0 fw-normal">Письмо, бандероль заказные</h4><br>
+            <h4 class="my-0 fw-normal">Письмо, бандероль<br>заказные</h4>
           </div>
           <div class="card-body">
-            <h1 class="card-title pricing-card-title">{{ cost_of_reg_fiz }}
-            <small class="text-body-secondary fw-light"> руб.</small></h1>
+            <h1 class="card-title pricing-card-title">
+              {% for rate in registered %}
+              {{ rate.fiz }}
+              <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
+              {% endfor %}
+            </h1>
             <ul class="list-unstyled mt-3 mb-4">
               <li>отслеживание</li>
               <li>прием оператором</li>
@@ -203,8 +211,12 @@
             <h4 class="my-0 fw-normal">Письмо с объявленной ценностью</h4>
           </div>
           <div class="card-body">
-            <h1 class="card-title pricing-card-title">{{ cost_of_value_fiz }}
-              <small class="text-body-secondary fw-light">руб.</small></h1>
+            <h1 class="card-title pricing-card-title">
+              {% for rate in value_letter %}
+           {{ rate.fiz }}/{{ rate.yur }}
+              <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
+              {% endfor %}
+              </h1>
             <ul class="list-unstyled mt-3 mb-4">
               <li>отслеживание</li>
               <li>прием оператором</li>

@@ -39,29 +39,22 @@ def calculation_view(request):
         if form.is_valid():
             item_weight = int(request.POST.get('weight'))
             declared_value = request.POST.get('declared_value')
-            if declared_value:
-                cost_of_value_fiz = formatted(cost_of_value_letter(item_weight, declared_value)[0])
-                cost_of_value_yur = formatted(cost_of_value_letter(item_weight, declared_value)[1])
-                vat_value_letter = formatted(cost_of_value_letter(item_weight, declared_value)[2])
-                for_declared_value = formatted(cost_for_declared_value(declared_value)[0])
-            else:
-                cost_of_value_fiz = ""
-                cost_of_value_yur = ""
-                vat_value_letter = ""
-                for_declared_value = ""
+            # if declared_value:
+            #     cost_of_value_fiz = formatted(cost_of_value_letter(item_weight, declared_value)[0])
+            #     cost_of_value_yur = formatted(cost_of_value_letter(item_weight, declared_value)[1])
+            #     vat_value_letter = formatted(cost_of_value_letter(item_weight, declared_value)[2])
+            #     for_declared_value = formatted(cost_for_declared_value(declared_value)[0])
+            # else:
+            #     cost_of_value_fiz = ""
+            #     cost_of_value_yur = ""
+            #     vat_value_letter = ""
+            #     for_declared_value = ""
             simple = cost_of_simple(item_weight)
-            print(simple)
-            cost_of_reg_fiz = formatted(cost_of_registered(item_weight)[0])
-            cost_of_reg_yur = formatted(cost_of_registered(item_weight)[1])
-            vat_registered = formatted(cost_of_registered(item_weight)[2])
+            registered = cost_of_registered(item_weight)
+            value_letter = cost_of_value_letter(item_weight, declared_value)
             context = {'form': form, 'simple': simple,
-                       'cost_of_reg_fiz': cost_of_reg_fiz,
-                       'cost_of_reg_yur': cost_of_reg_yur,
-                       'vat_registered': vat_registered,
-                       'cost_of_value_fiz': cost_of_value_fiz,
-                       'cost_of_value_yur': cost_of_value_yur,
-                       'vat_value_letter': vat_value_letter,
-                       'for_declared_value': for_declared_value}
+                       'registered': registered,
+                       'value_letter': value_letter}
             return render(request, 'index.html', context)  # Внутри фиг скобок
     else:
         form = PostForm()
