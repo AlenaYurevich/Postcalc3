@@ -49,11 +49,12 @@ def cost_of_simple(item_weight):
     else:
         fiz = "Макс. вес 2 кг"
         price_row.append({'fiz': fiz})
-
     return price_row
 
 
-print(cost_of_simple(2001))
+"""
+заказное письмо, заказная бандероль, заказной мелкий пакет
+"""
 
 
 def cost_of_registered(item_weight):
@@ -116,6 +117,3 @@ def cost_of_value_letter(item_weight, declared_value):
         fiz = "Макс. вес 2 кг"
         price_row.append({'fiz': fiz})
     return price_row
-
-
-print(cost_of_value_letter(20, 10))

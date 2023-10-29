@@ -31,14 +31,13 @@
     <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
       <a href="/" class="d-flex align-items-center link-body-emphasis text-decoration-none">
         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="32" class="me-2" viewBox="0 0 118 94" role="img"><title>Bootstrap</title><path fill-rule="evenodd" clip-rule="evenodd" d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z" fill="currentColor"></path></svg>
-        <span class="fs-4">Postcalc</span>
+        <span class="fs-4 text-info">PostTarif</span>
       </a>
 
       <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">по Беларуси</a>
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none text-info " href="#">по Беларуси</a>
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Международные</a>
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Информация</a>
-        <a class="py-2 link-body-emphasis text-decoration-none" href="#">Справка</a>
       </nav>
     </div>
 
@@ -82,7 +81,7 @@
     <form method="POST" class="PostForm">{% csrf_token %}
       <div class="col">
         {{ form }}
-        <button class=" btn btn-lg btn-primary mt-4 mb-4" type="submit" name="send" >Рассчитать</button>
+        <button class=" btn btn-lg btn-info text-white mt-4 mb-4" type="submit" name="send" >Рассчитать</button>
       </div>
     </form>
 
@@ -114,7 +113,7 @@
             <td>нет</td>
           </tr>
           <tr>
-            <th scope="row" class="text-start">Письмо заказное, бандероль заказная</th>
+            <th scope="row" class="text-start">Письмо, бандероль, мелкий пакет заказные</th>
             {% for rate in registered %}
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
@@ -127,7 +126,7 @@
 
         <tbody>
           <tr>
-            <th scope="row" class="text-start">Письмо с объявленной ценностью</th>
+            <th scope="row" class="text-start">Письмо, мелкий пакет с объявленной ценностью</th>
             {% for rate in value_letter %}
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
@@ -137,9 +136,13 @@
             <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
           </tr>
           <tr>
-            <th scope="row" class="text-start">Мелкий пакет заказной</th>
+            <th scope="row" class="text-start">1 класс</th>
+            {% for rate in first_class %}
+            <td> {{ rate.fiz }}</td>
+            <td> {{ rate.yur }}</td>
+            <td> {{ rate.item_vat }}</td>
+            {% endfor %}
             <td></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
             <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
           </tr>
           <tr>
@@ -174,18 +177,18 @@
             <ul class="list-unstyled mt-3 mb-4">
               <li>нет отслеживания</li>
               <li>оплата марками</li>
+              <li>прием в почтовый ящик</li>
               <li>Д + 3</li>
-              <li>в почтовый ящик</li>
-              <br>
+              <li>вручение в почтовый ящик</li>
             </ul>
-            <label class="w-100 btn btn-lg btn-outline-primary">доступный вариант</label>
+            <label class="w-100 btn btn-lg btn-outline-info">доступный вариант</label>
           </div>
         </div>
       </div>
       <div class="col">
         <div class="card mb-4 rounded-3 shadow-sm">
           <div class="card-header py-3">
-            <h4 class="my-0 fw-normal">Письмо, бандероль<br>заказные</h4>
+            <h4 class="my-0 fw-normal">Письмо, бандероль, мелкий пакет заказные</h4>
           </div>
           <div class="card-body">
             <h1 class="card-title pricing-card-title">
@@ -201,14 +204,14 @@
               <li>возмещение при утрате</li>
               <li>вручение лично в руки</li>
             </ul>
-            <button type="button" class="w-100 btn btn-lg btn-primary">надежный вариант</button>
+            <button type="button" class="w-100 btn btn-lg btn-info text-white">надежный вариант</button>
           </div>
         </div>
       </div>
       <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm border-primary">
-          <div class="card-header py-3 text-bg-primary border-primary">
-            <h4 class="my-0 fw-normal">Письмо с объявленной ценностью</h4>
+        <div class="card mb-4 rounded-3 shadow-sm border-info">
+          <div class="card-header py-3 text-bg-info text-white border-info">
+            <h4 class="my-0 fw-normal">Письмо, мелкий пакет с объявленной ценностью</h4>
           </div>
           <div class="card-body">
             <h1 class="card-title pricing-card-title">
@@ -224,12 +227,36 @@
               <li>возмещение при утрате</li>
               <li>вручение лично в руки</li>
             </ul>
-            <button type="button" class="w-100 btn btn-lg btn-primary">для ценных документов</button>
+            <button type="button" class="w-100 btn btn-lg btn-info text-white">для ценных документов</button>
+          </div>
+        </div>
+      </div>
+
+
+    <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+          <div class="card-header py-3">
+            <h4 class="my-0 fw-normal">1 класс</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title">
+              {% for rate in first_class %}
+              {{ rate.fiz }}
+              <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
+              {% endfor %}
+            </h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>отслеживание</li>
+              <li>оплата марками</li>
+              <li>прием в почтовый ящик</li>
+              <li>Д + 1 / Д + 2</li>
+              <li>вручение в почтовый ящик</li>
+            </ul>
+            <button type="button" class="w-100 btn btn-lg btn-info text-white">быстрый вариант</button>
           </div>
         </div>
       </div>
     </div>
-
   </main>
 
   <footer class="pt-4 my-md-5 pt-md-5 border-top">
