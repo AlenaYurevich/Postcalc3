@@ -3,6 +3,11 @@ import math
 from openpyxl import load_workbook
 
 
+"""
+для отправления 1 класс стоимость добавляется за каждые последующие полные или неполные 100 г
+"""
+
+
 def weight_step(item_weight):
     return math.ceil((item_weight - 100) / 100)
 
