@@ -37,7 +37,9 @@ def cost_of_first_class(item_weight):
             'fiz': fiz,
             'yur': yur,
             'item_vat': item_vat,
-            'rub': " руб."
+            'for_declared': "",
+            'rub': " руб.",
+            'tracking': "да"
         }
         for i in rate:
             rate[i] = formatted(rate[i])

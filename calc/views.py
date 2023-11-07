@@ -6,6 +6,7 @@ from openpyxl import load_workbook
 from .forms import PostForm
 from .letter import cost_of_simple, cost_of_registered, cost_of_value_letter
 from .first_class import cost_of_first_class
+from .parcel import cost_of_parcel
 
 
 def read_letter_from_exel(filepath):
@@ -24,7 +25,6 @@ def read_letter_from_exel(filepath):
     return price_list
 
 
-
 def calculation_view(request):
     if request.method == "POST":
         form = PostForm(request.POST)
@@ -35,10 +35,12 @@ def calculation_view(request):
             registered = cost_of_registered(item_weight)
             value_letter = cost_of_value_letter(item_weight, declared_value)
             first_class = cost_of_first_class(item_weight)
+            parcel = cost_of_parcel(item_weight, declared_value)
             context = {'form': form, 'simple': simple,
                        'registered': registered,
                        'value_letter': value_letter,
-                       'first_class': first_class}
+                       'first_class': first_class,
+                       'parcel': parcel}
             print(context)
             return render(request, 'index.html', context)  # Внутри фиг скобок
     else:

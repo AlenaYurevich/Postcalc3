@@ -18,15 +18,6 @@ def formatted(num):
         return str("{:.2f}".format(num).replace('.', ','))
 
 
-def cost_for_declared_value(declared_value):
-    if declared_value:
-        fiz = float(declared_value) * 3.6 / 100
-        yur = float(declared_value) * 3 / 100
-    else:
-        fiz, yur = "", ""
-    return [fiz, yur]
-
-
 def cost_of_simple(item_weight):
     price_row = []
     if item_weight <= 2000:
@@ -41,7 +32,9 @@ def cost_of_simple(item_weight):
             'fiz': fiz,
             'yur': yur,
             'item_vat': item_vat,
-            'rub': " руб."
+            'for_declared': "",
+            'rub': " руб.",
+            'tracking': "нет"
         }
         for i in rate:
             rate[i] = formatted(rate[i])
@@ -71,7 +64,9 @@ def cost_of_registered(item_weight):
             'fiz': fiz,
             'yur': yur,
             'item_vat': item_vat,
-            'rub': " руб."
+            'for_declared': "",
+            'rub': " руб.",
+            'tracking': "да"
         }
         for i in rate:
             rate[i] = formatted(rate[i])
@@ -82,10 +77,19 @@ def cost_of_registered(item_weight):
     return price_row
 
 
+def cost_for_declared_value(declared_value):
+    if declared_value not in ("нет", ""):
+        fiz = float(declared_value) * 3.6 / 100
+        yur = float(declared_value) * 3 / 100
+    else:
+        fiz, yur = "", ""
+    return [fiz, yur]
+
+
 def cost_of_value_letter(item_weight, declared_value):
     price_row = []
     if item_weight <= 2000:
-        if declared_value:
+        if declared_value not in ("нет", "", 0):
             file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/letter2.xlsx')  # второй файл
             workbook = load_workbook(filename=file_path)
             sheet = workbook.active
@@ -99,7 +103,8 @@ def cost_of_value_letter(item_weight, declared_value):
                 'yur': yur,
                 'item_vat': item_vat,
                 'for_declared': for_declared,
-                'rub': " руб."
+                'rub': " руб.",
+                'tracking': "да"
             }
             for i in rate:
                 rate[i] = formatted(rate[i])

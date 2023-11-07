@@ -19,12 +19,12 @@
     </style>
 </head>
 <body>
-<svg xmlns="http://www.w3.org/2000/svg" class="d-none">
-  <symbol id="check" viewBox="0 0 16 16">
-    <title>Check</title>
-    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-  </symbol>
-</svg>
+<!--<svg xmlns="http://www.w3.org/2000/svg" class="d-none">-->
+<!--  <symbol id="check" viewBox="0 0 16 16">-->
+<!--    <title>Check</title>-->
+<!--    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>-->
+<!--  </symbol>-->
+<!--</svg>-->
 
 <div class="container py-3">
   <header>
@@ -44,7 +44,7 @@
     <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
       <h1 class="display-4 fw-normal text-body-emphasis">Расчет стоимости пересылки по Беларуси</h1>
       <p class="fs-5 text-body-secondary">Какое почтовое отправление самое быстрое, какое самое надежное, какое самое доступное?
-        Введите вес отправления в граммах и таблица покажет все возможные варианты пересылки РУП "Белпочта" </p>
+        Введите вес отправления в граммах, и таблица покажет все возможные варианты пересылки РУП "Белпочта" </p>
     </div>
   </header>
 
@@ -108,9 +108,9 @@
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat }}</td>
+            <td> {{ rate.for_declared }}</td>
+            <td> {{ rate.tracking }}</td>
             {% endfor %}
-            <td></td>
-            <td>нет</td>
           </tr>
           <tr>
             <th scope="row" class="text-start">Письмо, бандероль, мелкий пакет заказные</th>
@@ -118,13 +118,10 @@
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat }}</td>
+            <td> {{ rate.for_declared }}</td>
+            <td> {{ rate.tracking }}</td>
             {% endfor %}
-            <td></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
           </tr>
-        </tbody>
-
-        <tbody>
           <tr>
             <th scope="row" class="text-start">Письмо, мелкий пакет с объявленной ценностью</th>
             {% for rate in value_letter %}
@@ -132,8 +129,8 @@
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat }}</td>
             <td> {{ rate.for_declared }}</td>
+            <td> {{ rate.tracking }}</td>
             {% endfor %}
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
           </tr>
           <tr>
             <th scope="row" class="text-start">1 класс</th>
@@ -141,15 +138,19 @@
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat }}</td>
+            <td> {{ rate.for_declared }}</td>
+            <td> {{ rate.tracking }}</td>
             {% endfor %}
-            <td></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
           </tr>
           <tr>
-            <th scope="row" class="text-start">Unlimited members</th>
-            <td></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+            <th scope="row" class="text-start">Посылка</th>
+            {% for rate in parcel %}
+            <td> {{ rate.fiz }}</td>
+            <td> {{ rate.yur }}</td>
+            <td> {{ rate.item_vat }}</td>
+            <td> {{ rate.for_declared_fiz }} / {{ rate.for_declared_yur }}</td>
+            <td> {{ rate.tracking }}</td>
+            {% endfor %}
           </tr>
           <tr>
             <th scope="row" class="text-start">Extra security</th>
@@ -253,6 +254,30 @@
               <li>вручение в почтовый ящик</li>
             </ul>
             <button type="button" class="w-100 btn btn-lg btn-info text-white">быстрый вариант</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+          <div class="card-header py-3">
+            <h4 class="my-0 fw-normal">Посылка</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title">
+              {% for rate in parcel %}
+              {{ rate.fiz }}/{{ rate.yur }}
+              <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
+              {% endfor %}
+            </h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>отслеживание</li>
+              <li>прием оператором</li>
+              <li>Д + 3</li>
+              <li>возмещение при утрате</li>
+              <li>вручение лично в руки</li>
+            </ul>
+            <button type="button" class="w-100 btn btn-lg btn-info text-white">надежный вариант</button>
           </div>
         </div>
       </div>
