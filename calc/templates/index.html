@@ -148,7 +148,7 @@
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat }}</td>
-            <td> {{ rate.for_declared_fiz }} / {{ rate.for_declared_yur }}</td>
+            <td> {{ rate.for_declared_fiz }} {{rate.sep}} {{ rate.for_declared_yur }}</td>
             <td> {{ rate.tracking }}</td>
             {% endfor %}
           </tr>
@@ -266,7 +266,7 @@
           <div class="card-body">
             <h1 class="card-title pricing-card-title">
               {% for rate in parcel %}
-              {{ rate.fiz }}/{{ rate.yur }}
+              {{ rate.fiz }}{{ rate.sep }}{{ rate.yur }}
               <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
               {% endfor %}
             </h1>

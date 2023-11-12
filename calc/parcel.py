@@ -26,22 +26,15 @@ def formatted(num):
 
 
 def weight(item_weight, declared_value):
-    if declared_value == "нет" or declared_value == 0:
+    if declared_value in ("нет", "", 0):
         return math.ceil(item_weight / 100) / 10
     else:
         return math.ceil(item_weight / 10) / 100
 
 
-print(weight(1585, 10))
-print(weight(1585, 0))
-
-
 def cost_for_declared_value(declared_value):
-    if declared_value in ("нет", "", 0):
-        fiz, yur = 0, 0
-    else:
-        fiz = float(declared_value) * 3 / 100
-        yur = float(declared_value) * 3 / 100
+    fiz = float(declared_value) * 3 / 100
+    yur = float(declared_value) * 3 / 100
     return [fiz, yur]
 
 
@@ -52,15 +45,39 @@ def cost_of_parcel(item_weight, declared_value):
         workbook = load_workbook(filename=file_path)
         sheet = workbook.active
         if item_weight <= 1000:
-            fiz = sheet['D29'].value + cost_for_declared_value(declared_value)[0]
+            if declared_value in ("нет", "", 0):
+                fiz = sheet['D29'].value
+                """
+                округление вверх с точностью до двух знаков
+                """
+                yur = sheet['H29'].value + math.ceil(sheet['H30'].value * weight(item_weight, declared_value) * 100)/100
+                for_declared_fiz = ''
+                for_declared_yur = ''
+            else:
+                fiz = sheet['D29'].value + cost_for_declared_value(declared_value)[0]
+                yur = sheet['H29'].value + math.ceil(sheet['H30'].value * weight(item_weight, declared_value) * 100)/100
+                print(yur)
+                for_declared_fiz = math.ceil(cost_for_declared_value(declared_value)[0] * 100) / 100
+                for_declared_yur = math.ceil(cost_for_declared_value(declared_value)[1] * 100) / 100
+                print(for_declared_yur)
+                for_declared_yur += vat(for_declared_yur)
+                yur += for_declared_yur
         else:
-            fiz = sheet['D31'].value + sheet['D32'].value * weight(item_weight, declared_value) + cost_for_declared_value(declared_value)[0]
-        yur = sheet['H29'].value + sheet['H30'].value * weight(item_weight, declared_value) + cost_for_declared_value(declared_value)[1]
+            if declared_value in ("нет", "", 0):
+                fiz = sheet['D31'].value + sheet['D32'].value * weight(item_weight, declared_value)
+                yur = sheet['H29'].value + math.ceil(sheet['H30'].value * weight(item_weight, declared_value) * 100)/100
+                for_declared_fiz = ''
+                for_declared_yur = ''
+            else:
+                fiz = sheet['D31'].value + sheet['D32'].value * weight(item_weight, declared_value)
+                fiz += cost_for_declared_value(declared_value)[0]
+                yur = sheet['H29'].value + sheet['H30'].value * weight(item_weight, declared_value)
+                yur += cost_for_declared_value(declared_value)[1]
+                for_declared_fiz = cost_for_declared_value(declared_value)[0]
+                for_declared_yur = cost_for_declared_value(declared_value)[1]
+                for_declared_yur += vat(for_declared_yur)
         item_vat = vat(yur)
         yur += item_vat
-        for_declared_fiz = cost_for_declared_value(declared_value)[0]
-        for_declared_yur = cost_for_declared_value(declared_value)[1]
-        for_declared_yur += vat(for_declared_yur)
         rate = {
             'fiz': fiz,
             'yur': yur,
@@ -68,13 +85,19 @@ def cost_of_parcel(item_weight, declared_value):
             'for_declared_fiz': for_declared_fiz,
             'for_declared_yur': for_declared_yur,
             'rub': " руб.",
-            'tracking': "да"
+            'tracking': "да",
+            'sep': '/'
             }
         for i in rate:
             rate[i] = formatted(rate[i])
         price_row.append(rate)
     else:
         fiz = "Макс. вес 50 кг"
-        price_row.append({'fiz': fiz})
+        sep = ''
+        price_row.append({'fiz': fiz, 'sep': sep})
 
     return price_row
+
+
+print(cost_of_parcel(900, 1.25))
+

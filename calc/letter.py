@@ -77,6 +77,11 @@ def cost_of_registered(item_weight):
     return price_row
 
 
+"""
+Письмо, мелкий пакет с объявленной ценностью
+"""
+
+
 def cost_for_declared_value(declared_value):
     if declared_value not in ("нет", ""):
         fiz = float(declared_value) * 3.6 / 100
