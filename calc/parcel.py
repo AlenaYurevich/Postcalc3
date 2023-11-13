@@ -33,8 +33,8 @@ def weight(item_weight, declared_value):
 
 
 def cost_for_declared_value(declared_value):
-    fiz = float(declared_value) * 3 / 100
-    yur = float(declared_value) * 3 / 100
+    fiz = declared_value * 3 / 100
+    yur = declared_value * 3 / 100
     return [fiz, yur]
 
 
@@ -53,14 +53,19 @@ def cost_of_parcel(item_weight, declared_value):
                 yur = sheet['H29'].value + math.ceil(sheet['H30'].value * weight(item_weight, declared_value) * 100)/100
                 for_declared_fiz = ''
                 for_declared_yur = ''
+                item_vat = vat(yur)
+                yur += item_vat
             else:
                 fiz = sheet['D29'].value + cost_for_declared_value(declared_value)[0]
                 yur = sheet['H29'].value + math.ceil(sheet['H30'].value * weight(item_weight, declared_value) * 100)/100
                 print(yur)
-                for_declared_fiz = math.ceil(cost_for_declared_value(declared_value)[0] * 100) / 100
-                for_declared_yur = math.ceil(cost_for_declared_value(declared_value)[1] * 100) / 100
+                for_declared_fiz = cost_for_declared_value(declared_value)[0]
+                for_declared_yur = cost_for_declared_value(declared_value)[1]
                 print(for_declared_yur)
                 for_declared_yur += vat(for_declared_yur)
+                print(yur)
+                item_vat = vat(yur)
+                yur += item_vat
                 yur += for_declared_yur
         else:
             if declared_value in ("нет", "", 0):
@@ -68,6 +73,8 @@ def cost_of_parcel(item_weight, declared_value):
                 yur = sheet['H29'].value + math.ceil(sheet['H30'].value * weight(item_weight, declared_value) * 100)/100
                 for_declared_fiz = ''
                 for_declared_yur = ''
+                item_vat = vat(yur)
+                yur += item_vat
             else:
                 fiz = sheet['D31'].value + sheet['D32'].value * weight(item_weight, declared_value)
                 fiz += cost_for_declared_value(declared_value)[0]
@@ -76,8 +83,9 @@ def cost_of_parcel(item_weight, declared_value):
                 for_declared_fiz = cost_for_declared_value(declared_value)[0]
                 for_declared_yur = cost_for_declared_value(declared_value)[1]
                 for_declared_yur += vat(for_declared_yur)
-        item_vat = vat(yur)
-        yur += item_vat
+                item_vat = vat(yur)
+                yur += item_vat
+
         rate = {
             'fiz': fiz,
             'yur': yur,
