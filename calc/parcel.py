@@ -1,6 +1,7 @@
 import os
 import math
 from openpyxl import load_workbook
+from decimal import Decimal
 
 
 """
@@ -14,8 +15,12 @@ from openpyxl import load_workbook
 """
 
 
+def dec(num):
+    return Decimal(num).quantize(Decimal("1.00"))  # десятичные числа для отражения денежных средств
+
+
 def vat(num):
-    return round(num * 0.2, 2)  # расчет НДС 20 %
+    return dec(num * dec(0.2))
 
 
 def formatted(num):
@@ -26,59 +31,63 @@ def formatted(num):
 
 
 def weight(item_weight, declared_value):
-    if declared_value in ("нет", "", 0):
+    if declared_value in ("нет", "", 0, "0"):
         return math.ceil(item_weight / 100) / 10
     else:
         return math.ceil(item_weight / 10) / 100
 
 
 def cost_for_declared_value(declared_value):
-    fiz = declared_value * 3 / 100
-    yur = declared_value * 3 / 100
+    fiz = dec(float(declared_value) * 3 / 100)
+    yur = dec(float(declared_value) * 3 / 100)
     return [fiz, yur]
 
 
 def cost_of_parcel(item_weight, declared_value):
     price_row = []
     if item_weight <= 50000:
-        file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/letter2.xlsx')  # первый файл
+        file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/letter2.xlsx')  # второй файл
         workbook = load_workbook(filename=file_path)
         sheet = workbook.active
         if item_weight <= 1000:
-            if declared_value in ("нет", "", 0):
+            if declared_value in ("нет", "", 0, "0"):
                 fiz = sheet['D29'].value
                 """
                 округление вверх с точностью до двух знаков
                 """
                 yur = sheet['H29'].value + math.ceil(sheet['H30'].value * weight(item_weight, declared_value) * 100)/100
+                yur = dec(yur)
                 for_declared_fiz = ''
                 for_declared_yur = ''
                 item_vat = vat(yur)
                 yur += item_vat
             else:
                 fiz = sheet['D29'].value + cost_for_declared_value(declared_value)[0]
-                yur = sheet['H29'].value + math.ceil(sheet['H30'].value * weight(item_weight, declared_value) * 100)/100
-                print(yur)
+                yur = sheet['H29'].value + sheet['H30'].value * weight(item_weight, declared_value)
+                yur = dec(yur)
                 for_declared_fiz = cost_for_declared_value(declared_value)[0]
                 for_declared_yur = cost_for_declared_value(declared_value)[1]
-                print(for_declared_yur)
                 for_declared_yur += vat(for_declared_yur)
-                print(yur)
+                print(for_declared_yur, "за объявленную ценность")
                 item_vat = vat(yur)
+                print(item_vat, "ндс")
                 yur += item_vat
                 yur += for_declared_yur
         else:
-            if declared_value in ("нет", "", 0):
+            if declared_value in ("нет", "", 0, "0"):
                 fiz = sheet['D31'].value + sheet['D32'].value * weight(item_weight, declared_value)
-                yur = sheet['H29'].value + math.ceil(sheet['H30'].value * weight(item_weight, declared_value) * 100)/100
+                yur = sheet['H29'].value + sheet['H30'].value * weight(item_weight, declared_value)
+                yur = dec(yur)
                 for_declared_fiz = ''
                 for_declared_yur = ''
                 item_vat = vat(yur)
                 yur += item_vat
             else:
                 fiz = sheet['D31'].value + sheet['D32'].value * weight(item_weight, declared_value)
+                fiz = dec(fiz)
                 fiz += cost_for_declared_value(declared_value)[0]
                 yur = sheet['H29'].value + sheet['H30'].value * weight(item_weight, declared_value)
+                yur = dec(yur)
                 yur += cost_for_declared_value(declared_value)[1]
                 for_declared_fiz = cost_for_declared_value(declared_value)[0]
                 for_declared_yur = cost_for_declared_value(declared_value)[1]
@@ -107,5 +116,5 @@ def cost_of_parcel(item_weight, declared_value):
     return price_row
 
 
-print(cost_of_parcel(900, 1.25))
-
+print(cost_of_parcel(500, 0))
+print(cost_of_parcel(500, 1.25))

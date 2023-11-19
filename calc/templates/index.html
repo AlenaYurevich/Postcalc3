@@ -36,8 +36,8 @@
 
       <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
         <a class="me-3 py-2 link-body-emphasis text-decoration-none text-info " href="#">по Беларуси</a>
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Международные</a>
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Информация</a>
+<!--        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Международные</a>-->
+<!--        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Информация</a>-->
       </nav>
     </div>
 
@@ -153,10 +153,14 @@
             {% endfor %}
           </tr>
           <tr>
-            <th scope="row" class="text-start">Extra security</th>
+            <th scope="row" class="text-start">Посылка с оформлением в личном кабинете "Тариф 3, 4, 5"</th>
+           {% for rate in parcel_3_4_5 %}
+            <td> {{ rate.fiz }}</td>
             <td></td>
+            <td> {{ rate.for_declared }} </td>
             <td></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+            <td> {{ rate.tracking }}</td>
+            {% endfor %}
           </tr>
         </tbody>
       </table>

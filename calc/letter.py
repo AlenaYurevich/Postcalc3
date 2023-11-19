@@ -94,7 +94,7 @@ def cost_for_declared_value(declared_value):
 def cost_of_value_letter(item_weight, declared_value):
     price_row = []
     if item_weight <= 2000:
-        if declared_value not in ("нет", "", 0):
+        if declared_value not in ("нет", "", 0, "0"):
             file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/letter2.xlsx')  # второй файл
             workbook = load_workbook(filename=file_path)
             sheet = workbook.active
