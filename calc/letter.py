@@ -109,7 +109,8 @@ def cost_of_value_letter(item_weight, declared_value):
                 'item_vat': item_vat,
                 'for_declared': for_declared,
                 'rub': " руб.",
-                'tracking': "да"
+                'tracking': "да",
+                'sep': '/'
             }
             for i in rate:
                 rate[i] = formatted(rate[i])
@@ -120,10 +121,11 @@ def cost_of_value_letter(item_weight, declared_value):
                 'yur': "-",
                 'item_vat': "-",
                 'for_declared': "-",
-                'rub': ""
+                'rub': "",
+                'sep': "h"
             }
             price_row.append(rate)
     else:
         fiz = "Макс. вес 2 кг"
-        price_row.append({'fiz': fiz})
+        price_row.append({'fiz': fiz, 'sep': ''})
     return price_row

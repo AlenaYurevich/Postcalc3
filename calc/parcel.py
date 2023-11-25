@@ -61,6 +61,7 @@ def cost_of_parcel(item_weight, declared_value):
                 for_declared_yur = ''
                 item_vat = vat(yur)
                 yur += item_vat
+                sep = ''
             else:
                 fiz = sheet['D29'].value + cost_for_declared_value(declared_value)[0]
                 yur = sheet['H29'].value + sheet['H30'].value * weight(item_weight, declared_value)
@@ -68,11 +69,10 @@ def cost_of_parcel(item_weight, declared_value):
                 for_declared_fiz = cost_for_declared_value(declared_value)[0]
                 for_declared_yur = cost_for_declared_value(declared_value)[1]
                 for_declared_yur += vat(for_declared_yur)
-                print(for_declared_yur, "за объявленную ценность")
                 item_vat = vat(yur)
-                print(item_vat, "ндс")
                 yur += item_vat
                 yur += for_declared_yur
+                sep = "/"
         else:
             if declared_value in ("нет", "", 0, "0"):
                 fiz = sheet['D31'].value + sheet['D32'].value * weight(item_weight, declared_value)
@@ -82,6 +82,7 @@ def cost_of_parcel(item_weight, declared_value):
                 for_declared_yur = ''
                 item_vat = vat(yur)
                 yur += item_vat
+                sep = ""
             else:
                 fiz = sheet['D31'].value + sheet['D32'].value * weight(item_weight, declared_value)
                 fiz = dec(fiz)
@@ -94,6 +95,7 @@ def cost_of_parcel(item_weight, declared_value):
                 for_declared_yur += vat(for_declared_yur)
                 item_vat = vat(yur)
                 yur += item_vat
+                sep = "/"
 
         rate = {
             'fiz': fiz,
@@ -103,7 +105,7 @@ def cost_of_parcel(item_weight, declared_value):
             'for_declared_yur': for_declared_yur,
             'rub': " руб.",
             'tracking': "да",
-            'sep': '/'
+            'sep': sep,
             }
         for i in rate:
             rate[i] = formatted(rate[i])
@@ -111,10 +113,6 @@ def cost_of_parcel(item_weight, declared_value):
     else:
         fiz = "Макс. вес 50 кг"
         sep = ''
-        price_row.append({'fiz': fiz, 'sep': sep})
+        price_row.append({'fiz': fiz, 'sep': ''})
 
     return price_row
-
-
-print(cost_of_parcel(500, 0))
-print(cost_of_parcel(500, 1.25))

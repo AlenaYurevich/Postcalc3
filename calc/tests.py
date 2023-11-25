@@ -1,8 +1,7 @@
-# from django.test import TestCase
-from . import parcel
 from .letter import cost_of_simple, cost_of_registered, cost_of_value_letter
 from .first_class import cost_of_first_class
 from .parcel import cost_of_parcel
+from .parcel_3_4_5 import cost_of_parcel_3_4_5
 
 
 def test_simple():
@@ -106,4 +105,13 @@ def test_parcel():
     assert cost_of_parcel(50200, '') == [{
         'fiz': 'Макс. вес 50 кг',
         'sep': ''
+    }]
+
+
+def test_parcel_3_4_5():
+    assert cost_of_parcel_3_4_5(6545, 1.55) == [{
+        'fiz': '8,93',
+        'for_declared': '0,02',
+        'tracking': 'да',
+        'rub': " руб."
     }]
