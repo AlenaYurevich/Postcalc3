@@ -115,3 +115,8 @@ def test_parcel_3_4_5():
         'for_declared': '0,50',
         'rub': " руб."
     }]
+    assert cost_of_parcel_3_4_5(6545, 50.00) == [{
+        'fiz': '9,41',
+        'for_declared': '0,50',
+        'rub': " руб."
+    }]

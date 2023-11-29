@@ -1,7 +1,10 @@
 import os
 import math
 from openpyxl import load_workbook
-from decimal import Decimal
+from okrugl import round_as_excel
+
+
+print(round_as_excel(0.568))
 
 
 """
@@ -15,12 +18,12 @@ from decimal import Decimal
 """
 
 
-def dec(num):
-    return Decimal(num).quantize(Decimal("1.00"))  # десятичные числа для отражения денежных средств
+# def dec(num):
+#     return Decimal(num).quantize(Decimal("1.00"))  # десятичные числа для отражения денежных средств
 
 
 def vat(num):
-    return dec(num * dec(0.2))
+    return round_as_excel(num * 0.2)
 
 
 def formatted(num):
@@ -38,8 +41,8 @@ def weight(item_weight, declared_value):
 
 
 def cost_for_declared_value(declared_value):
-    fiz = dec(declared_value * 3 / 100)
-    yur = dec(declared_value * 3 / 100)
+    fiz = round_as_excel(declared_value * 3 / 100)
+    yur = round_as_excel(declared_value * 3 / 100)
     return [fiz, yur]
 
 
@@ -56,7 +59,7 @@ def cost_of_parcel(item_weight, declared_value):
                 округление вверх с точностью до двух знаков
                 """
                 yur = sheet['H29'].value + math.ceil(sheet['H30'].value * weight(item_weight, declared_value) * 100)/100
-                yur = dec(yur)
+                yur = round_as_excel(yur)
                 for_declared_fiz = ''
                 for_declared_yur = ''
                 item_vat = vat(yur)
@@ -65,7 +68,7 @@ def cost_of_parcel(item_weight, declared_value):
             else:
                 fiz = sheet['D29'].value + cost_for_declared_value(declared_value)[0]
                 yur = sheet['H29'].value + sheet['H30'].value * weight(item_weight, declared_value)
-                yur = dec(yur)
+                yur = round_as_excel(yur)
                 for_declared_fiz = cost_for_declared_value(declared_value)[0]
                 for_declared_yur = cost_for_declared_value(declared_value)[1]
                 for_declared_yur += vat(for_declared_yur)
@@ -77,7 +80,7 @@ def cost_of_parcel(item_weight, declared_value):
             if declared_value in ("нет", "", 0, "0"):
                 fiz = sheet['D31'].value + sheet['D32'].value * weight(item_weight, declared_value)
                 yur = sheet['H29'].value + sheet['H30'].value * weight(item_weight, declared_value)
-                yur = dec(yur)
+                yur = round_as_excel(yur)
                 for_declared_fiz = ''
                 for_declared_yur = ''
                 item_vat = vat(yur)
@@ -85,10 +88,10 @@ def cost_of_parcel(item_weight, declared_value):
                 sep = ""
             else:
                 fiz = sheet['D31'].value + sheet['D32'].value * weight(item_weight, declared_value)
-                fiz = dec(fiz)
+                fiz = round_as_excel(fiz)
                 fiz += cost_for_declared_value(declared_value)[0]
                 yur = sheet['H29'].value + sheet['H30'].value * weight(item_weight, declared_value)
-                yur = dec(yur)
+                yur = round_as_excel(yur)
                 yur += cost_for_declared_value(declared_value)[1]
                 for_declared_fiz = cost_for_declared_value(declared_value)[0]
                 for_declared_yur = cost_for_declared_value(declared_value)[1]
@@ -113,9 +116,9 @@ def cost_of_parcel(item_weight, declared_value):
     else:
         fiz = "Макс. вес 50 кг"
         sep = ''
-        price_row.append({'fiz': fiz, 'sep': ''})
+        price_row.append({'fiz': fiz, 'sep': sep})
 
     return price_row
 
 
-print(cost_of_parcel(1152, 115.15))
+print(cost_of_parcel(1152, 115.45))

@@ -1,10 +1,7 @@
 import os
 import math
 from openpyxl import load_workbook
-from .rounding import round_as_excel
-
-
-print(round_as_excel(0.568))
+from okrugl import round_as_excel
 
 
 # def dec(num):
@@ -43,28 +40,28 @@ def weight(item_weight, declared_value):
         return math.ceil(item_weight / 10) / 100
 
 
-def cost_of_parcel_simple(item_weight):
-    file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/letter2.xlsx')  # второй файл
-    workbook = load_workbook(filename=file_path, read_only=True)  # для снижения затрат ОП в режиме чтения
-    sheet = workbook.active
-    if item_weight <= 1000:
-        fiz = sheet['D42'].value
-    else:
-        if item_weight <= 3000:
-            fiz = sheet['D43'].value
-        else:
-            if item_weight <= 5000:
-                fiz = sheet['D44'].value
-            else:
-                fiz = sheet['D46'].value + sheet['D47'].value * weight(item_weight, declared_value=0)
-    rate = {
-        'fiz': fiz,
-        'rub': " руб."
-    }
-    for i in rate:
-        rate[i] = formatted(rate[i])
-    workbook.close()
-    return rate
+# def cost_of_parcel_simple(item_weight):
+#     file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/letter2.xlsx')  # второй файл
+#     workbook = load_workbook(filename=file_path, read_only=True)  # для снижения затрат ОП в режиме чтения
+#     sheet = workbook.active
+#     if item_weight <= 1000:
+#         fiz = sheet['D42'].value
+#     else:
+#         if item_weight <= 3000:
+#             fiz = sheet['D43'].value
+#         else:
+#             if item_weight <= 5000:
+#                 fiz = sheet['D44'].value
+#             else:
+#                 fiz = sheet['D46'].value + sheet['D47'].value * weight(item_weight, declared_value=0)
+#     rate = {
+#         'fiz': fiz,
+#         'rub': " руб."
+#     }
+#     for i in rate:
+#         rate[i] = formatted(rate[i])
+#     workbook.close()
+#     return rate
 
 
 def cost_of_parcel_declared(item_weight, declared_value):
@@ -82,10 +79,12 @@ def cost_of_parcel_declared(item_weight, declared_value):
             else:
                 fiz = sheet['D46'].value + sheet['D47'].value * weight(item_weight, declared_value)
                 fiz = round_as_excel(fiz)
-    for_declared = round_as_excel(declared_value * 0.01)
-    if for_declared < 0.50:
-        for_declared = 0.50
-    fiz += for_declared
+    for_declared = ''
+    if declared_value not in ("нет", "", 0, "0"):
+        for_declared = round_as_excel(declared_value * 0.01)
+        if for_declared < 0.50:
+            for_declared = 0.50
+        fiz += for_declared
     rate = {
         'fiz': fiz,
         'for_declared': for_declared,
@@ -100,10 +99,7 @@ def cost_of_parcel_declared(item_weight, declared_value):
 def cost_of_parcel_3_4_5(item_weight, declared_value):
     price_row = []
     if item_weight <= 50000:
-        if declared_value in ("нет", "", 0, "0"):
-            rate = cost_of_parcel_simple(item_weight)
-        else:
-            rate = cost_of_parcel_declared(item_weight, declared_value)
+        rate = cost_of_parcel_declared(item_weight, declared_value)
         price_row.append(rate)
     else:
         fiz = "Макс. вес 50 кг"
@@ -113,4 +109,5 @@ def cost_of_parcel_3_4_5(item_weight, declared_value):
 
 
 print(cost_of_parcel_3_4_5(6545, 1.55))
+print(cost_of_parcel_3_4_5(6545, 50.00))
 print(cost_of_parcel_3_4_5(6545, ''))
