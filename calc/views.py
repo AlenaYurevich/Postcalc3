@@ -30,7 +30,7 @@ def calculation_view(request):
         form = PostForm(request.POST)
         if form.is_valid():
             item_weight = int(request.POST.get('weight'))
-            declared_value = request.POST.get('declared_value')
+            declared_value = float(request.POST.get('declared_value'))
             simple = cost_of_simple(item_weight)
             registered = cost_of_registered(item_weight)
             value_letter = cost_of_value_letter(item_weight, declared_value)

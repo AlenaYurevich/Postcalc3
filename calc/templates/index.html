@@ -175,14 +175,14 @@
             <td> {{ rate.tracking }}</td>
             {% endfor %}
           </tr>
-          <tr class="border-info">
+         <tr class="border-info">
             <th scope="row" class="text-start">Посылка с оформлением в личном кабинете<br>&#171Тариф 3, 4, 5&#187</th>
            {% for rate in parcel_3_4_5 %}
             <td> {{ rate.fiz }}</td>
-            <td></td>
-            <td></td>
+            <td> </td>
+            <td> </td>
             <td> {{ rate.for_declared }} </td>
-            <td> {{ rate.tracking }}</td>
+            <td> да </td>
             {% endfor %}
           </tr>
         </tbody>
@@ -308,6 +308,13 @@
           </div>
         </div>
       </div>
+
+        <div class="col">
+
+<!--            пустой див-->
+
+            
+        </div>
 
       <div class="col">
         <div class="card mb-4 rounded-3 shadow-sm border-info">

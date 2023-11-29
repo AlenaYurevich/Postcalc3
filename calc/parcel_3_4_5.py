@@ -1,18 +1,21 @@
 import os
 import math
 from openpyxl import load_workbook
-import decimal
+from .rounding import round_as_excel
 
 
-def dec(num):
-    d = decimal.Decimal
-    return d(num).quantize(d("1.00"), decimal.ROUND_HALF_UP)
+print(round_as_excel(0.568))
 
 
-"""
-quantize - десятичные числа для отражения денежных средств, округление до двух знаков.
-decimal.ROUND_HALF_UP: 5 округляется в большую сторону
-"""
+# def dec(num):
+#     d = decimal.Decimal
+#     return d(num).quantize(d("1.00"), decimal.ROUND_HALF_UP)
+#
+#
+# """
+# quantize - десятичные числа для отражения денежных средств, округление до двух знаков.
+# decimal.ROUND_HALF_UP: 5 округляется в большую сторону
+# """
 
 
 def formatted(num):
@@ -56,8 +59,7 @@ def cost_of_parcel_simple(item_weight):
                 fiz = sheet['D46'].value + sheet['D47'].value * weight(item_weight, declared_value=0)
     rate = {
         'fiz': fiz,
-        'rub': " руб.",
-        'tracking': "да",
+        'rub': " руб."
     }
     for i in rate:
         rate[i] = formatted(rate[i])
@@ -79,17 +81,16 @@ def cost_of_parcel_declared(item_weight, declared_value):
                 fiz = sheet['D44'].value
             else:
                 fiz = sheet['D46'].value + sheet['D47'].value * weight(item_weight, declared_value)
-                fiz = dec(fiz)
-    for_declared = dec(float(declared_value) * 0.01)
+                fiz = round_as_excel(fiz)
+    for_declared = round_as_excel(declared_value * 0.01)
     if for_declared < 0.50:
         for_declared = 0.50
     fiz += for_declared
     rate = {
         'fiz': fiz,
         'for_declared': for_declared,
-        'rub': " руб.",
-        'tracking': "да"
-    }
+        'rub': " руб."
+            }
     for i in rate:
         rate[i] = formatted(rate[i])
     workbook.close()
@@ -109,3 +110,7 @@ def cost_of_parcel_3_4_5(item_weight, declared_value):
         sep = ''
         price_row.append({'fiz': fiz, 'sep': sep})
     return price_row
+
+
+print(cost_of_parcel_3_4_5(6545, 1.55))
+print(cost_of_parcel_3_4_5(6545, ''))

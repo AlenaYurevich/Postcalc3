@@ -37,9 +37,10 @@ def test_value_letter():
             'item_vat': '0,67',
             'for_declared': '0,36',
             'tracking': 'да',
+            'sep': '/',
             'rub': " руб."}]
     assert cost_of_value_letter(2001, 10) == [{
-        'fiz': 'Макс. вес 2 кг'
+        'fiz': 'Макс. вес 2 кг', 'sep': ''
     }]
 
 
@@ -65,7 +66,7 @@ def test_parcel():
         'for_declared_yur': '',
         'tracking': 'да',
         'rub': " руб.",
-        'sep': '/'}]
+        'sep': ''}]
     assert cost_of_parcel(510, '') == [{
         'fiz': '3,00',
         'yur': '5,94',
@@ -74,7 +75,7 @@ def test_parcel():
         'for_declared_yur': '',
         'tracking': 'да',
         'rub': " руб.",
-        'sep': '/'}]
+        'sep': ''}]
     assert cost_of_parcel(915, 1.25) == [{
         'fiz': '3,04',
         'yur': '6,28',
@@ -92,7 +93,7 @@ def test_parcel():
         'for_declared_yur': '',
         'tracking': 'да',
         'rub': " руб.",
-        'sep': '/'}]
+        'sep': ''}]
     assert cost_of_parcel(1152, 10.12) == [{
         'fiz': '5,17',
         'yur': '6,80',
@@ -110,8 +111,7 @@ def test_parcel():
 
 def test_parcel_3_4_5():
     assert cost_of_parcel_3_4_5(6545, 1.55) == [{
-        'fiz': '8,93',
-        'for_declared': '0,02',
-        'tracking': 'да',
+        'fiz': '9,41',
+        'for_declared': '0,50',
         'rub': " руб."
     }]

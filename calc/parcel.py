@@ -38,8 +38,8 @@ def weight(item_weight, declared_value):
 
 
 def cost_for_declared_value(declared_value):
-    fiz = dec(float(declared_value) * 3 / 100)
-    yur = dec(float(declared_value) * 3 / 100)
+    fiz = dec(declared_value * 3 / 100)
+    yur = dec(declared_value * 3 / 100)
     return [fiz, yur]
 
 
@@ -116,3 +116,6 @@ def cost_of_parcel(item_weight, declared_value):
         price_row.append({'fiz': fiz, 'sep': ''})
 
     return price_row
+
+
+print(cost_of_parcel(1152, 115.15))
