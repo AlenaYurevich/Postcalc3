@@ -1,7 +1,7 @@
 import os
 import math
 from openpyxl import load_workbook
-from okrugl import round_as_excel
+# from okr import round_as_excel
 
 
 # def dec(num):
@@ -13,6 +13,14 @@ from okrugl import round_as_excel
 # quantize - десятичные числа для отражения денежных средств, округление до двух знаков.
 # decimal.ROUND_HALF_UP: 5 округляется в большую сторону
 # """
+
+def round_as_excel(num):
+    # num = float(num)
+    reminder = str(round(num % 1, 3))+'0000'
+    if reminder[3] in '02468' and reminder[4] in '56789':
+        return round(num + 0.01, 2)
+    else:
+        return round(num, 2)
 
 
 def formatted(num):

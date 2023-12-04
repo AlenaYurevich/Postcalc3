@@ -2,7 +2,7 @@
 # from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from openpyxl import load_workbook
-from .forms import PostForm
+from .forms import PostForm, EmsForm
 from .letter import cost_of_simple, cost_of_registered, cost_of_value_letter
 from .first_class import cost_of_first_class
 from .parcel import cost_of_parcel
@@ -49,3 +49,19 @@ def calculation_view(request):
     else:
         form = PostForm()
         return render(request, 'index.html', {'form': form})  # внутри фигурных скобок
+
+
+def ems_view(request):
+    if request.method == "POST":
+        form = EmsForm(request.POST)
+        if form.is_valid():
+            item_weight = int(request.POST.get('weight'))
+            declared_value = (request.POST.get('declared_value'))
+            context = {'form': form,
+                       'item_weight': item_weight,
+                       'declared_value': declared_value,
+                       }
+            return render(request, 'ems_express_dostavka.html', context)  # Внутри фиг скобок
+    else:
+        form = PostForm()
+        return render(request, 'ems_express_dostavka.html', {'form': form})  # внутри фигурных скобок
