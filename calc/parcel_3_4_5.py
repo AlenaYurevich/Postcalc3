@@ -89,7 +89,7 @@ def cost_of_parcel_declared(item_weight, declared_value):
                 fiz = round_as_excel(fiz)
     for_declared = ''
     if declared_value not in ("нет", "", 0, "0"):
-        for_declared = round_as_excel(declared_value * 0.01)
+        for_declared = round_as_excel(float(declared_value) * 0.01)
         if for_declared < 0.50:
             for_declared = 0.50
         fiz += for_declared

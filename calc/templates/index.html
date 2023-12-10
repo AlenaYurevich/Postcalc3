@@ -40,6 +40,7 @@
 
       <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
         <a class="me-3 py-2 link-body-emphasis text-decoration-none text-info " href="#">по Беларуси</a>
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none text-info " href="ems_express_dostavka">EMS экспресс доставка</a>
 <!--        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Международные</a>-->
 <!--        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Информация</a>-->
       </nav>
@@ -171,7 +172,7 @@
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat }}</td>
-            <td> {{ rate.for_declared_fiz }} {{rate.sep}} {{ rate.for_declared_yur }}</td>
+            <td> {{ rate.for_declared_fiz }} {{rate.sep1}} {{ rate.for_declared_yur }}</td>
             <td> {{ rate.tracking }}</td>
             {% endfor %}
           </tr>
@@ -293,7 +294,7 @@
           <div class="card-body">
             <h2 class="card-title pricing-card-title">
               {% for rate in parcel %}
-              {{ rate.fiz }} {{ rate.sep }} {{ rate.yur }}
+              {{ rate.fiz }} {{ rate.sep2 }} {{ rate.yur }}
               <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
               {% endfor %}
             </h2>

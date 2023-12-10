@@ -122,7 +122,7 @@ def cost_of_value_letter(item_weight, declared_value):
                 'item_vat': "-",
                 'for_declared': "-",
                 'rub': "",
-                'sep': "h"
+                'sep': ""
             }
             price_row.append(rate)
     else:

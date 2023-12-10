@@ -1,7 +1,7 @@
 # import requests
 # from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from openpyxl import load_workbook
+# from openpyxl import load_workbook
 from .forms import PostForm, EmsForm
 from .letter import cost_of_simple, cost_of_registered, cost_of_value_letter
 from .first_class import cost_of_first_class
@@ -9,20 +9,20 @@ from .parcel import cost_of_parcel
 from .parcel_3_4_5 import cost_of_parcel_3_4_5
 
 
-def read_letter_from_exel(filepath):
-    price_list = []
-    workbook = load_workbook(filename=filepath)
-    sheet = workbook.active
-
-    for row in sheet.iter_rows(min_row=3, values_only=True):
-        item, cost_fiz, cost_yur = row
-        rates = {
-            'item': item,
-            'cost_fiz': cost_fiz,
-            'cost_yur': cost_yur
-                    }
-        price_list.append(rates)
-    return price_list
+# def read_letter_from_exel(filepath):
+#     price_list = []
+#     workbook = load_workbook(filename=filepath)
+#     sheet = workbook.active
+#
+#     for row in sheet.iter_rows(min_row=3, values_only=True):
+#         item, cost_fiz, cost_yur = row
+#         rates = {
+#             'item': item,
+#             'cost_fiz': cost_fiz,
+#             'cost_yur': cost_yur
+#                     }
+#         price_list.append(rates)
+#     return price_list
 
 
 def calculation_view(request):
@@ -30,7 +30,7 @@ def calculation_view(request):
         form = PostForm(request.POST)
         if form.is_valid():
             item_weight = int(request.POST.get('weight'))
-            declared_value = float(request.POST.get('declared_value'))
+            declared_value = request.POST.get('declared_value')
             simple = cost_of_simple(item_weight)
             registered = cost_of_registered(item_weight)
             value_letter = cost_of_value_letter(item_weight, declared_value)
@@ -55,13 +55,15 @@ def ems_view(request):
     if request.method == "POST":
         form = EmsForm(request.POST)
         if form.is_valid():
+            departure = request.POST.get('departure')
             item_weight = int(request.POST.get('weight'))
-            declared_value = (request.POST.get('declared_value'))
+            declared_value = request.POST.get('declared_value')
             context = {'form': form,
+                       'departure': departure,
                        'item_weight': item_weight,
                        'declared_value': declared_value,
                        }
             return render(request, 'ems_express_dostavka.html', context)  # Внутри фиг скобок
     else:
-        form = PostForm()
+        form = EmsForm()
         return render(request, 'ems_express_dostavka.html', {'form': form})  # внутри фигурных скобок
