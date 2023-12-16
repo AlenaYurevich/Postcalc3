@@ -1,4 +1,5 @@
 from django import forms
+from .ems_points import read_ems_points
 
 
 class PostForm(forms.Form):
@@ -8,12 +9,14 @@ class PostForm(forms.Form):
                                         widget=forms.NumberInput(attrs={'class': "form-control", 'placeholder': "нет"}))
 
 
-Choices = ((1, "English"), (2, "German"), (3, "French"))
+# Choices = ((1, "English"), (2, "German"), (3, "French"))
+Choices = read_ems_points()
 
 
 class EmsForm(forms.Form):
-    departure = forms.TypedChoiceField(label="Выберите пункт отправления", choices=Choices, empty_value=2,
-                                       widget=forms.Select(attrs={'class': "form-control", 'autofocus': 'autofocus'}))
+    departure = forms.TypedChoiceField(label="Выберите пункт отправления", choices=Choices,
+                                       widget=forms.Select(attrs={'class': "form-control", 'autofocus': 'autofocus',
+                                                                  'placeholder': "нет"}))
     weight = forms.IntegerField(label="Введите вес отправления, грамм", widget=forms.NumberInput(attrs={
         'class': "form-control"}))
     declared_value = forms.DecimalField(label="Введите объявленную ценность, рублей", required=False, decimal_places=2,

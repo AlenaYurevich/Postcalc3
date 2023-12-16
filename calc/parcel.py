@@ -7,13 +7,16 @@ from openpyxl import load_workbook
 def round_as_excel(num):
     # num = float(num)
     reminder = str(round(num % 1, 3))+'0000'
-    if reminder[3] in '02468' and reminder[4] in '56789':
-        return round(num + 0.01, 2)
+    if reminder[3] in '02648' and reminder[4] in '5':
+        return round(num + 0.01, 2), reminder
     else:
         return round(num, 2)
 
 
-print(round_as_excel(0.568))
+print(round_as_excel(0.558))
+print(round_as_excel(0.565))
+print(round_as_excel(0.566))
+print(round_as_excel(0.578))
 
 
 """
@@ -133,4 +136,4 @@ def cost_of_parcel(item_weight, declared_value):
     return price_row
 
 
-print(cost_of_parcel(1152, 115.45))
+print(cost_of_parcel(915, 1.25))

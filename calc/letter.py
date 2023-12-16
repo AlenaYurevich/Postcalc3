@@ -117,10 +117,10 @@ def cost_of_value_letter(item_weight, declared_value):
             price_row.append(rate)
         else:
             rate = {
-                'fiz': "-",
-                'yur': "-",
-                'item_vat': "-",
-                'for_declared': "-",
+                'fiz': "",
+                'yur': "",
+                'item_vat': "",
+                'for_declared': "",
                 'rub': "",
                 'sep': ""
             }

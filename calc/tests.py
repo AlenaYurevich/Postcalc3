@@ -99,7 +99,10 @@ def test_parcel():
         'for_declared_yur': '',
         'tracking': 'да',
         'rub': " руб.",
-        'sep': ''}]
+        'sep1': '',
+        'sep2': '/',
+
+    }]
     assert cost_of_parcel(1152, 10.12) == [{
         'fiz': '5,17',
         'yur': '6,80',
@@ -108,11 +111,12 @@ def test_parcel():
         'for_declared_yur': '0,36',
         'tracking': 'да',
         'rub': " руб.",
-        'sep': '/'}]
+        'sep1': '/',
+        'sep2': '/',
+    }]
     assert cost_of_parcel(50200, '') == [{
         'fiz': 'Макс. вес 50 кг',
-        'sep': ''
-    }]
+        'sep1': '', 'sep2': ''}]
 
 
 def test_parcel_3_4_5():
