@@ -1,5 +1,5 @@
 from django import forms
-from .ems_points import read_ems_points
+from .ems_points import read_ems_points, sheet
 
 
 class PostForm(forms.Form):
@@ -9,8 +9,7 @@ class PostForm(forms.Form):
                                         widget=forms.NumberInput(attrs={'class': "form-control", 'placeholder': "нет"}))
 
 
-# Choices = ((1, "English"), (2, "German"), (3, "French"))
-Choices = read_ems_points()
+Choices = read_ems_points(sheet)
 
 
 class EmsForm(forms.Form):

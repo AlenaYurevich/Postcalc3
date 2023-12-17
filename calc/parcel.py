@@ -1,7 +1,6 @@
 import os
 import math
 from openpyxl import load_workbook
-# from okr import round_as_excel
 
 
 def round_as_excel(num):
@@ -11,12 +10,6 @@ def round_as_excel(num):
         return round(num + 0.01, 2), reminder
     else:
         return round(num, 2)
-
-
-print(round_as_excel(0.558))
-print(round_as_excel(0.565))
-print(round_as_excel(0.566))
-print(round_as_excel(0.578))
 
 
 """
@@ -132,8 +125,4 @@ def cost_of_parcel(item_weight, declared_value):
         fiz = "Макс. вес 50 кг"
         sep1, sep2 = '', ''
         price_row.append({'fiz': fiz, 'sep1': sep1, 'sep2': sep2})
-
     return price_row
-
-
-print(cost_of_parcel(915, 1.25))

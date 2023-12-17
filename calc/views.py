@@ -7,6 +7,7 @@ from .letter import cost_of_simple, cost_of_registered, cost_of_value_letter
 from .first_class import cost_of_first_class
 from .parcel import cost_of_parcel
 from .parcel_3_4_5 import cost_of_parcel_3_4_5
+from .ems_points import cost_of_ems
 
 
 # def read_letter_from_exel(filepath):
@@ -44,7 +45,6 @@ def calculation_view(request):
                        'parcel': parcel,
                        'parcel_3_4_5': parcel_3_4_5,
                        }
-            print(context)
             return render(request, 'index.html', context)  # Внутри фиг скобок
     else:
         form = PostForm()
@@ -58,10 +58,13 @@ def ems_view(request):
             departure = request.POST.get('departure')
             item_weight = int(request.POST.get('weight'))
             declared_value = request.POST.get('declared_value')
+            ems = cost_of_ems(departure, item_weight, declared_value)
+            print(ems)
             context = {'form': form,
                        'departure': departure,
                        'item_weight': item_weight,
                        'declared_value': declared_value,
+                       'ems': ems
                        }
             return render(request, 'ems_express_dostavka.html', context)  # Внутри фиг скобок
     else:
