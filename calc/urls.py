@@ -1,5 +1,4 @@
 from django.urls import path
-# from .views import movies_view
 from .views import calculation_view
 from .views import ems_view
 

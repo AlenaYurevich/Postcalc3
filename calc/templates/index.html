@@ -1,87 +1,13 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name = "viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1 shrink-to-fit=no">
-    <meta http-equiv ="X-UA-Compatible" content = "ie-edge">
-    <title>Расчет стоимости почтового отправления</title>
-    <link rel = "stylesheet" href = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" ></script>
-<!--    <link rel="mask-icon" href="/docs/5.3/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">-->
-<!--    <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon.ico">-->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <style>
-    .bi {
-        vertical-align: -.125em;
-        fill: currentColor;
-      }
-    </style>
-</head>
-<body>
-<!--<svg xmlns="http://www.w3.org/2000/svg" class="d-none">-->
-<!--  <symbol id="check" viewBox="0 0 16 16">-->
-<!--    <title>Check</title>-->
-<!--    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>-->
-<!--  </symbol>-->
-<!--</svg>-->
-
-<div class="container py-3">
+{% extends 'base.html' %}
+{% block page_content %}
+ <main>
   <header>
-    <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
-      <a href="/" class="d-flex align-items-center link-body-emphasis text-decoration-none">
-        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" class="bi bi-calculator text-info" role="img" viewBox="0 0 16 16">
-  <path d="M12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
-  <path d="M4 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z"/>
-</svg>
-        <span class="fs-4 text-info">PostTarif</span>
-
-      </a>
-
-      <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none text-info " href="#">по Беларуси</a>
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none text-info " href="ems_express_dostavka">EMS экспресс доставка</a>
-<!--        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Международные</a>-->
-<!--        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Информация</a>-->
-      </nav>
-    </div>
-
     <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-      <h1 class="display-4 fw-normal text-body-emphasis">Расчет стоимости пересылки по Беларуси</h1>
+      <h1 class="display-4 fw-normal text-body-emphasis">Расчет стоимости<br>пересылки по Беларуси</h1>
       <p class="fs-5 text-body-secondary">Какое почтовое отправление самое быстрое, какое самое надежное, какое самое доступное?
         Введите вес отправления в граммах, и таблица покажет все возможные варианты пересылки РУП &#171Белпочта&#187 </p>
     </div>
   </header>
-
-  <main>
-<!--      {% for rates in price_list %}-->
-<!--        <div>-->
-<!--            <h2>{{ rates.item }}</h2>-->
-<!--            <p>Стоимость: {{ rates.cost }}</p>-->
-<!--        </div>-->
-<!--    {% endfor %}-->
-<!--    <h2>Результат расчета</h2>-->
-<!--    <p>{{ cost_of_delivery }} руб.</p>-->
-
-
-<!--    <div class="row row-cols-1 row-cols-md-3 mb-3">-->
-<!--      <form class="needs-validation" action = "" method = "POST" novalidate>-->
-<!--        {% csrf_token %}-->
-
-<!--            <div class="col">-->
-<!--              <label for="weight" class="form-label">Введите массу отправления, грамм</label>-->
-<!--              <input type="text" class="form-control" id="weight" name="weight" placeholder="20" required>-->
-<!--              <div class="invalid-feedback">-->
-<!--                Максимальный вес 30,0 кг-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="col">-->
-<!--              <label for="declared_value" class="form-label">Сумма объявленной ценности, руб.</label>-->
-<!--              <input type="text" class="form-control" id="declared_value" name="declared_value" placeholder="0,0">-->
-<!--            </div>-->
-<!--            <button class="col-md-6 btn btn-lg btn-primary mt-4 mb-4" type="submit" name="send" >Рассчитать</button>-->
-<!--       </form>-->
-<!--    </div>-->
     <div class="row row-cols-1 row-cols-md-3 mb-3">
     <form method="POST" class="PostForm">{% csrf_token %}
       <div class="col">
@@ -176,7 +102,7 @@
             <td> {{ rate.tracking }}</td>
             {% endfor %}
           </tr>
-         <tr class="border-info">
+         <tr>
             <th scope="row" class="text-start">Посылка с оформлением в личном кабинете<br>&#171Тариф 3, 4, 5&#187</th>
            {% for rate in parcel_3_4_5 %}
             <td> {{ rate.fiz }}</td>
@@ -186,6 +112,15 @@
             <td> да </td>
             {% endfor %}
           </tr>
+        <tr class="border-info">
+            <th scope="row" class="text-start"><a class="me-3 py-2 link-body-emphasis text-decoration-none text-info"
+                                                  href="ems_express_dostavka" target="blank">EMS экспресс-доставка</a></th>
+             <td colspan="5"><a class="me-3 py-2 link-body-emphasis text-info" href="ems_express_dostavka"
+                                  target="blank">Для расчета экспресс-доставки EMS перейдите по ссылке</a></td>
+        </tr>
+
+
+
         </tbody>
       </table>
     </div>
@@ -392,53 +327,7 @@
           </div>
         </div>
       </div>
-
-
     </div>
   </main>
 
-  <footer class="pt-4 my-md-5 pt-md-5 border-top">
-    <div class="row">
-      <div class="col-12 col-md">
-        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="20" class="bi bi-calculator text-info" role="img" viewBox="0 0 16 16">
-  <path d="M12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
-  <path d="M4 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z"/>
-</svg>
-<!--        <img class="mb-2" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="24" height="19">-->
-        <small class="d-block mb-3 text-body-secondary">&copy; 2024</small>
-      </div>
-      <div class="col-6 col-md">
-        <h5>Features</h5>
-        <ul class="list-unstyled text-small">
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="ems_express_dostavka">EMS экспресс доставка по Беларуси</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Random feature</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Team feature</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Stuff for developers</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Another one</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Last time</a></li>
-        </ul>
-      </div>
-      <div class="col-6 col-md">
-        <h5>Resources</h5>
-        <ul class="list-unstyled text-small">
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Resource</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Resource name</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Another resource</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Final resource</a></li>
-        </ul>
-      </div>
-      <div class="col-6 col-md">
-        <h5>About</h5>
-        <ul class="list-unstyled text-small">
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Team</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Locations</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Privacy</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Terms</a></li>
-        </ul>
-      </div>
-    </div>
-  </footer>
-</div>
-<script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-</body>
-</html>
+ {% endblock %}

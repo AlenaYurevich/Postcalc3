@@ -98,8 +98,10 @@ def cost_of_value_letter(item_weight, declared_value):
             file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/letter2.xlsx')  # второй файл
             workbook = load_workbook(filename=file_path)
             sheet = workbook.active
-            fiz = sheet['D11'].value + sheet['D12'].value * weight_step(item_weight) + cost_for_declared_value(declared_value)[0]
-            yur = sheet['H11'].value + sheet['H12'].value * weight_step(item_weight) + cost_for_declared_value(declared_value)[1]
+            fiz = sheet['D11'].value + sheet['D12'].value * weight_step(item_weight)\
+                                     + cost_for_declared_value(declared_value)[0]
+            yur = sheet['H11'].value + sheet['H12'].value * weight_step(item_weight)\
+                                     + cost_for_declared_value(declared_value)[1]
             item_vat = vat(yur)
             yur += item_vat
             for_declared = cost_for_declared_value(declared_value)[0]

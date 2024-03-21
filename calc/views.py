@@ -56,12 +56,14 @@ def ems_view(request):
         form = EmsForm(request.POST)
         if form.is_valid():
             departure = request.POST.get('departure')
+            destination = request.POST.get('destination')
             item_weight = int(request.POST.get('weight'))
             declared_value = request.POST.get('declared_value')
-            ems = cost_of_ems(departure, item_weight, declared_value)
+            ems = cost_of_ems(departure, destination, item_weight, declared_value)
             print(ems)
             context = {'form': form,
                        'departure': departure,
+                       'destination': destination,
                        'item_weight': item_weight,
                        'declared_value': declared_value,
                        'ems': ems
