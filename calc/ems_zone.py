@@ -1,5 +1,6 @@
 import os
 from openpyxl import load_workbook
+from openpyxl.utils.cell import get_column_letter
 
 
 file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/ems_zone.xlsx')
@@ -16,3 +17,5 @@ def find_ems_zone(worksheet, point1):
 
 
 print(find_ems_zone(sheet, 'Р13'))
+print(get_column_letter(int('P13'[1:]) + 1))
+
