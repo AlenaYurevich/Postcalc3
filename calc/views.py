@@ -7,7 +7,7 @@ from .letter import cost_of_simple, cost_of_registered, cost_of_value_letter
 from .first_class import cost_of_first_class
 from .parcel import cost_of_parcel
 from .parcel_3_4_5 import cost_of_parcel_3_4_5
-from .ems_points import cost_of_ems
+from .ems_points import data_of_ems
 from .ems_zone import find_ems_zone
 
 
@@ -60,15 +60,17 @@ def ems_view(request):
             destination = request.POST.get('destination')
             item_weight = int(request.POST.get('weight'))
             declared_value = request.POST.get('declared_value')
-            ems = cost_of_ems(departure, destination, item_weight, declared_value)
-            # ems_zone = find_ems_zone(departure, destination)
+            ems = data_of_ems(departure, destination, item_weight, declared_value)
+            zone1 = data_of_ems(departure, destination, item_weight, declared_value)[0]
+            zone2 = data_of_ems(departure, destination, item_weight, declared_value)[1]
+            ems_zone = find_ems_zone(zone1, zone2)
             context = {'form': form,
                        'departure': departure,
                        'destination': destination,
                        'item_weight': item_weight,
                        'declared_value': declared_value,
                        'ems': ems,
-                       # 'ems_zone': ems_zone
+                       'ems_zone': ems_zone
                        }
             return render(request, 'ems_express_dostavka.html', context)  # Внутри фиг скобок
     else:

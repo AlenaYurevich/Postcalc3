@@ -19,22 +19,18 @@ def read_ems_points(worksheet):
 
 
 def find_ems_point(worksheet, point):
-    # zone_list = []
     ems_point = 0
     for row in worksheet.iter_rows(min_row=1, values_only=True):
-        # zone_list.append(row)
         if str(row[0]) == point:
             ems_point = row[2]
     return ems_point
 
 
-def cost_of_ems(departure, destination, item_weight, declared_value):
+def data_of_ems(departure, destination, item_weight, declared_value):
     zone1 = find_ems_point(sheet, departure)
     zone2 = find_ems_point(sheet, destination)
-    return departure, destination, zone1, zone2, item_weight, declared_value
+    return [zone1, zone2, item_weight, declared_value]
 
-
-print(find_ems_point(sheet, '5'))
 
 """
 правильно определяет зоны
