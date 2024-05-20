@@ -9,6 +9,7 @@ from .parcel import cost_of_parcel
 from .parcel_3_4_5 import cost_of_parcel_3_4_5
 from .ems_points import data_of_ems
 from .ems_zone import find_ems_zone
+from .ems_cost import find_ems_documents_cost
 
 
 # def read_letter_from_exel(filepath):
@@ -64,13 +65,15 @@ def ems_view(request):
             zone1 = data_of_ems(departure, destination, item_weight, declared_value)[0]
             zone2 = data_of_ems(departure, destination, item_weight, declared_value)[1]
             ems_zone = find_ems_zone(zone1, zone2)
+            ems_cost = find_ems_documents_cost(ems_zone, item_weight)
             context = {'form': form,
                        'departure': departure,
                        'destination': destination,
                        'item_weight': item_weight,
                        'declared_value': declared_value,
                        'ems': ems,
-                       'ems_zone': ems_zone
+                       'ems_zone': ems_zone,
+                       'ems_cost': ems_cost
                        }
             return render(request, 'ems_express_dostavka.html', context)  # Внутри фиг скобок
     else:
