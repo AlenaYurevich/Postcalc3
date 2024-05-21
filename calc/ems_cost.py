@@ -20,17 +20,60 @@ def formatted(num):
         return str("{:.2f}".format(num).replace('.', ','))
 
 
-def find_ems_documents_cost(zone, item_weight):
-    x = find_column_letter(zone)
-    if item_weight <= 1000:
-        yur = sheet[str(x + '10')].value
-    elif item_weight <= 2000:
-        yur = sheet[str(x + '11')].value
+def find_documents_table_row(weight):
+    if weight <= 1000:
+        return '10'
+    elif weight <= 2000:
+        return '11'
+
+
+def find_goods_table_row(weight):
+    if weight <= 1000:
+        return '13'
+    elif weight <= 2000:
+        return '14'
+    elif weight <= 3000:
+        return '15'
+    elif weight <= 5000:
+        return '16'
+    elif weight <= 10000:
+        return '17'
+    elif weight <= 15000:
+        return '18'
+    elif weight <= 20000:
+        return '19'
+    elif weight <= 25000:
+        return '20'
+    elif weight <= 30000:
+        return '21'
+    elif weight <= 35000:
+        return '22'
+    elif weight <= 40000:
+        return '23'
+    elif weight <= 45000:
+        return '24'
+    elif weight <= 50000:
+        return '25'
+
+
+def find_ems_documents_cost(zone, weight):
+    price_row = []
+    if weight <= 2000:
+        x = find_column_letter(zone)
+        yur = sheet[str(x + find_documents_table_row(weight))].value
+        item_vat = vat(yur)
+        yur += item_vat
+        rate = {
+            'fiz': yur,
+            'yur': yur,
+            'item_vat': item_vat,
+            'for_declared': ""
+                    }
+        for i in rate:
+            rate[i] = formatted(rate[i])
+        price_row.append(rate)
     else:
-        return 'документы до 2 кг включительно'
-    item_vat = vat(yur)
-    yur += item_vat
-    return formatted(yur)
+        fiz = "Макс. вес 2 кг"
+        price_row.append({'fiz': fiz})
+    return price_row
 
-
-print(find_ems_documents_cost(5, 2500))

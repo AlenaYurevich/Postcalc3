@@ -12,22 +12,6 @@ from .ems_zone import find_ems_zone
 from .ems_cost import find_ems_documents_cost
 
 
-# def read_letter_from_exel(filepath):
-#     price_list = []
-#     workbook = load_workbook(filename=filepath)
-#     sheet = workbook.active
-#
-#     for row in sheet.iter_rows(min_row=3, values_only=True):
-#         item, cost_fiz, cost_yur = row
-#         rates = {
-#             'item': item,
-#             'cost_fiz': cost_fiz,
-#             'cost_yur': cost_yur
-#                     }
-#         price_list.append(rates)
-#     return price_list
-
-
 def calculation_view(request):
     if request.method == "POST":
         form = PostForm(request.POST)
@@ -47,7 +31,7 @@ def calculation_view(request):
                        'parcel': parcel,
                        'parcel_3_4_5': parcel_3_4_5,
                        }
-            return render(request, 'index.html', context)  # Внутри фиг скобок
+            return render(request, 'index.html', context)  # Внутри фигурных скобок
     else:
         form = PostForm()
         return render(request, 'index.html', {'form': form})  # внутри фигурных скобок

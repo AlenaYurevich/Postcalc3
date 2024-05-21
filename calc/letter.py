@@ -4,8 +4,8 @@ from openpyxl import load_workbook
 from .vat import vat
 
 
-def weight_step(item_weight):
-    return math.ceil((item_weight - 20) / 20)
+def weight_step(weight):
+    return math.ceil((weight - 20) / 20)
 
 
 # def vat(num):

@@ -3,7 +3,7 @@
  <main>
   <header>
     <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-      <h1 class="display-4 fw-normal text-body-emphasis">Расчет стоимости<br>экспресс доставки EMS по Беларуси</h1>
+      <h1 class="display-4 fw-normal text-body-emphasis">Расчет стоимости экспресс доставки EMS по Беларуси</h1>
       <p class="fs-5 text-body-secondary">Самое быстрое почтовое отправление РУП &#171Белпочта&#187</p>
     </div>
   </header>
@@ -15,11 +15,9 @@
       </div>
     </form>
     </div>
-      <p>{{ departure }}</p>
-      <p>{{ destination }}</p>
       <p>{{ ems }}</p>
       <p>{{ ems_zone }}</p>
-    <h2 class="display-6 text-center mb-4">Стоимость пересылки, руб.</h2>
+    <h2 class="display-6 text-center mb-4">Стоимость пересылки по Беларуси, руб.</h2>
 
     <div class="table-responsive">
       <table class="table text-center">
@@ -35,23 +33,50 @@
         </thead>
         <tbody>
         <tr>
-            <th scope="row" class="text-start">Отправление EMS по Беларуси:</th>
+            <th scope="row" class="text-start">Документы:</th>
+        </tr>
+        <tr>
+            <th scope="row" class="text-start">Прием в отделении связи</th>
+            {% for rate in ems_cost %}
+            <td> {{ rate.fiz }}</td>
+            <td> {{ rate.yur }}</td>
+            <td> {{ rate.item_vat }}</td>
+            <td> {{ rate.for_declared }}</td>
+            <td> да </td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <th scope="row" class="text-start">Прием в офисе или на дому</th>
+            {% for rate in ems_cost %}
+            <td> {{ rate.fiz }}</td>
+            <td> {{ rate.yur }}</td>
+            <td> {{ rate.item_vat }}</td>
+            <td> {{ rate.for_declared }}</td>
+            <td> да </td>
+            {% endfor %}
+          </tr>
+        <tr>
+            <th scope="row" class="text-start">Товары:</th>
           </tr>
         <tr>
             <th scope="row" class="text-start">Прием в отделении связи</th>
-            <td> 3,10 </td>
-            <td> {{ ems_cost }} </td>
-            <td> 0,52 </td>
-            <td></td>
+            {% for rate in ems_cost %}
+            <td> {{ rate.fiz }}</td>
+            <td> {{ rate.yur }}</td>
+            <td> {{ rate.item_vat }}</td>
+            <td> {{ rate.for_declared }}</td>
             <td> да </td>
-          </tr>
+            {% endfor %}
+        </tr>
         <tr>
-            <th scope="row" class="text-start">Прием на дому или в офисе</th>
-            <td> 3,10 </td>
-            <td> 3,10 </td>
-            <td> 0,52 </td>
-            <td></td>
+            <th scope="row" class="text-start">Прием в офисе или на дому</th>
+            {% for rate in ems_cost %}
+            <td> {{ rate.fiz }}</td>
+            <td> {{ rate.yur }}</td>
+            <td> {{ rate.item_vat }}</td>
+            <td> {{ rate.for_declared }}</td>
             <td> да </td>
+            {% endfor %}
           </tr>
 
 
@@ -61,29 +86,7 @@
     </div>
 
     <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-      <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm">
-          <div class="card-header py-3">
-            <h4 class="my-0 fw-normal">Письмо, бандероль, мелкий пакет простые</h4>
-          </div>
-          <div class="card-body">
-            <h2 class="card-title pricing-card-title">
-             {% for rate in simple %}
-             {{ rate.fiz }}
-             <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
-             {% endfor %}
-            </h2>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>нет отслеживания</li>
-              <li>оплата марками</li>
-              <li>прием в почтовый ящик</li>
-              <li>Д + 3</li>
-              <li>вручение в почтовый ящик</li>
-            </ul>
-            <label class="w-100 btn btn-lg btn-info text-white">доступный вариант</label>
-          </div>
-        </div>
-      </div>
+
       <div class="col">
         <div class="card mb-4 rounded-3 shadow-sm">
           <div class="card-header py-3">
