@@ -4,8 +4,8 @@ from openpyxl import load_workbook
 from .vat import vat
 
 
-def weight_step(item_weight):
-    return math.ceil((item_weight - 20) / 20)
+def weight_step(weight):
+    return math.ceil((weight - 20) / 20)
 
 
 # def vat(num):
@@ -80,15 +80,16 @@ def cost_of_registered(item_weight):
 
 """
 Письмо, мелкий пакет с объявленной ценностью
+проверить, можно ли перенести в новый файл
 """
 
 
 def cost_for_declared_value(declared_value):
-    if declared_value not in ("нет", ""):
+    if declared_value not in ("нет", "", 0, "0"):
         fiz = float(declared_value) * 3.6 / 100
         yur = float(declared_value) * 3 / 100
     else:
-        fiz, yur = "", ""
+        fiz, yur = 0, 0
     return [fiz, yur]
 
 
