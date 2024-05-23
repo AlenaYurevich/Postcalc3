@@ -9,6 +9,6 @@ sheet = wb.active
 
 
 def find_ems_zone(point1, point2):
-    x = get_column_letter(int(point1[1:]) + 1)  # get string from point1 without P
-    y = str(int(point2[1:]) + 2)  # get row number from point2 without P
+    x = get_column_letter(int(point2[1:]) + 1)  # get string from point1 without P. Point of destination
+    y = str(int(point1[1:]) + 2)  # get row number from point2 without P. Point of departure
     return sheet[str(x + y)].value

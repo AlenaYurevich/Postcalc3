@@ -1,15 +1,8 @@
 import os
 import math
 from openpyxl import load_workbook
-
-
-def round_as_excel(num):
-    # num = float(num)
-    reminder = str(round(num % 1, 3))+'0000'
-    if reminder[3] in '02648' and reminder[4] in '5':
-        return round(num + 0.01, 2), reminder
-    else:
-        return round(num, 2)
+from .round_as_excel import round_as_excel
+from .vat import vat
 
 
 """
@@ -19,16 +12,12 @@ def round_as_excel(num):
 Тарификация  за  массу  посылки  массой  свыше  1  кг  с  объявленной  ценностью  осуществляется  с точностью  до  
 десятков  граммов.  Любое  количество  граммов  округляется  до  десятков  граммов  в
 большую сторону
-
 """
 
 
-# def dec(num):
-#     return Decimal(num).quantize(Decimal("1.00"))  # десятичные числа для отражения денежных средств
-
-
-def vat(num):
-    return round_as_excel(num * 0.2)
+file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/letter2.xlsx')  # второй файл
+workbook = load_workbook(filename=file_path)
+sheet = workbook.active
 
 
 def formatted(num):
@@ -46,17 +35,14 @@ def weight(item_weight, declared_value):
 
 
 def cost_for_declared_value(declared_value):
-    fiz = round_as_excel(float(declared_value) * 3 / 100)
-    yur = round_as_excel(float(declared_value) * 3 / 100)
+    fiz = float(declared_value) * 3 / 100
+    yur = float(declared_value) * 3 / 100
     return [fiz, yur]
 
 
 def cost_of_parcel(item_weight, declared_value):
     price_row = []
     if item_weight <= 50000:
-        file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/letter2.xlsx')  # второй файл
-        workbook = load_workbook(filename=file_path)
-        sheet = workbook.active
         if item_weight <= 1000:
             if declared_value in ("нет", "", 0, "0"):
                 fiz = sheet['D29'].value
@@ -95,10 +81,10 @@ def cost_of_parcel(item_weight, declared_value):
                 sep2 = '/'
             else:
                 fiz = sheet['D31'].value + sheet['D32'].value * weight(item_weight, declared_value)
-                fiz = round_as_excel(fiz)
+                # fiz = round_as_excel(fiz)
                 fiz += cost_for_declared_value(declared_value)[0]
                 yur = sheet['H29'].value + sheet['H30'].value * weight(item_weight, declared_value)
-                yur = round_as_excel(yur)
+                # yur = round_as_excel(yur)
                 yur += cost_for_declared_value(declared_value)[1]
                 for_declared_fiz = cost_for_declared_value(declared_value)[0]
                 for_declared_yur = cost_for_declared_value(declared_value)[1]

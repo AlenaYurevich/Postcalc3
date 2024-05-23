@@ -49,7 +49,7 @@ def ems_view(request):
             zone1 = data_of_ems(departure, destination, item_weight, declared_value)[0]
             zone2 = data_of_ems(departure, destination, item_weight, declared_value)[1]
             ems_zone = find_ems_zone(zone1, zone2)
-            ems_cost = find_ems_documents_cost(ems_zone, item_weight)
+            ems_cost = find_ems_documents_cost(ems_zone, item_weight, declared_value)
             context = {'form': form,
                        'departure': departure,
                        'destination': destination,
