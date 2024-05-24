@@ -37,7 +37,7 @@
         </tr>
         <tr>
             <th scope="row" class="text-start">Прием в отделении связи</th>
-            {% for rate in ems_cost %}
+            {% for rate in ems_documents_cost %}
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat }}</td>
@@ -47,20 +47,14 @@
         </tr>
         <tr>
             <th scope="row" class="text-start">Прием в офисе или на дому</th>
-            {% for rate in ems_cost %}
-            <td> {{ rate.fiz }}</td>
-            <td> {{ rate.yur }}</td>
-            <td> {{ rate.item_vat }}</td>
-            <td> {{ rate.for_declared }}</td>
-            <td> да </td>
-            {% endfor %}
+
           </tr>
         <tr>
             <th scope="row" class="text-start">Товары:</th>
           </tr>
         <tr>
             <th scope="row" class="text-start">Прием в отделении связи</th>
-            {% for rate in ems_cost %}
+            {% for rate in ems_goods_cost %}
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat }}</td>

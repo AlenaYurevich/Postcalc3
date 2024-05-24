@@ -37,15 +37,13 @@ def weight(item_weight, declared_value):
 def cost_of_parcel_declared(item_weight, declared_value):
     if item_weight <= 1000:
         fiz = sheet['D42'].value
+    elif item_weight <= 3000:
+        fiz = sheet['D43'].value
+    elif item_weight <= 5000:
+        fiz = sheet['D44'].value
     else:
-        if item_weight <= 3000:
-            fiz = sheet['D43'].value
-        else:
-            if item_weight <= 5000:
-                fiz = sheet['D44'].value
-            else:
-                fiz = sheet['D46'].value + sheet['D47'].value * weight(item_weight, declared_value)
-                fiz = round_as_excel(fiz)
+        fiz = sheet['D46'].value + sheet['D47'].value * weight(item_weight, declared_value)
+        fiz = round_as_excel(fiz)
     for_declared = ''
     if declared_value not in ("нет", "", 0, "0"):
         for_declared = round_as_excel(float(declared_value) * 0.01)
