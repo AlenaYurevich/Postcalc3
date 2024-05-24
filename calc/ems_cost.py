@@ -62,49 +62,160 @@ def cost_for_declared_value(declared_value):
         fiz = float(declared_value) * 3.6 / 100
         fiz = round_as_excel(fiz)
         yur = float(declared_value) * 3 / 100
-        yur = round_as_excel(yur)
+        yur = round(yur, 4)
     else:
         fiz, yur = 0, 0
     return [fiz, yur]
 
 
-def find_ems_documents_cost(zone, weight, declared_value):
+# def find_ems_documents_cost(zone, weight, declared_value):
+#     price_row = []
+#     if weight <= 2000:
+#         if declared_value not in ("нет", "", 0, "0"):
+#             x = find_column_letter(zone)
+#             fiz = sheet[str(x + find_documents_table_row(weight))].value * 1.2
+#             yur = sheet[str(x + find_documents_table_row(weight))].value
+#             fiz += cost_for_declared_value(declared_value)[0]
+#             yur += cost_for_declared_value(declared_value)[1]
+#             yur = round_as_excel(yur)
+#             item_vat = round_as_excel(vat(yur))
+#             yur += item_vat
+#             for_declared = cost_for_declared_value(declared_value)[1] * 1.2
+#             rate = {
+#                 'fiz': fiz,
+#                 'yur': yur,
+#                 'item_vat': item_vat,
+#                 'for_declared': for_declared
+#                         }
+#             for i in rate:
+#                 rate[i] = formatted(rate[i])
+#             price_row.append(rate)
+#         else:
+#             x = find_column_letter(zone)
+#             fiz = sheet[str(x + find_documents_table_row(weight))].value * 1.2
+#             yur = sheet[str(x + find_documents_table_row(weight))].value
+#             item_vat = vat(yur)
+#             yur += item_vat
+#             rate = {
+#                 'fiz': fiz,
+#                 'yur': yur,
+#                 'item_vat': item_vat,
+#                 'for_declared': "-"
+#             }
+#             for i in rate:
+#                 rate[i] = formatted(rate[i])
+#             price_row.append(rate)
+#     else:
+#         fiz = "Макс. вес 2 кг"
+#         price_row.append({'fiz': fiz})
+#     return price_row
+
+
+def find_item_cost(zone, weight, declared_value, item):
     price_row = []
-    if weight <= 2000:
-        if declared_value not in ("нет", "", 0, "0"):
-            x = find_column_letter(zone)
-            fiz = sheet[str(x + find_documents_table_row(weight))].value * 1.2
-            yur = sheet[str(x + find_documents_table_row(weight))].value
-            fiz += cost_for_declared_value(declared_value)[0]
-            yur += cost_for_declared_value(declared_value)[1]
-            for_declared = cost_for_declared_value(declared_value)[1] * 1.2
-            item_vat = vat(yur)
-            yur += item_vat
-            rate = {
-                'fiz': fiz,
-                'yur': yur,
-                'item_vat': item_vat,
-                'for_declared': for_declared
-                        }
-            for i in rate:
-                rate[i] = formatted(rate[i])
-            price_row.append(rate)
-        else:
-            x = find_column_letter(zone)
-            fiz = sheet[str(x + find_documents_table_row(weight))].value * 1.2
-            yur = sheet[str(x + find_documents_table_row(weight))].value
-            item_vat = vat(yur)
-            yur += item_vat
-            rate = {
-                'fiz': fiz,
-                'yur': yur,
-                'item_vat': item_vat,
-                'for_declared': "-"
-            }
-            for i in rate:
-                rate[i] = formatted(rate[i])
-            price_row.append(rate)
+    y = '0'
+    if item == 'documents':
+        y = find_documents_table_row(weight)
+    elif item == 'goods':
+        y = find_goods_table_row(weight)
+    if declared_value not in ("нет", "", 0, "0"):
+        x = find_column_letter(zone)
+        fiz = sheet[str(x + y)].value * 1.2
+        yur = sheet[str(x + y)].value
+        fiz += cost_for_declared_value(declared_value)[0]
+        yur += cost_for_declared_value(declared_value)[1]
+        yur = round_as_excel(yur)
+        item_vat = round_as_excel(vat(yur))
+        yur += item_vat
+        for_declared = cost_for_declared_value(declared_value)[1] * 1.2
+        rate = {
+            'fiz': fiz,
+            'yur': yur,
+            'item_vat': item_vat,
+            'for_declared': for_declared
+                    }
+        for i in rate:
+            rate[i] = formatted(rate[i])
+        price_row.append(rate)
     else:
-        fiz = "Макс. вес 2 кг"
-        price_row.append({'fiz': fiz})
+        x = find_column_letter(zone)
+        fiz = sheet[str(x + y)].value * 1.2
+        yur = sheet[str(x + y)].value
+        item_vat = vat(yur)
+        yur += item_vat
+        rate = {
+            'fiz': fiz,
+            'yur': yur,
+            'item_vat': item_vat,
+            'for_declared': "-"
+        }
+        for i in rate:
+            rate[i] = formatted(rate[i])
+        price_row.append(rate)
     return price_row
+
+
+# def find_ems_goods_cost(zone, weight, declared_value):
+#     price_row = []
+#     if weight <= 50000:
+#         if declared_value not in ("нет", "", 0, "0"):
+#             x = find_column_letter(zone)
+#             fiz = sheet[str(x + find_goods_table_row(weight))].value * 1.2
+#             yur = sheet[str(x + find_goods_table_row(weight))].value
+#             fiz += cost_for_declared_value(declared_value)[0]
+#             yur += cost_for_declared_value(declared_value)[1]
+#             yur = round_as_excel(yur)
+#             item_vat = round_as_excel(vat(yur))
+#             yur += item_vat
+#             for_declared = cost_for_declared_value(declared_value)[1] * 1.2
+#             rate = {
+#                 'fiz': fiz,
+#                 'yur': yur,
+#                 'item_vat': item_vat,
+#                 'for_declared': for_declared
+#                         }
+#             for i in rate:
+#                 rate[i] = formatted(rate[i])
+#             price_row.append(rate)
+#         else:
+#             x = find_column_letter(zone)
+#             fiz = sheet[str(x + find_goods_table_row(weight))].value * 1.2
+#             yur = sheet[str(x + find_goods_table_row(weight))].value
+#             item_vat = vat(yur)
+#             yur += item_vat
+#             rate = {
+#                 'fiz': fiz,
+#                 'yur': yur,
+#                 'item_vat': item_vat,
+#                 'for_declared': "-"
+#             }
+#             for i in rate:
+#                 rate[i] = formatted(rate[i])
+#             price_row.append(rate)
+#     else:
+#         fiz = "Макс. вес 50 кг"
+#         price_row.append({'fiz': fiz})
+#     return price_row
+
+
+def find_ems_cost(zone, weight, declared_value):
+    if weight > 2000:
+        documents_price_row = [{
+            'fiz': "Макс. вес 2 кг",
+            'yur': "-",
+            'item_vat': "-",
+            'for_declared': "-"
+        }]
+    else:
+        documents_price_row = find_item_cost(zone, weight, declared_value, 'documents')
+    if weight > 50000:
+        goods_price_row = [{
+            'fiz': "Макс. вес 50 кг",
+            'yur': "-",
+            'item_vat': "-",
+            'for_declared': "-"
+        }]
+    else:
+        goods_price_row = find_item_cost(zone, weight, declared_value, 'goods')
+    print(documents_price_row, goods_price_row)
+    return documents_price_row, goods_price_row
