@@ -24,8 +24,8 @@
         <thead>
           <tr class="border-info">
             <th style="width: 20%;"></th>
-            <th style="width: 15%;">Для физических лиц</th>
-            <th style="width: 15%;">Для юридических лиц</th>
+            <th style="width: 15%;">Для физ. лиц</th>
+            <th style="width: 15%;">Для юр. лиц</th>
             <th style="width: 15%;">В том числе НДС (юр.)</th>
             <th style="width: 15%;">В том числе за объявленную ценность</th>
             <th style="width: 15%;">Отслеживание</th>
@@ -37,7 +37,7 @@
         </tr>
         <tr>
             <th scope="row" class="text-start">Прием в отделении связи</th>
-            {% for rate in ems_documents_cost %}
+            {% for rate in post_office_ems_documents_cost %}
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat }}</td>
@@ -47,7 +47,13 @@
         </tr>
         <tr>
             <th scope="row" class="text-start">Прием в офисе или на дому</th>
-
+            {% for rate in home_ems_documents_cost %}
+            <td> {{ rate.fiz }}</td>
+            <td> {{ rate.yur }}</td>
+            <td> {{ rate.item_vat }}</td>
+            <td> {{ rate.for_declared }}</td>
+            <td> да </td>
+            {% endfor %}
           </tr>
         <tr>
             <th scope="row" class="text-start">Товары:</th>
@@ -64,7 +70,7 @@
         </tr>
         <tr>
             <th scope="row" class="text-start">Прием в офисе или на дому</th>
-            {% for rate in ems_cost %}
+            {% for rate in ems_goods_cost %}
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat }}</td>
@@ -81,52 +87,6 @@
 
     <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
 
-      <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm">
-          <div class="card-header py-3">
-            <h4 class="my-0 fw-normal">Письмо, бандероль, мелкий пакет заказные</h4>
-          </div>
-          <div class="card-body">
-            <h2 class="card-title pricing-card-title">
-              {% for rate in registered %}
-              {{ rate.fiz }}
-              <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
-              {% endfor %}
-            </h2>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>отслеживание</li>
-              <li>прием оператором</li>
-              <li>Д + 3</li>
-              <li>возмещение при утрате</li>
-              <li>вручение лично в руки</li>
-            </ul>
-            <button type="button" class="w-100 btn btn-lg btn-info text-white">надежный вариант</button>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm border-info">
-          <div class="card-header py-3 text-bg-info text-white border-info">
-            <h4 class="my-0 fw-normal">Письмо, мелкий пакет с объявленной ценностью</h4>
-          </div>
-          <div class="card-body">
-            <h2 class="card-title pricing-card-title">
-              {% for rate in value_letter %}
-           {{ rate.fiz }} {{ rate.sep}} {{ rate.yur }}
-              <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
-              {% endfor %}
-              </h2>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>отслеживание</li>
-              <li>прием оператором</li>
-              <li>Д + 3</li>
-              <li>возмещение при утрате</li>
-              <li>вручение лично в руки</li>
-            </ul>
-            <button type="button" class="w-100 btn btn-lg btn-info text-white">для ценных документов</button>
-          </div>
-        </div>
-      </div>
     </div>
   </main>
  {% endblock %}
