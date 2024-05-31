@@ -51,7 +51,7 @@ def ems_view(request):
             ems_zone = find_ems_zone(zone1, zone2)
             post_office_ems_documents_cost = find_ems_cost(ems_zone, item_weight, declared_value)[0]
             home_ems_documents_cost = find_ems_cost(ems_zone, item_weight, declared_value)[1]
-            ems_goods_cost = find_ems_cost(ems_zone, item_weight, declared_value)[2]
+            post_office_ems_goods_cost = find_ems_cost(ems_zone, item_weight, declared_value)[2]
             context = {'form': form,
                        'departure': departure,
                        'destination': destination,
@@ -61,7 +61,7 @@ def ems_view(request):
                        'ems_zone': ems_zone,
                        'post_office_ems_documents_cost': post_office_ems_documents_cost,
                        'home_ems_documents_cost': home_ems_documents_cost,
-                       'ems_goods_cost': ems_goods_cost
+                       'post_office_ems_goods_cost': post_office_ems_goods_cost
                        }
             return render(request, 'ems_express_dostavka.html', context)  # Внутри фиг скобок
     else:

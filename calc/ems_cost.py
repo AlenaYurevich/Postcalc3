@@ -136,12 +136,12 @@ def find_ems_cost(zone, weight, declared_value):
         post_office_documents_price_row = find_item_cost(zone, weight, declared_value, 'documents', 'post_office')
         home_documents_price_row = find_item_cost(zone, weight, declared_value, 'documents', 'home')
     if weight > 50000:
-        goods_price_row = [{
+        post_office_goods_price_row = [{
             'fiz': "Макс. вес 50 кг",
             'yur': "-",
             'item_vat': "-",
             'for_declared': "-"
         }]
     else:
-        goods_price_row = find_item_cost(zone, weight, declared_value, 'goods', 'post_office')
-    return post_office_documents_price_row, home_documents_price_row, goods_price_row
+        post_office_goods_price_row = find_item_cost(zone, weight, declared_value, 'goods', 'post_office')
+    return post_office_documents_price_row, home_documents_price_row, post_office_goods_price_row
