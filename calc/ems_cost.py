@@ -76,7 +76,7 @@ def find_item_cost(zone, weight, declared_value, item, reception_place):
             y = find_documents_table_row(weight)
         elif item == 'goods':
             y = find_goods_table_row(weight)
-    else:
+    elif reception_place == 'home':
         if item == 'documents':
             y = find_documents_table_row(weight) + 18
         elif item == 'goods':
