@@ -8,10 +8,6 @@ def weight_step(weight):
     return math.ceil((weight - 20) / 20)
 
 
-# def vat(num):
-#     return round(num * 0.2, 2)  # расчет НДС 20 %
-
-
 def formatted(num):
     if num == str(num):
         return num
