@@ -9,7 +9,7 @@ from .parcel import cost_of_parcel
 from .parcel_3_4_5 import cost_of_parcel_3_4_5
 from .ems_points import data_of_ems
 from .ems_zone import find_ems_zone
-from .ems_cost import find_documents_cost
+from .ems_cost import find_documents_cost, find_goods_cost
 
 
 def calculation_view(request):
@@ -50,8 +50,11 @@ def ems_view(request):
             zone2 = data_of_ems(departure, destination, item_weight, declared_value)[1]
             ems_zone = find_ems_zone(zone1, zone2)
             ems_documents_cost = find_documents_cost(ems_zone, item_weight, declared_value)
+            ems_goods_cost = find_goods_cost(ems_zone, item_weight, declared_value)
             post_office_ems_documents_cost = ems_documents_cost[0]
             home_ems_documents_cost = ems_documents_cost[1]
+            post_office_ems_goods_cost = ems_goods_cost[0]
+            home_ems_goods_cost = ems_goods_cost[1]
             context = {'form': form,
                        'departure': departure,
                        'destination': destination,
@@ -61,8 +64,8 @@ def ems_view(request):
                        'ems_zone': ems_zone,
                        'post_office_ems_documents_cost': post_office_ems_documents_cost,
                        'home_ems_documents_cost': home_ems_documents_cost,
-                       # 'post_office_ems_goods_cost': post_office_ems_goods_cost,
-                       # 'home_ems_goods_cost': home_ems_goods_cost
+                       'post_office_ems_goods_cost': post_office_ems_goods_cost,
+                       'home_ems_goods_cost': home_ems_goods_cost
                        }
             return render(request, 'ems_express_dostavka.html', context)  # Внутри фиг скобок
     else:

@@ -2,3 +2,8 @@ db.sqlite3
 /calc/files/ems_rates.xlsx
 /calc/files/ems_zone.xlsx
 /calc/round_as_excel.py
+/.idea/
+/calc/static/
+/venv/Lib/site-packages/
+/venv/Scripts/django-admin.exe
+/venv/Scripts/sqlformat.exe
