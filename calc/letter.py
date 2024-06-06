@@ -2,17 +2,11 @@ import os
 import math
 from openpyxl import load_workbook
 from .vat import vat
+from .format import formatted
 
 
 def weight_step(weight):
     return math.ceil((weight - 20) / 20)
-
-
-def formatted(num):
-    if num == str(num):
-        return num
-    else:
-        return str("{:.2f}".format(num).replace('.', ','))
 
 
 def cost_of_simple(item_weight):

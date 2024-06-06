@@ -2,7 +2,7 @@
 # from django.http import HttpResponseRedirect
 from django.shortcuts import render
 # from openpyxl import load_workbook
-from .forms import PostForm, EmsForm
+from .forms import PostForm, EmsForm, DeliveryForm
 from .letter import cost_of_simple, cost_of_registered, cost_of_value_letter
 from .first_class import cost_of_first_class
 from .parcel import cost_of_parcel
@@ -71,3 +71,17 @@ def ems_view(request):
     else:
         form = EmsForm()
         return render(request, 'ems_express_dostavka.html', {'form': form})  # внутри фигурных скобок
+
+
+def delivery_view(request):
+    if request.method == "POST":
+        form1 = DeliveryForm(request.POST)
+        if form1.is_valid():
+            delivery1 = request.POST.get('delivery1')
+            context = {'form1': form1,
+                       'delivery1': delivery1}
+
+            return render(request, 'ems_express_dostavka.html', context)
+        else:
+            form1 = DeliveryForm()
+            return render(request, 'ems_express_dostavka.html', {'form1': form1})

@@ -2,18 +2,12 @@ import os
 import math
 from openpyxl import load_workbook
 from .round_as_excel import round_as_excel
+from .format import formatted
 
 
 file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/letter2.xlsx')  # второй файл
 workbook = load_workbook(filename=file_path, read_only=True)  # для снижения затрат ОП в режиме чтения
 sheet = workbook.active
-
-
-def formatted(num):
-    if num == str(num):
-        return num
-    else:
-        return str("{:.2f}".format(num).replace('.', ','))
 
 
 """
