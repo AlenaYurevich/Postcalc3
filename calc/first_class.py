@@ -1,6 +1,8 @@
 import os
 import math
 from openpyxl import load_workbook
+from .format import formatted
+from .vat import vat
 
 
 """
@@ -10,17 +12,6 @@ from openpyxl import load_workbook
 
 def weight_step(item_weight):
     return math.ceil((item_weight - 100) / 100)
-
-
-def vat(num):
-    return round(num * 0.2, 2)  # расчет НДС 20 %
-
-
-def formatted(num):
-    if num == str(num):
-        return num
-    else:
-        return str("{:.2f}".format(num).replace('.', ','))
 
 
 def cost_of_first_class(item_weight):
