@@ -10,6 +10,9 @@ class PostForm(forms.Form):
 
 
 Choices = read_ems_points(sheet)
+Choices2 = [('1', 'в течение рабочего дня, следующего за днем приема'),
+            ('2', 'до 10 часов рабочего дня, следующего за днем приема'),
+            ('3', 'в указанное время рабочего дня, следующего за днем приема')]
 
 
 class EmsForm(forms.Form):
@@ -21,8 +24,4 @@ class EmsForm(forms.Form):
         'class': "form-control"}))
     declared_value = forms.DecimalField(label="Введите объявленную ценность, рублей", required=False, decimal_places=2,
                                         widget=forms.NumberInput(attrs={'class': "form-control", 'placeholder': "нет"}))
-
-
-class DeliveryForm(forms.Form):
-    delivery1 = forms.BooleanField(label="111111", required=False,
-                                   widget=forms.Select(attrs={"name": "select_0", "class": "form-control"}))
+    delivery = forms.ChoiceField(label="Доставка:", choices=Choices2, widget=forms.RadioSelect(attrs={'class': "col"}))

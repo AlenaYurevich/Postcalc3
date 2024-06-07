@@ -2,7 +2,7 @@
 # from django.http import HttpResponseRedirect
 from django.shortcuts import render
 # from openpyxl import load_workbook
-from .forms import PostForm, EmsForm, DeliveryForm
+from .forms import PostForm, EmsForm
 from .letter import cost_of_simple, cost_of_registered, cost_of_value_letter
 from .first_class import cost_of_first_class
 from .parcel import cost_of_parcel
@@ -45,11 +45,12 @@ def ems_view(request):
             destination = request.POST.get('destination')
             item_weight = int(request.POST.get('weight'))
             declared_value = request.POST.get('declared_value')
+            delivery = request.POST.get('delivery')
             ems = data_of_ems(departure, destination, item_weight, declared_value)
             zone1 = data_of_ems(departure, destination, item_weight, declared_value)[0]
             zone2 = data_of_ems(departure, destination, item_weight, declared_value)[1]
             ems_zone = find_ems_zone(zone1, zone2)
-            ems_documents_cost = find_documents_cost(ems_zone, item_weight, declared_value)
+            ems_documents_cost = find_documents_cost(ems_zone, item_weight, declared_value, delivery)
             ems_goods_cost = find_goods_cost(ems_zone, item_weight, declared_value)
             post_office_ems_documents_cost = ems_documents_cost[0]
             home_ems_documents_cost = ems_documents_cost[1]
@@ -60,28 +61,16 @@ def ems_view(request):
                        'destination': destination,
                        'item_weight': item_weight,
                        'declared_value': declared_value,
+                       'delivery': delivery,
                        'ems': ems,
                        'ems_zone': ems_zone,
                        'post_office_ems_documents_cost': post_office_ems_documents_cost,
                        'home_ems_documents_cost': home_ems_documents_cost,
                        'post_office_ems_goods_cost': post_office_ems_goods_cost,
-                       'home_ems_goods_cost': home_ems_goods_cost
+                       'home_ems_goods_cost': home_ems_goods_cost,
                        }
+            print(delivery)
             return render(request, 'ems_express_dostavka.html', context)  # Внутри фиг скобок
     else:
         form = EmsForm()
         return render(request, 'ems_express_dostavka.html', {'form': form})  # внутри фигурных скобок
-
-
-def delivery_view(request):
-    if request.method == "POST":
-        form1 = DeliveryForm(request.POST)
-        if form1.is_valid():
-            delivery1 = request.POST.get('delivery1')
-            context = {'form1': form1,
-                       'delivery1': delivery1}
-
-            return render(request, 'ems_express_dostavka.html', context)
-        else:
-            form1 = DeliveryForm()
-            return render(request, 'ems_express_dostavka.html', {'form1': form1})
