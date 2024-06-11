@@ -45,13 +45,13 @@ def ems_view(request):
             destination = request.POST.get('destination')
             item_weight = int(request.POST.get('weight'))
             declared_value = request.POST.get('declared_value')
-            delivery = request.POST.get('delivery')
+            delivery = float(request.POST.get('delivery'))
             ems = data_of_ems(departure, destination, item_weight, declared_value)
             zone1 = data_of_ems(departure, destination, item_weight, declared_value)[0]
             zone2 = data_of_ems(departure, destination, item_weight, declared_value)[1]
             ems_zone = find_ems_zone(zone1, zone2)
             ems_documents_cost = find_documents_cost(ems_zone, item_weight, declared_value, delivery)
-            ems_goods_cost = find_goods_cost(ems_zone, item_weight, declared_value)
+            ems_goods_cost = find_goods_cost(ems_zone, item_weight, declared_value, delivery)
             post_office_ems_documents_cost = ems_documents_cost[0]
             home_ems_documents_cost = ems_documents_cost[1]
             post_office_ems_goods_cost = ems_goods_cost[0]
@@ -69,7 +69,7 @@ def ems_view(request):
                        'post_office_ems_goods_cost': post_office_ems_goods_cost,
                        'home_ems_goods_cost': home_ems_goods_cost,
                        }
-            print(delivery)
+            print(delivery, type(delivery))
             return render(request, 'ems_express_dostavka.html', context)  # Внутри фиг скобок
     else:
         form = EmsForm()
