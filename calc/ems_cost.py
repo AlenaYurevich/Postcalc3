@@ -89,52 +89,55 @@ def cost_for_declared_value(declared_value):
     return [fiz, yur]
 
 
-def find_item_cost(zone, weight, declared_value, item, reception_place):
+def find_item_cost(zone, weight, declared_value, item, reception_place, delivery):
     x = find_column_letter(zone)
     if reception_place == 'post_office':
         row = find_table_row(weight, item)
     else:
         row = find_table_row(weight, item) + 18
-
+    delivery2 = delivery
+    if delivery == 2.5:
+        delivery2 = 2
     if declared_value:
-        fiz = sheet[f"{x}{row}"].value
-        yur = fiz
+        fiz = sheet[f"{x}{row}"].value * delivery
+        yur = sheet[f"{x}{row}"].value * delivery2
         fiz += cost_for_declared_value(declared_value)[0]
         yur += cost_for_declared_value(declared_value)[1]
         yur = round_as_excel(yur)
         for_declared = cost_for_declared_value(declared_value)[1] * 1.2
     else:
-        fiz = sheet[f"{x}{row}"].value
-        yur = fiz
+        fiz = sheet[f"{x}{row}"].value * delivery
+        yur = sheet[f"{x}{row}"].value * delivery2
         for_declared = "-"
 
-    item_vat = round_as_excel(vat(yur))
-    fiz += item_vat
-    yur += item_vat
+    item_vat_fiz = round_as_excel(vat(fiz))
+    item_vat_yur = round_as_excel(vat(yur))
+    fiz = round_as_excel(fiz + item_vat_fiz)
+    yur += item_vat_yur
 
     return [{
         "fiz": formatted(fiz),
         "yur": formatted(yur),
-        "item_vat": formatted(item_vat),
+        "item_vat": formatted(item_vat_yur),
         "for_declared": formatted(for_declared),
     }]
 
 
-def find_documents_cost(zone, weight, declared_value):
+def find_documents_cost(zone, weight, declared_value, delivery):
     if weight > 2000:
         return [
             [{'fiz': "Макс. вес 2 кг", 'yur': "-", 'item_vat': "-", 'for_declared': "-"}],
             [{'fiz': "Макс. вес 2 кг", 'yur': "-", 'item_vat': "-", 'for_declared': "-"}],
         ]
-    return [find_item_cost(zone, weight, declared_value, 'documents', 'post_office'),
-            find_item_cost(zone, weight, declared_value, 'documents', 'home')]
+    return [find_item_cost(zone, weight, declared_value, 'documents', 'post_office', delivery),
+            find_item_cost(zone, weight, declared_value, 'documents', 'home',  delivery)]
 
 
-def find_goods_cost(zone, weight, declared_value):
+def find_goods_cost(zone, weight, declared_value, delivery):
     if weight > 50000:
         return [
             [{'fiz': "Макс. вес 50 кг", 'yur': "-", 'item_vat': "-", 'for_declared': "-"}],
             [{'fiz': "Макс. вес 50 кг", 'yur': "-", 'item_vat': "-", 'for_declared': "-"}],
         ]
-    return [find_item_cost(zone, weight, declared_value, 'goods', 'post_office'),
-            find_item_cost(zone, weight, declared_value, 'goods', 'home')]
+    return [find_item_cost(zone, weight, declared_value, 'goods', 'post_office', delivery),
+            find_item_cost(zone, weight, declared_value, 'goods', 'home',  delivery)]
