@@ -10,13 +10,18 @@ class PostForm(forms.Form):
 
 
 Choices = read_ems_points(sheet)
-Choices2 = [(1, 'в течение рабочего дня, следующего за днем приема'),
-            (3, 'до 10 часов рабочего дня, следующего за днем приема'),
+Choices2 = [(3, 'до 10 часов рабочего дня, следующего за днем приема'),
             (2, 'в указанное время рабочего дня, следующего за днем приема'),
-            (2.5, 'в день приёма')]
+            (2.5, 'в день приёма'),
+            (1, 'в течение рабочего дня, следующего за днем приема')]
 """
 1, 3, 2, 2.5 - повышающие коэффициенты в зависимости от времени доставки
 """
+
+Choices3 = [(1, 'простое'),
+            (2, 'заказное'),
+            (3, 'посредством SMS сообщения'),
+            (4, 'без уведомления')]
 
 
 class EmsForm(forms.Form):
@@ -29,4 +34,6 @@ class EmsForm(forms.Form):
     declared_value = forms.DecimalField(label="Введите объявленную ценность, рублей", required=False, decimal_places=2,
                                         widget=forms.NumberInput(attrs={'class': "form-control", 'placeholder': "нет"}))
     delivery = forms.ChoiceField(label="Доставка:", choices=Choices2,
-                                 widget=forms.RadioSelect(attrs={'class': "col", Choices2[1]: 'selected'}))
+                                 widget=forms.RadioSelect(attrs={"input type": "checkbox", 'checked': Choices2[3]}))
+    notification = forms.ChoiceField(label="Уведомление:", choices=Choices3,
+                                     widget=forms.RadioSelect(attrs={'id': "radio2", 'checked': Choices3[0]}))
