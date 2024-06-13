@@ -41,15 +41,17 @@ def ems_view(request):
             departure = request.POST.get('departure')
             destination = request.POST.get('destination')
             item_weight = int(request.POST.get('weight'))
-            declared_value = request.POST.get('declared_value')
+            declared_value = bool(request.POST.get('declared_value'))
             delivery = float(request.POST.get('delivery'))
             notification = int(request.POST.get('notification'))
+            fragile = str(request.POST.get('fragile'))
+            print(fragile, type(fragile), "Отметка хрупкое")
             ems = data_of_ems(departure, destination, item_weight, declared_value)
             zone1 = data_of_ems(departure, destination, item_weight, declared_value)[0]
             zone2 = data_of_ems(departure, destination, item_weight, declared_value)[1]
             ems_zone = find_ems_zone(zone1, zone2)
-            ems_documents_cost = find_documents_cost(ems_zone, item_weight, declared_value, delivery, notification)
-            ems_goods_cost = find_goods_cost(ems_zone, item_weight, declared_value, delivery, notification)
+            ems_documents_cost = find_documents_cost(ems_zone, item_weight, declared_value, delivery, notification, fragile)
+            ems_goods_cost = find_goods_cost(ems_zone, item_weight, declared_value, delivery, notification, fragile)
             post_office_ems_documents_cost = ems_documents_cost[0]
             home_ems_documents_cost = ems_documents_cost[1]
             post_office_ems_goods_cost = ems_goods_cost[0]
@@ -61,6 +63,7 @@ def ems_view(request):
                        'declared_value': declared_value,
                        'delivery': delivery,
                        'notification': notification,
+                       'fragile': fragile,
                        'ems': ems,
                        'ems_zone': ems_zone,
                        'post_office_ems_documents_cost': post_office_ems_documents_cost,

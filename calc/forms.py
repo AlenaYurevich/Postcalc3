@@ -21,7 +21,7 @@ Choices2 = [(3, 'до 10 часов рабочего дня, следующег�
 Choices3 = [(1, 'простое'),
             (2, 'заказное'),
             (3, 'посредством SMS сообщения'),
-            (4, 'без уведомления')]
+            (4, 'без уведомления',)]
 
 
 class EmsForm(forms.Form):
@@ -34,6 +34,7 @@ class EmsForm(forms.Form):
     declared_value = forms.DecimalField(label="Введите объявленную ценность, рублей", required=False, decimal_places=2,
                                         widget=forms.NumberInput(attrs={'class': "form-control", 'placeholder': "нет"}))
     delivery = forms.ChoiceField(label="Доставка:", choices=Choices2,
-                                 widget=forms.RadioSelect(attrs={"input type": "checkbox", 'checked': Choices2[3]}))
-    notification = forms.ChoiceField(label="Уведомление:", choices=Choices3,
-                                     widget=forms.RadioSelect(attrs={'id': "radio2", 'checked': Choices3[0]}))
+                                 widget=forms.RadioSelect(attrs={'checked': Choices2[3]}))
+    notification = forms.TypedChoiceField(label="Уведомление:", choices=Choices3,
+                                          widget=forms.RadioSelect(attrs={'id': "radio2", 'checked': Choices3[0]}))
+    fragile = forms.BooleanField(label="За прием хрупких и (или) громоздких", required=False, widget=forms.CheckboxInput(attrs={}))
