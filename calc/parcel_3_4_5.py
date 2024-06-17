@@ -6,7 +6,8 @@ from .format import formatted
 
 
 file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/letter2.xlsx')  # второй файл
-workbook = load_workbook(filename=file_path, read_only=True)  # для снижения затрат ОП в режиме чтения
+# workbook = load_workbook(filename=file_path, read_only=True)  # для снижения затрат ОП в режиме чтения
+workbook = load_workbook(filename=file_path)  # для снижения затрат ОП в режиме чтения
 sheet = workbook.active
 
 

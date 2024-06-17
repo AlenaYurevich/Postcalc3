@@ -135,7 +135,6 @@ def find_item_cost(zone, weight, declared_value, item, reception_place, delivery
     item_vat_yur = round_as_excel(vat(yur))
     fiz = round_as_excel(fiz + item_vat_fiz)
     yur = round_as_excel(yur + item_vat_yur)
-    print(for_fragile, type(for_fragile), "За хрупкое")
     return [{
         "fiz": formatted(fiz),
         "yur": formatted(yur),
