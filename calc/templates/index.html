@@ -11,7 +11,7 @@
     <div class="row row-cols-1 row-cols-md-3 mb-3">
     <form method="POST" class="PostForm">{% csrf_token %}
       <div class="col">
-        {{ form }}
+        {{ form.as_p }}
         <button class=" btn btn-lg btn-info text-white mt-4 mb-4" type="submit" name="send" >Рассчитать</button>
       </div>
     </form>
@@ -21,7 +21,7 @@
     <h2 class="display-6 text-center mb-4">Стоимость пересылки, руб.</h2>
 
     <div class="table-responsive">
-      <table class="table text-center">
+      <table class="table text-center mb-5">
         <thead>
           <tr class="border-info">
             <th style="width: 20%;"></th>
@@ -281,7 +281,7 @@
       <div class="col">
         <div class="card mb-4 rounded-3 shadow-sm border-info">
           <div class="card-header py-3 text-bg-info text-white border-info">
-            <h4 class="my-0 fw-normal">Оплаченная пересылка S/M/L:<br>заказной мелкий пакет</h4>
+            <h4 class="my-0 fw-normal">Оплаченная пересылка S/M/L<br>заказной мелкий пакет</h4>
           </div>
           <div class="card-body">
             <h2 class="card-title pricing-card-title">
@@ -306,7 +306,7 @@
       <div class="col">
         <div class="card mb-4 rounded-3 shadow-sm border-info">
           <div class="card-header py-3 text-bg-info text-white border-info">
-            <h4 class="my-0 fw-normal">Оплаченная пересылка S/M/L:<br>посылка</h4>
+            <h4 class="my-0 fw-normal">Оплаченная пересылка S/M/L<br>посылка</h4>
           </div>
           <div class="card-body">
             <h2 class="pricing-card-title">

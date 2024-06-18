@@ -7,15 +7,43 @@
       <p class="fs-5 text-body-secondary">Самое быстрое почтовое отправление РУП &#171Белпочта&#187</p>
     </div>
   </header>
-  <div class="row row-cols-1 row-cols-md-3 mb-3">
+  <div class="row row-cols-1 row-cols-md-1 mb-3">
       <form method="POST" class="EmsForm">{% csrf_token %}
         <div class="col">
-            {{ form }}
+            {{ form.departure.label }}
+            {{ form.departure }}
+            {{ form.departure.error_messages }}
+            <p></p>
+            {{ form.destination.label }}
+            {{ form.destination }}
+            {{ form.destination.error_messages }}
+            <p></p>
+            {{ form.weight.label }}
+            {{ form.weight }}
+            {{ form.weight.error_messages }}
+            <p></p>
+            {{ form.declared_value.label }}
+            {{ form.declared_value }}
+            {{ form.declared_value.error_messages }}
+
         </div>
-
-
+        <div class="col ms-5">
+            {{ form.delivery.label }}
+            {{ form.delivery }}
+            {{ form.delivery.error_messages }}
+            <p></p>
+            {{ form.notification.label }}
+            {{ form.notification }}
+            {{ form.notification.error_messages }}
+            <p></p>
+            {{ form.fragile.label }}
+            {{ form.fragile }}
+            {{ form.fragile.error_messages }}
+            <p></p>
+            <p>
           <button class="btn btn-lg btn-info text-white mt-4 mb-4" type="submit" name="send" >Рассчитать</button>
-
+            </p>
+        </div>
       </form>
 
   </div>
