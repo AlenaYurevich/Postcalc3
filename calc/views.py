@@ -45,7 +45,6 @@ def ems_view(request):
             delivery = float(request.POST.get('delivery'))
             notification = int(request.POST.get('notification'))
             fragile = str(request.POST.get('fragile'))
-            ems = data_of_ems(departure, destination, item_weight, declared_value)
             zone1 = data_of_ems(departure, destination, item_weight, declared_value)[0]
             zone2 = data_of_ems(departure, destination, item_weight, declared_value)[1]
             ems_zone = find_ems_zone(zone1, zone2)
@@ -64,7 +63,6 @@ def ems_view(request):
                        'delivery': delivery,
                        'notification': notification,
                        'fragile': fragile,
-                       'ems': ems,
                        'ems_zone': ems_zone,
                        'post_office_ems_documents_cost': post_office_ems_documents_cost,
                        'home_ems_documents_cost': home_ems_documents_cost,
