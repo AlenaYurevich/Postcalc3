@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 {% block page_content %}
+{% block seo %}
+  <title>Экспресс доставка почтой по Беларуси: расчет стоимости на тарификаторе</title>
+  <meta name="description" content="Рассчитай на тарификаторе стоимость экспресс доставки EMS Белпочта по Беларуси">
+  <meta name="keywords" content="Экспресс доставка, посылка емс, из дома, из офиса, с доставкой в день приема, тарификатор, калькулятор Белпочта">
+{% endblock %}
  <main>
   <header>
     <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
@@ -25,7 +30,6 @@
             {{ form.declared_value.label }}
             {{ form.declared_value }}
             {{ form.declared_value.error_messages }}
-
         </div>
         <div class="col ms-5">
             {{ form.delivery.label }}
