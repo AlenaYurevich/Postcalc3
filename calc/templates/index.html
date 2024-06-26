@@ -10,7 +10,7 @@
     <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
       <h1 class="display-4 fw-normal text-body-emphasis">Расчет стоимости<br>пересылки по Беларуси</h1>
       <p class="fs-5 text-body-secondary">Какое почтовое отправление самое быстрое, какое самое надежное, какое самое доступное?
-        Введите вес отправления в граммах, и таблица покажет все возможные варианты пересылки РУП &#171Белпочта&#187 </p>
+        Введите вес отправления в граммах, и таблица покажет все возможные варианты пересылки РУП <q>Белпочта</q> </p>
     </div>
   </header>
     <div class="row row-cols-1 row-cols-md-3 mb-3">
@@ -58,7 +58,7 @@
             <td> да </td>
           </tr>
           <tr>
-            <th scope="row" class="text-start">Письмо, бандероль, мелкий пакет простые</th>
+            <th scope="row" class="text-start">Простое письмо, бандероль, мелкий пакет</th>
             {% for rate in simple %}
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
@@ -68,7 +68,7 @@
             {% endfor %}
           </tr>
           <tr>
-            <th scope="row" class="text-start">Письмо, бандероль, мелкий пакет заказные</th>
+            <th scope="row" class="text-start">Заказное письмо, бандероль, мелкий пакет</th>
             {% for rate in registered %}
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
@@ -88,7 +88,7 @@
             {% endfor %}
           </tr>
           <tr>
-            <th scope="row" class="text-start">Письмо &#171 1класс &#187</th>
+            <th scope="row" class="text-start">Письмо «1 класс»</th>
             {% for rate in first_class %}
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
@@ -134,7 +134,7 @@
       <div class="col">
         <div class="card mb-4 rounded-3 shadow-sm border-info">
           <div class="card-header py-3 border-info">
-            <h4 class="my-0 fw-normal">Письмо, бандероль, мелкий пакет простые</h4>
+            <h4 class="my-0 fw-normal">Простое письмо, бандероль, мелкий пакет</h4>
           </div>
           <div class="card-body">
             <h2 class="card-title pricing-card-title">
@@ -157,7 +157,7 @@
       <div class="col">
         <div class="card mb-4 rounded-3 shadow-sm border-info">
           <div class="card-header py-3 border-info">
-            <h4 class="my-0 fw-normal">Письмо, бандероль, мелкий пакет заказные</h4>
+            <h4 class="my-0 fw-normal">Заказное письмо, бандероль, мелкий пакет</h4>
           </div>
           <div class="card-body">
             <h2 class="card-title pricing-card-title">
@@ -205,7 +205,7 @@
     <div class="col">
         <div class="card mb-4 rounded-3 shadow-sm border-info">
           <div class="card-header py-3 border-info">
-            <h4 class="my-0 fw-normal">Письмо &#171 1класс &#187</h4>
+            <h4 class="my-0 fw-normal">Письмо «1 класс»</h4>
           </div>
           <div class="card-body">
             <h2 class="card-title pricing-card-title">

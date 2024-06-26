@@ -89,17 +89,16 @@ def cost_for_declared_value(declared_value):
     return [fiz, yur]
 
 
+notification_list = [sheet["D63"].value, sheet["D64"].value, sheet["D65"].value]
+
+
 def notification_cost(notification):
-    for_notification = 0
-    if notification == 1:
-        for_notification = sheet["D63"].value
-    elif notification == 2:
-        for_notification = sheet["D64"].value
-    elif notification == 3:
-        for_notification = sheet["D65"].value
-    elif notification == 4:
-        for_notification = 0
-    return for_notification
+    print("обратились к функции notification_cost")
+    match notification:
+        case 1: return notification_list[0]
+        case 2: return notification_list[1]
+        case 3: return notification_list[2]
+        case 4: return 0
 
 
 def fragile_cost(fragile):
