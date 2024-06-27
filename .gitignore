@@ -7,3 +7,4 @@ db.sqlite3
 /venv/Lib/site-packages/
 /venv/Scripts/django-admin.exe
 /venv/Scripts/sqlformat.exe
+/calc/templates/sitemap.xml

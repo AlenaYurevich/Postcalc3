@@ -1,4 +1,6 @@
 from django.shortcuts import render
+# from django import template
+# from django.conf import settings
 from .forms import PostForm, EmsForm
 from .letter import cost_of_simple, cost_of_registered, cost_of_value_letter
 from .first_class import cost_of_first_class
@@ -73,3 +75,7 @@ def ems_view(request):
     else:
         form = EmsForm()
         return render(request, 'ems_express_dostavka.html', {'form': form})  # внутри фигурных скобок
+
+
+def page_not_found_view(request, exception):
+    return render(request, '404/404.html', status=404)

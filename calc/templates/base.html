@@ -3,11 +3,12 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name = "viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1 shrink-to-fit=no">
+    <meta name = "viewport" content="width=device-width, initial-scale=1, maximum-scale=6, minimum-scale=1 shrink-to-fit=no">
     <meta http-equiv ="X-UA-Compatible" content = "ie-edge">
     {% block seo %}
     {% endblock %}
     <meta name="google-site-verification" content="tk4qpuwEg0oCcqwDJimqQPVlufw_jyqJ2Oukma59cH8" />
+    <meta name="yandex-verification" content="fa7b2bea76fff0e0" />
     <meta name="robots" content="index,follow" />
     <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" sizes="any"><!-- 32×32 -->
     <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}" type="image/png">
@@ -35,8 +36,8 @@
       </a>
 
       <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none text-info" href="main">по Беларуси</a>
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none text-info" href="ems_express_dostavka">EMS экспресс-доставка</a>
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none text-info" href="{% url 'main' %}">по Беларуси</a>
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none text-info" href="{% url 'ems_express_dostavka' %}">EMS экспресс-доставка</a>
       </nav>
     </div>
   </header>
@@ -55,19 +56,15 @@
       <div class="col-6 col-md">
         <h5>По Беларуси</h5>
         <ul class="list-unstyled text-small">
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="main">доставка по Беларуси</a></li>
-          <li class="mb-1"><a class="link-secondary text-decoration-none " href="ems_express_dostavka">EMS экспресс-доставка</a></li>
-<!--          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Another one</a></li>-->
-<!--          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Last time</a></li>-->
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'main' %}">доставка по Беларуси</a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'ems_express_dostavka' %}">EMS экспресс-доставка</a></li>
         </ul>
       </div>
       <div class="col-6 col-md">
         <h5>Международная</h5>
         <ul class="list-unstyled text-small">
           <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">В разработке</a></li>
-<!--          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Resource name</a></li>-->
-<!--          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Another resource</a></li>-->
-<!--          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Final resource</a></li>-->
+
         </ul>
       </div>
       <div class="col-6 col-md">
@@ -82,6 +79,6 @@
     </div>
   </footer>
 </div>
-<script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<!--<script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>-->
 </body>
 </html>
