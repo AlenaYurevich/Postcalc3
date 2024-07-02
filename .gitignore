@@ -8,4 +8,6 @@ db.sqlite3
 /venv/Scripts/django-admin.exe
 /venv/Scripts/sqlformat.exe
 /calc/templates/sitemap.xml
-/Восстановленный Posttarif.docx
+/calc/templates/404.html
+/calc/templates/robots.txt
+
