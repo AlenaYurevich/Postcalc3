@@ -18,12 +18,25 @@
         Введите вес отправления в граммах, и таблица покажет все возможные варианты пересылки РУП <q>Белпочта</q> </p>
     </div>
   </header>
-    <div class="row row-cols-1 row-cols-md-3 mb-3">
+    <div class="row row-cols-1 row-cols-md-1 mb-3">
     <form method="POST" class="PostForm">{% csrf_token %}
       <div class="col">
-        {{ form.as_p }}
-        <button class=" btn btn-lg btn-info text-white mt-4 mb-4" type="submit" name="send" >Рассчитать</button>
+         {{ form.weight.label }}
+         {{ form.weight }}
+         {{ form.weight.error_messages }}
+          <p></p>
+         {{ form.declared_value.label }}
+         {{ form.declared_value }}
+         {{ form.declared_value.error_messages }}
       </div>
+      <div class="col ms-5">
+            {{ form.notification.label }}
+            {{ form.notification }}
+            {{ form.notification.error_messages }}
+            <p>
+          <button class="btn btn-lg btn-info text-white mt-4 mb-4" type="submit" name="send">Рассчитать</button>
+            </p>
+        </div>
     </form>
 
     </div>
@@ -34,17 +47,18 @@
       <table class="table text-center mb-5">
         <thead>
           <tr class="border-info">
-            <th style="width: 20%;"></th>
+            <th style="width: 25%;"></th>
             <th style="width: 15%;">Для физических лиц</th>
             <th style="width: 15%;">Для юридических лиц</th>
-            <th style="width: 15%;">В том числе НДС (юр.)</th>
-            <th style="width: 15%;">В том числе за объявленную ценность</th>
-            <th style="width: 15%;">Отслеживание</th>
+            <th style="width: 15%;">В т. ч. НДС (юр.)</th>
+            <th style="width: 10%;">В т. ч. за объявленную ценность</th>
+            <th style="width: 10%;">В т. ч. за уведомление</th>
+            <th style="width: 10%;">Отслеживание</th>
           </tr>
         </thead>
         <tbody>
         <tr>
-            <th scope="row" colspan="6" class="text-start">Оплаченная пересылка S/M/L с учетом стоимости упаковки:</th>
+            <th scope="row" colspan="7" class="text-start">Оплаченная пересылка S/M/L с учетом стоимости упаковки:</th>
           </tr>
         <tr>
             <th scope="row" class="text-start">Заказной мелкий пакет (пластиковый конверт)</th>
@@ -52,6 +66,7 @@
             <td> 3,30 / 4,50 / 5,50</td>
             <td> 0,55 / 0,75 / 0,92</td>
             <td></td>
+            <td> </td>
             <td> да </td>
           </tr>
         <tr class="border-info">
@@ -59,6 +74,7 @@
             <td> 5,99 / 8,99 / 13,99</td>
             <td> 5,99 / 8,99 / 13,99</td>
             <td> 1,00 / 1,50 / 2,33 </td>
+            <td> </td>
             <td> </td>
             <td> да </td>
           </tr>
@@ -69,6 +85,7 @@
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat }}</td>
             <td> {{ rate.for_declared }}</td>
+            <td> </td>
             <td> {{ rate.tracking }}</td>
             {% endfor %}
           </tr>
@@ -79,6 +96,7 @@
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat }}</td>
             <td> {{ rate.for_declared }}</td>
+            <td> {{ rate.notification }}</td>
             <td> {{ rate.tracking }}</td>
             {% endfor %}
           </tr>
@@ -89,6 +107,7 @@
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat }}</td>
             <td> {{ rate.for_declared }}</td>
+            <td> {{ rate.notification }}</td>
             <td> {{ rate.tracking }}</td>
             {% endfor %}
           </tr>
@@ -99,6 +118,7 @@
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat }}</td>
             <td> {{ rate.for_declared }}</td>
+            <td></td>
             <td> {{ rate.tracking }}</td>
             {% endfor %}
           </tr>
@@ -109,6 +129,7 @@
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat }}</td>
             <td> {{ rate.for_declared_fiz }} {{rate.sep1}} {{ rate.for_declared_yur }}</td>
+            <td></td>
             <td> {{ rate.tracking }}</td>
             {% endfor %}
           </tr>
@@ -119,13 +140,14 @@
             <td> </td>
             <td> </td>
             <td> {{ rate.for_declared }} </td>
+            <td> </td>
             <td> да </td>
             {% endfor %}
           </tr>
         <tr class="border-info">
             <th scope="row" class="text-start"><a class="me-3 py-2 link-body-emphasis text-decoration-none text-info"
                                                   href="ems_express_dostavka" target="blank">EMS экспресс-доставка</a></th>
-             <td colspan="5"><a class="me-3 py-2 link-body-emphasis text-info" href="ems_express_dostavka"
+             <td colspan="6"><a class="me-3 py-2 link-body-emphasis text-info" href="ems_express_dostavka"
                                   target="blank">Для расчета экспресс-доставки EMS перейдите по ссылке</a></td>
         </tr>
         </tbody>

@@ -17,9 +17,10 @@ def calculation_view(request):
         if form.is_valid():
             item_weight = int(request.POST.get('weight'))
             declared_value = request.POST.get('declared_value')
+            notification = int(request.POST.get('notification'))
             simple = cost_of_simple(item_weight)
-            registered = cost_of_registered(item_weight)
-            value_letter = cost_of_value_letter(item_weight, declared_value)
+            registered = cost_of_registered(item_weight, notification)
+            value_letter = cost_of_value_letter(item_weight, declared_value, notification)
             first_class = cost_of_first_class(item_weight)
             parcel = cost_of_parcel(item_weight, declared_value)
             parcel_3_4_5 = cost_of_parcel_3_4_5(item_weight, declared_value)
@@ -29,6 +30,7 @@ def calculation_view(request):
                        'first_class': first_class,
                        'parcel': parcel,
                        'parcel_3_4_5': parcel_3_4_5,
+                       'notification': notification
                        }
             return render(request, 'index.html', context)  # Внутри фигурных скобок
     else:
@@ -65,7 +67,6 @@ def ems_view(request):
                        'delivery': delivery,
                        'notification': notification,
                        'fragile': fragile,
-                       'ems_zone': ems_zone,
                        'post_office_ems_documents_cost': post_office_ems_documents_cost,
                        'home_ems_documents_cost': home_ems_documents_cost,
                        'post_office_ems_goods_cost': post_office_ems_goods_cost,
