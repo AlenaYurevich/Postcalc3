@@ -34,9 +34,17 @@ def weight(item_weight, declared_value):
         return math.ceil(item_weight / 10) / 100
 
 
+# def cost_for_declared_value(declared_value):
+#     fiz = float(declared_value) * 3 / 100
+#     yur = float(declared_value) * 3 / 100
+#     return [fiz, yur]
+
+
 def cost_for_declared_value(declared_value):
-    fiz = float(declared_value) * 3 / 100
-    yur = float(declared_value) * 3 / 100
+    if not declared_value or declared_value in ("нет", "", 0, "0"):
+        return [0, 0]
+    fiz = round(float(declared_value) * 3 / 100, 4)
+    yur = fiz
     return [fiz, yur]
 
 
@@ -62,8 +70,7 @@ def cost_of_parcel(item_weight, declared_value):
                 yur = sheet['H29'].value + sheet['H30'].value * weight(item_weight, declared_value)
                 yur = round_as_excel(yur)
                 for_declared_fiz = cost_for_declared_value(declared_value)[0]
-                for_declared_yur = cost_for_declared_value(declared_value)[1]
-                for_declared_yur += vat(for_declared_yur)
+                for_declared_yur = cost_for_declared_value(declared_value)[1] * 1.2
                 item_vat = vat(yur)
                 yur += item_vat
                 yur += for_declared_yur
@@ -81,14 +88,11 @@ def cost_of_parcel(item_weight, declared_value):
                 sep2 = '/'
             else:
                 fiz = sheet['D31'].value + sheet['D32'].value * weight(item_weight, declared_value)
-                # fiz = round_as_excel(fiz)
                 fiz += cost_for_declared_value(declared_value)[0]
                 yur = sheet['H29'].value + sheet['H30'].value * weight(item_weight, declared_value)
-                # yur = round_as_excel(yur)
                 yur += cost_for_declared_value(declared_value)[1]
                 for_declared_fiz = cost_for_declared_value(declared_value)[0]
-                for_declared_yur = cost_for_declared_value(declared_value)[1]
-                for_declared_yur += vat(for_declared_yur)
+                for_declared_yur = cost_for_declared_value(declared_value)[1] * 1.2
                 item_vat = vat(yur)
                 yur += item_vat
                 sep1, sep2 = "/", "/"
