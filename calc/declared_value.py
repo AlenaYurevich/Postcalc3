@@ -1,17 +1,13 @@
 class DeclaredValue:
-    def __init__(self, value, percent):
+    def __init__(self, value):
         self.value = value
-        self.percent = percent
 
-    def cost(self):
-        if self.value:
-            return self.value * self.percent / 100
-        else:
-            return 0  # avoid error if declared value is absent
+    def cost_for_declared_value(self):
+        if not self.value or self.value in ("нет", "", 0, "0"):
+            return 0
+        res = round(float(self.value) * 3 / 100, 4)
+        return res
 
 
-"""
-за письмо cost_per_letter
-за объявленную ценность cost
-стоимость пересылки cost_of_delivery
-"""
+item_declared_value = DeclaredValue(5.85)
+print(item_declared_value.cost_for_declared_value())

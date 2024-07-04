@@ -78,5 +78,9 @@ def ems_view(request):
         return render(request, 'ems_express_dostavka.html', {'form': form})  # внутри фигурных скобок
 
 
+def about_view(request):
+    return render(request, 'about.html')
+
+
 def page_not_found_view(request, exception):
     return render(request, '404/404.html', status=404)

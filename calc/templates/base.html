@@ -41,7 +41,7 @@
         <div class="lang_choose_cont">
             <div id="bxdynamic_jmonnO_start" style="display:none"></div>
             <div id="google_translate_element"></div>
-      <script>
+      <script async>
 
     function googleTranslateElementInit() {
         new google.translate.TranslateElement({
@@ -216,13 +216,8 @@
         </ul>
       </div>
       <div class="col-6 col-md">
-        <h5>About</h5>
-        <ul class="list-unstyled text-small">
-<!--          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Виды отправлений</a></li>-->
-<!--          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">О сайте</a></li>-->
-<!--          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Связь с разработчиком</a></li>-->
-<!--          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Terms</a></li>-->
-        </ul>
+        <h5><a class="link-dark text-decoration-none" href="{% url 'about' %}">О сайте</a></h5>
+
       </div>
     </div>
   </footer>
