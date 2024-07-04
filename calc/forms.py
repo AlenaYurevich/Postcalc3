@@ -18,7 +18,7 @@ class PostForm(forms.Form):
     declared_value = forms.DecimalField(label="Введите объявленную ценность, рублей", min_value=0, required=False,
                                         decimal_places=2, widget=forms.NumberInput(attrs={'class': "form-control",
                                                                                           'placeholder': "нет"}))
-    notification = forms.TypedChoiceField(label="Уведомление:", choices=Choices_notice,
+    notification = forms.TypedChoiceField(label="Уведомление о вручении:", choices=Choices_notice,
                                           widget=forms.RadioSelect(attrs={'checked': Choices_notice[0]}))
 
 
@@ -44,7 +44,7 @@ class EmsForm(forms.Form):
                                                                                           'placeholder': "нет"}))
     delivery = forms.ChoiceField(label="Доставка:", choices=Choices2,
                                  widget=forms.RadioSelect(attrs={'checked': Choices2[3]}))
-    notification = forms.TypedChoiceField(label="Уведомление:", choices=Choices_notice,
+    notification = forms.TypedChoiceField(label="Уведомление о вручении:", choices=Choices_notice,
                                           widget=forms.RadioSelect(attrs={'checked': Choices_notice[0]}))
     fragile = forms.BooleanField(label="С отметкой за прием хрупких и (или) громоздких", required=False,
                                  widget=forms.CheckboxInput(attrs={'class': "form-check-input"}))

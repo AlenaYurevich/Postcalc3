@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block page_content %}
+{% block seo %}
+  <title>О сайте</title>
+  <meta name="description" content="Информация о сайте Посттариф">
+  <meta name="keywords" content="">
+  <link rel="canonical" href="https://posttarif.by/about"/>
+  <meta property="og:title" content="О сайте по расчету стоимости доставки по Беларуси"/>
+  <meta property="og:image" content="https://posttarif.by/apple-touch-icon.png"/>
+  <meta property="og:description" content="Информация о сайте Посттариф"/>
+  <meta property="og:type" content="article"/>
+{% endblock %}
+ <main>
+  <header>
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+      <h1 class="display-4 fw-normal text-body-emphasis">О сайте PostTarif.by</h1>
+      <p class="fs-5 text-body-secondary">111</p>
+    </div>
+  </header>
+
+
+    <h2 class="display-6 text-center mb-4">Стоимость пересылки, руб.</h2>
+
+
+<p>Д + 3 означает срок доставки 3 дня, включая день отправки</p>
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+      <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm border-info">
+          <div class="card-header py-3 border-info">
+            <h4 class="my-0 fw-normal">Приветствие</h4>
+          </div>
+          <div class="card-body">
+            <h2 class="card-title pricing-card-title">
+
+             <small class="text-body-secondary fw-light"></small>
+
+            </h2>
+             <p>Добро пожаловать на Posttarif.by! Мы рады, что вы к нам заглянули. Если вы хоть раз изучали виды и стоимости почтовых отправлений и думали, что это слишком сложно – вы точно по адресу! Мы здесь для того, чтобы сделать ваш почтовый опыт проще и приятнее.
+             </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm border-info">
+          <div class="card-header py-3 text-bg-info text-white border-info">
+            <h4 class="my-0 fw-normal">Письмо, мелкий пакет с объявленной ценностью</h4>
+          </div>
+          <div class="card-body">
+            <h2 class="card-title pricing-card-title">
+              {% for rate in value_letter %}
+           {{ rate.fiz }} {{ rate.sep}} {{ rate.yur }}
+              <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
+              {% endfor %}
+              </h2>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>отслеживание</li>
+              <li>прием оператором</li>
+              <li>Д + 3</li>
+              <li>возмещение при утрате</li>
+              <li>вручение лично в руки</li>
+            </ul>
+            <button type="button" class="w-100 btn btn-lg btn-info text-white">для ценных документов</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+ {% endblock %}
