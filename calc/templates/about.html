@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block page_content %}
 {% block seo %}
   <title>О сайте</title>
@@ -10,62 +11,87 @@
   <meta property="og:description" content="Информация о сайте Посттариф"/>
   <meta property="og:type" content="article"/>
 {% endblock %}
- <main>
-  <header>
-    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-      <h1 class="display-4 fw-normal text-body-emphasis">О сайте PostTarif.by</h1>
-      <p class="fs-5 text-body-secondary">111</p>
-    </div>
-  </header>
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
 
+      @media (min-width: 768px) {
+      .marketing h2 {
+    font-weight: 400;
+         }
+         }
+      @media (min-width: 62em) {
+         .featurette-heading {
+        margin-top: 7rem;
+    }
+}
+@media (min-width: 40em) {
+    .featurette-heading {
+        font-size: 50px;
+    }
+      }
+    </style>
+<main>
 
-    <h2 class="display-6 text-center mb-4">Стоимость пересылки, руб.</h2>
-
-
-<p>Д + 3 означает срок доставки 3 дня, включая день отправки</p>
-    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-      <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm border-info">
-          <div class="card-header py-3 border-info">
-            <h4 class="my-0 fw-normal">Приветствие</h4>
-          </div>
-          <div class="card-body">
-            <h2 class="card-title pricing-card-title">
-
-             <small class="text-body-secondary fw-light"></small>
-
-            </h2>
-             <p>Добро пожаловать на Posttarif.by! Мы рады, что вы к нам заглянули. Если вы хоть раз изучали виды и стоимости почтовых отправлений и думали, что это слишком сложно – вы точно по адресу! Мы здесь для того, чтобы сделать ваш почтовый опыт проще и приятнее.
-             </p>
-          </div>
-        </div>
+  <div class="container marketing">
+    <div class="row featurette">
+      <div class="col-md-7">
+        <h2 class="featurette-heading">Добро пожаловать на <span class="text-info">Posttarif.by!</span></h2>
+        <p class="lead">Мы рады, что вы к нам заглянули. Если вы хоть раз изучали виды и стоимость почтовых отправлений
+          и думали, что это слишком сложно – вы точно по адресу! Мы здесь для того, чтобы сделать ваш почтовый опыт проще и приятнее.
+        </p>
       </div>
-
-      <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm border-info">
-          <div class="card-header py-3 text-bg-info text-white border-info">
-            <h4 class="my-0 fw-normal">Письмо, мелкий пакет с объявленной ценностью</h4>
-          </div>
-          <div class="card-body">
-            <h2 class="card-title pricing-card-title">
-              {% for rate in value_letter %}
-           {{ rate.fiz }} {{ rate.sep}} {{ rate.yur }}
-              <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
-              {% endfor %}
-              </h2>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>отслеживание</li>
-              <li>прием оператором</li>
-              <li>Д + 3</li>
-              <li>возмещение при утрате</li>
-              <li>вручение лично в руки</li>
-            </ul>
-            <button type="button" class="w-100 btn btn-lg btn-info text-white">для ценных документов</button>
-          </div>
-        </div>
+      <div class="col-md-5">
+        <img src ="{% static '/images/gift.png' %}"/>
       </div>
-
     </div>
-  </main>
 
- {% endblock %}
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+      <div class="col-md-7 order-md-2">
+        <h2 class="featurette-heading">Что мы предлагаем?<span class="text-muted"></span></h2>
+        <p class="lead">Posttarif.by – это ваш путеводитель в мире почтовых отправлений РУП <q>Белпочта</q>. Зачем
+          тратить время на поиски нужной информации, когда можно просто зайти к нам и получить всё и сразу?
+          Здесь вы найдёте:
+        </p>
+        <ul class="list-group">
+          <li class="lead ms-4">Полный список видов почтовых отправлений</li>
+          <li class="lead ms-4">Актуальные тарифы и дополнительные услуги</li>
+          <li class="lead ms-4">Подробную информацию о сроках доставки</li>
+        </ul>
+      </div>
+      <div class="col-md-5 order-md-1">
+        <img src ="{% static '/images/letter.png' %}"/>
+      </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+      <div class="col-md-7">
+        <h2 class="featurette-heading">Почему нам можно доверять?<span class="text-muted"></span></h2>
+        <p class="lead">1. Открытость и прозрачность: Мы честны и открыты с нашими пользователями. У нас нет
+          скрытых условий и «мелкого шрифта».
+        </p>
+        <p class="lead">2. Отзывчивость: Нам всегда важно ваше мнение. Есть вопросы или предложения? Пишите
+          нам <a class ="text-info" href="mailto:info@posttarif.by" rel="nofollow">info@posttarif.by</a>, мы
+          открыты к диалогу и всегда готовы помочь.
+        </p>
+        <p class="lead">3. Профессионализм: Несмотря на наш лёгкий стиль, мы профессионалы в своём деле.
+          Posttarif.by – это результат множества часов работы, тестирования и совершенствования.
+        </p>
+      </div>
+      <div class="col-md-5">
+        <img src ="{% static '/images/package.png' %}"/>
+      </div>
+    </div>
+
+  </div><!-- /.container -->
+</main>
+{% endblock %}

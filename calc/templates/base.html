@@ -10,7 +10,7 @@
     <meta name="google-site-verification" content="tk4qpuwEg0oCcqwDJimqQPVlufw_jyqJ2Oukma59cH8"/>
     <meta name="yandex-verification" content="fa7b2bea76fff0e0"/>
     <meta name="robots" content="index,follow"/>
-    <link rel="shortcut icon" href="https://posttarif.by/favicon.ico" sizes="any"><!-- 32×32 -->
+    <link rel="icon" href="https://posttarif.by/favicon.ico" type="image/x-icon" sizes="any"><!-- 32×32 -->
     <link rel="apple-touch-icon" href="https://posttarif.by/apple-touch-icon.png" type="image/png">
     <link rel="icon" href="https://posttarif.by/icon_192.png" type="image/png"><!-- 192×192 -->
     <link rel="icon" href="https://posttarif.by/icon_512.png" type="image/png"><!-- 512×512 -->
@@ -165,19 +165,16 @@
     .goog-te-gadget {
         font-size: 0;
     }
-
     .goog-logo-link {
         display: none;
     }
-
     .goog-te-combo, .goog-te-banner *, .goog-te-ftab *, .goog-te-menu *, .goog-te-menu2 *, .goog-te-balloon * {
         text-transform: capitalize;
-    }
 
+    }
     .skiptranslate goog-te-gadget {
         display: none;
     }
-
     .goog-te-combo {
         border: 0;
         outline: 0;
@@ -193,13 +190,13 @@
 {% endblock %}
  <footer class="pt-4 my-md-5 pt-md-5 border-top">
     <div class="row">
-      <div class="col-12 col-md">
+      <div class="col-12 col-md mb-4">
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="20" class="bi bi-calculator text-info" role="img" viewBox="0 0 16 16">
   <path d="M12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
   <path d="M4 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z"/>
         </svg>
-
-        <time class="d-block mb-3 text-body-secondary">&copy; 2024</time>
+        <time class="d-block  text-body-secondary">&copy; 2024</time>
+        <a class ="text-info " href="mailto:info@posttarif.by" rel="nofollow">info@posttarif.by</a>
       </div>
       <div class="col-6 col-md">
         <h5>По Беларуси</h5>
@@ -217,11 +214,10 @@
       </div>
       <div class="col-6 col-md">
         <h5><a class="link-dark text-decoration-none" href="{% url 'about' %}">О сайте</a></h5>
-
+        <a class="text-info" href="#">Вверх</a>
       </div>
     </div>
   </footer>
 </div>
-<!--<script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>-->
 </body>
 </html>

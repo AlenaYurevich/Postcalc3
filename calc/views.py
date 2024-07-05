@@ -1,5 +1,5 @@
 from django.shortcuts import render
-# from django import template
+#  from django import template
 # from django.conf import settings
 from .forms import PostForm, EmsForm
 from .letter import cost_of_simple, cost_of_registered, cost_of_value_letter
@@ -82,5 +82,5 @@ def about_view(request):
     return render(request, 'about.html')
 
 
-def page_not_found_view(request, exception):
+def page_not_found_view(request):
     return render(request, '404/404.html', status=404)
