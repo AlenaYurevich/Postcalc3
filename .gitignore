@@ -10,4 +10,5 @@ db.sqlite3
 /calc/templates/sitemap.xml
 /calc/templates/404.html
 /calc/templates/robots.txt
-
+/settings.py
+/.pytest_cache/
