@@ -6,9 +6,9 @@ from .format import formatted
 
 N = [formatted(i * 1.2) for i in notification_list]
 
-Choices_notice = [(1, f'простое {N[0]} руб.'),
-                  (2, f'заказное {N[1]} руб. '),
-                  (3, f'электронное (посредством Viber, SMS, email) {N[2]} руб.'),
+Choices_notice = [(1, f'простое 0,78 руб.'),
+                  (2, f'заказное 2,52 руб. '),
+                  (3, f'электронное (посредством Viber, SMS, email) 0,54 руб.'),
                   (4, 'без уведомления',)]
 
 
