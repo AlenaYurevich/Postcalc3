@@ -10,6 +10,7 @@
     <meta name="google-site-verification" content="tk4qpuwEg0oCcqwDJimqQPVlufw_jyqJ2Oukma59cH8"/>
     <meta name="yandex-verification" content="fa7b2bea76fff0e0"/>
     <meta name="robots" content="index,follow"/>
+    <link rel="icon" href="{% static '/images/favicon.ico' %}" type="image/x-icon" sizes="any"><!-- 32×32 -->
     <link rel="icon" href="https://posttarif.by/favicon.ico" type="image/x-icon" sizes="any"><!-- 32×32 -->
     <link rel="apple-touch-icon" href="https://posttarif.by/apple-touch-icon.png" type="image/png">
     <link rel="icon" href="https://posttarif.by/icon_192.png" type="image/png"><!-- 192×192 -->
@@ -214,181 +215,13 @@
   </div>
 </nav>
 
-
-
-
-
-
-<!--      <a href="main" class="d-flex align-items-center link-body-emphasis text-decoration-none">-->
-<!--        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" class="bi bi-calculator text-info" role="img" viewBox="0 0 16 16">-->
-<!--  <path d="M12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>-->
-<!--  <path d="M4 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z"/>-->
-<!--        </svg>-->
-<!--        <span class="fs-4 text-info">PostTarif</span>-->
-
-<!--      </a>-->
-
-
-
-
-
-<!--      <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">-->
-<!--        <a class="me-3 py-2 link-body-emphasis text-decoration-none text-info" href="{% url 'main' %}">по Беларуси</a>-->
-<!--        <a class="me-3 py-2 link-body-emphasis text-decoration-none text-info" href="{% url 'ems_express_dostavka' %}">EMS экспресс-доставка</a>-->
-<!--        <div class="lang_choose_cont">-->
-<!--            <div id="bxdynamic_jmonnO_start" style="display:none"></div>-->
-<!--            <div id="google_translate_element"></div>-->
-<!--      <script async>-->
-
-<!--    function googleTranslateElementInit() {-->
-<!--        new google.translate.TranslateElement({-->
-<!--            lang: 'ru',-->
-<!--            pageLanguages: 'ru',-->
-<!--            includedLanguages: 'ru,en,be'-->
-<!--        }, 'google_translate_element');-->
-<!--    }-->
-
-<!--    /*-->
-<!--     * Функция убирает надпись "Выбрать язык"-->
-<!--     * и подбирает язык установленный в браузере-->
-<!--     */-->
-<!--    function rmGoogleTeComboValue(i = 0) {-->
-<!--        if (i >= 10) return;-->
-
-<!--        if ($('.goog-te-combo').length === 0) {-->
-<!--            setTimeout(function () {-->
-<!--                ++i;-->
-<!--                rmGoogleTeComboValue(i);-->
-<!--            }, 2000);-->
-<!--        } else {-->
-<!--            if ($("select.goog-te-combo option:first").val() == '') {-->
-<!--                $("select.goog-te-combo option:first").remove();-->
-<!--                $('select.goog-te-combo option[value="ru"]').prop("selected", true);-->
-<!--            }-->
-<!--        }-->
-<!--    }-->
-
-<!--    /**-->
-<!--     * В рускоязычных бразуерах не переводися языковой список-->
-<!--     * функция переводит селект на английский**/-->
-<!--    function setLangToGTEnglish(i = 0) {-->
-<!--        if (i >= 8) return;-->
-<!--        if ($('.goog-te-combo').length === 0) {-->
-<!--            setTimeout(function () {-->
-<!--                ++i;-->
-<!--                setLangToGTEnglish(i);-->
-<!--            }, 3000);-->
-<!--        } else {-->
-<!--            if (($('.goog-te-combo option:selected').val() === 'en')) {-->
-<!--                $(' .goog-te-combo').find('option').each(function (i, item) {-->
-
-<!--                    let language = 'English';-->
-<!--                    let langId = $(this).val();-->
-
-<!--                    if (langId === 'ru') {-->
-<!--                        language = 'Russian'-->
-<!--                    } else if (langId === 'be') {-->
-<!--                        language = 'Belorussian'-->
-<!--                    }-->
-<!--                    $(this).text(language);-->
-<!--                });-->
-<!--            }-->
-<!--        }-->
-<!--    }-->
-
-
-<!--    /**-->
-<!--     * В некоторых браузерах вместо русского селекта показывает английский текст-->
-<!--     * фунция переводит селект на русский-->
-<!--     * @param i-->
-<!--     */-->
-<!--    function setLangToGoogleTranslate(i = 0) {-->
-<!--        if (i >= 8) return;-->
-
-<!--        if ($('.goog-te-combo').length === 0) {-->
-<!--            setTimeout(function () {-->
-<!--                ++i;-->
-<!--                setLangToGoogleTranslate(i);-->
-<!--            }, 1000);-->
-<!--        } else {-->
-<!--            if (($('.goog-te-combo option:selected').val() === 'ru')) {-->
-<!--                $(' .goog-te-combo').find('option').each(function (i, item) {-->
-
-<!--                    let language = 'Русский';-->
-<!--                    let langId = $(this).val();-->
-
-<!--                    if (langId === 'en') {-->
-<!--                        language = 'Английский'-->
-<!--                    } else if (langId === 'be') {-->
-<!--                        language = 'Белорусский'-->
-<!--                    }-->
-<!--                    $(this).text(language);-->
-<!--                });-->
-<!--            }-->
-<!--        }-->
-<!--    }-->
-
-<!--    function refreshPage() {-->
-<!--        $.ajax({-->
-<!--            url: document.location.href,-->
-<!--            success: function (html) {-->
-<!--                let data = html.replace('<body>', '<body><div id="body">').replace('</body>', '</div></body>');-->
-<!--                let body = $(data).filter('#body');-->
-<!--                $('body').html(body);-->
-<!--            }-->
-<!--        });-->
-<!--    }-->
-
-<!--    function loadGoogleTranslate() {-->
-<!--        $("script").each(function (i, item) {-->
-<!--            let src = $(item).attr('src');-->
-<!--            if (src !== undefined && src.indexOf('translate.google') !== -1) {-->
-<!--                $(item).remove();-->
-<!--            }-->
-<!--        });-->
-<!--        var googleTranslateScript = document.createElement('script');-->
-<!--        googleTranslateScript.type = 'text/javascript';-->
-<!--        googleTranslateScript.async = true;-->
-<!--        googleTranslateScript.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';-->
-<!--        (document.getElementsByTagName('head')[0]).appendChild(googleTranslateScript);-->
-<!--    }-->
-
-<!--    loadGoogleTranslate();-->
-<!--    rmGoogleTeComboValue();-->
-<!--    setLangToGoogleTranslate();-->
-<!--    setLangToGTEnglish();-->
-<!--</script>-->
-<!--<style>-->
-<!--    .goog-te-gadget {-->
-<!--        font-size: 0;-->
-<!--    }-->
-<!--    .goog-logo-link {-->
-<!--        display: none;-->
-<!--    }-->
-<!--    .goog-te-combo, .goog-te-banner *, .goog-te-ftab *, .goog-te-menu *, .goog-te-menu2 *, .goog-te-balloon * {-->
-<!--        text-transform: capitalize;-->
-
-<!--    }-->
-<!--    .skiptranslate goog-te-gadget {-->
-<!--        display: none;-->
-<!--    }-->
-<!--    .goog-te-combo {-->
-<!--        border: 0;-->
-<!--        outline: 0;-->
-<!--    }-->
-<!--</style>-->
-<!--            <div id="bxdynamic_jmonnO_end" style="display:none"></div>-->
-<!--        </div>-->
-
-<!--      </nav>-->
-<!--    </div>-->
   </header>
 {% block page_content %}
 {% endblock %}
  <footer class="pt-4 my-md-5 pt-md-5 border-top">
     <div class="row">
       <div class="col-12 col-md mb-4">
-        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="20" class="bi bi-calculator text-info" role="img" viewBox="0 0 16 16">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="20" fill="currentColor" class="bi bi-calculator text-info" role="img" viewBox="0 0 16 16">
   <path d="M12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
   <path d="M4 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z"/>
         </svg>

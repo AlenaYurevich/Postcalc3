@@ -57,43 +57,46 @@
   </div>
     <h2 class="display-6 text-center mb-4">Стоимость пересылки EMS по Беларуси, руб.</h2>
     <div class="table-responsive">
-      <table class="table text-center table-striped">
+      <table class="table text-center">
         <thead>
           <tr class="border-info">
             <th style="width: 20%;"></th>
             <th style="width: 15%;">Для физ. лиц</th>
             <th style="width: 15%;">Для юр. лиц</th>
-            <th style="width: 15%;">В том числе НДС (юр.)</th>
-            <th style="width: 15%;">В том числе за объявленную ценность</th>
+            <th style="width: 15%;">В т. ч. НДС (юр.)</th>
+            <th style="width: 15%;">В т. ч. за объявленную ценность</th>
+            <th style="width: 15%;">В т. ч. за уведомление</th>
             <th style="width: 15%;">Отслеживание</th>
           </tr>
         </thead>
         <tbody>
         <tr>
-            <th scope="row" class="text-start">Документы:</th>
+            <th scope="row" class="text-start table-info" colspan="7">Документы:</th>
         </tr>
-        <tr>
+         <tr>
             <th scope="row" class="text-start">Прием в отделении связи</th>
             {% for rate in post_office_ems_documents_cost %}
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat }}</td>
             <td> {{ rate.for_declared }}</td>
+            <td> {{ rate.notification }}</td>
             <td> да </td>
             {% endfor %}
         </tr>
-        <tr>
+         <tr>
             <th scope="row" class="text-start">Прием в офисе или на дому</th>
             {% for rate in home_ems_documents_cost %}
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat }}</td>
             <td> {{ rate.for_declared }}</td>
+            <td> {{ rate.notification }}</td>
             <td> да </td>
             {% endfor %}
           </tr>
         <tr>
-            <th scope="row" class="text-start">Товары:</th>
+            <th scope="row" class="text-start table-info" colspan="7">Товары:</th>
           </tr>
         <tr>
             <th scope="row" class="text-start">Прием в отделении связи</th>
@@ -102,16 +105,18 @@
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat }}</td>
             <td> {{ rate.for_declared }}</td>
+            <td> {{ rate.notification }}</td>
             <td> да </td>
             {% endfor %}
         </tr>
-        <tr>
+         <tr>
             <th scope="row" class="text-start">Прием в офисе или на дому</th>
             {% for rate in home_ems_goods_cost %}
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat }}</td>
             <td> {{ rate.for_declared }}</td>
+            <td> {{ rate.notification }}</td>
             <td> да </td>
             {% endfor %}
           </tr>

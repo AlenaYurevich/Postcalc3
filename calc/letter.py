@@ -4,6 +4,7 @@ from openpyxl import load_workbook
 from .vat import vat
 from .format import formatted
 from .ems_cost import notification_list
+from .declared_value import cost_for_declared_value
 
 
 def weight_step(weight):
@@ -91,14 +92,6 @@ def cost_of_registered(item_weight, notification):
 """
 
 
-def cost_for_declared_value(declared_value):
-    if not declared_value or declared_value in ("нет", "", 0, "0"):
-        return [0, 0]
-    fiz = round(float(declared_value) * 3 / 100, 4)
-    yur = fiz
-    return [fiz, yur]
-
-
 def cost_of_value_letter(item_weight, declared_value, notification):
     price_row = []
     notification = notification_cost(notification)
@@ -108,17 +101,17 @@ def cost_of_value_letter(item_weight, declared_value, notification):
             workbook = load_workbook(filename=file_path)
             sheet = workbook.active
             fiz = sheet['D11'].value + sheet['D12'].value * weight_step(item_weight)\
-                                     + cost_for_declared_value(declared_value)[0]
+                                     + cost_for_declared_value(declared_value) * 1.2
             yur = sheet['H11'].value + sheet['H12'].value * weight_step(item_weight)\
-                                     + cost_for_declared_value(declared_value)[1]
-            fiz += notification * 1.2
+                                     + cost_for_declared_value(declared_value)
+            fiz += notification
             yur += notification
             notification = notification * 1.2
             if notification == 0:
                 notification = ""
             item_vat = vat(yur)
             yur += item_vat
-            for_declared = cost_for_declared_value(declared_value)[1] * 1.2
+            for_declared = cost_for_declared_value(declared_value) * 1.2
             rate = {
                 'fiz': fiz,
                 'yur': yur,

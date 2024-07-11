@@ -3,6 +3,7 @@ from openpyxl import load_workbook
 from .vat import vat
 from .round_as_excel import round_as_excel
 from .format import formatted
+from .declared_value import cost_for_declared_value
 
 
 file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/ems_rates.xlsx')
@@ -81,14 +82,6 @@ def find_table_row(weight, item):
         raise ValueError("Неизвестный тип товара.")
 
 
-def cost_for_declared_value(declared_value):
-    if not declared_value or declared_value in ("нет", "", 0, "0"):
-        return [0, 0]
-    fiz = round(float(declared_value) * 3 / 100, 4)
-    yur = fiz
-    return [fiz, yur]
-
-
 notification_list = [sheet["D63"].value, sheet["D64"].value, sheet["D65"].value]
 
 
@@ -119,9 +112,9 @@ def find_item_cost(zone, weight, declared_value, item, reception_place, delivery
     if declared_value:
         fiz = sheet[f"{x}{row}"].value * delivery
         yur = sheet[f"{x}{row}"].value * delivery2
-        fiz += cost_for_declared_value(declared_value)[0]
-        yur += cost_for_declared_value(declared_value)[1]
-        for_declared = cost_for_declared_value(declared_value)[1] * 1.2
+        fiz += cost_for_declared_value(declared_value)
+        yur += cost_for_declared_value(declared_value)
+        for_declared = cost_for_declared_value(declared_value) * 1.2
     else:
         fiz = sheet[f"{x}{row}"].value * delivery
         yur = sheet[f"{x}{row}"].value * delivery2
@@ -130,6 +123,9 @@ def find_item_cost(zone, weight, declared_value, item, reception_place, delivery
     yur *= for_fragile
     fiz += notification
     yur += notification
+    notification = notification * 1.2
+    if notification == 0:
+        notification = ""
     item_vat_fiz = round_as_excel(vat(fiz))
     item_vat_yur = round_as_excel(vat(yur))
     fiz = round_as_excel(fiz + item_vat_fiz)
@@ -139,6 +135,7 @@ def find_item_cost(zone, weight, declared_value, item, reception_place, delivery
         "yur": formatted(yur),
         "item_vat": formatted(item_vat_yur),
         "for_declared": formatted(for_declared),
+        'notification': formatted(notification)
     }]
 
 
