@@ -2,6 +2,7 @@ import os
 import math
 from openpyxl import load_workbook
 from .round_as_excel import round_as_excel
+from .format import formatted
 from .vat import vat
 from .declared_value import cost_for_declared_value
 
@@ -21,26 +22,11 @@ workbook = load_workbook(filename=file_path)
 sheet = workbook.active
 
 
-def formatted(num):
-    if num == str(num):
-        return num
-    else:
-        return str("{:.2f}".format(num).replace('.', ','))
-
-
 def weight(item_weight, declared_value):
     if declared_value in ("нет", "", 0, "0"):
         return math.ceil(item_weight / 100) / 10
     else:
         return math.ceil(item_weight / 10) / 100
-
-
-# def cost_for_declared_value(declared_value):
-#     if not declared_value or declared_value in ("нет", "", 0, "0"):
-#         return [0, 0]
-#     fiz = round(float(declared_value) * 3 / 100, 4)
-#     yur = fiz
-#     return [fiz, yur]
 
 
 def cost_of_parcel(item_weight, declared_value):
