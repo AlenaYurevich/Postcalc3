@@ -48,3 +48,9 @@ class EmsForm(forms.Form):
                                           widget=forms.RadioSelect(attrs={'checked': Choices_notice[0]}))
     fragile = forms.BooleanField(label="С отметкой за прием хрупких и (или) громоздких", required=False,
                                  widget=forms.CheckboxInput(attrs={'class': "form-check-input"}))
+
+
+class TransferForm(forms.Form):
+    amount = forms.DecimalField(label="Введите сумму перевода, рублей", min_value=0.01, required=False,
+                                decimal_places=2, widget=forms.NumberInput(attrs={'class': "form-control",
+                                                                                  'autofocus': 'autofocus' }))

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 #  from django import template
 # from django.conf import settings
-from .forms import PostForm, EmsForm
+from .forms import PostForm, EmsForm, TransferForm
 from .letter import cost_of_simple, cost_of_registered, cost_of_value_letter
 from .first_class import cost_of_first_class
 from .parcel import cost_of_parcel
@@ -9,6 +9,7 @@ from .parcel_3_4_5 import cost_of_parcel_3_4_5
 from .ems_points import data_of_ems
 from .ems_zone import find_ems_zone
 from .ems_cost import find_documents_cost, find_goods_cost
+from .internal_transfer import find_transfer_cost
 
 
 def calculation_view(request):
@@ -76,6 +77,22 @@ def ems_view(request):
     else:
         form = EmsForm()
         return render(request, 'ems_express_dostavka.html', {'form': form})  # внутри фигурных скобок
+
+
+def internal_transfer_view(request):
+    if request.method == "POST":
+        form = TransferForm(request.POST)
+        if form.is_valid():
+            amount = float(request.POST.get('amount'))
+            internal_transfer_cost = find_transfer_cost(amount)
+            context = {'form': form,
+                       'amount': amount,
+                       'internal_transfer_cost': internal_transfer_cost
+                       }
+            return render(request, 'internal_transfer.html', context)  # Внутри фиг скобок
+    else:
+        form = TransferForm()
+        return render(request, 'internal_transfer.html', {'form': form})  # внутри фигурных скобок
 
 
 def about_view(request):

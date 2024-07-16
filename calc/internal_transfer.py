@@ -1,5 +1,6 @@
-from round_as_excel import round_as_excel
-from format import formatted
+from .round_as_excel import round_as_excel
+from .format import formatted
+from .vat import vat
 
 
 def amount_match(amount):
@@ -18,19 +19,22 @@ def find_transfer_cost(amount):
     rate = {
         'fiz': 1.00,
         'yur': 1.20,
+        'fiz_home': 1.32,
             }
     multiplier = amount_match(amount)
     fiz = round_as_excel(amount * multiplier / 100)
-    yur = fiz * 1.2
+    item_vat = round_as_excel(vat(fiz))
+    yur = fiz + item_vat
+    fiz_home = fiz + 0.32
     if fiz >= 1.00:
         rate = {
             'fiz': fiz,
             'yur': yur,
+            'item_vat': item_vat,
+            'fiz_home': fiz_home,
                 }
     for i in rate:
         rate[i] = formatted(rate[i])
+    rate['yur_home'] = "нет"
     price_row.append(rate)
     return price_row
-
-
-print(find_transfer_cost(1000))
