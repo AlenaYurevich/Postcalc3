@@ -3,21 +3,21 @@ import math
 from openpyxl import load_workbook
 from .vat import vat
 from .format import formatted
-from .ems_cost import notification_list
+from .notification import notification_cost
 from .declared_value import cost_for_declared_value
 
 
 def weight_step(weight):
     return math.ceil((weight - 20) / 20)
 
-
-def notification_cost(notification):
-    print("обратились к функции notification_cost")
-    match notification:
-        case 1: return notification_list[0]
-        case 2: return notification_list[1]
-        case 3: return notification_list[2]
-        case 4: return 0
+#
+# def notification_cost(notification):
+#     print("обратились к функции notification_cost")
+#     match notification:
+#         case 1: return notification_list[0]
+#         case 2: return notification_list[1]
+#         case 3: return notification_list[2]
+#         case 4: return 0
 
 
 def cost_of_simple(item_weight):
@@ -45,6 +45,9 @@ def cost_of_simple(item_weight):
         fiz = "Макс. вес 2 кг"
         price_row.append({'fiz': fiz})
     return price_row
+
+
+# notification = notification_cost(notification)
 
 
 """
@@ -104,7 +107,7 @@ def cost_of_value_letter(item_weight, declared_value, notification):
                                      + cost_for_declared_value(declared_value) * 1.2
             yur = sheet['H11'].value + sheet['H12'].value * weight_step(item_weight)\
                                      + cost_for_declared_value(declared_value)
-            fiz += notification
+            fiz += notification * 1.2
             yur += notification
             notification = notification * 1.2
             if notification == 0:

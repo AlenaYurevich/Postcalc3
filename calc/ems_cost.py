@@ -4,6 +4,7 @@ from .vat import vat
 from .round_as_excel import round_as_excel
 from .format import formatted
 from .declared_value import cost_for_declared_value
+from .notification import notification_cost
 
 
 file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/ems_rates.xlsx')
@@ -80,18 +81,6 @@ def find_table_row(weight, item):
         return find_goods_table_row(weight)
     else:
         raise ValueError("Неизвестный тип товара.")
-
-
-notification_list = [sheet["D63"].value, sheet["D64"].value, sheet["D65"].value]
-
-
-def notification_cost(notification):
-    print("обратились к функции notification_cost")
-    match notification:
-        case 1: return notification_list[0]
-        case 2: return notification_list[1]
-        case 3: return notification_list[2]
-        case 4: return 0
 
 
 def fragile_cost(fragile):

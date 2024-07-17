@@ -1,10 +1,6 @@
 from django import forms
 from .ems_points import read_ems_points, sheet
-from .ems_cost import notification_list
-from .format import formatted
 
-
-N = [formatted(i * 1.2) for i in notification_list]
 
 Choices_notice = [(1, f'простое 0,78 руб.'),
                   (2, f'заказное 2,52 руб. '),
@@ -13,7 +9,7 @@ Choices_notice = [(1, f'простое 0,78 руб.'),
 
 
 class PostForm(forms.Form):
-    weight = forms.IntegerField(label="Введите вес отправления, грамм", min_value=0, widget=forms.NumberInput(attrs={
+    weight = forms.IntegerField(label="Введите вес отправления, грамм", min_value=1, widget=forms.NumberInput(attrs={
         'class': "form-control", 'autofocus': 'autofocus'}))
     declared_value = forms.DecimalField(label="Введите объявленную ценность, рублей", min_value=0, required=False,
                                         decimal_places=2, widget=forms.NumberInput(attrs={'class': "form-control",
@@ -37,7 +33,7 @@ class EmsForm(forms.Form):
                                        widget=forms.Select(attrs={'class': "form-control", 'autofocus': 'autofocus'}))
     destination = forms.TypedChoiceField(label="Выберите пункт назначения", choices=Choices,
                                          widget=forms.Select(attrs={'class': "form-control"}))
-    weight = forms.IntegerField(label="Введите вес отправления, грамм", min_value=0, widget=forms.NumberInput(attrs={
+    weight = forms.IntegerField(label="Введите вес отправления, грамм", min_value=1, widget=forms.NumberInput(attrs={
         'class': "form-control"}))
     declared_value = forms.DecimalField(label="Введите объявленную ценность, рублей", min_value=0, required=False,
                                         decimal_places=2, widget=forms.NumberInput(attrs={'class': "form-control",
@@ -53,4 +49,4 @@ class EmsForm(forms.Form):
 class TransferForm(forms.Form):
     amount = forms.DecimalField(label="Введите сумму перевода, рублей", min_value=0.01, required=False,
                                 decimal_places=2, widget=forms.NumberInput(attrs={'class': "form-control",
-                                                                                  'autofocus': 'autofocus' }))
+                                                                                  'autofocus': 'autofocus'}))

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block page_content %}
+{% block seo %}
+  <title>Почтовый денежный по Беларуси: расчет стоимости на тарификаторе</title>
+  <meta name="description" content="Почтовый денежный по Беларуси: расчет стоимости на тарификаторе">
+  <meta name="keywords" content="Денежный перевод, тарификатор, калькулятор Белпочта">
+  <link rel="canonical" href="https://posttarif.by/internal_transfer"/>
+  <meta property="og:title" content="Почтовый денежный по Беларуси: расчет стоимости на тарификаторе"/>
+  <meta property="og:image" content="https://posttarif.by/apple-touch-icon.png"/>
+  <meta property="og:description" content="Почтовый денежный по Беларуси: расчет стоимости на тарификаторе"/>
+  <meta property="og:type" content="article"/>
+{% endblock %}
+ <main>
+  <header>
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+      <h1 class="display-4 fw-normal text-body-emphasis">Расчет стоимости почтового денежного перевода по Беларуси</h1>
+      <p class="fs-5 text-body-secondary">Получение в любом отделении почтовой связи РУП <q>Белпочта</q></p>
+    </div>
+  </header>
+  <div class="row row-cols-1 row-cols-md-1 mb-3">
+      <form method="POST" class="TransferForm">{% csrf_token %}
+        <div class="col">
+            {{ form }}
+            <button class="btn btn-lg btn-info text-white mt-4 mb-4" type="submit" name="send">Рассчитать</button>
+        </div>
+        <div class="col">
+
+        </div>
+      </form>
+  </div>
+    <h2 class="display-6 text-center mb-4">Стоимость почтового денежного перевода по Беларуси, руб.</h2>
+    <div class="table-responsive">
+      <table class="table text-center">
+        <thead>
+          <tr class="border-info">
+            <th style="width: 20%;"></th>
+            <th style="width: 15%;">Для физ. лиц</th>
+            <th style="width: 15%;">Для юр. лиц</th>
+            <th style="width: 15%;">В т. ч. НДС (юр.)</th>
+<!--            <th style="width: 15%;">В т. ч. за уведомление</th>-->
+          </tr>
+        </thead>
+        <tbody>
+         <tr>
+            <th scope="row" class="text-start">Прием в отделении связи</th>
+            {% for rate in internal_transfer_cost %}
+            <td> {{ rate.fiz }}</td>
+            <td> {{ rate.yur }}</td>
+            <td> {{ rate.item_vat }}</td>
+            {% endfor %}
+        </tr>
+         <tr>
+            <th scope="row" class="text-start">Прием на дому</th>
+            {% for rate in internal_transfer_cost %}
+            <td> {{ rate.fiz_home }}</td>
+            <td> {{ rate.yur_home }}</td>
+            <td> </td>
+            {% endfor %}
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+
+    </div>
+  </main>
+ {% endblock %}
