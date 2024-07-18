@@ -38,7 +38,7 @@ def cost_of_parcel(item_weight, declared_value):
                 """
                 округление вверх с точностью до двух знаков
                 """
-                yur = sheet['H29'].value + math.ceil(sheet['H30'].value * weight(item_weight, declared_value) * 100)/100
+                yur = sheet['H29'].value + round((sheet['H30'].value * weight(item_weight, declared_value) * 100)/100, 4)
                 yur = round_as_excel(yur)
                 for_declared_fiz = ''
                 for_declared_yur = ''
@@ -51,10 +51,10 @@ def cost_of_parcel(item_weight, declared_value):
                 yur = sheet['H29'].value + sheet['H30'].value * weight(item_weight, declared_value)
                 yur = round_as_excel(yur)
                 for_declared_fiz = cost_for_declared_value(declared_value)
-                for_declared_yur = cost_for_declared_value(declared_value) * 1.2
+                yur += cost_for_declared_value(declared_value)
+                for_declared_yur = round_as_excel(cost_for_declared_value(declared_value)) * 1.2
                 item_vat = vat(yur)
                 yur += item_vat
-                yur += for_declared_yur
                 sep1, sep2 = "/", "/"
         else:
             if declared_value in ("нет", "", 0, "0"):
@@ -71,9 +71,10 @@ def cost_of_parcel(item_weight, declared_value):
                 fiz = sheet['D31'].value + sheet['D32'].value * weight(item_weight, declared_value)
                 fiz += cost_for_declared_value(declared_value)
                 yur = sheet['H29'].value + sheet['H30'].value * weight(item_weight, declared_value)
-                yur += cost_for_declared_value(declared_value)
+                yur = round_as_excel(yur)
                 for_declared_fiz = cost_for_declared_value(declared_value)
-                for_declared_yur = cost_for_declared_value(declared_value) * 1.2
+                yur += cost_for_declared_value(declared_value)
+                for_declared_yur = round_as_excel(cost_for_declared_value(declared_value) * 1.2)
                 item_vat = vat(yur)
                 yur += item_vat
                 sep1, sep2 = "/", "/"
