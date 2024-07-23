@@ -2,6 +2,7 @@ from .letter import cost_of_simple, cost_of_registered, cost_of_value_letter
 from .first_class import cost_of_first_class
 from .parcel import cost_of_parcel
 from .parcel_3_4_5 import cost_of_parcel_3_4_5
+from .internal_transfer import cost_of_internal_transfer
 
 
 def test_simple():
@@ -41,6 +42,16 @@ def test_value_letter():
             'sep': '/',
             'rub': " руб.",
             'notification': ""
+    }]
+    assert cost_of_value_letter(915, 1.25, 4) == [{
+        'fiz': '6,23',
+        'yur': '6,59',
+        'item_vat': '1,10',
+        'for_declared': '0,05',
+        'tracking': 'да',
+        'sep': '/',
+        'rub': " руб.",
+        'notification': ""
     }]
     assert cost_of_value_letter(2001, 10, 4) == [{
         'fiz': 'Макс. вес 2 кг', 'sep': ''
@@ -142,4 +153,14 @@ def test_parcel_3_4_5():
         'fiz': '9,41',
         'for_declared': '0,50',
         'rub': " руб."
+    }]
+
+
+def test_internal_transfer():
+    assert cost_of_internal_transfer(35.85) == [{
+        'fiz': '1,08',
+        'yur': '1,30',
+        'item_vat': '0,22',
+        'fiz_home': '1,40',
+        'yur_home': 'нет'
     }]

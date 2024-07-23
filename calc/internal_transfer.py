@@ -14,7 +14,7 @@ def amount_match(amount):
         return 3
 
 
-def find_transfer_cost(amount):
+def cost_of_internal_transfer(amount):
     price_row = []
     rate = {
         'fiz': 1.00,
