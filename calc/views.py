@@ -9,7 +9,7 @@ from .parcel_3_4_5 import cost_of_parcel_3_4_5
 from .ems_points import data_of_ems
 from .ems_zone import find_ems_zone
 from .ems_cost import find_documents_cost, find_goods_cost
-from .internal_transfer import find_transfer_cost
+from .internal_transfer import cost_of_internal_transfer
 
 
 def calculation_view(request):
@@ -84,7 +84,7 @@ def internal_transfer_view(request):
         form = TransferForm(request.POST)
         if form.is_valid():
             amount = float(request.POST.get('amount'))
-            internal_transfer_cost = find_transfer_cost(amount)
+            internal_transfer_cost = cost_of_internal_transfer(amount)
             context = {'form': form,
                        'amount': amount,
                        'internal_transfer_cost': internal_transfer_cost

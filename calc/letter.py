@@ -2,6 +2,7 @@ import os
 import math
 from openpyxl import load_workbook
 from .vat import vat
+from .round_as_excel import round_as_excel
 from .format import formatted
 from .notification import notification_cost
 from .declared_value import cost_for_declared_value
@@ -9,15 +10,6 @@ from .declared_value import cost_for_declared_value
 
 def weight_step(weight):
     return math.ceil((weight - 20) / 20)
-
-#
-# def notification_cost(notification):
-#     print("обратились к функции notification_cost")
-#     match notification:
-#         case 1: return notification_list[0]
-#         case 2: return notification_list[1]
-#         case 3: return notification_list[2]
-#         case 4: return 0
 
 
 def cost_of_simple(item_weight):
@@ -104,7 +96,7 @@ def cost_of_value_letter(item_weight, declared_value, notification):
             workbook = load_workbook(filename=file_path)
             sheet = workbook.active
             fiz = sheet['D11'].value + sheet['D12'].value * weight_step(item_weight)\
-                                     + cost_for_declared_value(declared_value) * 1.2
+                                     + round_as_excel(cost_for_declared_value(declared_value)) * 1.2
             yur = sheet['H11'].value + sheet['H12'].value * weight_step(item_weight)\
                                      + cost_for_declared_value(declared_value)
             fiz += notification * 1.2
@@ -114,7 +106,7 @@ def cost_of_value_letter(item_weight, declared_value, notification):
                 notification = ""
             item_vat = vat(yur)
             yur += item_vat
-            for_declared = cost_for_declared_value(declared_value) * 1.2
+            for_declared = round_as_excel(cost_for_declared_value(declared_value)) * 1.2
             rate = {
                 'fiz': fiz,
                 'yur': yur,
