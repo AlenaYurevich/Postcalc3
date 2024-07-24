@@ -76,7 +76,7 @@
         new google.translate.TranslateElement({
             lang: 'ru',
             pageLanguages: 'ru',
-            includedLanguages: 'ru,en,be'
+            includedLanguages: 'ru,en,be,zh-CN'
         }, 'google_translate_element');
     }
 
@@ -113,15 +113,14 @@
         } else {
             if (($('.goog-te-combo option:selected').val() === 'en')) {
                 $(' .goog-te-combo').find('option').each(function (i, item) {
-
                     let language = 'English';
                     let langId = $(this).val();
-
                     if (langId === 'ru') {
-                        language = 'Russian'
-                    } else if (langId === 'be') {
-                        language = 'Belorussian'
-                    }
+                        language = 'Russian'}
+                    else if (langId === 'be') {
+                        language = 'Belorussian'}
+                    else if (langId === 'zh-CN') {
+                        language = 'Сhinese'}
                     $(this).text(language);
                 });
             }
@@ -130,8 +129,8 @@
 
 
     /**
-     * В некоторых браузерах вместо русского селекта показывает английский текст
-     * фунция переводит селект на русский
+     * В некоторых браузерах (Edge) вместо русского селекта показывает английский текст
+     * функция переводит селект на русский
      * @param i
      */
     function setLangToGoogleTranslate(i = 0) {
@@ -148,12 +147,12 @@
 
                     let language = 'Русский';
                     let langId = $(this).val();
-
                     if (langId === 'en') {
-                        language = 'English'
-                    } else if (langId === 'be') {
-                        language = 'Белорусский'
-                    }
+                        language = 'English'}
+                    else if (langId === 'be') {
+                        language = 'Белорусский'}
+                    else if (langId === 'zh-CN') {
+                        language = '中文'}
                     $(this).text(language);
                 });
             }
@@ -192,22 +191,16 @@
 </script>
 <style>
     .goog-te-gadget {
-        font-size: 0;
-    }
+        font-size: 0;}
     .goog-logo-link {
-        display: none;
-    }
+        display: none;}
     .goog-te-combo, .goog-te-banner *, .goog-te-ftab *, .goog-te-menu *, .goog-te-menu2 *, .goog-te-balloon * {
-        text-transform: capitalize;
-
-    }
+        text-transform: capitalize;}
     .skiptranslate goog-te-gadget {
-        display: none;
-    }
+        display: none;}
     .goog-te-combo {
         border: 0;
-        outline: 0;
-    }
+        outline: 0;}
 </style>
        <div id="bxdynamic_jmonnO_end" style="display:none"></div>
        </div>
