@@ -48,8 +48,8 @@
         <thead>
           <tr class="border-info">
             <th style="width: 25%;"></th>
-            <th style="width: 15%;">Для физических лиц</th>
-            <th style="width: 15%;">Для юридических лиц</th>
+            <th style="width: 15%;">Для физ. лиц</th>
+            <th style="width: 15%;">Для юр. лиц, ИП</th>
             <th style="width: 15%;">В т. ч. НДС (юр.)</th>
             <th style="width: 10%;">В т. ч. за объявленную ценность</th>
             <th style="width: 10%;">В т. ч. за уведомление</th>
@@ -127,9 +127,9 @@
             {% for rate in parcel %}
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
-            <td> {{ rate.item_vat }}</td>
+            <td> {{ rate.item_vat_yur }}</td>
             <td> {{ rate.for_declared_fiz }} {{rate.sep1}} {{ rate.for_declared_yur }}</td>
-            <td></td>
+             <td> {{ rate.notification }}</td>
             <td> {{ rate.tracking }}</td>
             {% endfor %}
           </tr>

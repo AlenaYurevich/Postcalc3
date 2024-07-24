@@ -61,7 +61,6 @@ def find_goods_table_row(weight):
             right = mid - 1
         else:
             left = mid + 1
-
     # Если вес выходит за пределы последнего диапазона
     return None
 

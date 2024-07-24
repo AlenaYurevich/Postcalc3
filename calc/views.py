@@ -23,7 +23,7 @@ def calculation_view(request):
             registered = cost_of_registered(item_weight, notification)
             value_letter = cost_of_value_letter(item_weight, declared_value, notification)
             first_class = cost_of_first_class(item_weight)
-            parcel = cost_of_parcel(item_weight, declared_value)
+            parcel = cost_of_parcel(item_weight, declared_value, notification)
             parcel_3_4_5 = cost_of_parcel_3_4_5(item_weight, declared_value)
             context = {'form': form, 'simple': simple,
                        'registered': registered,
