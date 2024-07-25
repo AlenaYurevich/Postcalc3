@@ -1,6 +1,4 @@
 from django.shortcuts import render
-#  from django import template
-# from django.conf import settings
 from .forms import PostForm, EmsForm, TransferForm
 from .letter import cost_of_simple, cost_of_registered, cost_of_value_letter
 from .first_class import cost_of_first_class
@@ -24,7 +22,7 @@ def calculation_view(request):
             value_letter = cost_of_value_letter(item_weight, declared_value, notification)
             first_class = cost_of_first_class(item_weight)
             parcel = cost_of_parcel(item_weight, declared_value, notification)
-            parcel_3_4_5 = cost_of_parcel_3_4_5(item_weight, declared_value)
+            parcel_3_4_5 = cost_of_parcel_3_4_5(item_weight, declared_value, notification)
             context = {'form': form, 'simple': simple,
                        'registered': registered,
                        'value_letter': value_letter,

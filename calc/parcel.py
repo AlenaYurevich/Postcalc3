@@ -1,6 +1,5 @@
-import os
 import math
-from openpyxl import load_workbook
+from .sheets import sheet2
 from .round_as_excel import round_as_excel
 from .format import formatted
 from .vat import vat
@@ -18,12 +17,6 @@ from .notification import notification_cost
 """
 
 
-file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/letter2.xlsx')  # второй файл
-print("Открыли второй файл")
-workbook = load_workbook(filename=file_path)
-sheet = workbook.active
-
-
 def weight(item_weight, declared_value):
     if declared_value in ("нет", "", 0, "0"):
         return math.ceil(item_weight / 100) / 10
@@ -37,19 +30,20 @@ def cost_of_parcel(item_weight, declared_value, notification):
     if item_weight <= 50000:
         if item_weight <= 1000:
             if declared_value in ("нет", "", 0, "0"):
-                fiz = sheet['D29'].value
+                fiz = sheet2['D29'].value
                 """
                 округление вверх с точностью до двух знаков
                 """
-                yur = sheet['H29'].value + round((sheet['H30'].value * weight(item_weight, declared_value) * 100)/100, 4)
+                yur = sheet2['H29'].value + round((sheet2['H30'].value * weight(item_weight, declared_value)
+                                                   * 100)/100, 4)
                 yur = round_as_excel(yur)
                 for_declared_fiz = ''
                 for_declared_yur = ''
                 sep1 = ''
                 sep2 = '/'
             else:
-                fiz = sheet['D29'].value + cost_for_declared_value(declared_value)
-                yur = sheet['H29'].value + sheet['H30'].value * weight(item_weight, declared_value)
+                fiz = sheet2['D29'].value + cost_for_declared_value(declared_value)
+                yur = sheet2['H29'].value + sheet2['H30'].value * weight(item_weight, declared_value)
                 yur = round_as_excel(yur)
                 for_declared_fiz = cost_for_declared_value(declared_value)
                 yur += cost_for_declared_value(declared_value)
@@ -57,17 +51,17 @@ def cost_of_parcel(item_weight, declared_value, notification):
                 sep1, sep2 = "/", "/"
         else:
             if declared_value in ("нет", "", 0, "0"):
-                fiz = sheet['D31'].value + sheet['D32'].value * weight(item_weight, declared_value)
-                yur = sheet['H29'].value + sheet['H30'].value * weight(item_weight, declared_value)
+                fiz = sheet2['D31'].value + sheet2['D32'].value * weight(item_weight, declared_value)
+                yur = sheet2['H29'].value + sheet2['H30'].value * weight(item_weight, declared_value)
                 yur = round_as_excel(yur)
                 for_declared_fiz = ''
                 for_declared_yur = ''
                 sep1 = ''
                 sep2 = '/'
             else:
-                fiz = sheet['D31'].value + sheet['D32'].value * weight(item_weight, declared_value)
+                fiz = sheet2['D31'].value + sheet2['D32'].value * weight(item_weight, declared_value)
                 fiz += cost_for_declared_value(declared_value)
-                yur = sheet['H29'].value + sheet['H30'].value * weight(item_weight, declared_value)
+                yur = sheet2['H29'].value + sheet2['H30'].value * weight(item_weight, declared_value)
                 yur = round_as_excel(yur)
                 for_declared_fiz = cost_for_declared_value(declared_value)
                 yur += cost_for_declared_value(declared_value)

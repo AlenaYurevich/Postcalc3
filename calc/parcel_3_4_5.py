@@ -1,14 +1,8 @@
-import os
 import math
-from openpyxl import load_workbook
+from .sheets import sheet2
 from .round_as_excel import round_as_excel
 from .format import formatted
-
-
-file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/letter2.xlsx')  # второй файл
-# workbook = load_workbook(filename=file_path, read_only=True)  # для снижения затрат ОП в режиме чтения
-workbook = load_workbook(filename=file_path)  # для снижения затрат ОП в режиме чтения
-sheet = workbook.active
+from .notification import notification_cost
 
 
 """
@@ -29,15 +23,16 @@ def weight(item_weight, declared_value):
         return math.ceil(item_weight / 10) / 100
 
 
-def cost_of_parcel_declared(item_weight, declared_value):
+def cost_of_parcel_declared(item_weight, declared_value, notification):
+    notification = notification_cost(notification)
     if item_weight <= 1000:
-        fiz = sheet['D42'].value
+        fiz = sheet2['D42'].value
     elif item_weight <= 3000:
-        fiz = sheet['D43'].value
+        fiz = sheet2['D43'].value
     elif item_weight <= 5000:
-        fiz = sheet['D44'].value
+        fiz = sheet2['D44'].value
     else:
-        fiz = sheet['D46'].value + sheet['D47'].value * weight(item_weight, declared_value)
+        fiz = sheet2['D46'].value + sheet2['D47'].value * weight(item_weight, declared_value)
         fiz = round_as_excel(fiz)
     for_declared = ''
     if declared_value not in ("нет", "", 0, "0"):
@@ -45,21 +40,26 @@ def cost_of_parcel_declared(item_weight, declared_value):
         if for_declared < 0.50:
             for_declared = 0.50
         fiz += for_declared
+    if notification == 3:
+        fiz += notification * 1.2
+        notification = notification * 1.2
+    else:
+        notification = ""
     rate = {
         'fiz': fiz,
         'for_declared': for_declared,
-        'rub': " руб."
+        'rub': " руб.",
+        'notification': notification,
             }
     for i in rate:
         rate[i] = formatted(rate[i])
-    workbook.close()
     return rate
 
 
-def cost_of_parcel_3_4_5(item_weight, declared_value):
+def cost_of_parcel_3_4_5(item_weight, declared_value, notification):
     price_row = []
     if item_weight <= 50000:
-        rate = cost_of_parcel_declared(item_weight, declared_value)
+        rate = cost_of_parcel_declared(item_weight, declared_value, notification)
         price_row.append(rate)
     else:
         fiz = "Макс. вес 50 кг"

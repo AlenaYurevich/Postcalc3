@@ -19,15 +19,15 @@ def test_simple():
 
 
 def test_registered():
-    assert cost_of_registered(1000, 0) == [{
-            'fiz': '5,70',
-            'yur': '5,70',
-            'item_vat': '0,95',
+    assert cost_of_registered(1000, 4) == [{
+            'fiz': '5,94',
+            'yur': '5,94',
+            'item_vat': '0,99',
             'for_declared': '',
             'tracking': 'да',
             'rub': " руб.",
             'notification': ""}]
-    assert cost_of_registered(30000, 0) == [{
+    assert cost_of_registered(30000, 4) == [{
         'fiz': 'Макс. вес 2 кг'
     }]
 
@@ -160,15 +160,23 @@ def test_parcel():
 
 
 def test_parcel_3_4_5():
-    assert cost_of_parcel_3_4_5(6545, 1.55) == [{
+    assert cost_of_parcel_3_4_5(6545, 1.55, 4) == [{
         'fiz': '9,41',
         'for_declared': '0,50',
-        'rub': " руб."
+        'rub': " руб.",
+        'notification': ""
     }]
-    assert cost_of_parcel_3_4_5(6545, 50.00) == [{
+    assert cost_of_parcel_3_4_5(6545, 50.00, 4) == [{
         'fiz': '9,41',
         'for_declared': '0,50',
-        'rub': " руб."
+        'rub': " руб.",
+        'notification': ""
+    }]
+    assert cost_of_parcel_3_4_5(915, 1.25, 3) == [{
+        'fiz': '4,04',
+        'for_declared': '0,50',
+        'rub': " руб.",
+        'notification': "0,54"
     }]
 
 
