@@ -1,6 +1,5 @@
-import os
 import math
-from openpyxl import load_workbook
+from .sheets import sheet1, sheet2
 from .vat import vat
 from .round_as_excel import round_as_excel
 from .format import formatted
@@ -15,11 +14,8 @@ def weight_step(weight):
 def cost_of_simple(item_weight):
     price_row = []
     if item_weight <= 2000:
-        file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/letter.xlsx')  # первый файл
-        workbook = load_workbook(filename=file_path)
-        sheet = workbook.active
-        fiz = sheet['B5'].value + sheet['B6'].value * weight_step(item_weight)
-        yur = sheet['C5'].value + sheet['C6'].value * weight_step(item_weight)
+        fiz = sheet1['B5'].value + sheet1['B6'].value * weight_step(item_weight)
+        yur = sheet1['C5'].value + sheet1['C6'].value * weight_step(item_weight)
         item_vat = vat(yur)
         yur += item_vat
         rate = {
@@ -39,9 +35,6 @@ def cost_of_simple(item_weight):
     return price_row
 
 
-# notification = notification_cost(notification)
-
-
 """
 заказное письмо, заказная бандероль, заказной мелкий пакет
 """
@@ -51,11 +44,8 @@ def cost_of_registered(item_weight, notification):
     price_row = []
     notification = notification_cost(notification)
     if item_weight <= 2000:
-        file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/letter2.xlsx')  # второй файл
-        workbook = load_workbook(filename=file_path)
-        sheet = workbook.active
-        fiz = sheet['D10'].value + sheet['D12'].value * weight_step(item_weight)
-        yur = sheet['H10'].value + sheet['H12'].value * weight_step(item_weight)
+        fiz = sheet2['D10'].value + sheet2['D12'].value * weight_step(item_weight)
+        yur = sheet2['H10'].value + sheet2['H12'].value * weight_step(item_weight)
         fiz += notification * 1.2
         yur += notification
         notification = notification * 1.2
@@ -92,13 +82,10 @@ def cost_of_value_letter(item_weight, declared_value, notification):
     notification = notification_cost(notification)
     if item_weight <= 2000:
         if declared_value not in ("нет", "", 0, "0"):
-            file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/letter2.xlsx')  # второй файл
-            workbook = load_workbook(filename=file_path)
-            sheet = workbook.active
-            fiz = sheet['D11'].value + sheet['D12'].value * weight_step(item_weight)\
+            fiz = sheet2['D11'].value + sheet2['D12'].value * weight_step(item_weight)\
                                      + round_as_excel(cost_for_declared_value(declared_value)) * 1.2
-            yur = sheet['H11'].value + sheet['H12'].value * weight_step(item_weight)\
-                                     + cost_for_declared_value(declared_value)
+            yur = sheet2['H11'].value + sheet2['H12'].value * weight_step(item_weight)\
+                                      + cost_for_declared_value(declared_value)
             fiz += notification * 1.2
             yur += notification
             notification = notification * 1.2
