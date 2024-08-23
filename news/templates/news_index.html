@@ -13,36 +13,22 @@
  <main>
   <header>
     <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-      <h1 class="display-4 fw-normal text-body-emphasis">Расчет стоимости почтового денежного перевода по Беларуси</h1>
-      <p class="fs-5 text-body-secondary">Получение в любом отделении почтовой связи РУП <q>Белпочта</q></p>
+      <h1 class="display-4 fw-normal text-body-emphasis">Новости</h1>
+      <p class="fs-5 text-body-secondary">Последние изменения в работе калькулятора тарифов</p>
     </div>
   </header>
 
-  <div class="row row-cols-1 row-cols-md-1 mb-3">
-
-  </div>
-    <h2 class="display-6 text-center mb-4">Стоимость почтового денежного перевода по Беларуси, руб.</h2>
-
-    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-
-    </div>
-
-     <div class="col-md-8 offset-md-2">
-  <h1>Блог</h1>
   <hr>
   {% for post in posts %}
-  <h2><a href="{% url 'blog_detail' post.pk%}">{{ post.title }}</a></h2>
-  <small>
-      {{ post.created_on.date }}
-      Категории:
-      {% for category in post.categories.all %}
-      <a href="{% url 'blog_category' category.name %}">
-          {{ category.name }}
-      </a>
-      {% endfor %}
-  </small>
+  <div>
+  <h3><a href="{% url 'news_detail' post.pk %}">{{ post.title }}</a></h3>
+  <small>{{ post.created_on }}</small>
+     <img src = "{{ post.image_min }}">
+
+
+
   <p>{{ post.body | slice:":400" }}...</p>
   {% endfor %}
-</div>
+  </div>
   </main>
  {% endblock %}
