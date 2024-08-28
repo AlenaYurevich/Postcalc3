@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block page_content %}
 {% block seo %}
   <title>Новости</title>
@@ -23,12 +24,12 @@
   <div>
   <h3><a href="{% url 'news_detail' post.pk %}">{{ post.title }}</a></h3>
   <small>{{ post.created_on }}</small>
-     <img src = "{{ post.image_min }}">
-
+  <img src = '{{ post.image_min }}'/>
 
 
   <p>{{ post.body | slice:":400" }}...</p>
   {% endfor %}
+
   </div>
   </main>
  {% endblock %}
