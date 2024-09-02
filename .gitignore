@@ -10,6 +10,5 @@ db.sqlite3
 /calc/templates/sitemap.xml
 /calc/templates/404.html
 /calc/templates/robots.txt
-/settings4.py
 /.pytest_cache/
 /postcalc2/settings.py
