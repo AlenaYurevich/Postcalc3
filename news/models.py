@@ -13,8 +13,8 @@ class Post(models.Model):
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
-    image = models.FileField(upload_to='static/images/gallery')
-    image_min = models.FileField(upload_to='static/images/gallery')
+    image = models.FileField(upload_to='static/images/')
+    image_min = models.FileField(upload_to='static/images/')
     alt = models.CharField(max_length=30)
     categories = models.ManyToManyField('Category', related_name='posts')
 
