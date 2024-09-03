@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_content %}
+
+  <title>{{ post.title }}</title>
+  <meta name="description" content='{{ post.body | slice:":400" }}...'>
+  <meta name="keywords" content="Тарифы, рост тарифов, новые расчеты">
+  <link rel="canonical" href="{% url 'news_detail' post.pk %}"/>
+  <meta property="og:title" content="{{ post.title }}"/>
+  <meta property="og:image" content="{{ post.image }}"/>
+  <meta property="og:description" content='{{ post.body | slice:":400" }}...'/>
+  <meta property="og:type" content="article"/>
+ <main>
+  <header>
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+      <h1 class="display-4 fw-normal text-body-emphasis">Новости </h1>
+    </div>
+  </header>
+  <hr>
+ <div class="row">
+    <div class="col-md-3 order-md-1">
+
+     </div>
+    <div class="col-md-7 order-md-2">
+        <h2 class="featurette-heading"><a class ="text-info text-decoration-none" href="{% url 'news_detail' post.pk %}">{{ post.title }}</a><span class="text-muted"></span></h2>
+        <small>{{ post.created_on }} |
+
+      {% for category in post.categories.all %}
+      <a href="{% url 'news_category' category.name %}">
+      {{ category.name | capfirst }}
+      </a> |
+      {% endfor %}
+        </small>
+        <p>{{ post.body }}</p>
+        <img src = "{{ post.image }}" alt = "{{ post.alt }}"/>
+    </div>
+  </div>
+  </main>
+ {% endblock %}
