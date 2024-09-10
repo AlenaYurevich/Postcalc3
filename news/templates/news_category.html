@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_content %}
+{% block seo %}
+  <title>Новости по категориям</title>
+  <meta name="description" content="Обновления на сайте, повышение тарифов на услуги">
+  <meta name="keywords" content="Тарифы, рост тарифов, новые расчеты">
+  <link rel="canonical" href="https://posttarif.by/news/category"/>
+  <meta property="og:title" content="Новости по категориям"/>
+  <meta property="og:image" content="https://posttarif.by/apple-touch-icon.png"/>
+  <meta property="og:description" content="Обновления на сайте, повышение тарифов на услуги"/>
+  <meta property="og:type" content="article"/>
+{% endblock %}
+ <main>
+  <header>
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+      <h1 class="display-4 fw-normal text-body-emphasis">Новости по категориям</h1>
+         <h2>{{ category | title }}</h2>
+      <p class="fs-5 text-body-secondary">Изменения в работе калькулятора тарифов по категориям</p>
+    </div>
+  </header>
+
+  <hr>
+<!--  {% for post in posts %}-->
+<!-- <div class="row">-->
+<!--    <div class="col-md-3 order-md-1">-->
+<!--           <img src = "{{ post.image_min }}" alt = "{{ post.alt }}"/>-->
+<!--     </div>-->
+<!--    <div class="col-md-7 order-md-2">-->
+<!--        <h2 class="featurette-heading"><a class ="text-info text-decoration-none" href="{% url 'news_detail' post.pk %}">{{ post.title }}</a><span class="text-muted"></span></h2>-->
+<!--        <small>{{ post.created_on }}</small>-->
+<!--        <p>{{ post.body }}</p>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <hr class="featurette-divider">-->
+
+<!--  {% endfor %}-->
+  {% for post in posts %}
+  <div class="row">
+<div class="col-md-3 order-md-1">
+<img src = "{{ post.image_min }}" alt = "{{ post.alt }}"/>
+</div>
+        <h2><a href="{% url 'news_detail' post.pk%}">{{ post.title }}</a></h2>
+        <small>
+            {{ post.created_on.date }} |&nbsp;
+            Категории:&nbsp;
+            {% for category in post.categories.all %}
+            <a href="{% url 'news_category' category.name%}">
+                {{ category.name | capfirst }}
+            </a>
+            {% endfor %}
+        </small>
+        <p>{{ post.body | slice:":400" }}...</p>
+    {% endfor %}
+
+  </main>
+ {% endblock %}
