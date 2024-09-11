@@ -23,7 +23,7 @@
   {% for post in posts %}
  <div class="row">
     <div class="col-md-3 order-md-1">
-           <img src = "{{ post.image_min }}" alt = "{{ post.alt }}"/>
+           <img src = "{{ post.image_min.url }}" alt = "{{ post.alt }}"/>
      </div>
     <div class="col-md-7 order-md-2">
         <h2 class="featurette-heading"><a class ="text-info text-decoration-none" href="{% url 'news_detail' post.pk %}">{{ post.title }}</a><span class="text-muted"></span></h2>
