@@ -40,7 +40,7 @@ def cost_of_parcel_declared(item_weight, declared_value, notification):
         if for_declared < 0.50:
             for_declared = 0.50
         fiz += for_declared
-    if notification == 3:
+    if notification == 0.45:
         fiz += notification * 1.2
         notification = notification * 1.2
     else:
