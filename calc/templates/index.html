@@ -144,6 +144,17 @@
             <td> да </td>
             {% endfor %}
           </tr>
+        <tr>
+            <th scope="row" class="text-start">Посылка с оформлением в личном кабинете<br>&#171QR box&#187</th>
+           {% for rate in qr_box %}
+            <td> {{ rate.fiz }}</td>
+            <td> {{ rate.yur}}</td>
+            <td> {{ rate.item_vat_yur }}</td>
+            <td> {{ rate.for_declared_fiz }} {{rate.sep1}} {{ rate.for_declared_yur }}</td>
+            <td> {{ rate.notification }}</td>
+            <td> {{ rate.tracking }}</td>
+            {% endfor %}
+          </tr>
         <tr class="border-info">
             <th scope="row" class="text-start"><a class="me-3 py-2 link-body-emphasis text-decoration-none text-info"
                                                   href="ems_express_dostavka" target="blank">EMS экспресс-доставка</a></th>

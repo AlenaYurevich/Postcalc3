@@ -4,6 +4,7 @@ from .letter import cost_of_simple, cost_of_registered, cost_of_value_letter
 from .first_class import cost_of_first_class
 from .parcel import cost_of_parcel
 from .parcel_3_4_5 import cost_of_parcel_3_4_5
+from .qr_box import cost_of_parcel_qr
 from .ems_points import data_of_ems
 from .ems_zone import find_ems_zone
 from .ems_cost import find_documents_cost, find_goods_cost
@@ -23,12 +24,14 @@ def calculation_view(request):
             first_class = cost_of_first_class(item_weight)
             parcel = cost_of_parcel(item_weight, declared_value, notification)
             parcel_3_4_5 = cost_of_parcel_3_4_5(item_weight, declared_value, notification)
+            qr_box = cost_of_parcel_qr(item_weight, declared_value, notification)
             context = {'form': form, 'simple': simple,
                        'registered': registered,
                        'value_letter': value_letter,
                        'first_class': first_class,
                        'parcel': parcel,
                        'parcel_3_4_5': parcel_3_4_5,
+                       'qr_box': qr_box,
                        'notification': notification
                        }
             return render(request, 'index.html', context)  # Внутри фигурных скобок
