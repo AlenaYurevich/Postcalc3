@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Post
+from .models import Post, Category
 
 
 def news_index(request):
@@ -18,9 +18,10 @@ def news_detail(request, pk):
     return render(request, 'news_detail.html', context)
 
 
-def news_category(request, category):
+def news_category(request, category_slug):
+    category = Category.objects.get(slug=category_slug)
     posts = Post.objects.filter(
-        categories__name__contains=category
+        categories__slug__contains=category_slug
     ).order_by(
         '-created_on')
     context = {

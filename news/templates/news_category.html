@@ -14,8 +14,8 @@
  <main>
   <header>
     <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-      <h1 class="display-4 fw-normal text-body-emphasis text-decoration-none">Изменения в работе калькулятора тарифов по категории</h1>
-      <p class="fs-5 text-body-secondary">{{ category | title }}</p>
+      <h1 class="display-4 fw-normal text-body-emphasis text-decoration-none">Изменения на сайте <br>
+          по категории {{ category.name | capfirst | default_if_none:"-" }}</h1>
     </div>
   </header>
   <hr>
@@ -29,7 +29,7 @@
         <small>
             {{ post.created_on.date }} |&nbsp;
             {% for category in post.categories.all %}
-                <a href="{% url 'news_category' category.name %}">
+                <a href="{% url 'news_category' category.slug %}">
                 {{ category.name | capfirst }}
                 </a> |&nbsp;
             {% endfor %}
