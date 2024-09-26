@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Post, Category
 
 
@@ -10,8 +10,8 @@ def news_index(request):
     return render(request, 'news_index.html', context)
 
 
-def news_detail(request, pk):
-    post = Post.objects.get(pk=pk)
+def news_detail(request, slug):
+    post = get_object_or_404(Post, slug=slug)
     context = {
         "post": post
     }

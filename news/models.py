@@ -24,6 +24,12 @@ class Post(models.Model):
     image_min = models.FileField(upload_to='static/images/')
     alt = models.CharField(max_length=30)
     categories = models.ManyToManyField('Category', related_name='posts')
+    slug = models.SlugField(max_length=250, unique=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super(Post, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title

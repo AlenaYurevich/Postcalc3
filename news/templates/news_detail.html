@@ -5,7 +5,7 @@
   <title>{{ post.title }}</title>
   <meta name="description" content='{{ post.body | slice:":400" }}...'>
   <meta name="keywords" content="Тарифы, рост тарифов, новые расчеты">
-  <link rel="canonical" href="{% url 'news_detail' post.pk %}"/>
+  <link rel="canonical" href="{% url 'news_detail' slug=post.slug %}"/>
   <meta property="og:title" content="{{ post.title }}"/>
   <meta property="og:image" content="{{ post.image }}"/>
   <meta property="og:description" content='{{ post.body | slice:":400" }}...'/>
@@ -22,7 +22,7 @@
 
      </div>
     <div class="col-md-7 order-md-2">
-        <h2 class="featurette-heading"><a class ="text-info text-decoration-none" href="{% url 'news_detail' post.pk %}">{{ post.title }}</a><span class="text-muted"></span></h2>
+        <h2 class="featurette-heading"><a class ="text-info text-decoration-none" href="{% url 'news_detail' slug=post.slug %}">{{ post.title }}</a><span class="text-muted"></span></h2>
         <p>{{ post.created_on }} |
       {% for category in post.categories.all %}
       <a href="{% url 'news_category' category.slug %}">
