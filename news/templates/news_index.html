@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block page_content %}
 {% block seo %}
-  <title>Новости</title>
-  <meta name="description" content="Обновления на сайте">
-  <meta name="keywords" content="Тарифы, рост тарифов, новые расчеты">
-  <link rel="canonical" href="https://posttarif.by/news"/>
-  <meta property="og:title" content="Новости"/>
-  <meta property="og:image" content="https://posttarif.by/apple-touch-icon.png"/>
-  <meta property="og:description" content="Обновления на сайте, повышение тарифов"/>
-  <meta property="og:type" content="article"/>
+    <title>Новости</title>
+    <meta name="description" content="Обновления на сайте">
+    <meta name="keywords" content="Тарифы, рост тарифов, новые расчеты">
+    <link rel="canonical" href="https://posttarif.by/news"/>
+    <meta property="og:title" content="Новости"/>
+    <meta property="og:image" content="https://posttarif.by/apple-touch-icon.png"/>
+    <meta property="og:description" content="Обновления на сайте, повышение тарифов"/>
+    <meta property="og:type" content="article"/>
 {% endblock %}
+{% block page_content %}
  <main>
   <header>
     <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
@@ -18,7 +18,6 @@
       <p class="fs-5 text-body-secondary">Последние изменения в работе калькулятора тарифов</p>
     </div>
   </header>
-
   <hr>
   {% for post in posts %}
  <div class="row">
@@ -32,8 +31,6 @@
     </div>
   </div>
   <hr class="featurette-divider">
-
   {% endfor %}
-
   </main>
  {% endblock %}

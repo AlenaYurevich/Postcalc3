@@ -21,13 +21,22 @@
     <style>
     .bi { vertical-align: -.5rem; }
     form { display: flex; }
+    .goog-te-gadget {
+        font-size: 0;}
+    .goog-logo-link {
+        display: none;}
+    .goog-te-combo, .goog-te-banner *, .goog-te-ftab *, .goog-te-menu *, .goog-te-menu2 *, .goog-te-balloon * {
+        text-transform: capitalize;}
+    .skiptranslate goog-te-gadget {
+        display: none;}
+    .goog-te-combo {
+        border: 0;
+        outline: 0;}
     </style>
 </head>
 <body>
 <div class="container py-3">
   <header>
-<!--    <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">-->
-
   <nav class="navbar navbar-expand-sm navbar-light bg-light">
   <div class="container-fluid">
   <a href="{% url 'main' %}" class="d-flex align-items-center link-body-emphasis text-decoration-none">
@@ -189,19 +198,6 @@
     setLangToGoogleTranslate();
     setLangToGTEnglish();
 </script>
-<style>
-    .goog-te-gadget {
-        font-size: 0;}
-    .goog-logo-link {
-        display: none;}
-    .goog-te-combo, .goog-te-banner *, .goog-te-ftab *, .goog-te-menu *, .goog-te-menu2 *, .goog-te-balloon * {
-        text-transform: capitalize;}
-    .skiptranslate goog-te-gadget {
-        display: none;}
-    .goog-te-combo {
-        border: 0;
-        outline: 0;}
-</style>
        <div id="bxdynamic_jmonnO_end" style="display:none"></div>
        </div>
 
