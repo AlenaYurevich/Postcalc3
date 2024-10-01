@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
 from markitup.fields import MarkupField
-from markdown import markdown
 
 
 class Category(models.Model):
