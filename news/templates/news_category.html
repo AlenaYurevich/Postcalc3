@@ -5,7 +5,7 @@
   <title>Новости по категориям</title>
   <meta name="description" content="Обновления на сайте, повышение тарифов на услуги">
   <meta name="keywords" content="Тарифы, рост тарифов, новые расчеты">
-  <link rel="canonical" href="{% url 'news_category' category.slug %}"/>
+  <link rel="canonical" href="https://posttarif.by/news/category"/>
   <meta property="og:title" content="Новости по категориям"/>
   <meta property="og:image" content="https://posttarif.by/apple-touch-icon.png"/>
   <meta property="og:description" content="Обновления на сайте, повышение тарифов на услуги"/>
@@ -14,7 +14,7 @@
  <main>
   <header>
     <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-      <h1 class="display-4 fw-normal text-body-emphasis text-decoration-none">Изменения на сайте <br>
+      <h1 class="display-5 fw-normal text-body-emphasis text-decoration-none">Изменения на сайте <br>
           по категории {{ category.name | capfirst | default_if_none:"-" }}</h1>
     </div>
   </header>
@@ -34,7 +34,7 @@
                 </a> |&nbsp;
             {% endfor %}
         </small>
-        <p>{{ post.body | linebreaksbr }}</p>
+        <p>{{ post.content }}</p>
     </div>
 </div>
 <hr class="featurette-divider">
