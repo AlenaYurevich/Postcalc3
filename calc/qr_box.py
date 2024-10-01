@@ -37,7 +37,7 @@ def cost_of_qr_box(declared_value, notification):
         'rub': " руб.",
         'tracking': "да",
         'sep1': sep1,
-        'sep2': sep2,
+        'sep2': "/",
         'notification': notification,
     }
     for i in rate:

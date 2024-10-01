@@ -5,7 +5,7 @@
   <title>Новости по категориям</title>
   <meta name="description" content="Обновления на сайте, повышение тарифов на услуги">
   <meta name="keywords" content="Тарифы, рост тарифов, новые расчеты">
-  <link rel="canonical" href="https://posttarif.by/news/category"/>
+  <link rel="canonical" href="{% url 'news_category' category.slug %}"/>
   <meta property="og:title" content="Новости по категориям"/>
   <meta property="og:image" content="https://posttarif.by/apple-touch-icon.png"/>
   <meta property="og:description" content="Обновления на сайте, повышение тарифов на услуги"/>
@@ -34,7 +34,7 @@
                 </a> |&nbsp;
             {% endfor %}
         </small>
-        <p>{{ post.content | django_prose_editor}}</p>
+        <p>{{ post.content }}</p>
     </div>
 </div>
 <hr class="featurette-divider">
