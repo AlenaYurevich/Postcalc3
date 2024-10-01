@@ -1,17 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load markitup_tags %}
-{% block seo %}
-    <title>Новости</title>
-    <meta name="description" content="Обновления на сайте">
-    <meta name="keywords" content="Тарифы, рост тарифов, новые расчеты">
-    <link rel="canonical" href="https://posttarif.by/news"/>
-    <meta property="og:title" content="Новости"/>
-    <meta property="og:image" content="https://posttarif.by/apple-touch-icon.png"/>
-    <meta property="og:description" content="Обновления на сайте, повышение тарифов"/>
-    <meta property="og:type" content="article"/>
-{% endblock %}
 {% block page_content %}
+{% block seo %}
+  <title>Новости</title>
+  <meta name="description" content="Обновления на сайте">
+  <meta name="keywords" content="Тарифы, рост тарифов, новые расчеты">
+  <link rel="canonical" href="https://posttarif.by/news"/>
+  <meta property="og:title" content="Новости"/>
+  <meta property="og:image" content="https://posttarif.by/apple-touch-icon.png"/>
+  <meta property="og:description" content="Обновления на сайте, повышение тарифов"/>
+  <meta property="og:type" content="article"/>
+{% endblock %}
  <main>
   <header>
     <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
@@ -19,6 +18,7 @@
       <p class="fs-5 text-body-secondary">Последние изменения в работе калькулятора тарифов</p>
     </div>
   </header>
+
   <hr>
   {% for post in posts %}
  <div class="row">
@@ -28,10 +28,12 @@
     <div class="col-md-7 order-md-2">
         <h2 class="featurette-heading"><a class ="text-info text-decoration-none" href="{% url 'news_detail' slug=post.slug %}">{{ post.title }}</a><span class="text-muted"></span></h2>
         <small>{{ post.created_on }}</small>
-        <p>{{ post.content | safe | slice:":400" }}...</p>
+        <p>{{ post.body | slice:":400" }}...</p>
     </div>
   </div>
   <hr class="featurette-divider">
+
   {% endfor %}
+
   </main>
  {% endblock %}
