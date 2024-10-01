@@ -66,8 +66,3 @@ def cost_of_parcel_3_4_5(item_weight, declared_value, notification):
         sep = ''
         price_row.append({'fiz': fiz, 'sep': sep})
     return price_row
-
-
-print(weight(6545, 0))
-print(weight(6545, 1.55))
-print(cost_of_parcel_3_4_5(6545, 0, 4))
