@@ -9,7 +9,7 @@ def cost_of_qr_box(declared_value, notification):
     notification = notification_cost(notification)
     fiz = sheet2['D54'].value
     yur = sheet2['H42'].value
-    for_declared_fiz, for_declared_yur = "", ""
+    for_declared_fiz, for_declared_yur = " ", " "
     sep1, sep2 = "", ""
     if declared_value not in ("нет", "", 0, "0"):
         for_declared_fiz = round_as_excel(float(declared_value) * 0.01)
