@@ -1,5 +1,6 @@
 from django import forms
 from .ems_points import read_ems_points, sheet
+from .countries import read_the_country
 
 
 Choices_notice = [(1, f'простое 0,78 руб.'),
@@ -26,6 +27,7 @@ Choices2 = [(3, 'до 10 часов рабочего дня, следующег�
 """
 1, 3, 2, 2.5 - повышающие коэффициенты в зависимости от времени доставки
 """
+International_Choices = read_the_country(sheet)
 
 
 class EmsForm(forms.Form):
@@ -50,3 +52,13 @@ class TransferForm(forms.Form):
     amount = forms.DecimalField(label="Введите сумму перевода, рублей", min_value=0.01, required=False,
                                 decimal_places=2, widget=forms.NumberInput(attrs={'class': "form-control",
                                                                                   'autofocus': 'autofocus'}))
+
+
+class ParcelIntForm(forms.Form):
+    destination = forms.TypedChoiceField(label="Страна назначения", choices=International_Choices,
+                                         widget=forms.Select(attrs={'class': "form-control", 'autofocus': 'autofocus'}))
+    weight = forms.IntegerField(label="Введите вес отправления, грамм", min_value=1, widget=forms.NumberInput(attrs={
+        'class': "form-control"}))
+    declared_value = forms.DecimalField(label="Введите объявленную ценность, рублей", min_value=0, required=False,
+                                        decimal_places=2, widget=forms.NumberInput(attrs={'class': "form-control",
+                                                                                          'placeholder': "нет"}))

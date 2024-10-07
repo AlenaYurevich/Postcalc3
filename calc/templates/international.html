@@ -2,28 +2,24 @@
 {% block page_content %}
 {% block seo %}
   <title>Международные отправления: расчет стоимости на тарификаторе</title>
-  <meta name="description" content="Рассчитай на тарификаторе стоимость экспресс доставки EMS Белпочта по Беларуси">
-  <meta name="keywords" content="Экспресс доставка, посылка емс, из дома, из офиса, с доставкой в день приема, тарификатор, калькулятор Белпочта">
-  <link rel="canonical" href="https://posttarif.by/ems_express_dostavka"/>
-  <meta property="og:title" content="Расчет стоимости экспресс доставки EMS по Беларуси"/>
+  <meta name="description" content="Международные почтовые отправления">
+  <meta name="keywords" content="тарификатор, калькулятор Белпочта">
+  <link rel="canonical" href="https://posttarif.by/international"/>
+  <meta property="og:title" content="Расчет стоимости посылки"/>
   <meta property="og:image" content="https://posttarif.by/apple-touch-icon.png"/>
-  <meta property="og:description" content="Самое быстрое почтовое отправление РУП Белпочта - EMS"/>
+  <meta property="og:description" content="Международные почтовые отправления"/>
   <meta property="og:type" content="article"/>
 {% endblock %}
  <main>
   <header>
     <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
       <h1 class="display-4 fw-normal text-body-emphasis">Расчет стоимости<br>международных отправлений</h1>
-      <p class="fs-5 text-body-secondary">Письмо, посылка, EMS</p>
+      <p class="fs-5 text-body-secondary">Международные письмо, посылка, EMS</p>
     </div>
   </header>
   <div class="row row-cols-1 row-cols-md-1 mb-3">
-      <form method="POST" class="EmsForm">{% csrf_token %}
+      <form method="POST" class="ParcelIntForm">{% csrf_token %}
         <div class="col">
-            {{ form.departure.label }}
-            {{ form.departure }}
-            {{ form.departure.error_messages }}
-            <p></p>
             {{ form.destination.label }}
             {{ form.destination }}
             {{ form.destination.error_messages }}
