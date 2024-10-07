@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .forms import PostForm, EmsForm, TransferForm
+from .forms import PostForm, EmsForm, TransferForm, ParcelIntForm
 from .letter import cost_of_simple, cost_of_registered, cost_of_value_letter
 from .first_class import cost_of_first_class
 from .parcel import cost_of_parcel
@@ -94,6 +94,24 @@ def internal_transfer_view(request):
     else:
         form = TransferForm()
         return render(request, 'internal_transfer.html', {'form': form})  # внутри фигурных скобок
+
+
+def international_view(request):
+    if request.method == "POST":
+        form = ParcelIntForm(request.POST)
+        if form.is_valid():
+            destination = request.POST.get('destination')
+            item_weight = int(request.POST.get('weight'))
+            declared_value = str(request.POST.get('declared_value'))
+            context = {'form': form,
+                       'destination': destination,
+                       'item_weight': item_weight,
+                       'declared_value': declared_value,
+                       }
+            return render(request, 'international.html', context)  # Внутри фиг скобок
+    else:
+        form = ParcelIntForm()
+        return render(request, 'international.html', {'form': form})  # внутри фигурных скобок
 
 
 def about_view(request):
