@@ -66,10 +66,10 @@
         </thead>
         <tbody>
         <tr>
-            <th scope="row" class="text-start table-info" colspan="7">Документы:</th>
+            <th scope="row" class="text-start table-info" colspan="7">Посылки:</th>
         </tr>
          <tr>
-            <th scope="row" class="text-start">Прием в отделении связи</th>
+            <th scope="row" class="text-start">Неприоритетные</th>
             {% for rate in post_office_ems_documents_cost %}
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
@@ -79,7 +79,7 @@
             {% endfor %}
         </tr>
          <tr>
-            <th scope="row" class="text-start">Прием в офисе или на дому</th>
+            <th scope="row" class="text-start">Приоритетные</th>
             {% for rate in home_ems_documents_cost %}
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>

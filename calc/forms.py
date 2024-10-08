@@ -1,6 +1,6 @@
 from django import forms
 from .ems_points import read_ems_points, sheet
-from .countries import read_the_country
+from .countries import read_the_country, sheet2
 
 
 Choices_notice = [(1, f'простое 0,78 руб.'),
@@ -27,7 +27,7 @@ Choices2 = [(3, 'до 10 часов рабочего дня, следующег�
 """
 1, 3, 2, 2.5 - повышающие коэффициенты в зависимости от времени доставки
 """
-International_Choices = read_the_country(sheet)
+International_Choices = read_the_country(sheet2)
 
 
 class EmsForm(forms.Form):
