@@ -9,6 +9,7 @@ from .ems_points import data_of_ems
 from .ems_zone import find_ems_zone
 from .ems_cost import find_documents_cost, find_goods_cost
 from .internal_transfer import cost_of_internal_transfer
+from .parcel_int import cost_of_parcel_int
 
 
 def calculation_view(request):
@@ -100,13 +101,15 @@ def international_view(request):
     if request.method == "POST":
         form = ParcelIntForm(request.POST)
         if form.is_valid():
-            destination = request.POST.get('destination')
+            destination = int(request.POST.get('destination'))
             item_weight = int(request.POST.get('weight'))
             declared_value = str(request.POST.get('declared_value'))
+            parcel_int_cost = cost_of_parcel_int(destination, item_weight, declared_value)
             context = {'form': form,
                        'destination': destination,
                        'item_weight': item_weight,
                        'declared_value': declared_value,
+                       'parcel_int_cost': parcel_int_cost
                        }
             return render(request, 'international.html', context)  # Внутри фиг скобок
     else:

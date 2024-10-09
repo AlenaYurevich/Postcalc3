@@ -86,8 +86,8 @@ def cost_of_parcel(item_weight, declared_value, notification):
             'sep2': sep2,
             'notification': notification,
             }
-        for i in rate:
-            rate[i] = formatted(rate[i])
+        for key in rate:
+            rate[key] = formatted(rate[key])
         price_row.append(rate)
     else:
         fiz = "Макс. вес 50 кг"

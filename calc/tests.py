@@ -4,6 +4,8 @@ from .parcel import cost_of_parcel
 from .parcel_3_4_5 import cost_of_parcel_3_4_5
 from .qr_box import cost_of_parcel_qr
 from .internal_transfer import cost_of_internal_transfer
+from .parcel_int import cost_of_parcel_int
+
 
 
 def test_simple():
@@ -204,6 +206,15 @@ def test_internal_transfer():
         'item_vat': '0,22',
         'fiz_home': '1,40',
         'yur_home': 'нет'
+    }]
+
+
+def test_parcel_int():
+    assert cost_of_parcel_int(12, 1000, '') == [{
+        'fiz': '59.15',
+        'yur': '70.98',
+        'item_vat_yur': '11.83',
+        'for_declared': '0',
     }]
 
 

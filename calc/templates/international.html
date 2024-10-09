@@ -31,20 +31,7 @@
             {{ form.declared_value.label }}
             {{ form.declared_value }}
             {{ form.declared_value.error_messages }}
-        </div>
-        <div class="col ms-5">
-            {{ form.delivery.label }}
-            {{ form.delivery }}
-            {{ form.delivery.error_messages }}
-            <p></p>
-            {{ form.notification.label }}
-            {{ form.notification }}
-            {{ form.notification.error_messages }}
-            <p></p>
-            {{ form.fragile.label }}
-            {{ form.fragile }}
-            {{ form.fragile.error_messages }}
-            <p></p>
+             <p></p>
             <p>
           <button class="btn btn-lg btn-info text-white mt-4 mb-4" type="submit" name="send">Рассчитать</button>
             </p>
@@ -70,12 +57,11 @@
         </tr>
          <tr>
             <th scope="row" class="text-start">Неприоритетные</th>
-            {% for rate in post_office_ems_documents_cost %}
+            {% for rate in parcel_int_cost %}
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
-            <td> {{ rate.item_vat }}</td>
-            <td> {{ rate.for_declared }}</td>
-            <td> {{ rate.notification }}</td>
+            <td> {{ rate.item_vat_yur }}</td>
+            <td> {{ rate.for_declared_yur }}</td>
             {% endfor %}
         </tr>
          <tr>
@@ -83,13 +69,12 @@
             {% for rate in home_ems_documents_cost %}
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
-            <td> {{ rate.item_vat }}</td>
-            <td> {{ rate.for_declared }}</td>
-            <td> {{ rate.notification }}</td>
+            <td> {{ rate.item_vat_yur }}</td>
+            <td> {{ rate.for_declared_yur }}</td>
             {% endfor %}
           </tr>
         <tr>
-            <th scope="row" class="text-start table-info" colspan="7">Товары:</th>
+            <th scope="row" class="text-start table-info" colspan="7">Отправления EMS:</th>
           </tr>
         <tr>
             <th scope="row" class="text-start">Прием в отделении связи</th>
