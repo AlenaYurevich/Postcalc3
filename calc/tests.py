@@ -7,7 +7,6 @@ from .internal_transfer import cost_of_internal_transfer
 from .parcel_int import cost_of_parcel_int
 
 
-
 def test_simple():
     assert cost_of_simple(300) == [{
             'fiz': '1,54',
@@ -211,10 +210,26 @@ def test_internal_transfer():
 
 def test_parcel_int():
     assert cost_of_parcel_int(12, 1000, '') == [{
-        'fiz': '59.15',
-        'yur': '70.98',
-        'item_vat_yur': '11.83',
-        'for_declared': '0',
+        'fiz': '59,15',
+        'yur': '70,98',
+        'item_vat_yur': '11,83',
+        'for_declared_fiz': '',
+        'for_declared_yur': '',
+        'tracking': "да",
+        'sep1': '',
+        'sep2': '/',
+        'rub': " руб.",
+    }]
+    assert cost_of_parcel_int(12, 1050, '10') == [{
+        'fiz': '65,83',
+        'yur': '79,00',
+        'item_vat_yur': '13,17',
+        'for_declared_fiz': '0,30',
+        'for_declared_yur': '0,36',
+        'sep1': '/',
+        'sep2': '/',
+        'tracking': "да",
+        'rub': " руб.",
     }]
 
 
