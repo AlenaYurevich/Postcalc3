@@ -58,9 +58,12 @@ def cost_of_parcel_int(destination, item_weight, declared_value):
             sep1 = ''
             sep2 = '/'
         else:
-            fiz = non_priority[0] + round_as_excel(non_priority[1] * weight(item_weight, declared_value))
+            fiz = 5.85 + non_priority[0] + round_as_excel(non_priority[1] * weight(item_weight, declared_value))
+            print(non_priority[1] * weight(item_weight, declared_value))
+            print(round_as_excel(non_priority[1] * weight(item_weight, declared_value)))
             yur = fiz
             for_declared_fiz = cost_for_declared_value(declared_value)
+            fiz += cost_for_declared_value(declared_value)
             yur += cost_for_declared_value(declared_value)
             for_declared_yur = round_as_excel(cost_for_declared_value(declared_value)) * 1.2
             sep1, sep2 = "/", "/"

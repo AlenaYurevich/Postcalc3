@@ -36,6 +36,8 @@
           <button class="btn btn-lg btn-info text-white mt-4 mb-4" type="submit" name="send">Рассчитать</button>
             </p>
         </div>
+          <div class="col">
+          </div>
       </form>
   </div>
     <h2 class="display-6 text-center mb-4">Стоимость пересылки международных отправлений, руб.</h2>
@@ -48,7 +50,6 @@
             <th style="width: 15%;">Для юр. лиц</th>
             <th style="width: 15%;">В т. ч. НДС (юр.)</th>
             <th style="width: 15%;">В т. ч. за объявленную ценность</th>
-            <th style="width: 15%;">В т. ч. за уведомление</th>
           </tr>
         </thead>
         <tbody>
@@ -61,7 +62,7 @@
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat_yur }}</td>
-            <td> {{ rate.for_declared_yur }}</td>
+            <td> {{ rate.for_declared_fiz }} {{rate.sep1}} {{ rate.for_declared_yur }}</td>
             {% endfor %}
         </tr>
          <tr>
@@ -83,7 +84,6 @@
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat }}</td>
             <td> {{ rate.for_declared }}</td>
-            <td> {{ rate.notification }}</td>
             {% endfor %}
         </tr>
          <tr>
@@ -93,7 +93,6 @@
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat }}</td>
             <td> {{ rate.for_declared }}</td>
-            <td> {{ rate.notification }}</td>
             {% endfor %}
           </tr>
         </tbody>
