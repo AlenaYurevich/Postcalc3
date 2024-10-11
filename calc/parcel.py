@@ -47,6 +47,7 @@ def cost_of_parcel(item_weight, declared_value, notification):
                 yur = round_as_excel(yur)
                 for_declared_fiz = cost_for_declared_value(declared_value)
                 yur += cost_for_declared_value(declared_value)
+                yur = round_as_excel(yur)  # округляем перед расчетом НДС
                 for_declared_yur = round_as_excel(cost_for_declared_value(declared_value)) * 1.2
                 sep1, sep2 = "/", "/"
         else:
@@ -65,6 +66,7 @@ def cost_of_parcel(item_weight, declared_value, notification):
                 yur = round_as_excel(yur)
                 for_declared_fiz = cost_for_declared_value(declared_value)
                 yur += cost_for_declared_value(declared_value)
+                yur = round_as_excel(yur)  # округляем перед расчетом НДС
                 for_declared_yur = round_as_excel(cost_for_declared_value(declared_value) * 1.2)
                 sep1, sep2 = "/", "/"
         fiz += notification * 1.2
@@ -72,8 +74,8 @@ def cost_of_parcel(item_weight, declared_value, notification):
         notification = notification * 1.2
         if notification == 0:
             notification = ""
-        item_vat_yur = round_as_excel(vat(yur))
-        yur = round_as_excel(yur + item_vat_yur)
+        item_vat_yur = vat(yur)
+        yur = yur + item_vat_yur
         rate = {
             'fiz': fiz,
             'yur': yur,

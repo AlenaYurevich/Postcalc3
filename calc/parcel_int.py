@@ -45,48 +45,60 @@ def find_numbers_by_country(row_number):
     return None, None
 
 
-def cost_of_parcel_int(destination, item_weight, declared_value):
+# def find_column_by_priority(priority):
+#     if priority == "non_priority":
+#         return 0, 1
+#     else:
+#         return 2, 3
+
+
+def find_parcel_int_cost(destination, item_weight, declared_value, priority):
     price_row = []
-    if item_weight <= 50000:
-        non_priority, priority = find_numbers_by_country(destination)  # декомпозиция кортежей
-        print(non_priority, priority)
-        if declared_value in ("нет", "", 0, "0"):
-            fiz = non_priority[0] + round_as_excel(non_priority[1] * weight(item_weight, declared_value))
-            yur = fiz
-            for_declared_fiz = ''
-            for_declared_yur = ''
-            sep1 = ''
-            sep2 = '/'
-        else:
-            fiz = 5.85 + non_priority[0] + round_as_excel(non_priority[1] * weight(item_weight, declared_value))
-            print(non_priority[1] * weight(item_weight, declared_value))
-            print(round_as_excel(non_priority[1] * weight(item_weight, declared_value)))
-            yur = fiz
-            for_declared_fiz = cost_for_declared_value(declared_value)
-            fiz += cost_for_declared_value(declared_value)
-            yur += cost_for_declared_value(declared_value)
-            for_declared_yur = round_as_excel(cost_for_declared_value(declared_value)) * 1.2
-            sep1, sep2 = "/", "/"
-
-        item_vat_yur = round_as_excel(vat(yur))
-        yur = round_as_excel(yur + item_vat_yur)
-        rate = {
-            'fiz': fiz,
-            'yur': yur,
-            'item_vat_yur': item_vat_yur,
-            'for_declared_fiz': for_declared_fiz,
-            'for_declared_yur': for_declared_yur,
-            'rub': " руб.",
-            'tracking': "да",
-            'sep1': sep1,
-            'sep2': sep2,
-        }
-        for key in rate:
-            rate[key] = formatted(rate[key])
-        price_row.append(rate)
-
+    non_priority, priority = find_numbers_by_country(destination)  # декомпозиция кортежей
+    if declared_value in ("нет", "", 0, "0"):
+        fiz = non_priority[0] + round_as_excel(non_priority[1] * weight(item_weight, declared_value))
+        yur = fiz
+        for_declared_fiz = ''
+        for_declared_yur = ''
+        sep1 = ''
+        sep2 = '/'
     else:
-        fiz = "Макс. вес 50 кг"
-        sep1, sep2 = '', ''
-        price_row.append({'fiz': fiz, 'sep1': sep1, 'sep2': sep2})
+        fiz = 5.85 + non_priority[0] + non_priority[1] * weight(item_weight, declared_value)
+        fiz = round(fiz, 4)
+        yur = fiz
+        print(yur)
+        print(cost_for_declared_value(declared_value))
+        for_declared_fiz = cost_for_declared_value(declared_value)
+        fiz += cost_for_declared_value(declared_value)
+        yur += cost_for_declared_value(declared_value)
+        yur = round_as_excel(yur)
+        print(yur)
+        for_declared_yur = round_as_excel(cost_for_declared_value(declared_value)) * 1.2
+        sep1, sep2 = "/", "/"
+    item_vat_yur = vat(yur)
+    yur = round_as_excel(yur + item_vat_yur)
+    rate = {
+        'fiz': fiz,
+        'yur': yur,
+        'item_vat_yur': item_vat_yur,
+        'for_declared_fiz': for_declared_fiz,
+        'for_declared_yur': for_declared_yur,
+        'rub': " руб.",
+        'tracking': "да",
+        'sep1': sep1,
+        'sep2': sep2,
+    }
+    for key in rate:
+        rate[key] = formatted(rate[key])
+    price_row.append(rate)
     return price_row
+
+
+def cost_of_parcel_int(destination, item_weight, declared_value):
+    if item_weight > 50000:
+        return [
+            [{'fiz': "Макс. вес 50 кг", 'yur': "-", 'item_vat_yur': "-", 'for_declared': "-"}],
+            [{'fiz': "Макс. вес 50 кг", 'yur': "-", 'item_vat_yur': "-", 'for_declared': "-"}],
+        ]
+    return [find_parcel_int_cost(destination, item_weight, declared_value, "non_priority"),
+            find_parcel_int_cost(destination, item_weight, declared_value, "priority")]
