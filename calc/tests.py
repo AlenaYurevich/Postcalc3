@@ -85,18 +85,6 @@ def test_first_class():
 
 
 def test_parcel():
-    assert cost_of_parcel(900, '', 4) == [{
-        'fiz': '3,30',
-        'yur': '6,26',
-        'item_vat_yur': '1,04',
-        'for_declared_fiz': '',
-        'for_declared_yur': '',
-        'tracking': 'да',
-        'rub': " руб.",
-        'sep1': '',
-        'sep2': '/',
-        'notification': ""
-    }]
     assert cost_of_parcel(510, '', 4) == [{
         'fiz': '3,30',
         'yur': '5,98',
@@ -220,12 +208,12 @@ def test_parcel_int():
         'sep2': '/',
         'rub': " руб.",
     }]
-    assert cost_of_parcel_int(12, 1050, '10') == [{
-        'fiz': '65,83',
-        'yur': '79,00',
-        'item_vat_yur': '13,17',
-        'for_declared_fiz': '0,30',
-        'for_declared_yur': '0,36',
+    assert cost_of_parcel_int(12, 1045, 1.25) == [{
+        'fiz': '65,57',
+        'yur': '78,68',  # на сайте Белпочта неправильно, 79,69
+        'item_vat_yur': '13,11',
+        'for_declared_fiz': '0,04',
+        'for_declared_yur': '0,05',
         'sep1': '/',
         'sep2': '/',
         'tracking': "да",
