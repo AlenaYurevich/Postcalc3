@@ -29,41 +29,39 @@ def weight(item_weight, declared_value):
         return math.ceil(item_weight / 10) / 100  # повторяется код с parcel
 
 
-def find_numbers_by_country(row_number):
+def find_numbers_by_country(row_number, priority):
     if row_number < 11:
         # Если номер строки меньше 11, возвращаем None, потому что строки выше 11 не обрабатываются.
-        return None, None
+        return None
         # Получаем строку по её индексу.
     row_data = list(sheet.iter_rows(min_row=row_number, max_row=row_number, values_only=True))
-
     if row_data:  # Проверка, что строка не пустая
         row_data = row_data[0]  # Извлекаем данные строки (поскольку iter_rows возвращает список кортежей)
-        non_priority = (row_data[3], row_data[4])  # Получаем данные из 3-й и 4-й колонок
-        priority = (row_data[5], row_data[6])  # Получаем данные из 5-й и 6-й колонок
-        return non_priority, priority
+        if priority == "non_priority":
+            data = (row_data[3], row_data[4])  # Получаем данные из 3-й и 4-й колонок
+        else:
+            data = (row_data[5], row_data[6])  # Получаем данные из 5-й и 6-й колонок
+        return data
     # Если row_data пустой или None, возвращаем None, None
-    return None, None
-
-
-# def find_column_by_priority(priority):
-#     if priority == "non_priority":
-#         return 0, 1
-#     else:
-#         return 2, 3
+    return None
 
 
 def find_parcel_int_cost(destination, item_weight, declared_value, priority):
     price_row = []
-    non_priority, priority = find_numbers_by_country(destination)  # декомпозиция кортежей
+    col = find_numbers_by_country(destination, priority)
+    print("data", col)
+    print(type(col[0]))
+    if type(col[0]) is not float:
+        return [{'fiz': "Посылки не принимаются", 'yur': "-", 'item_vat_yur': "-"}]
     if declared_value in ("нет", "", 0, "0"):
-        fiz = non_priority[0] + round_as_excel(non_priority[1] * weight(item_weight, declared_value))
+        fiz = col[0] + round_as_excel(col[1] * weight(item_weight, declared_value))
         yur = fiz
         for_declared_fiz = ''
         for_declared_yur = ''
         sep1 = ''
         sep2 = '/'
     else:
-        fiz = 5.85 + non_priority[0] + non_priority[1] * weight(item_weight, declared_value)
+        fiz = 5.85 + col[0] + col[1] * weight(item_weight, declared_value)
         fiz = round(fiz, 4)
         yur = fiz
         print(yur)
@@ -100,5 +98,6 @@ def cost_of_parcel_int(destination, item_weight, declared_value):
             [{'fiz': "Макс. вес 50 кг", 'yur': "-", 'item_vat_yur': "-", 'for_declared': "-"}],
             [{'fiz': "Макс. вес 50 кг", 'yur': "-", 'item_vat_yur': "-", 'for_declared': "-"}],
         ]
+    print("вызов функции cost_of_parcel_int")
     return [find_parcel_int_cost(destination, item_weight, declared_value, "non_priority"),
             find_parcel_int_cost(destination, item_weight, declared_value, "priority")]
