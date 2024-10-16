@@ -197,7 +197,7 @@ def test_internal_transfer():
 
 
 def test_parcel_int():
-    assert cost_of_parcel_int(12, 1000, '') == [{
+    assert cost_of_parcel_int(12, 1000, '') == [[{
         'fiz': '59,15',
         'yur': '70,98',
         'item_vat_yur': '11,83',
@@ -206,9 +206,17 @@ def test_parcel_int():
         'tracking': "да",
         'sep1': '',
         'sep2': '/',
-        'rub': " руб.",
-    }]
-    assert cost_of_parcel_int(12, 1045, 1.25) == [{
+        'rub': " руб."}],
+        [{'fiz': '60,60',
+          'for_declared_fiz': '',
+          'for_declared_yur': '',
+          'item_vat_yur': '12,12',
+          'rub': ' руб.',
+          'sep1': '',
+          'sep2': '/',
+          'tracking': 'да',
+          'yur': '72,72'}]]
+    assert cost_of_parcel_int(12, 1045, 1.25) == [[{
         'fiz': '65,57',
         'yur': '78,68',  # на сайте Белпочта неправильно, 79,69
         'item_vat_yur': '13,11',
@@ -217,8 +225,17 @@ def test_parcel_int():
         'sep1': '/',
         'sep2': '/',
         'tracking': "да",
-        'rub': " руб.",
-    }]
+        'rub': " руб."
+    }],
+      [{'fiz': '67,02',
+        'yur': '80,42',  # на сайте Белпочта неправильно, 80.44
+        'item_vat_yur': '13,40',
+        'for_declared_fiz': '0,04',
+        'for_declared_yur': '0,05',
+        'sep1': '/',
+        'sep2': '/',
+        'tracking': "да",
+        'rub': " руб."}]]
 
 
 """

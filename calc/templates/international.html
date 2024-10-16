@@ -58,7 +58,7 @@
         </tr>
          <tr>
             <th scope="row" class="text-start">Неприоритетные</th>
-            {% for rate in parcel_int_cost %}
+            {% for rate in non_priority %}
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat_yur }}</td>
@@ -67,11 +67,11 @@
         </tr>
          <tr>
             <th scope="row" class="text-start">Приоритетные</th>
-            {% for rate in home_ems_documents_cost %}
+            {% for rate in priority %}
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat_yur }}</td>
-            <td> {{ rate.for_declared_yur }}</td>
+            <td> {{ rate.for_declared_fiz }} {{rate.sep1}} {{ rate.for_declared_yur }}</td>
             {% endfor %}
           </tr>
         <tr>
@@ -101,6 +101,6 @@
 
     <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
     </div>
-     <p>Отслеживаются </p>
+     <p>Отслеживаются все категории посылок</p>
   </main>
  {% endblock %}

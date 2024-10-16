@@ -105,11 +105,14 @@ def international_view(request):
             item_weight = int(request.POST.get('weight'))
             declared_value = str(request.POST.get('declared_value'))
             parcel_int_cost = cost_of_parcel_int(destination, item_weight, declared_value)
+            non_priority = parcel_int_cost[0]
+            priority = parcel_int_cost[1]
             context = {'form': form,
                        'destination': destination,
                        'item_weight': item_weight,
                        'declared_value': declared_value,
-                       'parcel_int_cost': parcel_int_cost
+                       'non_priority': non_priority,
+                       'priority': priority
                        }
             return render(request, 'international.html', context)  # Внутри фиг скобок
     else:
