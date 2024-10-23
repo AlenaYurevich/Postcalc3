@@ -49,9 +49,7 @@ def find_numbers_by_country(row_number, priority):
 def find_parcel_int_cost(destination, item_weight, declared_value, priority):
     price_row = []
     col = find_numbers_by_country(destination, priority)
-    print("data", col)
-    print(type(col[0]))
-    if type(col[0]) is not float:
+    if type(col[0]) is str:
         return [{'fiz': "Посылки не принимаются", 'yur': "-", 'item_vat_yur': "-"}]
     if declared_value in ("нет", "", 0, "0"):
         fiz = col[0] + round_as_excel(col[1] * weight(item_weight, declared_value))
@@ -64,13 +62,10 @@ def find_parcel_int_cost(destination, item_weight, declared_value, priority):
         fiz = 5.85 + col[0] + col[1] * weight(item_weight, declared_value)
         fiz = round(fiz, 4)
         yur = fiz
-        print(yur)
-        print(cost_for_declared_value(declared_value))
         for_declared_fiz = cost_for_declared_value(declared_value)
         fiz += cost_for_declared_value(declared_value)
         yur += cost_for_declared_value(declared_value)
         yur = round_as_excel(yur)
-        print(yur)
         for_declared_yur = round_as_excel(cost_for_declared_value(declared_value)) * 1.2
         sep1, sep2 = "/", "/"
     item_vat_yur = vat(yur)
@@ -98,6 +93,5 @@ def cost_of_parcel_int(destination, item_weight, declared_value):
             [{'fiz': "Макс. вес 50 кг", 'yur': "-", 'item_vat_yur': "-", 'for_declared': "-"}],
             [{'fiz': "Макс. вес 50 кг", 'yur': "-", 'item_vat_yur': "-", 'for_declared': "-"}],
         ]
-    print("вызов функции cost_of_parcel_int")
     return [find_parcel_int_cost(destination, item_weight, declared_value, "non_priority"),
             find_parcel_int_cost(destination, item_weight, declared_value, "priority")]
