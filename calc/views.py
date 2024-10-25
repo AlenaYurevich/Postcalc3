@@ -10,6 +10,7 @@ from .ems_zone import find_ems_zone
 from .ems_cost import find_documents_cost, find_goods_cost
 from .internal_transfer import cost_of_internal_transfer
 from .parcel_int import cost_of_parcel_int
+from .letter_int import cost_of_letter_int
 
 
 def calculation_view(request):
@@ -107,12 +108,21 @@ def international_view(request):
             parcel_int_cost = cost_of_parcel_int(destination, item_weight, declared_value)
             non_priority = parcel_int_cost[0]
             priority = parcel_int_cost[1]
+            letter_int_cost = cost_of_letter_int(item_weight, declared_value)
+            non_priority_letter = letter_int_cost[0]
+            priority_letter = letter_int_cost[1]
+            value_non_priority_letter = letter_int_cost[2]
+            value_priority_letter = letter_int_cost[3]
             context = {'form': form,
                        'destination': destination,
                        'item_weight': item_weight,
                        'declared_value': declared_value,
                        'non_priority': non_priority,
-                       'priority': priority
+                       'priority': priority,
+                       'non_priority_letter': non_priority_letter,
+                       'priority_letter': priority_letter,
+                       'value_non_priority_letter': value_non_priority_letter,
+                       'value_priority_letter': value_priority_letter,
                        }
             return render(request, 'international.html', context)  # Внутри фиг скобок
     else:

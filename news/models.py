@@ -5,7 +5,7 @@ from markitup.fields import MarkupField
 
 class Category(models.Model):
     name = models.CharField(max_length=30)
-    slug = models.SlugField(max_length=30, unique=True, blank=True)
+    slug = models.SlugField(max_length=30, unique=True,)
 
     def save(self, *args, **kwargs):
         if not self.slug:
