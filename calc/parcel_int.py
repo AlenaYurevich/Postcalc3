@@ -1,15 +1,9 @@
-import os
 import math
-from openpyxl import load_workbook
+from .sheets import sheet3
 from .vat import vat
 from .round_as_excel import round_as_excel
 from .format import formatted
 from .declared_value import cost_for_declared_value
-
-
-file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/parcel_int.xlsx')
-wb = load_workbook(filename=file_path)
-sheet = wb.active
 
 
 """
@@ -34,7 +28,7 @@ def find_numbers_by_country(row_number, priority):
         # Если номер строки меньше 11, возвращаем None, потому что строки выше 11 не обрабатываются.
         return None
         # Получаем строку по её индексу.
-    row_data = list(sheet.iter_rows(min_row=row_number, max_row=row_number, values_only=True))
+    row_data = list(sheet3.iter_rows(min_row=row_number, max_row=row_number, values_only=True))
     if row_data:  # Проверка, что строка не пустая
         row_data = row_data[0]  # Извлекаем данные строки (поскольку iter_rows возвращает список кортежей)
         if priority == "non_priority":

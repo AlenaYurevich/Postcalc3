@@ -14,7 +14,7 @@
   <header>
     <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
       <h1 class="display-4 fw-normal text-body-emphasis">Расчет стоимости<br>международных отправлений</h1>
-      <p class="fs-5 text-body-secondary">Международные посылки</p>
+      <p class="fs-5 text-body-secondary">Международные письма и посылки</p>
     </div>
   </header>
   <div class="row row-cols-1 row-cols-md-1 mb-3">
@@ -53,6 +53,48 @@
           </tr>
         </thead>
         <tbody>
+        <tr>
+            <th scope="row" class="text-start table-info" colspan="7">Письма, бандероли простые:</th>
+        </tr>
+        <tr>
+            <th scope="row" class="text-start">Неприоритетные</th>
+            {% for rate in non_priority_letter %}
+            <td> {{ rate.fiz }}</td>
+            <td> {{ rate.yur }}</td>
+            <td> {{ rate.item_vat_yur }}</td>
+            <td></td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <th scope="row" class="text-start">Приоритетные</th>
+            {% for rate in priority_letter %}
+            <td> {{ rate.fiz }}</td>
+            <td> {{ rate.yur }}</td>
+            <td> {{ rate.item_vat_yur }}</td>
+            <td></td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <th scope="row" class="text-start table-info" colspan="7">Письма с объявленной ценностью:</th>
+        </tr>
+        <tr>
+            <th scope="row" class="text-start">Неприоритетные</th>
+            {% for rate in value_non_priority_letter %}
+            <td> {{ rate.fiz }}</td>
+            <td> {{ rate.yur }}</td>
+            <td> {{ rate.item_vat_yur }}</td>
+            <td> {{ rate.for_declared_fiz }} {{rate.sep1}} {{ rate.for_declared_yur }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <th scope="row" class="text-start">Приоритетные</th>
+            {% for rate in value_priority_letter %}
+            <td> {{ rate.fiz }}</td>
+            <td> {{ rate.yur }}</td>
+            <td> {{ rate.item_vat_yur }}</td>
+            <td> {{ rate.for_declared_fiz }} {{rate.sep1}} {{ rate.for_declared_yur }}</td>
+            {% endfor %}
+        </tr>
         <tr>
             <th scope="row" class="text-start table-info" colspan="7">Посылки:</th>
         </tr>

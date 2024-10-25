@@ -1,5 +1,6 @@
 from django import forms
-from .ems_points import read_ems_points, sheet
+from .ems_points import read_ems_points
+from .sheets import sheet5
 from .countries import read_the_country, sheet2
 
 
@@ -19,7 +20,7 @@ class PostForm(forms.Form):
                                           widget=forms.RadioSelect(attrs={'checked': Choices_notice[0]}))
 
 
-Choices = read_ems_points(sheet)
+Choices = read_ems_points(sheet5)
 Choices2 = [(3, 'до 10 часов рабочего дня, следующего за днем приема'),
             (2, 'в указанное время рабочего дня, следующего за днем приема'),
             (2.5, 'в день приёма'),
