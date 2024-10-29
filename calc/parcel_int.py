@@ -44,7 +44,7 @@ def find_parcel_int_cost(destination, item_weight, declared_value, priority):
     price_row = []
     col = find_numbers_by_country(destination, priority)
     if type(col[0]) is str:
-        return [{'fiz': "Посылки не принимаются", 'yur': "-", 'item_vat_yur': "-"}]
+        return [{'fiz': "Посылки не принимаются"}]
     if declared_value in ("нет", "", 0, "0"):
         fiz = col[0] + round_as_excel(col[1] * weight(item_weight, declared_value))
         yur = fiz
@@ -55,10 +55,9 @@ def find_parcel_int_cost(destination, item_weight, declared_value, priority):
     else:
         fiz = 5.85 + col[0] + col[1] * weight(item_weight, declared_value)
         fiz = round(fiz, 4)
-        yur = fiz
         for_declared_fiz = cost_for_declared_value(declared_value)
-        fiz += cost_for_declared_value(declared_value)
-        yur += cost_for_declared_value(declared_value)
+        fiz += for_declared_fiz
+        yur = fiz
         yur = round_as_excel(yur)
         for_declared_yur = round_as_excel(cost_for_declared_value(declared_value)) * 1.2
         sep1, sep2 = "/", "/"

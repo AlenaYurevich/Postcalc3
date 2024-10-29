@@ -108,7 +108,7 @@ def international_view(request):
             parcel_int_cost = cost_of_parcel_int(destination, item_weight, declared_value)
             non_priority = parcel_int_cost[0]
             priority = parcel_int_cost[1]
-            letter_int_cost = cost_of_letter_int(item_weight, declared_value)
+            letter_int_cost = cost_of_letter_int(item_weight, declared_value, destination)
             non_priority_letter = letter_int_cost[0]
             priority_letter = letter_int_cost[1]
             value_non_priority_letter = letter_int_cost[2]

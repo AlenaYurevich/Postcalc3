@@ -5,6 +5,7 @@ from .parcel_3_4_5 import cost_of_parcel_3_4_5
 from .qr_box import cost_of_parcel_qr
 from .internal_transfer import cost_of_internal_transfer
 from .parcel_int import cost_of_parcel_int
+from .letter_int import cost_of_letter_int
 
 
 def test_simple():
@@ -218,7 +219,7 @@ def test_parcel_int():
           'yur': '72,72'}]]
     assert cost_of_parcel_int(12, 1045, 1.25) == [[{
         'fiz': '65,57',
-        'yur': '78,68',  # на сайте Белпочта неправильно, 79,69
+        'yur': '78,68',  # на сайте Белпочта неправильно, 78,70
         'item_vat_yur': '13,11',
         'for_declared_fiz': '0,04',
         'for_declared_yur': '0,05',
@@ -228,7 +229,7 @@ def test_parcel_int():
         'rub': " руб."
     }],
       [{'fiz': '67,02',
-        'yur': '80,42',  # на сайте Белпочта неправильно, 80.44
+        'yur': '80,42',  # на сайте Белпочта неправильно, 80,44
         'item_vat_yur': '13,40',
         'for_declared_fiz': '0,04',
         'for_declared_yur': '0,05',
@@ -241,3 +242,44 @@ def test_parcel_int():
 """
 Добавить тест на ЕМS
 """
+
+
+def test_letter_int():
+    assert cost_of_letter_int(1045, 1.25) == [
+        [{'fiz': '48,48',
+          'yur': '48,48',
+          'item_vat_yur': '8,08',
+          'for_declared_fiz': '',
+          'for_declared_yur': '',
+          'rub': " руб.",
+          'tracking': "нет",
+          'sep1': "",
+          'sep2': "/", }],
+        [{'fiz': '69,54',
+          'yur': '69,54',
+          'item_vat_yur': '11,59',
+          'for_declared_fiz': '',
+          'for_declared_yur': '',
+          'rub': " руб.",
+          'tracking': "нет",
+          'sep1': "",
+          'sep2': "/", }],
+        [{'fiz': '61,61',
+          'yur': '61,61',
+          'item_vat_yur': '10,27',
+          'for_declared_fiz': '0,05',
+          'for_declared_yur': '0,05',
+          'rub': " руб.",
+          'tracking': "да",
+          'sep1': "/",
+          'sep2': "/", }],
+        [{'fiz': '82,67',
+          'yur': '82,67',
+          'item_vat_yur': '13,78',
+          'for_declared_fiz': '0,05',
+          'for_declared_yur': '0,05',
+          'rub': " руб.",
+          'tracking': "да",
+          'sep1': "/",
+          'sep2': "/", }]
+    ]
