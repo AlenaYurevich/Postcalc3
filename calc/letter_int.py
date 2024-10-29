@@ -24,97 +24,90 @@ def find_letter_table_row(weight):
         (1001, 2000, 16),
     ]
 
-    # Двоичный поиск для нахождения соответствующего диапазона
-    left, right = 0, len(ranges) - 1
-    while left <= right:
-        mid = (left + right) // 2
-        min_weight, max_weight, row_number = ranges[mid]
-
+    for min_weight, max_weight, row_number in ranges:
         if min_weight <= weight <= max_weight:
             return row_number
-        elif weight < min_weight:
-            right = mid - 1
-        else:
-            left = mid + 1
-    # Если вес выходит за пределы последнего диапазона
     return None
 
 
 def find_column_letter(priority):
-    if priority == "non_priority":
-        return 'D'
-    elif priority == "priority":
-        return 'E'
-    return None
+    """Возвращает колонку таблицы в зависимости от приоритета."""
+    columns = {
+        "non_priority": 'D',
+        "priority": 'E'
+    }
+    return columns.get(priority)
 
 
-def find_simple_letter_int_cost(item_weight, priority):
-    price_row = []
+def calculate_rates(item_weight, declared_value, priority, is_with_value):
+    """Рассчитывает стоимость писем с учетом заданных параметров."""
+    base_cost = 10.90 if is_with_value else 0
     col = find_column_letter(priority)
     row = find_letter_table_row(item_weight)
-    fiz = sheet4[f"{col}{row}"].value
-    yur = fiz
-    sep1 = ''
-    sep2 = '/'
-    item_vat_yur = vat(yur)
-    fiz = round_as_excel(fiz + item_vat_yur)
-    yur = round_as_excel(yur + item_vat_yur)
+
+    if row is None:
+        return None
+
+    base_fiz = sheet4[f"{col}{row}"].value + base_cost
+    base_yur = base_fiz
+
+    if is_with_value:
+        for_declared = cost_for_declared_value(declared_value)
+        base_fiz += for_declared
+        base_yur = base_fiz
+        for_declared = round_as_excel(for_declared * 1.2)
+    else:
+        for_declared = ''
+    item_vat_yur = vat(base_yur)
+    fiz = round_as_excel(base_fiz + item_vat_yur)
+    yur = round_as_excel(base_yur + item_vat_yur)
+
     rate = {
         'fiz': fiz,
         'yur': yur,
         'item_vat_yur': item_vat_yur,
+        'for_declared_fiz': for_declared if is_with_value else '',
+        'for_declared_yur': for_declared if is_with_value else '',
         'rub': " руб.",
-        'tracking': "нет",
-        'sep1': sep1,
-        'sep2': sep2,
+        'tracking': "да" if is_with_value else "нет",
+        'sep1': "/" if is_with_value else '',
+        'sep2': "/" if is_with_value else '/',
     }
+
     for key in rate:
         rate[key] = formatted(rate[key])
-    price_row.append(rate)
-    return price_row
+
+    return rate
 
 
-def find_value_letter_int_cost(item_weight, declared_value, priority):
-    price_row = []
-    col = find_column_letter(priority)
-    row = find_letter_table_row(item_weight)
-    fiz = 10.90 + sheet4[f"{col}{row}"].value
-    yur = fiz
-    for_declared_fiz = cost_for_declared_value(declared_value)
-    fiz += cost_for_declared_value(declared_value)
-    yur += cost_for_declared_value(declared_value)
-    yur = round_as_excel(yur)
-    for_declared_yur = round_as_excel(cost_for_declared_value(declared_value)) * 1.2
-    sep1, sep2 = "/", "/"
-    item_vat_yur = vat(yur)
-    fiz = round_as_excel(fiz + item_vat_yur)
-    yur = round_as_excel(yur + item_vat_yur)
-    rate = {
-        'fiz': fiz,
-        'yur': yur,
-        'item_vat_yur': item_vat_yur,
-        'for_declared_fiz': for_declared_fiz,
-        'for_declared_yur': for_declared_yur,
-        'rub': " руб.",
-        'tracking': "да",
-        'sep1': sep1,
-        'sep2': sep2,
-    }
-    for key in rate:
-        rate[key] = formatted(rate[key])
-    price_row.append(rate)
-    return price_row
-
-
-def cost_of_letter_int(item_weight, declared_value):
+def cost_of_letter_int(item_weight, declared_value, destination):
     if item_weight > 2000:
+        limit_message = "Макс. вес 2 кг"
         return [
-            [{'fiz': "Макс. вес 2 кг", 'yur': "-", 'item_vat_yur': "-"}],
-            [{'fiz': "Макс. вес 2 кг", 'yur': "-", 'item_vat_yur': "-"}],
-            [{'fiz': "Макс. вес 2 кг", 'yur': "-", 'item_vat_yur': "-", 'for_declared': "-"}],
-            [{'fiz': "Макс. вес 2 кг", 'yur': "-", 'item_vat_yur': "-", 'for_declared': "-"}],
+            [{'fiz': limit_message, 'yur': "-", 'item_vat_yur': "-"}],
+            [{'fiz': limit_message, 'yur': "-", 'item_vat_yur': "-"}],
+            [{'fiz': limit_message, 'yur': "-", 'item_vat_yur': "-", 'for_declared': "-"}],
+            [{'fiz': limit_message, 'yur': "-", 'item_vat_yur': "-", 'for_declared': "-"}],
         ]
-    return [find_simple_letter_int_cost(item_weight, "non_priority"),
-            find_simple_letter_int_cost(item_weight, "priority"),
-            find_value_letter_int_cost(item_weight, declared_value, "non_priority"),
-            find_value_letter_int_cost(item_weight, declared_value, "priority")]
+    if declared_value in ("", 0, "0"):
+        return [
+            [calculate_rates(item_weight, declared_value, "non_priority", False)],
+            [calculate_rates(item_weight, declared_value, "priority", False)],
+            [{'fiz': "-", 'yur': "-", 'item_vat_yur': "-", 'for_declared': "-"}],
+            [{'fiz': "-", 'yur': "-", 'item_vat_yur': "-", 'for_declared': "-"}]
+        ]
+    else:
+        if destination == 161:
+            return [
+                [calculate_rates(item_weight, declared_value, "non_priority", False)],
+                [calculate_rates(item_weight, declared_value, "priority", False)],
+                [calculate_rates(item_weight, declared_value, "non_priority", True)],
+                [calculate_rates(item_weight, declared_value, "priority", True)]
+            ]
+        else:
+            return [
+                [calculate_rates(item_weight, declared_value, "non_priority", False)],
+                [calculate_rates(item_weight, declared_value, "priority", False)],
+                [{'fiz': "Отправления не принимаются"}],
+                [calculate_rates(item_weight, declared_value, "priority", True)]
+            ]

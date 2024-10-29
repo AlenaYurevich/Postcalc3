@@ -54,27 +54,19 @@
     <div class="collapse navbar-collapse justify-content-md-end" id="navbarsExample03">
       <ul class="navbar-nav mr-auto mb-2 mb-sm-0">
         <li class="nav-item active">
-           <a class="nav-link link-body-emphasis text-decoration-none text-info" href="{% url 'main' %}">по Беларуси</a>
+          <a class="nav-link dropdown-toggle text-info" href="#" id="dropdown03" data-toggle="dropdown" aria-expanded="false">по Беларуси</a>
+          <ul class="dropdown-menu" aria-labelledby="dropdown03">
+            <li><a class="dropdown-item" href="{% url 'main' %}">отправления по Беларуси</a></li>
+            <li><a class="dropdown-item" href="{% url 'ems_express_dostavka' %}">отправления EMS</a></li>
+            <li><a class="dropdown-item" href="{% url 'internal_transfer' %}">денежный перевод</a></li>
+          </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-decoration-none text-info" href="{% url 'ems_express_dostavka' %}">EMS экспресс-доставка</a>
+          <a class="nav-link text-decoration-none text-info" href="{% url 'international' %}">Международные</a>
         </li>
-          <li class="nav-item">
-          <a class="nav-link text-decoration-none text-info" href="{% url 'internal_transfer' %}">денежный перевод</a>
+        <li class="nav-item">
+          <a class="nav-link text-decoration-none text-info" href="{% url 'news_index' %}">Новости</a>
         </li>
-<!--        <li class="nav-item">-->
-<!--          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>-->
-<!--        </li>-->
-<!--        <li class="nav-item dropdown">-->
-<!--          <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-expanded="false">Выпадающий список</a>-->
-<!--          <ul class="dropdown-menu" aria-labelledby="dropdown03">-->
-<!--            <li><a class="dropdown-item" href="#">Action</a></li>-->
-<!--            <li><a class="dropdown-item" href="#">Another action</a></li>-->
-<!--            <li><a class="dropdown-item" href="#">Something else here</a></li>-->
-<!--          </ul>-->
-<!--        </li>-->
-<!--      </ul>-->
-
 
           <li class="nav-item">
             <div class="lang_choose_cont">
@@ -232,7 +224,7 @@
       <div class="col-6 col-md">
         <h5>Международная</h5>
         <ul class="list-unstyled text-small">
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'international' %}">Посылки</a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'international' %}">Письма и посылки</a></li>
         </ul>
       </div>
       <div class="col-6 col-md">
