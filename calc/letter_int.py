@@ -60,18 +60,15 @@ def calculate_rates(item_weight, declared_value, priority, is_with_value):
         for_declared = ''
     item_vat_yur = vat(base_yur)
     fiz = round_as_excel(base_fiz + item_vat_yur)
-    yur = round_as_excel(base_yur + item_vat_yur)
+    yur = fiz
 
     rate = {
         'fiz': fiz,
         'yur': yur,
         'item_vat_yur': item_vat_yur,
-        'for_declared_fiz': for_declared if is_with_value else '',
-        'for_declared_yur': for_declared if is_with_value else '',
+        'for_declared': for_declared if is_with_value else '',
         'rub': " руб.",
         'tracking': "да" if is_with_value else "нет",
-        'sep1': "/" if is_with_value else '',
-        'sep2': "/" if is_with_value else '/',
     }
 
     for key in rate:
@@ -80,34 +77,56 @@ def calculate_rates(item_weight, declared_value, priority, is_with_value):
     return rate
 
 
+def calculate_registered(item_weight, priority):
+    registered_cost = 8.75
+    col = find_column_letter(priority)
+    row = find_letter_table_row(item_weight)
+    registered_fiz = sheet4[f"{col}{row}"].value + registered_cost
+    registered_vat = vat(registered_fiz)
+    registered_fiz = round_as_excel(registered_fiz + registered_vat)
+    registered_yur = registered_fiz
+    rate = {
+        'registered_fiz': registered_fiz,
+        'registered_yur': registered_yur,
+        'registered_vat': registered_vat,
+    }
+    for key in rate:
+        rate[key] = formatted(rate[key])
+    return rate
+
+
 def cost_of_letter_int(item_weight, declared_value, destination):
     if item_weight > 2000:
         limit_message = "Макс. вес 2 кг"
         return [
-            [{'fiz': limit_message, 'yur': "-", 'item_vat_yur': "-"}],
-            [{'fiz': limit_message, 'yur': "-", 'item_vat_yur': "-"}],
-            [{'fiz': limit_message, 'yur': "-", 'item_vat_yur': "-", 'for_declared': "-"}],
-            [{'fiz': limit_message, 'yur': "-", 'item_vat_yur': "-", 'for_declared': "-"}],
-        ]
-    if declared_value in ("", 0, "0"):
-        return [
-            [calculate_rates(item_weight, declared_value, "non_priority", False)],
-            [calculate_rates(item_weight, declared_value, "priority", False)],
-            [{'fiz': "-", 'yur': "-", 'item_vat_yur': "-", 'for_declared': "-"}],
-            [{'fiz': "-", 'yur': "-", 'item_vat_yur': "-", 'for_declared': "-"}]
+            [{'fiz': limit_message, 'yur': "-"}],
+            [{'fiz': limit_message, 'yur': "-"}],
+            [{'registered_fiz': limit_message, 'registered_yur': "-"}],
+            [{'registered_fiz': limit_message, 'registered_yur': "-"}],
+            [{'fiz': limit_message, 'yur': "-"}],
+            [{'fiz': limit_message, 'yur': "-"}],
         ]
     else:
+        simple_non_priority = calculate_rates(item_weight, declared_value, "non_priority", False)
+        simple_priority = calculate_rates(item_weight, declared_value, "priority", False)
+        registered_non_priority = {'registered_fiz': "Отправления не принимаются"}
+        registered_priority = calculate_registered(item_weight, "priority")
+        declared_non_priority = {'fiz': "-", 'yur': "-"}
+        declared_priority = {'fiz': "-", 'yur': "-"}
+    if declared_value not in ("", "0"):
+        declared_priority = calculate_rates(item_weight, declared_value, "priority", True)
         if destination == 161:
-            return [
-                [calculate_rates(item_weight, declared_value, "non_priority", False)],
-                [calculate_rates(item_weight, declared_value, "priority", False)],
-                [calculate_rates(item_weight, declared_value, "non_priority", True)],
-                [calculate_rates(item_weight, declared_value, "priority", True)]
-            ]
+            registered_non_priority = calculate_registered(item_weight, "non_priority")
+            declared_non_priority = calculate_rates(item_weight, declared_value, "priority", True)
         else:
-            return [
-                [calculate_rates(item_weight, declared_value, "non_priority", False)],
-                [calculate_rates(item_weight, declared_value, "priority", False)],
-                [{'fiz': "Отправления не принимаются"}],
-                [calculate_rates(item_weight, declared_value, "priority", True)]
+            declared_non_priority = {'fiz': "Отправления не принимаются"}
+    else:
+        if destination == 161:
+            registered_non_priority = calculate_registered(item_weight, "non_priority")
+    return [[simple_non_priority],
+            [simple_priority],
+            [registered_non_priority],
+            [registered_priority],
+            [declared_non_priority],
+            [declared_priority]
             ]

@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block page_content %}
 {% block seo %}
-  <title>Рассчитать стоимость посылки на тарификаторе</title>
+  <title>Рассчитать стоимость посылки Белпочта на тарификаторе</title>
   <meta name="description" content="Международные почтовые отправления">
-  <meta name="keywords" content="тарификатор, калькулятор Белпочта">
+  <meta name="keywords" content="тарификатор, калькулятор Белпочта, посттариф, международные посылки, международные отправления">
   <link rel="canonical" href="https://posttarif.by/international"/>
   <meta property="og:title" content="Рассчитать стоимость посылки на тарификаторе"/>
   <meta property="og:image" content="https://posttarif.by/apple-touch-icon.png"/>
@@ -47,7 +47,7 @@
           <tr class="border-info">
             <th style="width: 15%;"></th>
             <th style="width: 15%;">Для физ. лиц</th>
-            <th style="width: 15%;">Для юр. лиц</th>
+            <th style="width: 15%;">Для юр. лиц, ИП</th>
             <th style="width: 15%;">В т. ч. НДС (юр.)</th>
             <th style="width: 15%;">В т. ч. за объявленную ценность</th>
           </tr>
@@ -75,6 +75,27 @@
             {% endfor %}
         </tr>
         <tr>
+            <th scope="row" class="text-start table-info" colspan="7">Письма, бандероли заказные:</th>
+        </tr>
+        <tr>
+            <th scope="row" class="text-start">Неприоритетные</th>
+            {% for rate in registered_non_priority %}
+            <td> {{ rate.registered_fiz }}</td>
+            <td> {{ rate.registered_yur }}</td>
+            <td> {{ rate.registered_vat }}</td>
+            <td></td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <th scope="row" class="text-start">Приоритетные</th>
+            {% for rate in registered_priority %}
+            <td> {{ rate.registered_fiz }}</td>
+            <td> {{ rate.registered_yur }}</td>
+            <td> {{ rate.registered_vat }}</td>
+            <td></td>
+            {% endfor %}
+        </tr>
+        <tr>
             <th scope="row" class="text-start table-info" colspan="7">Письма с объявленной ценностью:</th>
         </tr>
         <tr>
@@ -83,7 +104,7 @@
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat_yur }}</td>
-            <td> {{ rate.for_declared_fiz }} {{rate.sep1}} {{ rate.for_declared_yur }}</td>
+            <td> {{ rate.for_declared }}</td>
             {% endfor %}
         </tr>
         <tr>
@@ -92,7 +113,7 @@
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat_yur }}</td>
-            <td> {{ rate.for_declared_fiz }} {{rate.sep1}} {{ rate.for_declared_yur }}</td>
+            <td> {{ rate.for_declared }}</td>
             {% endfor %}
         </tr>
         <tr>

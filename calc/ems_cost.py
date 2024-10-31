@@ -1,15 +1,9 @@
-import os
-from openpyxl import load_workbook
+from .sheets import sheet6
 from .vat import vat
 from .round_as_excel import round_as_excel
 from .format import formatted
 from .declared_value import cost_for_declared_value
 from .notification import notification_cost
-
-
-file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/ems_rates.xlsx')
-wb = load_workbook(filename=file_path)
-sheet = wb.active
 
 
 def find_column_letter(zone):
@@ -98,14 +92,14 @@ def find_item_cost(zone, weight, declared_value, item, reception_place, delivery
     if delivery == 2.5:
         delivery2 = 2
     if declared_value:
-        fiz = sheet[f"{x}{row}"].value * delivery
-        yur = sheet[f"{x}{row}"].value * delivery2
+        fiz = sheet6[f"{x}{row}"].value * delivery
+        yur = sheet6[f"{x}{row}"].value * delivery2
         fiz += cost_for_declared_value(declared_value)
         yur += cost_for_declared_value(declared_value)
         for_declared = cost_for_declared_value(declared_value) * 1.2
     else:
-        fiz = sheet[f"{x}{row}"].value * delivery
-        yur = sheet[f"{x}{row}"].value * delivery2
+        fiz = sheet6[f"{x}{row}"].value * delivery
+        yur = sheet6[f"{x}{row}"].value * delivery2
         for_declared = "-"
     fiz *= for_fragile
     yur *= for_fragile
