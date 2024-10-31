@@ -245,41 +245,25 @@ def test_parcel_int():
 
 
 def test_letter_int():
-    assert cost_of_letter_int(1045, 1.25) == [
+    assert cost_of_letter_int(1045, 1.25, 12) == [
         [{'fiz': '48,48',
           'yur': '48,48',
           'item_vat_yur': '8,08',
-          'for_declared_fiz': '',
-          'for_declared_yur': '',
+          'for_declared': '',
           'rub': " руб.",
-          'tracking': "нет",
-          'sep1': "",
-          'sep2': "/", }],
+          'tracking': "нет", }],
         [{'fiz': '69,54',
           'yur': '69,54',
           'item_vat_yur': '11,59',
-          'for_declared_fiz': '',
-          'for_declared_yur': '',
+          'for_declared': '',
           'rub': " руб.",
-          'tracking': "нет",
-          'sep1': "",
-          'sep2': "/", }],
-        [{'fiz': '61,61',
-          'yur': '61,61',
-          'item_vat_yur': '10,27',
-          'for_declared_fiz': '0,05',
-          'for_declared_yur': '0,05',
-          'rub': " руб.",
-          'tracking': "да",
-          'sep1': "/",
-          'sep2': "/", }],
+          'tracking': "нет", }],
+        [{'fiz': 'Отправления не принимаются'
+          }],
         [{'fiz': '82,67',
           'yur': '82,67',
           'item_vat_yur': '13,78',
-          'for_declared_fiz': '0,05',
-          'for_declared_yur': '0,05',
+          'for_declared': '0,05',
           'rub': " руб.",
-          'tracking': "да",
-          'sep1': "/",
-          'sep2': "/", }]
+          'tracking': "да", }]
     ]
