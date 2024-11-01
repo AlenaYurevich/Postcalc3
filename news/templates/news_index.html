@@ -14,7 +14,7 @@
  <main>
   <header>
     <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-      <h1 class="display-4 fw-normal text-body-emphasis">Новости</h1>
+      <h1 class="display-4 fw-normal text-body-emphasis"><a class="link-dark text-decoration-none" href="{% url 'news_index' %}">Новости</a></h1>
       <p class="fs-5 text-body-secondary">Последние изменения в работе калькулятора тарифов</p>
     </div>
   </header>
@@ -27,7 +27,7 @@
     <div class="col-md-7 order-md-2">
         <h2 class="featurette-heading"><a class ="text-info text-decoration-none" href="{% url 'news_detail' slug=post.slug %}">{{ post.title }}</a><span class="text-muted"></span></h2>
         <small>{{ post.created_on }}</small>
-        <p>{{ post.content | safe | slice:":250" }} <a class ="text-info text-decoration-none" href="{% url 'news_detail' slug=post.slug %}">   читать дальше ...</a></p>
+        <p>{{ post.content | safe | slice:":249" }} <a class ="text-info text-decoration-none" href="{% url 'news_detail' slug=post.slug %}">   читать дальше ...</a></p>
     </div>
   </div>
   <hr class="featurette-divider">
