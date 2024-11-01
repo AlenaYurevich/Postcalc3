@@ -16,6 +16,7 @@
     <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
       <h1 class="display-5 fw-normal text-body-emphasis text-decoration-none">Изменения на сайте <br>
           по категории {{ category.name | capfirst | default_if_none:"-" }}</h1>
+      <h5><a class="link-dark text-decoration-none" href="{% url 'news_index' %}">Все новости</a></h5>
     </div>
   </header>
   <hr>

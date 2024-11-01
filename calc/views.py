@@ -111,10 +111,11 @@ def international_view(request):
             letter_int_cost = cost_of_letter_int(item_weight, declared_value, destination)
             non_priority_letter = letter_int_cost[0]
             priority_letter = letter_int_cost[1]
-            registered_non_priority = letter_int_cost[2]
-            registered_priority = letter_int_cost[3]
-            value_non_priority_letter = letter_int_cost[4]
-            value_priority_letter = letter_int_cost[5]
+            tracked_priority = letter_int_cost[2]
+            registered_non_priority = letter_int_cost[3]
+            registered_priority = letter_int_cost[4]
+            value_non_priority_letter = letter_int_cost[5]
+            value_priority_letter = letter_int_cost[6]
             context = {'form': form,
                        'destination': destination,
                        'item_weight': item_weight,
@@ -122,6 +123,7 @@ def international_view(request):
                        'non_priority': non_priority,
                        'priority': priority,
                        'non_priority_letter': non_priority_letter,
+                       'tracked_priority': tracked_priority,
                        'registered_non_priority': registered_non_priority,
                        'registered_priority': registered_priority,
                        'priority_letter': priority_letter,

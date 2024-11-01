@@ -46,8 +46,8 @@
         <thead>
           <tr class="border-info">
             <th style="width: 15%;"></th>
-            <th style="width: 15%;">Для физ. лиц</th>
-            <th style="width: 15%;">Для юр. лиц, ИП</th>
+            <th style="width: 15%;">Физ. лица</th>
+            <th style="width: 15%;">Юр. лица, ИП</th>
             <th style="width: 15%;">В т. ч. НДС (юр.)</th>
             <th style="width: 15%;">В т. ч. за объявленную ценность</th>
           </tr>
@@ -75,23 +75,35 @@
             {% endfor %}
         </tr>
         <tr>
+            <th scope="row" class="text-start table-info" colspan="7">Письма, бандероли отслеживаемые:</th>
+        </tr>
+        <tr>
+            <th scope="row" class="text-start">Приоритетные</th>
+            {% for rate in tracked_priority %}
+            <td> {{ rate.fiz }}</td>
+            <td> {{ rate.yur }}</td>
+            <td> {{ rate.item_vat }}</td>
+            <td></td>
+            {% endfor %}
+        </tr>
+        <tr>
             <th scope="row" class="text-start table-info" colspan="7">Письма, бандероли заказные:</th>
         </tr>
         <tr>
             <th scope="row" class="text-start">Неприоритетные</th>
             {% for rate in registered_non_priority %}
-            <td> {{ rate.registered_fiz }}</td>
-            <td> {{ rate.registered_yur }}</td>
-            <td> {{ rate.registered_vat }}</td>
+            <td> {{ rate.fiz }}</td>
+            <td> {{ rate.yur }}</td>
+            <td> {{ rate.item_vat }}</td>
             <td></td>
             {% endfor %}
         </tr>
         <tr>
             <th scope="row" class="text-start">Приоритетные</th>
             {% for rate in registered_priority %}
-            <td> {{ rate.registered_fiz }}</td>
-            <td> {{ rate.registered_yur }}</td>
-            <td> {{ rate.registered_vat }}</td>
+             <td> {{ rate.fiz }}</td>
+            <td> {{ rate.yur }}</td>
+            <td> {{ rate.item_vat }}</td>
             <td></td>
             {% endfor %}
         </tr>
@@ -164,6 +176,7 @@
 
     <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
     </div>
-     <p>Отслеживаются письма с объявленной ценностью и все категории посылок</p>
+     <p>Слежение возможно для писем отслеживаемых, заказных и с объявленной ценностью</p>
+     <p>Отслеживаются все категории посылок</p>
   </main>
  {% endblock %}
