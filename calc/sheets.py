@@ -12,6 +12,7 @@ def load_excel_sheet(file_name):
 sheets = {
     'letter': load_excel_sheet('letter.xlsx'),
     'letter2': load_excel_sheet('letter2.xlsx'),
+    'sml': load_excel_sheet('sml.xlsx'),
     'parcel_int': load_excel_sheet('parcel_int.xlsx'),
     'letter_int': load_excel_sheet('letter_int.xlsx'),
     'ems_points': load_excel_sheet('ems_points.xlsx'),
@@ -25,3 +26,4 @@ sheet3 = sheets['parcel_int']
 sheet4 = sheets['letter_int']
 sheet5 = sheets['ems_points']
 sheet6 = sheets['ems_rates']
+sheet7 = sheets['sml']
