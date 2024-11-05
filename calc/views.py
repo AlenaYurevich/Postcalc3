@@ -3,6 +3,7 @@ from .forms import PostForm, EmsForm, TransferForm, ParcelIntForm
 from .letter import cost_of_simple, cost_of_registered, cost_of_value_letter
 from .first_class import cost_of_first_class
 from .parcel import cost_of_parcel
+from .sml import cost_of_sml
 from .parcel_3_4_5 import cost_of_parcel_3_4_5
 from .qr_box import cost_of_parcel_qr
 from .ems_points import data_of_ems
@@ -25,6 +26,7 @@ def calculation_view(request):
             value_letter = cost_of_value_letter(item_weight, declared_value, notification)
             first_class = cost_of_first_class(item_weight)
             parcel = cost_of_parcel(item_weight, declared_value, notification)
+            sml = cost_of_sml()
             parcel_3_4_5 = cost_of_parcel_3_4_5(item_weight, declared_value, notification)
             qr_box = cost_of_parcel_qr(item_weight, declared_value, notification)
             context = {'form': form, 'simple': simple,
@@ -32,6 +34,7 @@ def calculation_view(request):
                        'value_letter': value_letter,
                        'first_class': first_class,
                        'parcel': parcel,
+                       'sml': sml,
                        'parcel_3_4_5': parcel_3_4_5,
                        'qr_box': qr_box,
                        'notification': notification

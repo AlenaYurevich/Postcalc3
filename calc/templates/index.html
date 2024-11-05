@@ -3,7 +3,7 @@
 {% block seo %}
     <title>Тарификатор стоимости доставки посылки, письма Белпочта</title>
     <meta name="description" content="Рассчитать доставку на тарификаторе. Стоимость любых видов почтовых отправлений: посылка, заказной мелкий пакет, посылка с оплаченной упаковкой, 1 класс">
-    <meta name="keywords" content="Рассчитать доставку, доставка, посылка, тарификатор, калькулятор, заказное письмо, первый класс, Посттариф, Posttarif">
+    <meta name="keywords" content="Рассчитать доставку, доставка, посылка, тарификатор, калькулятор, заказное письмо, первый класс, Посттариф, Posttarif, РБ, по Беларуси, QR box">
     <link rel="canonical" href="https://posttarif.by"/>
     <meta property="og:title" content="Рассчитать стоимость доставки по Беларуси"/>
     <meta property="og:image" content="https://posttarif.by/apple-touch-icon.png"/>
@@ -24,18 +24,18 @@
          {{ form.weight.label }}
          {{ form.weight }}
          {{ form.weight.error_messages }}
-          <p></p>
+         <p></p>
          {{ form.declared_value.label }}
          {{ form.declared_value }}
          {{ form.declared_value.error_messages }}
+        <p>
+          <button class="btn btn-lg btn-info text-white mt-4 mb-4" type="submit" name="send">Рассчитать</button>
+         </p>
       </div>
       <div class="col ms-5">
-          {{ form.notification.label }}
-          {{ form.notification }}
-          {{ form.notification.error_messages }}
-            <p>
-          <button class="btn btn-lg btn-info text-white mt-4 mb-4" type="submit" name="send">Рассчитать</button>
-            </p>
+         {{ form.notification.label }}
+         {{ form.notification }}
+         {{ form.notification.error_messages }}
       </div>
     </form>
     </div>
@@ -46,36 +46,15 @@
         <thead>
           <tr class="border-info">
             <th style="width: 25%;"></th>
-            <th style="width: 15%;">Для физ. лиц</th>
-            <th style="width: 15%;">Для юр. лиц, ИП</th>
-            <th style="width: 15%;">В т. ч. НДС (юр.)</th>
-            <th style="width: 10%;">В т. ч. за объявленную ценность</th>
-            <th style="width: 10%;">В т. ч. за уведомление</th>
+            <th style="width: 15%;">Физ. лица</th>
+            <th style="width: 15%;">Юр. лица, ИП</th>
+            <th style="width: 15%;">в т.ч. НДС (юр.)</th>
+            <th style="width: 10%;">в т.ч. за объявленную ценность</th>
+            <th style="width: 10%;">в т.ч. за уведомление</th>
             <th style="width: 10%;">Отслеживание</th>
           </tr>
         </thead>
         <tbody>
-        <tr>
-            <th scope="row" colspan="7" class="text-start">Оплаченная пересылка S/M/L с учетом стоимости упаковки:</th>
-        </tr>
-        <tr>
-            <th scope="row" class="text-start">Заказной мелкий пакет (пластиковый конверт)</th>
-            <td> 3,30/ 4,50/ 5,50</td>
-            <td> 3,30/ 4,50/ 5,50</td>
-            <td> 0,55/ 0,75/ 0,92</td>
-            <td></td>
-            <td> </td>
-            <td> да </td>
-          </tr>
-        <tr class="border-info">
-            <th scope="row" class="text-start">Посылка (коробка)</th>
-            <td> 5,99/ 8,99/ 13,99</td>
-            <td> 5,99/ 8,99/ 13,99</td>
-            <td> 1,00/ 1,50/ 2,33 </td>
-            <td> </td>
-            <td> </td>
-            <td> да </td>
-          </tr>
           <tr>
             <th scope="row" class="text-start">Простое письмо, бандероль, мелкий пакет</th>
             {% for rate in simple %}
@@ -131,11 +110,36 @@
             <td> {{ rate.tracking }}</td>
             {% endfor %}
           </tr>
+           <tr>
+            <th scope="row" colspan="7" class="text-start table-info">Оплаченная пересылка S/M/L с учетом стоимости упаковки:</th>
+           </tr>
+        <tr>
+            <th scope="row" class="text-start">Заказной мелкий пакет (пластиковый конверт)</th>
+           {% for rate in sml %}
+            <td> {{ rate.fiz1 }}/ {{ rate.fiz2 }}/ {{ rate.fiz3 }}</td>
+            <td> {{ rate.fiz1 }}/ {{ rate.fiz2 }}/ {{ rate.fiz3 }}</td>
+            <td> {{ rate.item_vat1 }}/ {{ rate.item_vat2 }}/ {{ rate.item_vat3 }}</td>
+            <td></td>
+            <td></td>
+            <td> {{ rate.tracking }}</td>
+            {% endfor %}
+          </tr>
+        <tr class="border-info">
+            <th scope="row" class="text-start">Посылка (коробка)</th>
+           {% for rate in sml %}
+            <td> {{ rate.parcel_fiz1 }}/ {{ rate.parcel_fiz2 }}/ {{ rate.parcel_fiz3 }}</td>
+            <td> {{ rate.parcel_fiz1 }}/ {{ rate.parcel_fiz2 }}/ {{ rate.parcel_fiz3 }}</td>
+            <td> {{ rate.parcel_item_vat1 }}/ {{ rate.parcel_item_vat2 }}/ {{ rate.parcel_item_vat3 }}</td>
+            <td></td>
+            <td></td>
+            <td> {{ rate.tracking }}</td>
+            {% endfor %}
+          </tr>
           <tr>
-            <th scope="row" colspan="7" class="text-start">Посылки с оформлением в личном кабинете:</th>
+            <th scope="row" colspan="7" class="text-start table-info">Посылки с оформлением в личном кабинете:</th>
           </tr>
          <tr>
-            <th scope="row" class="text-start">&#171Тариф 3, 4, 5&#187</th>
+            <th scope="row" class="text-start">Тариф 3, 4, 5</th>
            {% for rate in parcel_3_4_5 %}
             <td> {{ rate.fiz }}</td>
             <td> </td>
@@ -147,7 +151,7 @@
           </tr>
 
           <tr class="border-info">
-            <th scope="row" class="text-start colspan='6'">&#171QR box&#187</th>
+            <th scope="row" class="text-start colspan='6'">QR box</th>
            {% for rate in qr_box %}
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur}}</td>
@@ -290,8 +294,63 @@
       </div>
 
         <div class="col">
-<!--            пустой див-->
+        <!--пустой див-->
         </div>
+      <div class="col">
+        <div class="card mb-5 rounded-3 shadow-sm border-info">
+          <div class="card-header py-3 text-bg-info text-white border-info">
+            <h4 class="my-0 fw-normal">Оплаченная пересылка S/M/L<br>заказной мелкий пакет</h4>
+          </div>
+          <div class="card-body">
+            <h2 class="card-title pricing-card-title">
+              {% for rate in sml %}
+              {{ rate.fiz1 }}/ {{ rate.fiz2 }}/ {{ rate.fiz3 }}
+              {% endfor %}
+              <small class="text-body-secondary fw-light">руб.</small>
+            </h2>
+            <ul class="list-unstyled mt-3 mb-4">
+            <li>Размер S	229х324 мм</li>
+            <li>Размер M	280х380 мм</li>
+            <li>Размер L	320х355 мм</li>
+              <li>приобрети пакет у оператора</li>
+              <li>отслеживание</li>
+              <li>Д + 3</li>
+              <li>возмещение при утрате</li>
+              <li>вручение лично в руки</li>
+            </ul>
+            <button type="button" class="w-100 btn btn-lg btn-info text-white">удобный вариант</button>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card mb-5 rounded-3 shadow-sm border-info">
+          <div class="card-header py-3 text-bg-info text-white border-info">
+            <h4 class="my-0 fw-normal">Оплаченная пересылка S/M/L<br>посылка</h4>
+          </div>
+          <div class="card-body">
+            <h2 class="pricing-card-title">
+              {% for rate in sml %}
+              {{ rate.parcel_fiz1 }}/ {{ rate.parcel_fiz2 }}/ {{ rate.parcel_fiz3 }}
+              {% endfor %}
+              <small class="text-body-secondary fw-light">руб.</small>
+            </h2>
+            <ul class="list-unstyled mt-3 mb-4">
+            <li>Размер S	270х175х60 мм</li>
+            <li>Размер M	320х220х110 мм</li>
+            <li>Размер L	400х250х200 мм</li>
+              <li>приобрети коробку у оператора</li>
+              <li>отслеживание</li>
+              <li>Д + 3</li>
+              <li>возмещение при утрате</li>
+              <li>вручение лично в руки</li>
+            </ul>
+            <button type="button" class="w-100 btn btn-lg btn-info text-white">удобный вариант</button>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <!-- пустой див-->
+      </div>
 
       <div class="col">
         <div class="card mb-5 rounded-3 shadow-sm border-info">
@@ -346,58 +405,12 @@
       </div>
 
         <div class="col">
-<!--            пустой див-->
+        <!-- пустой див-->
         </div>
 
-      <div class="col">
-        <div class="card mb-5 rounded-3 shadow-sm border-info">
-          <div class="card-header py-3 text-bg-info text-white border-info">
-            <h4 class="my-0 fw-normal">Оплаченная пересылка S/M/L<br>заказной мелкий пакет</h4>
-          </div>
-          <div class="card-body">
-            <h2 class="card-title pricing-card-title">
-              3,10 / 4,30 / 5,20
-              <small class="text-body-secondary fw-light">руб.</small>
-            </h2>
-            <ul class="list-unstyled mt-3 mb-4">
-            <li>Размер S	229х324 мм</li>
-            <li>Размер M	280х380 мм</li>
-            <li>Размер L	320х355 мм</li>
-              <li>приобрети пакет у оператора</li>
-              <li>отслеживание</li>
-              <li>Д + 3</li>
-              <li>возмещение при утрате</li>
-              <li>вручение лично в руки</li>
-            </ul>
-            <button type="button" class="w-100 btn btn-lg btn-info text-white">удобный вариант</button>
-          </div>
-        </div>
-      </div>
 
-      <div class="col">
-        <div class="card mb-5 rounded-3 shadow-sm border-info">
-          <div class="card-header py-3 text-bg-info text-white border-info">
-            <h4 class="my-0 fw-normal">Оплаченная пересылка S/M/L<br>посылка</h4>
-          </div>
-          <div class="card-body">
-            <h2 class="pricing-card-title">
-                5,99 / 8,99 / 13,99
-              <small class="text-body-secondary fw-light">руб.</small>
-            </h2>
-            <ul class="list-unstyled mt-3 mb-4">
-            <li>Размер S	270х175х60 мм</li>
-            <li>Размер M	320х220х110 мм</li>
-            <li>Размер L	400х250х200 мм</li>
-              <li>приобрети коробку у оператора</li>
-              <li>отслеживание</li>
-              <li>Д + 3</li>
-              <li>возмещение при утрате</li>
-              <li>вручение лично в руки</li>
-            </ul>
-            <button type="button" class="w-100 btn btn-lg btn-info text-white">удобный вариант</button>
-          </div>
-        </div>
-      </div>
+
+
     </div>
   </main>
 
