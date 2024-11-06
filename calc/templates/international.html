@@ -75,6 +75,27 @@
             {% endfor %}
         </tr>
         <tr>
+            <th scope="row" class="text-start table-info" colspan="7">Мелкие пакеты простые:</th>
+        </tr>
+        <tr>
+            <th scope="row" class="text-start">Неприоритетные</th>
+            {% for rate in non_priority_package %}
+            <td> {{ rate.fiz }}</td>
+            <td> {{ rate.yur }}</td>
+            <td> {{ rate.item_vat_yur }}</td>
+            <td></td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <th scope="row" class="text-start">Приоритетные</th>
+            {% for rate in priority_package %}
+            <td> {{ rate.fiz }}</td>
+            <td> {{ rate.yur }}</td>
+            <td> {{ rate.item_vat_yur }}</td>
+            <td></td>
+            {% endfor %}
+        </tr>
+        <tr>
             <th scope="row" class="text-start table-info" colspan="7">Письма, бандероли отслеживаемые:</th>
         </tr>
         <tr>
