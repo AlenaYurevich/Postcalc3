@@ -12,6 +12,7 @@ from .ems_cost import find_documents_cost, find_goods_cost
 from .internal_transfer import cost_of_internal_transfer
 from .parcel_int import cost_of_parcel_int
 from .letter_int import cost_of_letter_int
+from .package_int import cost_of_package_int
 
 
 def calculation_view(request):
@@ -119,6 +120,15 @@ def international_view(request):
             registered_priority = letter_int_cost[4]
             value_non_priority_letter = letter_int_cost[5]
             value_priority_letter = letter_int_cost[6]
+            package_int_cost = cost_of_package_int(destination, item_weight, declared_value)
+            print(package_int_cost)
+            non_priority_pack = package_int_cost[0]
+            priority_pack = package_int_cost[1]
+            tracked_priority_pack = package_int_cost[2]
+            registered_non_priority_pack = package_int_cost[3]
+            registered_priority_pack = package_int_cost[4]
+            value_non_priority_pack = package_int_cost[5]
+            value_priority_pack = package_int_cost[6]
             context = {'form': form,
                        'destination': destination,
                        'item_weight': item_weight,
@@ -132,6 +142,13 @@ def international_view(request):
                        'priority_letter': priority_letter,
                        'value_non_priority_letter': value_non_priority_letter,
                        'value_priority_letter': value_priority_letter,
+                       'non_priority_pack': non_priority_pack,
+                       'tracked_priority_pack': tracked_priority_pack,
+                       'registered_non_priority_pack': registered_non_priority_pack,
+                       'registered_priority_pack': registered_priority_pack,
+                       'priority_pack': priority_pack,
+                       'value_non_priority_pack': value_non_priority_pack,
+                       'value_priority_pack': value_priority_pack,
                        }
             return render(request, 'international.html', context)  # Внутри фиг скобок
     else:

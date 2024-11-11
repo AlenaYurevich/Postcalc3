@@ -79,19 +79,19 @@
         </tr>
         <tr>
             <th scope="row" class="text-start">Неприоритетные</th>
-            {% for rate in non_priority_package %}
+            {% for rate in non_priority_pack %}
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
-            <td> {{ rate.item_vat_yur }}</td>
+            <td> {{ rate.item_vat }}</td>
             <td></td>
             {% endfor %}
         </tr>
         <tr>
             <th scope="row" class="text-start">Приоритетные</th>
-            {% for rate in priority_package %}
+            {% for rate in priority_pack %}
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
-            <td> {{ rate.item_vat_yur }}</td>
+            <td> {{ rate.item_vat }}</td>
             <td></td>
             {% endfor %}
         </tr>
@@ -101,6 +101,18 @@
         <tr>
             <th scope="row" class="text-start">Приоритетные</th>
             {% for rate in tracked_priority %}
+            <td> {{ rate.fiz }}</td>
+            <td> {{ rate.yur }}</td>
+            <td> {{ rate.item_vat }}</td>
+            <td></td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <th scope="row" class="text-start table-info" colspan="7">Мелкие пакеты отслеживаемые:</th>
+        </tr>
+        <tr>
+            <th scope="row" class="text-start">Приоритетные</th>
+            {% for rate in tracked_priority_pack %}
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat }}</td>
@@ -129,6 +141,27 @@
             {% endfor %}
         </tr>
         <tr>
+            <th scope="row" class="text-start table-info" colspan="7">Мелкие пакеты заказные:</th>
+        </tr>
+        <tr>
+            <th scope="row" class="text-start">Неприоритетные</th>
+            {% for rate in registered_non_priority_pack %}
+            <td> {{ rate.fiz }}</td>
+            <td> {{ rate.yur }}</td>
+            <td> {{ rate.item_vat }}</td>
+            <td></td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <th scope="row" class="text-start">Приоритетные</th>
+            {% for rate in registered_priority_pack %}
+            <td> {{ rate.fiz }}</td>
+            <td> {{ rate.yur }}</td>
+            <td> {{ rate.item_vat }}</td>
+            <td></td>
+            {% endfor %}
+        </tr>
+        <tr>
             <th scope="row" class="text-start table-info" colspan="7">Письма с объявленной ценностью:</th>
         </tr>
         <tr>
@@ -146,6 +179,27 @@
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat_yur }}</td>
+            <td> {{ rate.for_declared }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <th scope="row" class="text-start table-info" colspan="7">Мелкие пакеты с объявленной ценностью:</th>
+        </tr>
+        <tr>
+            <th scope="row" class="text-start">Неприоритетные</th>
+            {% for rate in value_non_priority_pack %}
+            <td> {{ rate.fiz }}</td>
+            <td> {{ rate.yur }}</td>
+            <td> {{ rate.item_vat }}</td>
+            <td> {{ rate.for_declared }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <th scope="row" class="text-start">Приоритетные</th>
+            {% for rate in value_priority_pack %}
+            <td> {{ rate.fiz }}</td>
+            <td> {{ rate.yur }}</td>
+            <td> {{ rate.item_vat }}</td>
             <td> {{ rate.for_declared }}</td>
             {% endfor %}
         </tr>
