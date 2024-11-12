@@ -6,6 +6,7 @@ from .qr_box import cost_of_parcel_qr
 from .internal_transfer import cost_of_internal_transfer
 from .parcel_int import cost_of_parcel_int
 from .letter_int import cost_of_letter_int
+from .package_int import cost_of_package_int
 
 
 def test_simple():
@@ -258,12 +259,27 @@ def test_letter_int():
           'for_declared': '',
           'rub': " руб.",
           'tracking': "нет", }],
-        [{'fiz': 'Отправления не принимаются'
-          }],
+        [{'fiz': '75,30', 'yur': '75,30', 'item_vat': '12,55'}],
+        [{'fiz': 'Отправления не принимаются'}],
+        [{'fiz': '80,04', 'yur': '80,04', 'item_vat': '13,34'}],
+        [{'fiz': 'Отправления не принимаются'}],
         [{'fiz': '82,67',
-          'yur': '82,67',
-          'item_vat_yur': '13,78',
           'for_declared': '0,05',
-          'rub': " руб.",
-          'tracking': "да", }]
+          'item_vat_yur': '13,78',
+          'rub': ' руб.',
+          'tracking': 'да',
+          'yur': '82,67'}]
+    ]
+
+
+def test_package_int():
+    assert cost_of_package_int(12, 1045, 1.25) == [
+        [{'fiz': '26,05',
+          'yur': '26,05',
+          'item_vat': '4,34',
+          'for_declared': '', }],
+        [{'fiz': '37,15',
+          'yur': '37,15',
+          'item_vat': '6,19',
+          'for_declared': '', }]
     ]

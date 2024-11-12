@@ -18,9 +18,9 @@ from .declared_value import cost_for_declared_value
 
 def weight(item_weight, declared_value):
     if declared_value in ("нет", "", 0, "0"):
-        return math.ceil(item_weight / 10) / 100
-    else:
         return math.ceil(item_weight / 100) / 10
+    else:
+        return math.ceil(item_weight / 10) / 100  # если есть объявленная ценность
 
 
 def find_numbers_by_country(destination, priority):
@@ -41,12 +41,13 @@ def find_numbers_by_country(destination, priority):
 
 
 def find_package_int(destination, item_weight, declared_value, priority):
-    price_row = []
     data = find_numbers_by_country(destination, priority)
     if declared_value in ("нет", "", 0, "0"):
         fiz = data[0] + round_as_excel(data[1] * weight(item_weight, declared_value))
-
         for_declared = ''
+        print("без НДС", (round_as_excel(data[1] * weight(item_weight, declared_value))))
+        print("вес1", weight(item_weight, declared_value))
+        print("физ1", fiz)
     else:
         fiz = 10.90 + data[0] + data[1] * weight(item_weight, declared_value)  # Сбор за объявленную ценность
         fiz = round(fiz, 4)
@@ -65,15 +66,16 @@ def find_package_int(destination, item_weight, declared_value, priority):
     }
     for key in rate:
         rate[key] = formatted(rate[key])
-    price_row.append(rate)
-    return price_row
+    return rate
 
 
 def find_package_registered(destination, item_weight, priority, is_registered):
     add_cost = 8.75 if is_registered else 4.80  # заказной или отслеживаемый мелкий пакет
-    price_row = []
     data = find_numbers_by_country(destination, priority)
     fiz = data[0] + round_as_excel(data[1] * weight(item_weight, 10)) + add_cost
+    print("вес", weight(item_weight, 10))
+    fiz = round_as_excel(fiz)
+    print("физ", fiz)
     item_vat = vat(fiz)
     fiz = round_as_excel(fiz + item_vat)
     yur = fiz
@@ -84,8 +86,7 @@ def find_package_registered(destination, item_weight, priority, is_registered):
     }
     for key in rate:
         rate[key] = formatted(rate[key])
-    price_row.append(rate)
-    return price_row
+    return rate
 
 
 def cost_of_package_int(destination, item_weight, declared_value):
@@ -103,26 +104,26 @@ def cost_of_package_int(destination, item_weight, declared_value):
     else:
         simple_non_priority = find_package_int(destination, item_weight, declared_value, "non_priority")
         simple_priority = find_package_int(destination, item_weight, declared_value, "priority")
-        registered_non_priority = [{'fiz': "Отправления не принимаются"}]
-        registered_priority = find_package_registered(destination, item_weight, "priority", True)
         tracked_priority = find_package_registered(destination, item_weight, "priority", False)
-        declared_non_priority = [{'fiz': "-", 'yur': "-"}]
-        declared_priority = [{'fiz': "-", 'yur': "-"}]
+        registered_non_priority = {'fiz': "Отправления не принимаются"}
+        registered_priority = find_package_registered(destination, item_weight, "priority", True)
+        declared_non_priority = {'fiz': "-", 'yur': "-"}
+        declared_priority = {'fiz': "-", 'yur': "-"}
     if declared_value not in ("", "0"):
         declared_priority = find_package_int(destination, item_weight, declared_value, "priority")
         if destination == 161:
             registered_non_priority = find_package_registered(destination, item_weight, "non_priority", True)
-            declared_non_priority = find_package_int(destination, item_weight, declared_value, "priority")
+            declared_non_priority = find_package_int(destination, item_weight, declared_value, "non_priority")
         else:
-            registered_non_priority = [{'fiz': "Отправления не принимаются"}]
+            registered_non_priority = {'fiz': "Отправления не принимаются"}
     else:
         if destination == 161:
             registered_non_priority = find_package_registered(destination, item_weight, "non_priority", True)
-    return [simple_non_priority,
-            simple_priority,
-            tracked_priority,
-            registered_non_priority,
-            registered_priority,
-            declared_non_priority,
-            declared_priority,
+    return [[simple_non_priority],
+            [simple_priority],
+            [tracked_priority],
+            [registered_non_priority],
+            [registered_priority],
+            [declared_non_priority],
+            [declared_priority]
             ]
