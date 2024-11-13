@@ -3,6 +3,7 @@ from .vat import vat
 from .round_as_excel import round_as_excel
 from .format import formatted
 from .declared_value import cost_for_declared_value
+from .constants import TRACKED_RATE, REGISTERED_RATE, VALUE_RATE
 
 
 def find_letter_table_row(weight):
@@ -41,7 +42,7 @@ def find_column_letter(priority):
 
 def calculate_rates(item_weight, declared_value, priority, is_with_value):
     """Рассчитывает стоимость писем с учетом заданных параметров."""
-    base_cost = 10.90 if is_with_value else 0
+    base_cost = VALUE_RATE if is_with_value else 0
     col = find_column_letter(priority)
     row = find_letter_table_row(item_weight)
 
@@ -78,7 +79,7 @@ def calculate_rates(item_weight, declared_value, priority, is_with_value):
 
 
 def calculate_registered(item_weight, priority, is_registered):
-    add_cost = 8.75 if is_registered else 4.80  # заказное или отслеживаемое письмо
+    add_cost = REGISTERED_RATE if is_registered else TRACKED_RATE  # заказное или отслеживаемое письмо
     col = find_column_letter(priority)
     row = find_letter_table_row(item_weight)
     fiz = sheet4[f"{col}{row}"].value + add_cost

@@ -3,7 +3,7 @@ def round_as_excel(num):
     # print(reminder, reminder[2], reminder[3], reminder[4], reminder[5])
     if reminder[4] in '6' and reminder[5] in '5':
         return round(num + 0.01, 2)
-    elif reminder[3] in '3468' and reminder[4] in '5':
+    elif reminder[3] in '13468' and reminder[4] in '5':
         return round(round(num, 2) + 0.01, 2)
     elif reminder[2] in '05' and reminder[3] in '0' and reminder[4] in '5':
         return round(round(num, 2) + 0.01, 2)
@@ -33,3 +33,5 @@ decimal не округляет как excel
 # print("ожидаю 0,25", round_as_excel(0.245))
 # print(8, round(17.105, 2))
 # print("ожидаю 17.11", round_as_excel(17.105))
+# print(9, round(71.815, 2))
+# print("ожидаю 71.82", round_as_excel(71.815))
