@@ -4,6 +4,7 @@ from .vat import vat
 from .round_as_excel import round_as_excel
 from .format import formatted
 from .declared_value import cost_for_declared_value
+from .constants import TRACKED_RATE, REGISTERED_RATE, VALUE_RATE
 
 
 """
@@ -49,7 +50,7 @@ def find_package_int(destination, item_weight, declared_value, priority):
         print("вес1", weight(item_weight, declared_value))
         print("физ1", fiz)
     else:
-        fiz = 10.90 + data[0] + data[1] * weight(item_weight, declared_value)  # Сбор за объявленную ценность
+        fiz = VALUE_RATE + data[0] + data[1] * weight(item_weight, declared_value)  # Сбор за объявленную ценность
         fiz = round(fiz, 4)
         for_declared = cost_for_declared_value(declared_value)
         fiz += for_declared
@@ -70,10 +71,11 @@ def find_package_int(destination, item_weight, declared_value, priority):
 
 
 def find_package_registered(destination, item_weight, priority, is_registered):
-    add_cost = 8.75 if is_registered else 4.80  # заказной или отслеживаемый мелкий пакет
+    add_cost = REGISTERED_RATE if is_registered else TRACKED_RATE  # заказной или отслеживаемый мелкий пакет
     data = find_numbers_by_country(destination, priority)
     fiz = data[0] + round_as_excel(data[1] * weight(item_weight, 10)) + add_cost
     print("вес", weight(item_weight, 10))
+    print("физ без округления", data[0] + data[1] * weight(item_weight, 10) + add_cost)
     fiz = round_as_excel(fiz)
     print("физ", fiz)
     item_vat = vat(fiz)
@@ -102,8 +104,8 @@ def cost_of_package_int(destination, item_weight, declared_value):
             [{'fiz': limit_message, 'yur': "-"}],
         ]
     else:
-        simple_non_priority = find_package_int(destination, item_weight, declared_value, "non_priority")
-        simple_priority = find_package_int(destination, item_weight, declared_value, "priority")
+        simple_non_priority = find_package_int(destination, item_weight, 0, "non_priority")
+        simple_priority = find_package_int(destination, item_weight, 0, "priority")
         tracked_priority = find_package_registered(destination, item_weight, "priority", False)
         registered_non_priority = {'fiz': "Отправления не принимаются"}
         registered_priority = find_package_registered(destination, item_weight, "priority", True)
@@ -116,6 +118,7 @@ def cost_of_package_int(destination, item_weight, declared_value):
             declared_non_priority = find_package_int(destination, item_weight, declared_value, "non_priority")
         else:
             registered_non_priority = {'fiz': "Отправления не принимаются"}
+            declared_non_priority = {'fiz': "Отправления не принимаются"}
     else:
         if destination == 161:
             registered_non_priority = find_package_registered(destination, item_weight, "non_priority", True)

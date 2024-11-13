@@ -3,7 +3,7 @@ from .sheets import sheet1, sheet2
 from .vat import vat
 from .round_as_excel import round_as_excel
 from .format import formatted
-from .notification import notification_cost
+from .constants import notification_cost
 from .declared_value import cost_for_declared_value
 
 

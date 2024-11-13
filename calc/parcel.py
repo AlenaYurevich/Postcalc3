@@ -4,7 +4,7 @@ from .round_as_excel import round_as_excel
 from .format import formatted
 from .vat import vat
 from .declared_value import cost_for_declared_value
-from .notification import notification_cost
+from .constants import notification_cost
 
 
 """
