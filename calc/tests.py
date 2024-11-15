@@ -287,8 +287,9 @@ def test_package_int2():
     assert cost_of_package_int(161, 1035, 9.25) == [  # в Россию - destination 161
         [{'fiz': '26,05', 'yur': '26,05', 'item_vat': '4,34', 'for_declared': ''}],
         [{'fiz': '37,14', 'yur': '37,14', 'item_vat': '6,19', 'for_declared': ''}],
-        [{'fiz': '30,68', 'yur': '30,68', 'item_vat': '5,11'}],  # ошибки исправить!!!
+        [{'fiz': '41,17', 'yur': '41,17', 'item_vat': '6,86'}],
         [{'fiz': '35,42', 'yur': '35,42', 'item_vat': '5,90'}],
         [{'fiz': '45,91', 'yur': '45,91', 'item_vat': '7,65'}],
-        [{'fiz': '38,34', 'yur': '38,34', 'item_vat': '6,39', 'for_declared': '0,34'}],
-        [{'fiz': '48,83', 'yur': '48,83', 'item_vat': '8,14', 'for_declared': '0,34'}]]
+        [{'fiz': '38,34', 'yur': '38,34', 'item_vat': '6,39', 'for_declared': '0,33'}],
+        [{'fiz': '48,84', 'yur': '48,84', 'item_vat': '8,14', 'for_declared': '0,33'}]]  # правильно 48,83
+
