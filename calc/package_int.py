@@ -46,16 +46,18 @@ def find_package_int(destination, item_weight, declared_value, priority):
     if declared_value in ("нет", "", 0, "0"):
         fiz = data[0] + round_as_excel(data[1] * weight(item_weight, declared_value))
         for_declared = ''
-        print("без НДС", (round_as_excel(data[1] * weight(item_weight, declared_value))))
-        print("вес1", weight(item_weight, declared_value))
-        print("физ1", fiz)
     else:
         fiz = VALUE_RATE + data[0] + data[1] * weight(item_weight, declared_value)  # Сбор за объявленную ценность
+        print("физ с ОЦ без НДС", fiz)
         fiz = round(fiz, 4)
+        print("округление 4 цифры", fiz)
         for_declared = cost_for_declared_value(declared_value)
+        print("За ОЦ", for_declared)
         fiz += for_declared
         fiz = round_as_excel(fiz)
-        for_declared = round_as_excel(cost_for_declared_value(declared_value)) * 1.2
+        print("округление 2 цифры с ОЦ", fiz)
+        for_declared = round_as_excel(for_declared * 1.2)
+        # print("За ОЦ с НДС", for_declared)
     item_vat = vat(fiz)
     fiz = round_as_excel(fiz + item_vat)
     yur = fiz
@@ -74,10 +76,7 @@ def find_package_registered(destination, item_weight, priority, is_registered):
     add_cost = REGISTERED_RATE if is_registered else TRACKED_RATE  # заказной или отслеживаемый мелкий пакет
     data = find_numbers_by_country(destination, priority)
     fiz = data[0] + round_as_excel(data[1] * weight(item_weight, 10)) + add_cost
-    print("вес", weight(item_weight, 10))
-    print("физ без округления", data[0] + data[1] * weight(item_weight, 10) + add_cost)
     fiz = round_as_excel(fiz)
-    print("физ", fiz)
     item_vat = vat(fiz)
     fiz = round_as_excel(fiz + item_vat)
     yur = fiz
