@@ -121,15 +121,12 @@ def international_view(request):
             registered_priority = letter_int_cost[4]
             value_non_priority_letter = letter_int_cost[5]
             value_priority_letter = letter_int_cost[6]
-            package_int_cost = cost_of_package_int(destination, item_weight, declared_value)
-            print(package_int_cost)
+            package_int_cost = cost_of_package_int(destination, item_weight)
             non_priority_pack = package_int_cost[0]
             priority_pack = package_int_cost[1]
             tracked_priority_pack = package_int_cost[2]
             registered_non_priority_pack = package_int_cost[3]
             registered_priority_pack = package_int_cost[4]
-            value_non_priority_pack = package_int_cost[5]
-            value_priority_pack = package_int_cost[6]
             context = {'form': form,
                        'destination': destination,
                        'item_weight': item_weight,
@@ -148,8 +145,6 @@ def international_view(request):
                        'registered_non_priority_pack': registered_non_priority_pack,
                        'registered_priority_pack': registered_priority_pack,
                        'priority_pack': priority_pack,
-                       'value_non_priority_pack': value_non_priority_pack,
-                       'value_priority_pack': value_priority_pack,
                        }
             return render(request, 'international.html', context)  # Внутри фиг скобок
     else:

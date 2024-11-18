@@ -183,27 +183,6 @@
             {% endfor %}
         </tr>
         <tr>
-            <th scope="row" class="text-start table-info" colspan="7">Мелкие пакеты с объявленной ценностью:</th>
-        </tr>
-        <tr>
-            <th scope="row" class="text-start">Неприоритетные</th>
-            {% for rate in value_non_priority_pack %}
-            <td> {{ rate.fiz }}</td>
-            <td> {{ rate.yur }}</td>
-            <td> {{ rate.item_vat }}</td>
-            <td> {{ rate.for_declared }}</td>
-            {% endfor %}
-        </tr>
-        <tr>
-            <th scope="row" class="text-start">Приоритетные</th>
-            {% for rate in value_priority_pack %}
-            <td> {{ rate.fiz }}</td>
-            <td> {{ rate.yur }}</td>
-            <td> {{ rate.item_vat }}</td>
-            <td> {{ rate.for_declared }}</td>
-            {% endfor %}
-        </tr>
-        <tr>
             <th scope="row" class="text-start table-info" colspan="7">Посылки:</th>
         </tr>
          <tr>
@@ -251,7 +230,6 @@
 
     <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
     </div>
-     <p>Слежение возможно для писем отслеживаемых, заказных и с объявленной ценностью</p>
-     <p>Отслеживаются все категории посылок</p>
+     <p>Отслеживаются все категории международных отправлений за исключением простых писем, бандеролей, мелких пакетов</p>
   </main>
  {% endblock %}

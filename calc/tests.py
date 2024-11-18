@@ -273,23 +273,20 @@ def test_letter_int():
 
 
 def test_package_int():
-    assert cost_of_package_int(11, 1045, 1.25) == [  # в Австралию - destination 11
-        [{'fiz': '83,92', 'yur': '83,92', 'item_vat': '13,99', 'for_declared': ''}],
-        [{'fiz': '83,92', 'yur': '83,92', 'item_vat': '13,99', 'for_declared': ''}],
+    assert cost_of_package_int(11, 1045) == [  # в Австралию - destination 11
+        [{'fiz': '83,92', 'yur': '83,92', 'item_vat': '13,99'}],
+        [{'fiz': '83,92', 'yur': '83,92', 'item_vat': '13,99'}],
         [{'fiz': '86,18', 'yur': '86,18', 'item_vat': '14,36'}],
         [{'fiz': 'Отправления не принимаются'}],
-        [{'fiz': '90,92', 'yur': '90,92', 'item_vat': '15,15'}],
-        [{'fiz': 'Отправления не принимаются'}],
-        [{'fiz': '93,54', 'yur': '93,54', 'item_vat': '15,59', 'for_declared': '0,05'}]]
+        [{'fiz': '90,92', 'yur': '90,92', 'item_vat': '15,15'}]
+    ]
 
 
 def test_package_int2():
-    assert cost_of_package_int(161, 1035, 9.25) == [  # в Россию - destination 161
-        [{'fiz': '26,05', 'yur': '26,05', 'item_vat': '4,34', 'for_declared': ''}],
-        [{'fiz': '37,14', 'yur': '37,14', 'item_vat': '6,19', 'for_declared': ''}],
+    assert cost_of_package_int(161, 1035) == [  # в Россию - destination 161
+        [{'fiz': '26,05', 'yur': '26,05', 'item_vat': '4,34'}],
+        [{'fiz': '37,14', 'yur': '37,14', 'item_vat': '6,19'}],
         [{'fiz': '41,17', 'yur': '41,17', 'item_vat': '6,86'}],
         [{'fiz': '35,42', 'yur': '35,42', 'item_vat': '5,90'}],
-        [{'fiz': '45,91', 'yur': '45,91', 'item_vat': '7,65'}],
-        [{'fiz': '38,34', 'yur': '38,34', 'item_vat': '6,39', 'for_declared': '0,33'}],
-        [{'fiz': '48,84', 'yur': '48,84', 'item_vat': '8,14', 'for_declared': '0,33'}]]  # правильно 48,83
-
+        [{'fiz': '45,91', 'yur': '45,91', 'item_vat': '7,65'}]
+    ]
