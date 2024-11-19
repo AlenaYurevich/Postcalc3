@@ -17,6 +17,7 @@ sheets = {
     'letter_int': load_excel_sheet('letter_int.xlsx'),
     'ems_points': load_excel_sheet('ems_points.xlsx'),
     'ems_rates': load_excel_sheet('ems_rates.xlsx'),
+    'ems_int': load_excel_sheet('ems_int.xlsx'),
 }
 
 # Доступ к листам через словарь
@@ -27,3 +28,4 @@ sheet4 = sheets['letter_int']
 sheet5 = sheets['ems_points']
 sheet6 = sheets['ems_rates']
 sheet7 = sheets['sml']
+sheet8 = sheets['ems_int']
