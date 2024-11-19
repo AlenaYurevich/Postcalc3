@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .forms import PostForm, EmsForm, TransferForm, ParcelIntForm
+from .forms import PostForm, EmsForm, TransferForm, ParcelIntForm, EmsIntForm
 from .letter import cost_of_simple, cost_of_registered, cost_of_value_letter
 from .first_class import cost_of_first_class
 from .parcel import cost_of_parcel
@@ -107,7 +107,6 @@ def international_view(request):
         form = ParcelIntForm(request.POST)
         if form.is_valid():
             destination = int(request.POST.get('destination'))
-            print(destination)
             item_weight = int(request.POST.get('weight'))
             declared_value = str(request.POST.get('declared_value'))
             parcel_int_cost = cost_of_parcel_int(destination, item_weight, declared_value)
@@ -150,6 +149,24 @@ def international_view(request):
     else:
         form = ParcelIntForm()
         return render(request, 'international.html', {'form': form})  # внутри фигурных скобок
+
+
+def ems_int_view(request):
+    if request.method == "POST":
+        form = EmsIntForm(request.POST)
+        if form.is_valid():
+            destination = request.POST.get('destination')
+            item_weight = int(request.POST.get('weight'))
+            declared_value = str(request.POST.get('declared_value'))
+            context = {'form': form,
+                       'destination': destination,
+                       'item_weight': item_weight,
+                       'declared_value': declared_value,
+                       }
+            return render(request, 'ems_international.html', context)  # Внутри фиг скобок
+    else:
+        form = EmsIntForm()
+        return render(request, 'ems_international.html', {'form': form})  # внутри фигурных скобок
 
 
 def about_view(request):
