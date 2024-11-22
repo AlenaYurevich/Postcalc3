@@ -31,8 +31,9 @@
             {{ form.declared_value.label }}
             {{ form.declared_value }}
             {{ form.declared_value.error_messages }}
+            <p></p>
+            <button class="btn btn-lg btn-info text-white mt-4 mb-4" type="submit" name="send">Рассчитать</button>
         </div>
-           <button class="btn btn-lg btn-info text-white mt-4 mb-4" type="submit" name="send">Рассчитать</button>
         <div class="col ms-5">
         </div>
       </form>
@@ -47,13 +48,12 @@
             <th style="width: 15%;">Для юр. лиц</th>
             <th style="width: 15%;">В т. ч. НДС (юр.)</th>
             <th style="width: 15%;">В т. ч. за объявленную ценность</th>
-            <th style="width: 15%;">В т. ч. за уведомление</th>
           </tr>
         </thead>
         <tbody>
          <tr>
             <th scope="row" class="text-start">Документы</th>
-            {% for rate in post_office_ems_documents_cost %}
+            {% for rate in ems_documents_cost %}
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat }}</td>
@@ -62,7 +62,7 @@
         </tr>
          <tr>
             <th scope="row" class="text-start">Товары</th>
-            {% for rate in home_ems_documents_cost %}
+            {% for rate in ems_goods_cost %}
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat }}</td>

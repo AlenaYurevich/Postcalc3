@@ -13,6 +13,7 @@ from .internal_transfer import cost_of_internal_transfer
 from .parcel_int import cost_of_parcel_int
 from .letter_int import cost_of_letter_int
 from .package_int import cost_of_package_int
+from .ems_int import find_documents_cost, find_goods_cost
 
 
 def calculation_view(request):
@@ -155,13 +156,18 @@ def ems_int_view(request):
     if request.method == "POST":
         form = EmsIntForm(request.POST)
         if form.is_valid():
-            destination = request.POST.get('destination')
+            destination = int(request.POST.get('destination'))
+            print(destination)
             item_weight = int(request.POST.get('weight'))
             declared_value = str(request.POST.get('declared_value'))
+            ems_documents_cost = find_documents_cost(destination, item_weight, declared_value)
+            ems_goods_cost = find_goods_cost(destination, item_weight, declared_value)
             context = {'form': form,
                        'destination': destination,
                        'item_weight': item_weight,
                        'declared_value': declared_value,
+                       'ems_documents_cost': ems_documents_cost,
+                       'ems_goods_cost': ems_goods_cost,
                        }
             return render(request, 'ems_international.html', context)  # Внутри фиг скобок
     else:
