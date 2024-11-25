@@ -1,3 +1,4 @@
+import math
 from .sheets import sheet8
 from .vat import vat
 from .round_as_excel import round_as_excel
@@ -24,12 +25,16 @@ def find_numbers_by_country(row_number, item):
     if row_data:  # Проверка, что строка не пустая
         row_data = row_data[0]  # Извлекаем данные строки (поскольку iter_rows возвращает список кортежей)
         if item == "documents":
-            data = (row_data[3], row_data[4])  # Получаем данные из 3-й и 4-й колонок
+            data = (row_data[3], row_data[4], row_data[7])  # Получаем данные из 3-й 4-й и 7 колонок
         else:
             data = (row_data[5], row_data[6], row_data[7])  # Получаем данные из 5 6 7 колонок
         return data
     # Если row_data пустой или None, возвращаем None, None
     return None
+
+
+def ems_weight(weight):
+    return math.ceil((weight - 1000) / 1000)
 
 
 def find_item_cost(destination, weight, declared_value, item):
@@ -42,16 +47,16 @@ def find_item_cost(destination, weight, declared_value, item):
     elif weight <= 1000:
         fiz = col[1]
     else:
-        fiz = col[1] + col[2]
-    yur = fiz
+        fiz = col[1] + ems_weight(weight) * col[2]
+        print("множитель веса", ems_weight(weight))
     if declared_value in ("нет", "", 0, "0"):
         for_declared = ''
     else:
         for_declared = cost_for_declared_value(declared_value)
         fiz += for_declared
-        yur = fiz
-        yur = round_as_excel(yur)
         for_declared = round_as_excel(cost_for_declared_value(declared_value)) * 1.2
+    yur = fiz
+    yur = round_as_excel(yur)
     item_vat_yur = vat(yur)
     fiz = round_as_excel(fiz + item_vat_yur)
     yur = fiz
@@ -68,14 +73,14 @@ def find_item_cost(destination, weight, declared_value, item):
 
 
 def find_documents_cost(destination, weight, declared_value):
-    if weight > 1000:
-        return [{'fiz': "Макс. вес 1 кг", 'yur': "-", 'item_vat': "-"}]
+    if weight > 31500:
+        return [{'fiz': "Макс. вес 31,5 кг", 'yur': "-", 'item_vat': "-"}]
     return find_item_cost(destination, weight, declared_value, 'documents')
 
 
 def find_goods_cost(destination, weight, declared_value):
-    if weight > 30000:
-        return [{'fiz': "Макс. вес 30 кг", 'yur': "-", 'item_vat': "-"}]
+    if weight > 31500:
+        return [{'fiz': "Макс. вес 31,5 кг", 'yur': "-", 'item_vat': "-"}]
     return find_item_cost(destination, weight, declared_value, 'goods')
 
 
