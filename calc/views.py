@@ -13,7 +13,7 @@ from .internal_transfer import cost_of_internal_transfer
 from .parcel_int import cost_of_parcel_int
 from .letter_int import cost_of_letter_int
 from .package_int import cost_of_package_int
-from .ems_int import find_documents_cost, find_goods_cost
+from .ems_int import cost_of_ems_int
 
 
 def calculation_view(request):
@@ -160,8 +160,9 @@ def ems_int_view(request):
             print(destination)
             item_weight = int(request.POST.get('weight'))
             declared_value = str(request.POST.get('declared_value'))
-            ems_documents_cost = find_documents_cost(destination, item_weight, declared_value)
-            ems_goods_cost = find_goods_cost(destination, item_weight, declared_value)
+            ems_int_cost = cost_of_ems_int(destination, item_weight, declared_value)
+            ems_documents_cost = ems_int_cost[0]
+            ems_goods_cost = ems_int_cost[1]
             context = {'form': form,
                        'destination': destination,
                        'item_weight': item_weight,
