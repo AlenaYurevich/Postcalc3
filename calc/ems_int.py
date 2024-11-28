@@ -40,15 +40,18 @@ def ems_weight(weight):
 def find_item_cost(destination, weight, declared_value, item):
     price_row = []
     col = find_numbers_by_country(destination, item)
+    print("data", col)
     if type(col[0]) is str:
         return [{'fiz': "отправления не принимаются"}]
-    if weight <= 500:
-        fiz = col[0]
+    if weight <= col[3]:
+        print(col[3])
+        fiz = col[1] + ems_weight(weight) * col[2]
+        print('fiz', fiz)
+        print("множитель веса", ems_weight(weight))
     elif weight <= 1000:
         fiz = col[1]
-    elif weight <= col[3]:
-        fiz = col[1] + ems_weight(weight) * col[2]
-        print("множитель веса", ems_weight(weight))
+    elif weight <= 500:
+        fiz = col[0]
     else:
         fiz = 0
     if declared_value in ("нет", "", 0, "0"):
@@ -75,7 +78,7 @@ def find_item_cost(destination, weight, declared_value, item):
 
 
 def cost_of_ems_int(destination, weight, declared_value):
-    max_weight = find_numbers_by_country(destination, 'documents')[3]
+    max_weight = find_numbers_by_country(destination, 'documents')[3] * 1000
     if weight > max_weight:
         return [
             [{'fiz': f"Макс. вес {max_weight} кг", 'yur': "-", 'item_vat': "-"}],

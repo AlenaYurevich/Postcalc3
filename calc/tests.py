@@ -7,6 +7,7 @@ from .internal_transfer import cost_of_internal_transfer
 from .parcel_int import cost_of_parcel_int
 from .letter_int import cost_of_letter_int
 from .package_int import cost_of_package_int
+from .ems_int import cost_of_ems_int
 
 
 def test_simple():
@@ -289,4 +290,11 @@ def test_package_int2():
         [{'fiz': '41,17', 'yur': '41,17', 'item_vat': '6,86'}],
         [{'fiz': '35,42', 'yur': '35,42', 'item_vat': '5,90'}],
         [{'fiz': '45,91', 'yur': '45,91', 'item_vat': '7,65'}]
+    ]
+
+
+def test_ems_int():
+    assert cost_of_ems_int(153, 1035, 1.25) == [  # в Москву- destination 153
+        [{'fiz': '50,69', 'yur': '50,69', 'item_vat': '', 'for_declared': '0,05'}],
+        [{'fiz': '52,61', 'yur': '52,61', 'item_vat': '', 'for_declared': '0,05'}]
     ]
