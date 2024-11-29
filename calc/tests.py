@@ -294,7 +294,11 @@ def test_package_int2():
 
 
 def test_ems_int():
-    assert cost_of_ems_int(153, 1035, 1.25) == [  # в Москву- destination 153
-        [{'fiz': '50,69', 'yur': '50,69', 'item_vat': '', 'for_declared': '0,05'}],
-        [{'fiz': '52,61', 'yur': '52,61', 'item_vat': '', 'for_declared': '0,05'}]
+    assert cost_of_ems_int(153, 1035, 12.24) == [  # в Москву- destination 153
+        [{'fiz': '51,08', 'yur': '51,08', 'item_vat': '8,51', 'for_declared': '0,44'}],
+        [{'fiz': '53,00', 'yur': '53,00', 'item_vat': '8,83', 'for_declared': '0,44'}]
+    ]
+    assert cost_of_ems_int(194, 1035, 12.24) == [  # Украина - destination 194
+        [{'fiz': "отправления не принимаются"}],
+        [{'fiz': "отправления не принимаются"}]
     ]
