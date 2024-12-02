@@ -203,27 +203,13 @@
             <td> {{ rate.for_declared_fiz }} {{rate.sep1}} {{ rate.for_declared_yur }}</td>
             {% endfor %}
           </tr>
-        <tr>
-            <th scope="row" class="text-start table-info" colspan="7">Отправления EMS:</th>
-          </tr>
-        <tr>
-            <th scope="row" class="text-start">Прием в отделении связи</th>
-            {% for rate in post_office_ems_goods_cost %}
-            <td> {{ rate.fiz }}</td>
-            <td> {{ rate.yur }}</td>
-            <td> {{ rate.item_vat }}</td>
-            <td> {{ rate.for_declared }}</td>
-            {% endfor %}
+        <tr class="border-info table-info">
+            <th scope="row" class="text-start"><a class="me-3 py-2 link-body-emphasis text-decoration-none text-info"
+                                                  href="ems_int" target="blank">EMS экспресс-доставка</a></th>
+             <td colspan="6"><a class="me-3 py-2 link-body-emphasis text-info" href="ems_int"
+                                  target="blank">Для расчета экспресс-доставки EMS перейдите по ссылке</a></td>
         </tr>
-         <tr>
-            <th scope="row" class="text-start">Прием в офисе или на дому</th>
-            {% for rate in home_ems_goods_cost %}
-            <td> {{ rate.fiz }}</td>
-            <td> {{ rate.yur }}</td>
-            <td> {{ rate.item_vat }}</td>
-            <td> {{ rate.for_declared }}</td>
-            {% endfor %}
-          </tr>
+
         </tbody>
       </table>
     </div>
