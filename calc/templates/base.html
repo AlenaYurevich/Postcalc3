@@ -33,6 +33,9 @@
         border: 0;
         outline: 0;}
     </style>
+<!-- Yandex.RTB -->
+<script>window.yaContextCb=window.yaContextCb||[]</script>
+<script src="https://yandex.ru/ads/system/context.js" async></script>
 </head>
 <body>
 <div class="container py-3">
@@ -56,19 +59,22 @@
         <li class="nav-item active">
           <a class="nav-link dropdown-toggle text-info" href="#" id="dropdown03" data-toggle="dropdown" aria-expanded="false">по Беларуси</a>
           <ul class="dropdown-menu" aria-labelledby="dropdown03">
-            <li><a class="dropdown-item" href="{% url 'main' %}">отправления по Беларуси</a></li>
-            <li><a class="dropdown-item" href="{% url 'ems_express_dostavka' %}">отправления EMS</a></li>
+            <li><a class="dropdown-item" href="{% url 'main' %}">доставка по Беларуси</a></li>
+            <li><a class="dropdown-item" href="{% url 'ems_express_dostavka' %}">EMS экспресс-доставка</a></li>
             <li><a class="dropdown-item" href="{% url 'internal_transfer' %}">денежный перевод</a></li>
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-decoration-none text-info" href="{% url 'international' %}">Международные</a>
+            <a class="nav-link dropdown-toggle text-info" href="#" id="dropdown04" data-toggle="dropdown" aria-expanded="false">международные</a>
+          <ul class="dropdown-menu" aria-labelledby="dropdown03">
+            <li><a class="dropdown-item" href="{% url 'international' %}">международная доставка</a></li>
+            <li><a class="dropdown-item" href="{% url 'ems_int' %}">EMS экспресс-доставка</a></li>
+          </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link text-decoration-none text-info" href="{% url 'news_index' %}">Новости</a>
         </li>
-
-          <li class="nav-item">
+        <li class="nav-item">
             <div class="lang_choose_cont">
             <div id="bxdynamic_jmonnO_start" style="display:none"></div>
             <div id="google_translate_element"></div>
@@ -192,8 +198,7 @@
 </script>
        <div id="bxdynamic_jmonnO_end" style="display:none"></div>
        </div>
-
-          </li>
+       </li>
       </ul>
     </div>
   </div>
@@ -204,6 +209,18 @@
 {% endblock %}
 
    <footer class="footer my-md-5 pt-md-5 border-top mt-auto">
+       <div class="row">
+       <!-- Yandex.RTB R-A-13159426-1 -->
+<script>
+window.yaContextCb.push(() => {
+    Ya.Context.AdvManager.render({
+        "blockId": "R-A-13159426-1",
+        "type": "floorAd",
+        "platform": "desktop"
+    })
+})
+</script>
+       </div>
     <div class="row">
       <div class="col-12 col-md mb-4">
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="20" fill="currentColor" class="bi bi-calculator text-info" role="img" viewBox="0 0 16 16">
