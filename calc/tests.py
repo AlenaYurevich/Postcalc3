@@ -4,6 +4,7 @@ from .parcel import cost_of_parcel
 from .parcel_3_4_5 import cost_of_parcel_3_4_5
 from .qr_box import cost_of_parcel_qr
 from .internal_transfer import cost_of_internal_transfer
+from .ems_cost import find_documents_cost, find_goods_cost
 from .parcel_int import cost_of_parcel_int
 from .letter_int import cost_of_letter_int
 from .package_int import cost_of_package_int
@@ -241,9 +242,33 @@ def test_parcel_int():
         'rub': " руб."}]]
 
 
-"""
-Добавить тест на ЕМS
-"""
+def test_express_parcel():  # 4 зона P12 - P1 Орша - Брест
+    """
+    (zone, weight, declared_value, delivery, notification, fragile)
+    дописать тест товары
+    """
+    assert find_documents_cost(4, 1750, 0, 1, 4, "None") == [
+        [{'fiz': '8,60',
+          'for_declared': '-',
+          'item_vat': '1,72',
+          'notification': '',
+          'yur': '10,32'}],
+        [{'fiz': '10,10',
+          'for_declared': '-',
+          'item_vat': '2,02',
+          'notification': '',
+          'yur': '12,12'}]]
+    assert find_documents_cost(4, 1750, 10.25, 1, 4, "None") == [
+        [{'fiz': '8,97',
+          'for_declared': '0,37',
+          'item_vat': '1,78',
+          'notification': '',
+          'yur': '10,69'}],
+        [{'fiz': '10,47',
+          'for_declared': '0,37',
+          'item_vat': '2,08',
+          'notification': '',
+          'yur': '12,49'}]]
 
 
 def test_letter_int():
