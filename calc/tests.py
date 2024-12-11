@@ -249,26 +249,48 @@ def test_express_parcel():  # 4 зона P12 - P1 Орша - Брест
     """
     assert find_documents_cost(4, 1750, 0, 1, 4, "None") == [
         [{'fiz': '8,60',
-          'for_declared': '-',
+          'for_declared_yur': '-',
           'item_vat': '1,72',
           'notification': '',
           'yur': '10,32'}],
         [{'fiz': '10,10',
-          'for_declared': '-',
+          'for_declared_yur': '-',
           'item_vat': '2,02',
           'notification': '',
           'yur': '12,12'}]]
-    assert find_documents_cost(4, 1750, 10.25, 1, 4, "None") == [
-        [{'fiz': '8,97',
-          'for_declared': '0,37',
+    assert find_documents_cost(4, 1750, 10.75, 1, 4, "None") == [
+        [{'fiz': '8,99',
+          'for_declared_yur': '0,38',
           'item_vat': '1,78',
           'notification': '',
-          'yur': '10,69'}],
-        [{'fiz': '10,47',
-          'for_declared': '0,37',
+          'yur': '10,70'}],
+        [{'fiz': '10,49',
+          'for_declared_yur': '0,38',
           'item_vat': '2,08',
           'notification': '',
-          'yur': '12,49'}]]
+          'yur': '12,50'}]]
+    assert find_goods_cost(5, 21750, 0, 1, 4, "None") == [  # P30-P13 Дубровно-Кобрин
+        [{'fiz': '36,15',
+          'for_declared_yur': '-',
+          'item_vat': '7,23',
+          'notification': '',
+          'yur': '43,38'}],
+        [{'fiz': '37,10',
+          'for_declared_yur': '-',
+          'item_vat': '7,42',
+          'notification': '',
+          'yur': '44,52'}]]
+    assert find_goods_cost(5, 21750, 12.58, 1, 4, "None") == [  # P30-P13 Дубровно-Кобрин
+        [{'fiz': '36,60',
+          'for_declared_yur': '0,46',
+          'item_vat': '7,31',
+          'notification': '',
+          'yur': '43,84'}],
+        [{'fiz': '37,55',
+          'for_declared_yur': '0,46',
+          'item_vat': '7,50',
+          'notification': '',
+          'yur': '44,98'}]]
 
 
 def test_letter_int():

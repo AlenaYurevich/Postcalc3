@@ -56,7 +56,18 @@
         </thead>
         <tbody>
           <tr>
-            <th scope="row" class="text-start">Простое письмо, бандероль, мелкий пакет</th>
+            <th scope="row" class="text-start">Простое письмо, бандероль</th>
+            {% for rate in simple %}
+            <td> {{ rate.fiz }}</td>
+            <td> {{ rate.yur }}</td>
+            <td> {{ rate.item_vat }}</td>
+            <td> {{ rate.for_declared }}</td>
+            <td> </td>
+            <td> {{ rate.tracking }}</td>
+            {% endfor %}
+          </tr>
+          <tr>
+            <th scope="row" class="text-start">Простой мелкий пакет</th>
             {% for rate in simple %}
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
@@ -78,7 +89,7 @@
             {% endfor %}
           </tr>
           <tr>
-            <th scope="row" class="text-start">Письмо, мелкий пакет с объявленной ценностью</th>
+            <th scope="row" class="text-start">Мелкий пакет с объявленной ценностью</th>
             {% for rate in value_letter %}
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
