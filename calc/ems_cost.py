@@ -95,12 +95,12 @@ def find_item_cost(zone, weight, declared_value, item, reception_place, delivery
         fiz = sheet6[f"{x}{row}"].value * delivery
         yur = sheet6[f"{x}{row}"].value * delivery2
         yur += cost_for_declared_value(declared_value)
-        for_declared = cost_for_declared_value(declared_value) * 1.2
-        fiz += for_declared
+        for_declared_yur = round_as_excel(cost_for_declared_value(declared_value)) * 1.2
+        fiz += cost_for_declared_value(declared_value) * 1.2
     else:
         fiz = sheet6[f"{x}{row}"].value * delivery
         yur = sheet6[f"{x}{row}"].value * delivery2
-        for_declared = "-"
+        for_declared_yur = "-"
     fiz *= for_fragile
     yur *= for_fragile
     fiz += notification
@@ -108,15 +108,13 @@ def find_item_cost(zone, weight, declared_value, item, reception_place, delivery
     notification = notification * 1.2
     if notification == 0:
         notification = ""
-    # item_vat_fiz = round_as_excel(vat(fiz))
     item_vat_yur = round_as_excel(vat(yur))
-    # fiz = round_as_excel(fiz + item_vat_fiz)
     yur = round_as_excel(yur + item_vat_yur)
     return [{
         "fiz": formatted(fiz),
         "yur": formatted(yur),
         "item_vat": formatted(item_vat_yur),
-        "for_declared": formatted(for_declared),
+        "for_declared_yur": formatted(for_declared_yur),
         'notification': formatted(notification)
     }]
 
