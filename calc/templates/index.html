@@ -68,7 +68,7 @@
           </tr>
           <tr>
             <th scope="row" class="text-start">Простой мелкий пакет</th>
-            {% for rate in simple %}
+            {% for rate in package %}
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat }}</td>
@@ -90,7 +90,7 @@
           </tr>
           <tr>
             <th scope="row" class="text-start">Мелкий пакет с объявленной ценностью</th>
-            {% for rate in value_letter %}
+            {% for rate in value_package %}
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat }}</td>
@@ -165,9 +165,9 @@
             <th scope="row" class="text-start colspan='6'">QR box</th>
            {% for rate in qr_box %}
             <td> {{ rate.fiz }}</td>
-            <td> {{ rate.yur}}</td>
-            <td> {{ rate.item_vat_yur }}</td>
-            <td> {{ rate.for_declared_fiz }} {{rate.sep1}} {{ rate.for_declared_yur }}</td>
+            <td> </td>
+            <td> </td>
+            <td> {{ rate.for_declared_fiz }} </td>
             <td> {{ rate.notification }}</td>
             <td> {{ rate.tracking }}</td>
             {% endfor %}
@@ -188,7 +188,7 @@
       <div class="col">
         <div class="card mb-5 rounded-3 shadow-sm border-info">
           <div class="card-header py-3 border-info">
-            <h4 class="my-0 fw-normal">Простое письмо, бандероль, мелкий пакет</h4>
+            <h4 class="my-0 fw-normal">Простое письмо, бандероль</h4>
           </div>
           <div class="card-body">
             <h2 class="card-title pricing-card-title">
@@ -234,11 +234,11 @@
       <div class="col">
         <div class="card mb-5 rounded-3 shadow-sm border-info">
           <div class="card-header py-3 text-bg-info text-white border-info">
-            <h4 class="my-0 fw-normal">Письмо, мелкий пакет с объявленной ценностью</h4>
+            <h4 class="my-0 fw-normal">Мелкий пакет с объявленной ценностью</h4>
           </div>
           <div class="card-body">
             <h2 class="card-title pricing-card-title">
-              {% for rate in value_letter %}
+              {% for rate in value_package %}
            {{ rate.fiz }} {{ rate.sep}} {{ rate.yur }}
               <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
               {% endfor %}
@@ -397,7 +397,7 @@
           <div class="card-body">
             <h2 class="card-title pricing-card-title">
               {% for rate in qr_box %}
-              {{ rate.fiz }} {{ rate.sep2 }} {{ rate.yur }}
+              {{ rate.fiz }}
               <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
               {% endfor %}
             </h2>
@@ -418,10 +418,6 @@
         <div class="col">
         <!-- пустой див-->
         </div>
-
-
-
-
     </div>
   </main>
 

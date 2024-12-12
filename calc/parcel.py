@@ -30,11 +30,11 @@ def cost_of_parcel(item_weight, declared_value, notification):
     if item_weight <= 50000:
         if item_weight <= 1000:
             if declared_value in ("нет", "", 0, "0"):
-                fiz = sheet2['D29'].value
+                fiz = sheet2['D27'].value
                 """
                 округление вверх с точностью до двух знаков
                 """
-                yur = sheet2['H29'].value + round((sheet2['H30'].value * weight(item_weight, declared_value)
+                yur = sheet2['H27'].value + round((sheet2['H28'].value * weight(item_weight, declared_value)
                                                    * 100)/100, 4)
                 yur = round_as_excel(yur)
                 for_declared_fiz = ''
@@ -42,8 +42,8 @@ def cost_of_parcel(item_weight, declared_value, notification):
                 sep1 = ''
                 sep2 = '/'
             else:
-                fiz = sheet2['D29'].value + cost_for_declared_value(declared_value)
-                yur = sheet2['H29'].value + sheet2['H30'].value * weight(item_weight, declared_value)
+                fiz = sheet2['D27'].value + cost_for_declared_value(declared_value)
+                yur = sheet2['H27'].value + sheet2['H28'].value * weight(item_weight, declared_value)
                 yur = round_as_excel(yur)
                 for_declared_fiz = cost_for_declared_value(declared_value)
                 yur += cost_for_declared_value(declared_value)
@@ -52,17 +52,17 @@ def cost_of_parcel(item_weight, declared_value, notification):
                 sep1, sep2 = "/", "/"
         else:
             if declared_value in ("нет", "", 0, "0"):
-                fiz = sheet2['D31'].value + sheet2['D32'].value * weight(item_weight, declared_value)
-                yur = sheet2['H29'].value + sheet2['H30'].value * weight(item_weight, declared_value)
+                fiz = sheet2['D29'].value + sheet2['D30'].value * weight(item_weight, declared_value)
+                yur = sheet2['H27'].value + sheet2['H28'].value * weight(item_weight, declared_value)
                 yur = round_as_excel(yur)
                 for_declared_fiz = ''
                 for_declared_yur = ''
                 sep1 = ''
                 sep2 = '/'
             else:
-                fiz = sheet2['D31'].value + sheet2['D32'].value * weight(item_weight, declared_value)
+                fiz = sheet2['D29'].value + sheet2['D30'].value * weight(item_weight, declared_value)
                 fiz += cost_for_declared_value(declared_value)
-                yur = sheet2['H29'].value + sheet2['H30'].value * weight(item_weight, declared_value)
+                yur = sheet2['H27'].value + sheet2['H28'].value * weight(item_weight, declared_value)
                 yur = round_as_excel(yur)
                 for_declared_fiz = cost_for_declared_value(declared_value)
                 yur += cost_for_declared_value(declared_value)

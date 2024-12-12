@@ -26,13 +26,13 @@ def weight(item_weight, declared_value):
 def cost_of_parcel_declared(item_weight, declared_value, notification):
     notification = notification_cost(notification)
     if item_weight <= 1000:
-        fiz = sheet2['D42'].value
+        fiz = sheet2['D40'].value
     elif item_weight <= 3000:
-        fiz = sheet2['D43'].value
+        fiz = sheet2['D41'].value
     elif item_weight <= 5000:
-        fiz = sheet2['D44'].value
+        fiz = sheet2['D42'].value
     else:
-        fiz = sheet2['D46'].value + sheet2['D47'].value * weight(item_weight, declared_value)
+        fiz = sheet2['D44'].value + sheet2['D45'].value * weight(item_weight, declared_value)
         fiz = round_as_excel(fiz)
     for_declared = ''
     if declared_value not in ("нет", "", 0, "0"):
