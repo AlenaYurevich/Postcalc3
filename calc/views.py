@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .forms import PostForm, EmsForm, TransferForm, ParcelIntForm, EmsIntForm
-from .letter import cost_of_simple, cost_of_registered, cost_of_value_letter
+from .letter import cost_of_simple, cost_of_registered
+from .package import cost_of_package, cost_of_value_package
 from .first_class import cost_of_first_class
 from .parcel import cost_of_parcel
 from .sml import cost_of_sml
@@ -25,7 +26,8 @@ def calculation_view(request):
             notification = int(request.POST.get('notification'))
             simple = cost_of_simple(item_weight)
             registered = cost_of_registered(item_weight, notification)
-            value_letter = cost_of_value_letter(item_weight, declared_value, notification)
+            package = cost_of_package(item_weight)
+            value_package = cost_of_value_package(item_weight, declared_value, notification)
             first_class = cost_of_first_class(item_weight)
             parcel = cost_of_parcel(item_weight, declared_value, notification)
             sml = cost_of_sml()
@@ -33,7 +35,8 @@ def calculation_view(request):
             qr_box = cost_of_parcel_qr(item_weight, declared_value, notification)
             context = {'form': form, 'simple': simple,
                        'registered': registered,
-                       'value_letter': value_letter,
+                       'package': package,
+                       'value_package': value_package,
                        'first_class': first_class,
                        'parcel': parcel,
                        'sml': sml,

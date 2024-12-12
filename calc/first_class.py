@@ -20,8 +20,8 @@ def cost_of_first_class(item_weight):
         file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files/letter2.xlsx')  # первый файл
         workbook = load_workbook(filename=file_path)
         sheet = workbook.active
-        fiz = sheet['D23'].value + sheet['D24'].value * weight_step(item_weight)
-        yur = sheet['H23'].value + sheet['H24'].value * weight_step(item_weight)
+        fiz = sheet['D21'].value + sheet['D22'].value * weight_step(item_weight)
+        yur = sheet['H21'].value + sheet['H22'].value * weight_step(item_weight)
         item_vat = vat(yur)
         yur += item_vat
         rate = {

@@ -1,5 +1,5 @@
 import math
-from .sheets import sheet1, sheet2
+from .sheets import sheet2
 from .vat import vat
 from .round_as_excel import round_as_excel
 from .format import formatted
@@ -11,11 +11,11 @@ def weight_step(weight):
     return math.ceil((weight - 20) / 20)
 
 
-def cost_of_simple(item_weight):
+def cost_of_package(item_weight):
     price_row = []
     if item_weight <= 2000:
-        fiz = sheet1['B5'].value + sheet1['B6'].value * weight_step(item_weight)
-        yur = sheet1['C5'].value + sheet1['C6'].value * weight_step(item_weight)
+        fiz = sheet2['D13'].value + sheet2['D16'].value * weight_step(item_weight)
+        yur = sheet2['H13'].value + sheet2['H16'].value * weight_step(item_weight)
         item_vat = vat(yur)
         yur += item_vat
         rate = {
@@ -72,8 +72,7 @@ def cost_of_registered(item_weight, notification):
 
 
 """
-Письмо, мелкий пакет с объявленной ценностью
-проверить, можно ли перенести в новый файл
+Мелкий пакет с объявленной ценностью
 """
 
 

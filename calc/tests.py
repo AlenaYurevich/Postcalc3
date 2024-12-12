@@ -1,4 +1,4 @@
-from .letter import cost_of_simple, cost_of_registered, cost_of_value_letter
+from .letter import cost_of_simple, cost_of_registered, cost_of_value_package
 from .first_class import cost_of_first_class
 from .parcel import cost_of_parcel
 from .parcel_3_4_5 import cost_of_parcel_3_4_5
@@ -25,7 +25,7 @@ def test_simple():
     }]
 
 
-def test_registered():
+def test_registered():  # письмо, бандероль, мелкий пакет
     assert cost_of_registered(1000, 4) == [{
             'fiz': '5,94',
             'yur': '5,94',
@@ -40,7 +40,7 @@ def test_registered():
 
 
 def test_value_letter():
-    assert cost_of_value_letter(22, 10, 4) == [{
+    assert cost_of_value_package(22, 10, 4) == [{
         'fiz': '3,90',
         'yur': '4,26',
         'item_vat': '0,71',
@@ -50,7 +50,7 @@ def test_value_letter():
         'rub': " руб.",
         'notification': ""
     }]
-    assert cost_of_value_letter(915, 1.25, 4) == [{
+    assert cost_of_value_package(915, 1.25, 4) == [{
         'fiz': '6,23',
         'yur': '6,59',
         'item_vat': '1,10',
@@ -60,10 +60,10 @@ def test_value_letter():
         'rub': " руб.",
         'notification': ""
     }]
-    assert cost_of_value_letter(2001, 10, 4) == [{
+    assert cost_of_value_package(2001, 10, 4) == [{
         'fiz': 'Макс. вес 2 кг', 'sep': ''
     }]
-    assert cost_of_value_letter(22, 10, 1) == [{
+    assert cost_of_value_package(22, 10, 1) == [{
         'fiz': '4,68',
         'yur': '5,04',
         'item_vat': '0,84',
@@ -178,14 +178,9 @@ def test_parcel_3_4_5():
 def test_parcel_qr():
     assert cost_of_parcel_qr(6545, 1.55, 3) == [{
         'fiz': '5,54',
-        'yur': '6,54',
         'for_declared_fiz': '0,50',
-        'for_declared_yur': '0,60',
-        'item_vat_yur': '1,09',
         'rub': " руб.",
         'notification': '0,54',
-        'sep1': '/',
-        'sep2': '/',
         'tracking': 'да',
     }]
 
