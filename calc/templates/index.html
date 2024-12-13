@@ -211,6 +211,29 @@
       <div class="col">
         <div class="card mb-5 rounded-3 shadow-sm border-info">
           <div class="card-header py-3 border-info">
+            <h4 class="my-0 fw-normal">Простой мелкий пакет</h4>
+          </div>
+          <div class="card-body">
+            <h2 class="card-title pricing-card-title">
+             {% for rate in package %}
+             {{ rate.fiz }}
+             <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
+             {% endfor %}
+            </h2>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>нет отслеживания</li>
+              <li>оплата марками</li>
+              <li>прием в почтовый ящик/оператором</li>
+              <li>Д + 3</li>
+              <li>вручение в почтовый ящик/оператором</li>
+            </ul>
+            <label class="w-100 btn btn-lg btn-info text-white">доступный вариант</label>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card mb-5 rounded-3 shadow-sm border-info">
+          <div class="card-header py-3 border-info">
             <h4 class="my-0 fw-normal">Заказное письмо, бандероль, мелкий пакет</h4>
           </div>
           <div class="card-body">
@@ -304,9 +327,6 @@
         </div>
       </div>
 
-        <div class="col">
-        <!--пустой див-->
-        </div>
       <div class="col">
         <div class="card mb-5 rounded-3 shadow-sm border-info">
           <div class="card-header py-3 text-bg-info text-white border-info">
