@@ -4,6 +4,7 @@ from .vat import vat
 from .round_as_excel import round_as_excel
 from .format import formatted
 from .declared_value import cost_for_declared_value
+from .constants import PARCEL_VALUE_RATE
 
 
 """
@@ -53,7 +54,7 @@ def find_parcel_int_cost(destination, item_weight, declared_value, priority):
         sep1 = ''
         sep2 = '/'
     else:
-        fiz = 5.85 + col[0] + col[1] * weight(item_weight, declared_value)
+        fiz = PARCEL_VALUE_RATE + col[0] + col[1] * weight(item_weight, declared_value)
         fiz = round(fiz, 4)
         for_declared_fiz = cost_for_declared_value(declared_value)
         fiz += for_declared_fiz
