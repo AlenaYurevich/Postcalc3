@@ -4,8 +4,8 @@ from .sheets import sheet3, sheet5, sheet8
 from .countries import read_the_country
 
 
-Choices_notice = [(1, f'простое 0,78 руб.'),
-                  (2, f'заказное 2,52 руб. '),
+Choices_notice = [(1, f'простое 0,84 руб.'),
+                  (2, f'заказное 2,64 руб. '),
                   (3, f'электронное (посредством Viber, SMS, email) 0,54 руб.'),
                   (4, 'без уведомления',)]
 
