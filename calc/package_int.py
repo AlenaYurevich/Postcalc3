@@ -48,9 +48,9 @@ def find_package_int(destination, item_weight, track, priority):
     else:
         add_cost = 0
     if track == "simple":
-        fiz = data[0] + round_as_excel(data[1] * weight(item_weight, False))
+        fiz = round_as_excel(data[0] + data[1] * weight(item_weight, False))
     else:
-        fiz = data[0] + round_as_excel(data[1] * weight(item_weight, True)) + add_cost
+        fiz = round_as_excel(data[0] + data[1] * weight(item_weight, True)) + add_cost
     item_vat = vat(fiz)
     fiz = round_as_excel(fiz + item_vat)
     yur = fiz

@@ -197,28 +197,28 @@ def test_internal_transfer():
 
 def test_parcel_int():
     assert cost_of_parcel_int(12, 1000, '') == [[{
-        'fiz': '59,15',
-        'yur': '70,98',
-        'item_vat_yur': '11,83',
+        'fiz': '62,10',
+        'yur': '74,52',
+        'item_vat_yur': '12,42',
         'for_declared_fiz': '',
         'for_declared_yur': '',
         'tracking': "да",
         'sep1': '',
         'sep2': '/',
         'rub': " руб."}],
-        [{'fiz': '60,60',
+        [{'fiz': '63,65',
           'for_declared_fiz': '',
           'for_declared_yur': '',
-          'item_vat_yur': '12,12',
+          'item_vat_yur': '12,73',
           'rub': ' руб.',
           'sep1': '',
           'sep2': '/',
           'tracking': 'да',
-          'yur': '72,72'}]]
+          'yur': '76,38'}]]
     assert cost_of_parcel_int(12, 1045, 1.25) == [[{
-        'fiz': '65,57',
-        'yur': '78,68',  # на сайте Белпочта неправильно, 78,70
-        'item_vat_yur': '13,11',
+        'fiz': '68,85',
+        'yur': '82,62',
+        'item_vat_yur': '13,77',
         'for_declared_fiz': '0,04',
         'for_declared_yur': '0,05',
         'sep1': '/',
@@ -226,9 +226,9 @@ def test_parcel_int():
         'tracking': "да",
         'rub': " руб."
     }],
-      [{'fiz': '67,02',
-        'yur': '80,42',  # на сайте Белпочта неправильно, 80,44
-        'item_vat_yur': '13,40',
+      [{'fiz': '70,40',
+        'yur': '84,48',
+        'item_vat_yur': '14,08',
         'for_declared_fiz': '0,04',
         'for_declared_yur': '0,05',
         'sep1': '/',
@@ -290,55 +290,56 @@ def test_express_parcel():  # 4 зона P12 - P1 Орша - Брест
 
 def test_letter_int():
     assert cost_of_letter_int(1045, 1.25, 12) == [
-        [{'fiz': '48,48',
-          'yur': '48,48',
-          'item_vat_yur': '8,08',
+        [{'fiz': '50,88',
+          'yur': '50,88',
+          'item_vat_yur': '8,48',
           'for_declared': '',
           'rub': " руб.",
           'tracking': "нет", }],
-        [{'fiz': '69,54',
-          'yur': '69,54',
-          'item_vat_yur': '11,59',
+        [{'fiz': '77,34',
+          'yur': '77,34',
+          'item_vat_yur': '12,89',
           'for_declared': '',
           'rub': " руб.",
           'tracking': "нет", }],
-        [{'fiz': '75,30', 'yur': '75,30', 'item_vat': '12,55'}],
+        [{'fiz': '83,40', 'yur': '83,40', 'item_vat': '13,90'}],  # tracked priority
         [{'fiz': 'Отправления не принимаются'}],
-        [{'fiz': '80,04', 'yur': '80,04', 'item_vat': '13,34'}],
+        [{'fiz': '88,92', 'yur': '88,92', 'item_vat': '14,82'}],
         [{'fiz': 'Отправления не принимаются'}],
-        [{'fiz': '82,67',
+        [{'fiz': '91,13',
+          'yur': '91,13',
           'for_declared': '0,05',
-          'item_vat_yur': '13,78',
+          'item_vat_yur': '15,19',
           'rub': ' руб.',
           'tracking': 'да',
-          'yur': '82,67'}]
+          }]
     ]
 
 
 def test_package_int():
     assert cost_of_package_int(11, 1045) == [  # в Австралию - destination 11
-        [{'fiz': '83,92', 'yur': '83,92', 'item_vat': '13,99'}],
-        [{'fiz': '83,92', 'yur': '83,92', 'item_vat': '13,99'}],
-        [{'fiz': '86,18', 'yur': '86,18', 'item_vat': '14,36'}],
+        [{'fiz': '88,10', 'yur': '88,10', 'item_vat': '14,68'}],
+        [{'fiz': '88,10', 'yur': '88,10', 'item_vat': '14,68'}],
+        [{'fiz': '90,49', 'yur': '90,49', 'item_vat': '15,08'}],  # tracked_priority
         [{'fiz': 'Отправления не принимаются'}],
-        [{'fiz': '90,92', 'yur': '90,92', 'item_vat': '15,15'}]
+        [{'fiz': '96,01', 'yur': '96,01', 'item_vat': '16,00'}]
     ]
 
 
 def test_package_int2():
     assert cost_of_package_int(161, 1035) == [  # в Россию - destination 161
-        [{'fiz': '26,05', 'yur': '26,05', 'item_vat': '4,34'}],
-        [{'fiz': '37,14', 'yur': '37,14', 'item_vat': '6,19'}],
-        [{'fiz': '41,17', 'yur': '41,17', 'item_vat': '6,86'}],
-        [{'fiz': '35,42', 'yur': '35,42', 'item_vat': '5,90'}],
-        [{'fiz': '45,91', 'yur': '45,91', 'item_vat': '7,65'}]
+        [{'fiz': '27,41', 'yur': '27,41', 'item_vat': '4,57'}],
+        [{'fiz': '42,58', 'yur': '42,58', 'item_vat': '7,10'}],
+        [{'fiz': '46,67', 'yur': '46,67', 'item_vat': '7,78'}],
+        [{'fiz': '37,80', 'yur': '37,80', 'item_vat': '6,30'}],
+        [{'fiz': '52,19', 'yur': '52,19', 'item_vat': '8,70'}]
     ]
 
 
 def test_ems_int():
     assert cost_of_ems_int(153, 1035, 12.24) == [  # в Москву- destination 153
-        [{'fiz': '51,08', 'yur': '51,08', 'item_vat': '8,51', 'for_declared': '0,44'}],
-        [{'fiz': '53,00', 'yur': '53,00', 'item_vat': '8,83', 'for_declared': '0,44'}]
+        [{'fiz': '55,64', 'yur': '55,64', 'item_vat': '9,27', 'for_declared': '0,44'}],
+        [{'fiz': '58,10', 'yur': '58,10', 'item_vat': '9,68', 'for_declared': '0,44'}]
     ]
     assert cost_of_ems_int(194, 1035, 12.24) == [  # Украина - destination 194
         [{'fiz': "отправления не принимаются"}],
