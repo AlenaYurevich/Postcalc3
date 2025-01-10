@@ -202,39 +202,37 @@ def test_parcel_int():
         'item_vat_yur': '12,42',
         'for_declared_fiz': '',
         'for_declared_yur': '',
-        'tracking': "да",
-        'sep1': '',
-        'sep2': '/',
-        'rub': " руб."}],
+        'sep1': '', }],
         [{'fiz': '63,65',
+          'yur': '76,38',
           'for_declared_fiz': '',
           'for_declared_yur': '',
           'item_vat_yur': '12,73',
-          'rub': ' руб.',
-          'sep1': '',
-          'sep2': '/',
-          'tracking': 'да',
-          'yur': '76,38'}]]
+          'sep1': '', }]]
     assert cost_of_parcel_int(12, 1045, 1.25) == [[{
         'fiz': '68,85',
         'yur': '82,62',
         'item_vat_yur': '13,77',
         'for_declared_fiz': '0,04',
         'for_declared_yur': '0,05',
-        'sep1': '/',
-        'sep2': '/',
-        'tracking': "да",
-        'rub': " руб."
-    }],
+        'sep1': '/', }],
       [{'fiz': '70,40',
         'yur': '84,48',
         'item_vat_yur': '14,08',
         'for_declared_fiz': '0,04',
         'for_declared_yur': '0,05',
-        'sep1': '/',
-        'sep2': '/',
-        'tracking': "да",
-        'rub': " руб."}]]
+        'sep1': '/', }]]
+
+
+def test_parcel_int2():
+    assert cost_of_parcel_int(225, 26000, '') == [[{  # Экваториальная Гвинея
+        'fiz': '788,60',
+        'yur': '946,32',
+        'item_vat_yur': '157,72',
+        'for_declared_fiz': '',
+        'for_declared_yur': '',
+        'sep1': '', }],
+        [{'fiz': "Макс. вес 20 кг", 'yur': "-", 'item_vat_yur': "-", 'for_declared': "-"}]]
 
 
 def test_express_parcel():  # 4 зона P12 - P1 Орша - Брест
