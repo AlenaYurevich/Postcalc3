@@ -33,9 +33,9 @@ def find_numbers_by_country(row_number, priority):
     if row_data:  # Проверка, что строка не пустая
         row_data = row_data[0]  # Извлекаем данные строки (поскольку iter_rows возвращает список кортежей)
         if priority == "non_priority":
-            data = (row_data[3], row_data[4])  # Получаем данные из 3-й и 4-й колонок
+            data = (row_data[3], row_data[4], row_data[8])  # Получаем данные из 3-й и 4-й колонок
         else:
-            data = (row_data[5], row_data[6])  # Получаем данные из 5-й и 6-й колонок
+            data = (row_data[5], row_data[6], row_data[9])  # Получаем данные из 5-й и 6-й колонок
         return data
     # Если row_data пустой или None, возвращаем None, None
     return None
@@ -52,7 +52,6 @@ def find_parcel_int_cost(destination, item_weight, declared_value, priority):
         for_declared_fiz = ''
         for_declared_yur = ''
         sep1 = ''
-        sep2 = '/'
     else:
         fiz = PARCEL_VALUE_RATE + col[0] + col[1] * weight(item_weight, declared_value)
         fiz = round(fiz, 4)
@@ -61,7 +60,7 @@ def find_parcel_int_cost(destination, item_weight, declared_value, priority):
         yur = fiz
         yur = round_as_excel(yur)
         for_declared_yur = round_as_excel(cost_for_declared_value(declared_value)) * 1.2
-        sep1, sep2 = "/", "/"
+        sep1 = '/'
     item_vat_yur = vat(yur)
     yur = round_as_excel(yur + item_vat_yur)
     rate = {
@@ -70,10 +69,7 @@ def find_parcel_int_cost(destination, item_weight, declared_value, priority):
         'item_vat_yur': item_vat_yur,
         'for_declared_fiz': for_declared_fiz,
         'for_declared_yur': for_declared_yur,
-        'rub': " руб.",
-        'tracking': "да",
-        'sep1': sep1,
-        'sep2': sep2,
+        'sep1': sep1
     }
     for key in rate:
         rate[key] = formatted(rate[key])
@@ -82,10 +78,17 @@ def find_parcel_int_cost(destination, item_weight, declared_value, priority):
 
 
 def cost_of_parcel_int(destination, item_weight, declared_value):
-    if item_weight > 50000:
+    max_weight_non_prior = find_numbers_by_country(destination, "non_priority")[2]
+    max_weight_prior = find_numbers_by_country(destination, "priority")[2]
+    if item_weight > max_weight_non_prior * 1000:
         return [
-            [{'fiz': "Макс. вес 50 кг", 'yur': "-", 'item_vat_yur': "-", 'for_declared': "-"}],
-            [{'fiz': "Макс. вес 50 кг", 'yur': "-", 'item_vat_yur': "-", 'for_declared': "-"}],
+            [{'fiz': f"Макс. вес {max_weight_non_prior} кг", 'yur': "-", 'item_vat_yur': "-", 'for_declared': "-"}],
+            [{'fiz': f"Макс. вес {max_weight_prior} кг", 'yur': "-", 'item_vat_yur': "-", 'for_declared': "-"}],
+        ]
+    elif max_weight_non_prior * 1000 > item_weight > max_weight_prior * 1000:
+        return [
+            find_parcel_int_cost(destination, item_weight, declared_value, "non_priority"),
+            [{'fiz': f"Макс. вес {max_weight_prior} кг", 'yur': "-", 'item_vat_yur': "-", 'for_declared': "-"}],
         ]
     return [find_parcel_int_cost(destination, item_weight, declared_value, "non_priority"),
             find_parcel_int_cost(destination, item_weight, declared_value, "priority")]
