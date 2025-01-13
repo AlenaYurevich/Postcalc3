@@ -19,7 +19,7 @@
     </div>
   </header>
   <hr>
-  {% for post in posts %}
+  {% for post in page_obj %}
  <div class="row">
     <div class="col-md-3 order-md-1">
            <img src = "{{ post.image_min.url }}" alt = "{{ post.alt }}"/>
@@ -32,5 +32,22 @@
   </div>
   <hr class="featurette-divider">
   {% endfor %}
+  <div class="pagination">
+  <span class="step-links">
+    {% if page_obj.has_previous %}
+      <a href="?page=1">&laquo; первая</a>
+      <a href="?page={{ page_obj.previous_page_number }}">предыдущая</a>
+    {% endif %}
+
+    <span class="current">
+      Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+    </span>
+
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">следующая</a>
+      <a href="?page={{ page_obj.paginator.num_pages }}">последняя &raquo;</a>
+    {% endif %}
+  </span>
+</div>
   </main>
  {% endblock %}
