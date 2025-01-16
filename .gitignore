@@ -12,3 +12,4 @@ db.sqlite3
 /calc/templates/robots.txt
 /.pytest_cache/
 /postcalc2/settings.py
+/postbot/access.py
