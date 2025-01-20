@@ -26,7 +26,7 @@ def check_elements_on_pages(url_xpath_map):
                 element = wait.until(EC.presence_of_element_located((By.XPATH, xpath)))
 
                 if element:
-                    print(f"Элемент найден на странице {url}: {element.get_attribute('href')}")
+                    print(f"Элемент найден на странице {url}")
                 else:
                     print(f"Элемент не найден на странице {url}.")
             except Exception as e:
@@ -42,8 +42,22 @@ if __name__ == "__main__":
             "//a[span[text()='Прейскурант РБ с 01.01.2025.pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/Tarifynauslugipochtovoysv0":
             "//a[span[text()='Прейскурант юр. лица с  01.01.2025.pdf']]",
-
-        # Добавьте остальные URL и их XPath
+        "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/vnutrennyayauskorennayapo0":
+            "//a[span[text()='Прейскурант экспресс посылки физ. лица с 01.01.2025.pdf']]",
+        "https://www.belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/vnutrennyayauskorennayapo1":
+            "//a[span[text()='Прейскурант экспресс посылка юр. лица с 01.01.2025.pdf']]",
+        "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/mezhdunarodnyyepochtovyye1":
+            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД физ лица с 01.01.2025.pdf']]",
+        "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/mezhdunarodnyyepochtovyye0":
+            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД юр лица с 01.01.2025.pdf']]",
+        "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/Mezhdunarodnyyeposylkidly":
+            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД ПОСЫЛКИ физ лица с 01.01.2025).pdf']]",
+        "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/Mezhdunarodnyyeposylkidly0":
+            "//a[span[text()='2 ПРЕЙСКУРАНТ МЕЖД  посылки с 01.01.2025.pdf']]",
+        "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/Mezhdunarodnayauskorennay":
+            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД EMS  физ. лица с 01.01.2025).pdf']]",
+        "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/Mezhdunarodnayauskorennay0":
+            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД  EMS с 01.01.2025.pdf']]",
     }
 
     check_elements_on_pages(url_xpath_map)
