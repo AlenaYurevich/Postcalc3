@@ -1,48 +1,63 @@
-import asyncio
-import requests
-from bs4 import BeautifulSoup
-from telegram import Update
-from telegram.ext import Application, CommandHandler
-from access import My_token
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
 
 
-# Ваша функция, которая будет получать и проверять страницу
-def check_page():
-    url = "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/fiz"
-    response = requests.get(url)
-    response.raise_for_status()  # Проверяем на успешность запроса
+def check_elements_on_pages(url_xpath_map):
+    # Настройки для запуска браузера в фоновом режиме
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")  # Запуск без интерфейса
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
 
-    soup = BeautifulSoup(response.text, 'html.parser')
-    # Ищем элемент по тексту
-    element = soup.find_all(string="Прейскурант РБ с 01.01.2025.pdf")
+    # Инициализация драйвера
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
 
-    return "Прейскурант найден." if element else "Прейскурант не найден."
+    try:
+        for url, xpath in url_xpath_map.items():
+            driver.get(url)
+            try:
+                # Явное ожидание элемента
+                wait = WebDriverWait(driver, 10)  # Ожидание до 10 секунд
+                element = wait.until(EC.presence_of_element_located((By.XPATH, xpath)))
+
+                if element:
+                    print(f"Элемент найден на странице {url}")
+                else:
+                    print(f"Элемент не найден на странице {url}.")
+            except Exception as e:
+                print(f"Ошибка на странице {url}: {e}")
+    finally:
+        driver.quit()
 
 
-result = check_page()
+if __name__ == "__main__":
+    # Словарь URL-адресов и соответствующих XPath
+    url_xpath_map = {
+        "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/fiz":
+            "//a[span[text()='Прейскурант РБ с 01.01.2025.pdf']]",
+        "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/Tarifynauslugipochtovoysv0":
+            "//a[span[text()='Прейскурант юр. лица с  01.01.2025.pdf']]",
+        "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/vnutrennyayauskorennayapo0":
+            "//a[span[text()='Прейскурант экспресс посылки физ. лица с 01.01.2025.pdf']]",
+        "https://www.belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/vnutrennyayauskorennayapo1":
+            "//a[span[text()='Прейскурант экспресс посылка юр. лица с 01.01.2025.pdf']]",
+        "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/mezhdunarodnyyepochtovyye1":
+            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД физ лица с 01.01.2025.pdf']]",
+        "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/mezhdunarodnyyepochtovyye0":
+            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД юр лица с 01.01.2025.pdf']]",
+        "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/Mezhdunarodnyyeposylkidly":
+            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД ПОСЫЛКИ физ лица с 01.01.2025).pdf']]",
+        "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/Mezhdunarodnyyeposylkidly0":
+            "//a[span[text()='2 ПРЕЙСКУРАНТ МЕЖД  посылки с 01.01.2025.pdf']]",
+        "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/Mezhdunarodnayauskorennay":
+            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД EMS  физ. лица с 01.01.2025).pdf']]",
+        "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/Mezhdunarodnayauskorennay0":
+            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД  EMS с 01.01.2025.pdf']]",
+    }
 
-# # Функция-обработчик команды /start
-# async def start(update: Update):
-#     await update.message.reply_text('Привет! Используйте команду /check для проверки наличия прейскуранта.')
-#
-#
-# # Функция-обработчик команды /check
-# async def check(update: Update):
-#     result = check_page()
-#     await update.message.reply_text(result)
-#
-#
-# async def main():
-#     # Замените 'YOUR_TELEGRAM_BOT_TOKEN' на ваш токен бота
-#     application = Application.builder().token(My_token).build()
-#
-#     application.add_handler(CommandHandler("start", start))
-#     application.add_handler(CommandHandler("check", check))
-#
-#     await application.run_polling()
-#
-#     # Запуск бота
-#
-#
-# if __name__ == '__main__':
-#     asyncio.run(main())
+    check_elements_on_pages(url_xpath_map)
