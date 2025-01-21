@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support import expected_conditions as ec
 from webdriver_manager.chrome import ChromeDriverManager
 
 
@@ -23,7 +23,7 @@ def check_elements_on_pages(url_xpath_map):
             try:
                 # Явное ожидание элемента
                 wait = WebDriverWait(driver, 10)  # Ожидание до 10 секунд
-                element = wait.until(EC.presence_of_element_located((By.XPATH, xpath)))
+                element = wait.until(ec.presence_of_element_located((By.XPATH, xpath)))
 
                 if element:
                     print(f"Элемент найден на странице {url}")
@@ -31,6 +31,39 @@ def check_elements_on_pages(url_xpath_map):
                     print(f"Элемент не найден на странице {url}.")
             except Exception as e:
                 print(f"Ошибка на странице {url}: {e}")
+    finally:
+        driver.quit()
+
+
+def search_text_on_page(url, search_text):
+    # Настройки для запуска браузера в фоновом режиме
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+
+    # Инициализация драйвера
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+
+    try:
+        driver.get(url)
+        # Преобразуем искомый текст в нижний регистр
+        search_text_lower = search_text.lower()
+
+        # Ожидание: находим элемент с текстом без учёта регистра
+        wait = WebDriverWait(driver, 10)  # Ожидание до 10 секунд
+        try:
+            # Используем XPath с translate для нечувствительного поиска
+            xpath = f"//*[contains(translate(text(), 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯABCDEFGHIJKLMNOPQRSTUVWXYZ'," \
+                    f" 'абвгдеёжзийклмнопрстуфхцчшщъыьэюяabcdefghijklmnopqrstuvwxyz'), '{search_text_lower}')]"
+            element = wait.until(
+                ec.presence_of_element_located((By.XPATH, xpath))
+            )
+            print(f'Текст "{search_text}" найден в элементе: {element.text}')
+        except Exception as e:
+            print(f'Текст "{search_text}" не найден: {e}')
+    except Exception as e:
+        print(f"Ошибка при загрузке страницы {url}: {e}")
     finally:
         driver.quit()
 
@@ -61,3 +94,5 @@ if __name__ == "__main__":
     }
 
     check_elements_on_pages(url_xpath_map)
+    # Поиск текста "тариф" на странице блога
+    search_text_on_page("https://blog.belpost.by/", "тариф")
