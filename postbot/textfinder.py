@@ -101,7 +101,6 @@ if __name__ == "__main__":
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/Mezhdunarodnayauskorennay0":
             "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД  EMS с 01.01.2025.pdf']]",
     }
-
-    check_elements_on_pages(url_xpath_map)
     # Поиск текста "тариф" на странице блога
     search_text_on_page("https://blog.belpost.by/", "тариф")
+    check_elements_on_pages(url_xpath_map)
