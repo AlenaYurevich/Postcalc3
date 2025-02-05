@@ -44,6 +44,7 @@ def cost_of_parcel(item_weight, declared_value, notification):
             else:
                 fiz = sheet2['D27'].value + cost_for_declared_value(declared_value)
                 yur = sheet2['H27'].value + sheet2['H28'].value * weight(item_weight, declared_value)
+                fiz = round_as_excel(fiz)
                 yur = round(yur, 4)
                 for_declared_fiz = cost_for_declared_value(declared_value)
                 yur += for_declared_fiz
@@ -54,6 +55,7 @@ def cost_of_parcel(item_weight, declared_value, notification):
             if declared_value in ("нет", "", 0, "0"):
                 fiz = sheet2['D29'].value + sheet2['D30'].value * weight(item_weight, declared_value)
                 yur = sheet2['H27'].value + sheet2['H28'].value * weight(item_weight, declared_value)
+                fiz = round_as_excel(fiz)
                 yur = round_as_excel(yur)
                 for_declared_fiz = ''
                 for_declared_yur = ''
@@ -62,6 +64,7 @@ def cost_of_parcel(item_weight, declared_value, notification):
             else:
                 fiz = sheet2['D29'].value + sheet2['D30'].value * weight(item_weight, declared_value)
                 fiz += cost_for_declared_value(declared_value)
+                fiz = round_as_excel(fiz)
                 yur = sheet2['H27'].value + sheet2['H28'].value * weight(item_weight, declared_value)
                 yur = round_as_excel(yur)
                 for_declared_fiz = cost_for_declared_value(declared_value)
@@ -69,7 +72,6 @@ def cost_of_parcel(item_weight, declared_value, notification):
                 yur = round_as_excel(yur)  # округляем перед расчетом НДС
                 for_declared_yur = round_as_excel(for_declared_fiz * 1.2)
                 sep1, sep2 = "/", "/"
-
         yur += notification
         notification = notification * 1.2
         fiz += notification

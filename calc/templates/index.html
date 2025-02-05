@@ -165,9 +165,9 @@
             <th scope="row" class="text-start colspan='6'">QR box</th>
            {% for rate in qr_box %}
             <td> {{ rate.fiz }}</td>
-            <td> </td>
-            <td> </td>
-            <td> {{ rate.for_declared_fiz }} </td>
+            <td> {{ rate.yur }}</td>
+            <td> {{ rate.item_vat_yur }}</td>
+            <td> {{ rate.for_declared_fiz }} {{rate.sep1}} {{ rate.for_declared_yur }} </td>
             <td> {{ rate.notification }}</td>
             <td> {{ rate.tracking }}</td>
             {% endfor %}
