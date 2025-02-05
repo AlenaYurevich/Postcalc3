@@ -27,9 +27,9 @@ def get_rates_from_sheet(destination, priority):
     # Сопоставление кода назначения с номером строки ячеек
     country_rows = {
         11: (21, 22),  # Австралия
-        91: (24, 25),  # Канада
-        131: (27, 28),  # Мексика
-        164: (30, 31)  # США
+        92: (24, 25),  # Канада
+        132: (27, 28),  # Мексика
+        165: (30, 31)  # США
     }
     # Получение индексов строк для указанной страны
     start_row, end_row = country_rows.get(destination, (18, 19))
@@ -74,7 +74,7 @@ def cost_of_package_int(destination, item_weight):
         tracked_priority = find_package_int(destination, item_weight, "tracked", "priority")
         registered_non_priority = {'fiz': "Отправления не принимаются"}
         registered_priority = find_package_int(destination, item_weight, "registered", "priority")
-        if destination == 161:
+        if destination == 162:
             registered_non_priority = find_package_int(destination, item_weight, "registered", "non_priority")
     return [[simple_non_priority],
             [simple_priority],

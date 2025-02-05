@@ -54,7 +54,7 @@ def search_text_on_page(url, search_text):
         search_text_lower = search_text.lower()
 
         # Ожидание: находим все элементы с текстом без учёта регистра
-        wait = WebDriverWait(driver, 10)  # Ожидание до 10 секунд
+        wait = WebDriverWait(driver, 15)  # Ожидание до 10 секунд
         try:
             # Используем XPath с translate для нечувствительного поиска
             xpath = f"//*[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'," \
@@ -83,7 +83,7 @@ if __name__ == "__main__":
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/fiz":
             "//a[span[text()='Прейскурант РБ с 01.01.2025.pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/Tarifynauslugipochtovoysv0":
-            "//a[span[text()='Прейскурант юр. лица с  01.01.2025.pdf']]",
+            "//a[span[text()='Прейскурант РБ  с 01.01.2025 .pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/vnutrennyayauskorennayapo0":
             "//a[span[text()='Прейскурант экспресс посылки физ. лица с 01.01.2025.pdf']]",
         "https://www.belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/vnutrennyayauskorennayapo1":
@@ -93,7 +93,7 @@ if __name__ == "__main__":
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/mezhdunarodnyyepochtovyye0":
             "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД юр лица с 01.01.2025.pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/Mezhdunarodnyyeposylkidly":
-            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД ПОСЫЛКИ физ лица с 01.01.2025).pdf']]",
+            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД  посылки физ лица с 01.01.2025).pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/Mezhdunarodnyyeposylkidly0":
             "//a[span[text()='2 ПРЕЙСКУРАНТ МЕЖД  посылки с 01.01.2025.pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/Mezhdunarodnayauskorennay":
