@@ -97,9 +97,9 @@ if __name__ == "__main__":
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/Mezhdunarodnyyeposylkidly0":
             "//a[span[text()='2 ПРЕЙСКУРАНТ МЕЖД  посылки с 01.01.2025.pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/Mezhdunarodnayauskorennay":
-            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД EMS  физ. лица с 01.01.2025).pdf']]",
+            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД EMS  ФИЗ ЛИЦА с 01.01.2025).pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/Mezhdunarodnayauskorennay0":
-            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД  EMS с 01.01.2025.pdf']]",
+            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД EMS  юр лица с 01.01.2025).pdf']]",
     }
     # Поиск текста "тариф" на странице блога
     search_text_on_page("https://blog.belpost.by/", "тариф")
