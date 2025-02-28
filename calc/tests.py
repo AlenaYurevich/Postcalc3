@@ -90,7 +90,7 @@ def test_first_class():
 
 def test_parcel():
     assert cost_of_parcel(510, '', 4) == [{
-        'fiz': '3,50',
+        'fiz': '4,00',
         'yur': '6,01',
         'item_vat_yur': '1,00',
         'for_declared_fiz': '',
@@ -102,7 +102,7 @@ def test_parcel():
         'notification': ""
     }]
     assert cost_of_parcel(915, 1.25, 4) == [{
-        'fiz': '3,54',
+        'fiz': '4,04',
         'yur': '6,38',  # Белпочта 6,39 неправильно
         'item_vat_yur': '1,06',
         'for_declared_fiz': '0,04',
@@ -114,7 +114,7 @@ def test_parcel():
         'notification': ""
     }]
     assert cost_of_parcel(915, 1.25, 1) == [{
-        'fiz': '4,38',
+        'fiz': '4,88',
         'yur': '7,22',
         'item_vat_yur': '1,20',
         'for_declared_fiz': '0,04',
@@ -195,7 +195,7 @@ def test_parcel_3_4_5():
         'notification': ""
     }]
     assert cost_of_parcel_3_4_5(915, 1.25, 3) == [{
-        'fiz': '4,04',
+        'fiz': '4,54',
         'for_declared': '0,50',
         'rub': " руб.",
         'notification': "0,54"
@@ -222,7 +222,7 @@ def test_internal_transfer():
         'fiz': '1,08',
         'yur': '1,30',
         'item_vat': '0,22',
-        'fiz_home': '1,40',
+        'fiz_home': '1,43',
         'yur_home': 'нет'
     }]
 
