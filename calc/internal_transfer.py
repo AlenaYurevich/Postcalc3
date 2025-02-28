@@ -4,11 +4,9 @@ from .vat import vat
 
 
 def amount_match(amount):
-    if amount > 500:
-        return 0.5
-    elif amount > 300:
+    if amount > 1000:
         return 1
-    elif amount > 150:
+    elif amount > 200:
         return 2
     else:
         return 3
