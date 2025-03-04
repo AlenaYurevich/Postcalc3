@@ -273,49 +273,49 @@ def test_express_parcel():  # 4 зона P12 - P1 Орша - Брест
     дописать тест товары
     """
     assert find_documents_cost(4, 1750, 0, 1, 4, "None") == [
-        [{'fiz': '8,60',
+        [{'fiz': '9,45',
           'for_declared_yur': '-',
-          'item_vat': '1,72',
+          'item_vat': '1,89',
           'notification': '',
-          'yur': '10,32'}],
-        [{'fiz': '10,10',
+          'yur': '11,34'}],
+        [{'fiz': '11,10',
           'for_declared_yur': '-',
-          'item_vat': '2,02',
+          'item_vat': '2,22',
           'notification': '',
-          'yur': '12,12'}]]
+          'yur': '13,32'}]]
     assert find_documents_cost(4, 1750, 10.75, 1, 4, "None") == [
-        [{'fiz': '8,99',
-          'for_declared_yur': '0,38',
-          'item_vat': '1,78',
+        [{'fiz': '9,84',
+          'for_declared_yur': '0,38',  # С ОЦ физлица также 3,6%
+          'item_vat': '1,95',
           'notification': '',
-          'yur': '10,70'}],
-        [{'fiz': '10,49',
+          'yur': '11,72'}],
+        [{'fiz': '11,49',
           'for_declared_yur': '0,38',
-          'item_vat': '2,08',
+          'item_vat': '2,28',
           'notification': '',
-          'yur': '12,50'}]]
+          'yur': '13,70'}]]
     assert find_goods_cost(5, 21750, 0, 1, 4, "None") == [  # P30-P13 Дубровно-Кобрин
-        [{'fiz': '36,15',
+        [{'fiz': '39,75',
           'for_declared_yur': '-',
-          'item_vat': '7,23',
+          'item_vat': '7,95',
           'notification': '',
-          'yur': '43,38'}],
-        [{'fiz': '37,10',
+          'yur': '47,70'}],
+        [{'fiz': '40,80',
           'for_declared_yur': '-',
-          'item_vat': '7,42',
+          'item_vat': '8,16',
           'notification': '',
-          'yur': '44,52'}]]
+          'yur': '48,96'}]]
     assert find_goods_cost(5, 21750, 12.58, 1, 4, "None") == [  # P30-P13 Дубровно-Кобрин
-        [{'fiz': '36,60',
+        [{'fiz': '40,20',
           'for_declared_yur': '0,46',
-          'item_vat': '7,31',
+          'item_vat': '8,03',
           'notification': '',
-          'yur': '43,84'}],
-        [{'fiz': '37,55',
+          'yur': '48,16'}],
+        [{'fiz': '41,25',
           'for_declared_yur': '0,46',
-          'item_vat': '7,50',
+          'item_vat': '8,24',
           'notification': '',
-          'yur': '44,98'}]]
+          'yur': '49,42'}]]
 
 
 def test_letter_int():
