@@ -11,13 +11,13 @@ Choices_notice = [(1, f'простое 0,84 руб.'),
 
 
 class PostForm(forms.Form):
-    weight = forms.IntegerField(label="Введите вес отправления, грамм", min_value=1, widget=forms.NumberInput(attrs={
-        'class': "form-control", 'autofocus': 'autofocus'}))
+    weight = forms.IntegerField(label="Введите вес отправления, грамм", min_value=1, initial=20,
+                                widget=forms.NumberInput(attrs={'class': "form-control", 'autofocus': 'autofocus'}))
     declared_value = forms.DecimalField(label="Введите объявленную ценность, рублей", min_value=0, required=False,
                                         decimal_places=2, widget=forms.NumberInput(attrs={'class': "form-control",
                                                                                           'placeholder': "нет"}))
-    notification = forms.TypedChoiceField(label="Уведомление о вручении:", choices=Choices_notice,
-                                          widget=forms.RadioSelect(attrs={'checked': Choices_notice[0]}))
+    notification = forms.TypedChoiceField(label="Уведомление о вручении:", choices=Choices_notice, initial=4,
+                                          widget=forms.RadioSelect())
 
 
 Choices = read_ems_points(sheet5)
