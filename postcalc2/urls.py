@@ -22,5 +22,5 @@ urlpatterns = [
     path('', include('calc.urls')),
     path('admin/', admin.site.urls),
     path('news/', include('news.urls')),
-    path('telegram/', include('postbot.urls')),
+    path('telegram/', include('telegram_bot.urls')),
 ]
