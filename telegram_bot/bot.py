@@ -1,5 +1,6 @@
-from telebot import TeleBot
+from telebot import TeleBot, types
 from django.conf import settings
+from .selenium_tools import check_elements_on_pages, search_text_on_page
 
 bot = TeleBot(settings.TELEGRAM_BOT_TOKEN)
 
@@ -17,28 +18,68 @@ def admin_required(func):
             bot.reply_to(message, "🔒 Бот доступен только администратору")
             return
         return func(message, *args, **kwargs)
-
     return wrapped
+
+
+def create_main_keyboard():
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard.add("📰 Новости", "💰 Прейскуранты")
+    return keyboard
 
 
 # Все обработчики должны использовать декоратор
 @bot.message_handler(commands=['start'])
-@admin_required
+@admin_required  # Используем декоратор из предыдущего ответа
 def handle_start(message):
-    bot.send_message(message.chat.id, "Добро пожаловать, администратор!")
+    bot.send_message(
+        message.chat.id,
+        "Выберите действие:",
+        reply_markup=create_main_keyboard()
+    )
 
 
-@bot.message_handler(commands=['stats'])
+@bot.message_handler(func=lambda m: m.text == "📰 Новости")
 @admin_required
-def handle_stats(message):
-    # Ваша логика для админ-команды
-    bot.send_message(message.chat.id, "Статистика: ...")
+def handle_news(message):
+    try:
+        bot.send_chat_action(message.chat.id, 'typing')
+        result = search_text_on_page("https://blog.belpost.by/", "тариф")
+        bot.send_message(message.chat.id, result)
+    except Exception as e:
+        bot.send_message(message.chat.id, f"Ошибка: {str(e)}")
 
 
-@bot.message_handler(func=lambda m: True)
+@bot.message_handler(func=lambda m: m.text == "💰 Прейскуранты")
 @admin_required
-def handle_all_messages(message):
-    bot.send_message(message.chat.id, "Команда не распознана")
+def handle_pricelist(message):
+    try:
+        bot.send_chat_action(message.chat.id, 'typing')
+        url_xpath_map = {
+            "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/fiz":
+                "//a[span[text()='Прейскурант РБ  с 01.03.2025 .pdf']]",
+            "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/Tarifynauslugipochtovoysv0":
+                "//a[span[text()='Прейскурант РБ  с 01.03.2025 .pdf']]",
+            "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/vnutrennyayauskorennayapo0":
+                "//a[span[text()='Прейскурант экспресс посылки с 01.03.2025 .pdf']]",
+            "https://www.belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/vnutrennyayauskorennayapo1":
+                "//a[span[text()='Прейскурант экспресс посылки  с 01.03.2025 .pdf']]",
+            "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/mezhdunarodnyyepochtovyye1":
+                "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД физ лица с 01.01.2025.pdf']]",
+            "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/mezhdunarodnyyepochtovyye0":
+                "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД юр лица с 01.01.2025.pdf']]",
+            "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/Mezhdunarodnyyeposylkidly":
+                "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД  посылки физ лица с 01.01.2025).pdf']]",
+            "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/Mezhdunarodnyyeposylkidly0":
+                "//a[span[text()='2 ПРЕЙСКУРАНТ МЕЖД  посылки с 01.01.2025.pdf']]",
+            "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/Mezhdunarodnayauskorennay":
+                "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД EMS  ФИЗ ЛИЦА с 01.01.2025).pdf']]",
+            "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/Mezhdunarodnayauskorennay0":
+                "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД EMS  юр лица с 01.01.2025).pdf']]",
+        }
+        result = check_elements_on_pages(url_xpath_map)
+        bot.send_message(message.chat.id, result)
+    except Exception as e:
+        bot.send_message(message.chat.id, f"Ошибка: {str(e)}")
 
 
 @bot.callback_query_handler(func=lambda call: True)

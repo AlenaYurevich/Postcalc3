@@ -83,7 +83,7 @@ if __name__ == "__main__":
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/fiz":
             "//a[span[text()='Прейскурант РБ  с 01.03.2025 .pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/Tarifynauslugipochtovoysv0":
-            "//a[span[text()='Прейскурант  с 01.03.2025.pdf']]",
+            "//a[span[text()='Прейскурант РБ  с 01.03.2025 .pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/vnutrennyayauskorennayapo0":
             "//a[span[text()='Прейскурант экспресс посылки с 01.03.2025 .pdf']]",
         "https://www.belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/vnutrennyayauskorennayapo1":
