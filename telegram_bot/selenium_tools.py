@@ -21,7 +21,7 @@ def setup_driver():
     chrome_options.add_argument("--disable-dev-shm-usage")
 
     # Путь к chromedriver из .wdm
-    driver_path = os.path.join(os.getcwd(), "/.wdm/drivers/chromedriver/linux64/114.0.5735.90/chromedriver")
+    driver_path = os.path.join(os.getcwd(), "./virtualenv/postcalc2/3.11/lib/python3.11/site-packages/selenium/webdriver/chrome/webdriver.py")
 
     try:
         # Пытаемся использовать уже скачанный драйвер
