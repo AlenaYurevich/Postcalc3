@@ -1,6 +1,6 @@
 from telebot import TeleBot, types
 from django.conf import settings
-from telegram_bot.selenium_tools import check_elements_on_pages, search_text_on_page  # postbot!!!!
+from postbot.selenium_tools import check_elements_on_pages, search_text_on_page  # postbot!!!!
 from threading import Thread
 
 bot = TeleBot(settings.TELEGRAM_BOT_TOKEN)

@@ -5,7 +5,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
-from webdriver_manager.chrome import ChromeDriverManager
+# from webdriver_manager.chrome import ChromeDriverManager
 import logging
 
 
@@ -15,27 +15,35 @@ logging.getLogger('WDM').setLevel(logging.WARNING)  # Показывать то�
 
 
 def setup_driver():
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-
-    # Путь к chromedriver из .wdm
-    driver_path = os.path.join(os.getcwd(), "./virtualenv/postcalc2/3.11/lib/python3.11/site-packages/selenium/webdriver/chrome/webdriver.py")
-
     try:
-        # Пытаемся использовать уже скачанный драйвер
-        service = Service(executable_path=driver_path)
-        driver = webdriver.Chrome(service=service, options=chrome_options)
-        logger.info(f"Используем существующий драйвер: {driver_path}")
-        return driver
-    except Exception as e:
-        # Если не сработало - качаем заново
-        logger.warning(f"Ошибка: {str(e)}, пробуем автоматическую установку...")
-        return webdriver.Chrome(
-            service=Service(ChromeDriverManager().install()),
-            options=chrome_options
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--no-sandbox")
+
+        chromedriver_path = "/home/posttarifb/virtualenv/postcalc2/3.11/bin/chromedriver"
+
+        # Проверка существования драйвера
+        if not os.path.isfile(chromedriver_path):
+            raise RuntimeError(f"Chromedriver не найден: {chromedriver_path}")
+
+        # Создаем сервис
+        service = Service(
+            executable_path=chromedriver_path,
+            service_args=["--verbose", "--log-path=chromedriver.log"]
         )
+
+        # Инициализация драйвера
+        driver = webdriver.Chrome(service=service, options=chrome_options)
+
+        # Тестовая проверка
+        driver.get("about:blank")
+        assert "about:blank" in driver.current_url, "Драйвер не работает"
+
+        return driver
+
+    except Exception as e:
+        logger.critical(f"FATAL ERROR: {str(e)}")
+        raise
 
 
 def check_elements_on_pages(url_xpath_map):
