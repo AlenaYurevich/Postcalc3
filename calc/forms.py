@@ -51,7 +51,7 @@ class EmsForm(forms.Form):
 
 
 class TransferForm(forms.Form):
-    amount = forms.DecimalField(label="Введите сумму перевода, рублей", min_value=0.01, required=False,
+    amount = forms.DecimalField(label="Введите сумму перевода, рублей", min_value=0.01, initial=20,
                                 decimal_places=2, widget=forms.NumberInput(attrs={'class': "form-control",
                                                                                   'autofocus': 'autofocus'}))
 
