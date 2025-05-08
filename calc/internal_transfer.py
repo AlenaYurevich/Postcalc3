@@ -17,7 +17,9 @@ def cost_of_internal_transfer(amount):
     rate = {
         'fiz': 1.00,
         'yur': 1.20,
+        'item_vat': 0.20,
         'fiz_home': 1.35,
+
             }
     multiplier = amount_match(amount)
     fiz = round_as_excel(amount * multiplier / 100)
