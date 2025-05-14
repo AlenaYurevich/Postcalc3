@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block page_content %}
 {% block seo %}
   <title>Новости</title>
-  <meta name="description" content="Обновления на сайте">
+  <meta name="description" content="Обновления на сайте {{ page_obj.number }}">
   <meta name="keywords" content="Тарифы, рост тарифов, новые расчеты">
   <link rel="canonical" href="https://posttarif.by/news/?page={{ page_obj.number }}"/>
   <meta property="og:title" content="Новости"/>
@@ -11,6 +10,7 @@
   <meta property="og:description" content="Обновления на сайте, повышение тарифов"/>
   <meta property="og:type" content="article"/>
 {% endblock %}
+{% block page_content %}
  <main>
   <header>
     <div class="pricing-header p-3 pb-md-4 mx-auto text-center">

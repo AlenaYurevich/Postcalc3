@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
-{% block page_content %}
+
 {% block seo %}
     <title>Тарификатор почтовых отправлений Белпочта</title>
-    <meta name="description" content="Рассчитать стоимость посылки. Стоимость любых видов почтовых отправлений: посылка, заказной мелкий пакет, посылка с оплаченной упаковкой, 1 класс">
+    <meta name="description" content="Рассчитать стоимость посылки. Стоимость заказного письма, посылки, заказного мелкого пакета, посылки с оплаченной упаковкой, 1 класс">
     <meta name="keywords" content="Рассчитать доставку, доставка, посылка, тарификатор, калькулятор, заказное письмо, первый класс, Посттариф, Posttarif, РБ, по Беларуси, QR box">
     <link rel="canonical" href="https://posttarif.by"/>
     <meta property="og:title" content="Рассчитать стоимость доставки по Беларуси"/>
@@ -10,6 +10,7 @@
     <meta property="og:description" content="Рассчитай на тарификаторе стоимость доставки любых видов почтовых отправлений: заказной мелкий пакет, посылка, с оплаченной упаковкой, 1 класс"/>
     <meta property="og:type" content="article"/>
 {% endblock %}
+{% block page_content %}
  <main>
   <header>
     <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
@@ -32,7 +33,7 @@
           <button class="btn btn-lg btn-info text-white mt-4 mb-4" type="submit" name="send">Рассчитать</button>
          </p>
       </div>
-      <div class="col ms-5">
+      <div class="col ms-5 data-nosnippet">
          {{ form.notification.label }}
          {{ form.notification }}
          {{ form.notification.errors }}
