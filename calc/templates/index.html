@@ -194,7 +194,7 @@
           <div class="card-body">
             <h2 class="card-title pricing-card-title">
              {% for rate in simple %}
-             {{ rate.fiz }}
+            {{ rate.fiz }} {{ rate.sep}} {{ rate.yur }}
              <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
              {% endfor %}
             </h2>
@@ -217,7 +217,7 @@
           <div class="card-body">
             <h2 class="card-title pricing-card-title">
              {% for rate in package %}
-             {{ rate.fiz }}
+            {{ rate.fiz }} {{ rate.sep}} {{ rate.yur }}
              <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
              {% endfor %}
             </h2>
@@ -418,7 +418,7 @@
           <div class="card-body">
             <h2 class="card-title pricing-card-title">
               {% for rate in qr_box %}
-              {{ rate.fiz }}
+              {{ rate.fiz }} {{ rate.sep2}} {{ rate.yur }}
               <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
               {% endfor %}
             </h2>
