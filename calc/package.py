@@ -24,7 +24,8 @@ def cost_of_package(item_weight):
             'item_vat': item_vat,
             'for_declared': "",
             'rub': " руб.",
-            'tracking': "нет"
+            'tracking': "нет",
+            'sep': '/',
         }
         for i in rate:
             rate[i] = formatted(rate[i])
@@ -60,7 +61,7 @@ def cost_of_registered(item_weight, notification):
             'for_declared': "",
             'rub': " руб.",
             'tracking': "да",
-            'notification': notification
+            'notification': notification,
         }
         for i in rate:
             rate[i] = formatted(rate[i])

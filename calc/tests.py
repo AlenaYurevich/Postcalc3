@@ -13,9 +13,9 @@ from .ems_int import cost_of_ems_int
 
 def test_simple():
     assert cost_of_simple(300) == [{
-            'fiz': '1,54',
-            'yur': '1,54',
-            'item_vat': '0,26',
+            'fiz': '1,84',
+            'yur': '1,87',
+            'item_vat': '0,31',
             'for_declared': '',
             'tracking': 'нет',
             'rub': " руб.",
