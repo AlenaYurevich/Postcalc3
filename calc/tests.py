@@ -270,52 +270,51 @@ def test_parcel_int2():
 def test_express_parcel():  # 4 зона P12 - P1 Орша - Брест
     """
     (zone, weight, declared_value, delivery, notification, fragile)
-    дописать тест товары
     """
     assert find_documents_cost(4, 1750, 0, 1, 4, "None") == [
-        [{'fiz': '9,45',
+        [{'fiz': '9,80',
           'for_declared_yur': '-',
-          'item_vat': '1,89',
+          'item_vat': '1,96',
           'notification': '',
-          'yur': '11,34'}],
-        [{'fiz': '11,10',
+          'yur': '11,76'}],
+        [{'fiz': '11,35',
           'for_declared_yur': '-',
-          'item_vat': '2,22',
+          'item_vat': '2,27',
           'notification': '',
-          'yur': '13,32'}]]
+          'yur': '13,62'}]]
     assert find_documents_cost(4, 1750, 10.75, 1, 4, "None") == [
-        [{'fiz': '9,84',
+        [{'fiz': '10,19',
           'for_declared_yur': '0,38',  # С ОЦ физлица также 3,6%
-          'item_vat': '1,95',
+          'item_vat': '2,02',
           'notification': '',
-          'yur': '11,72'}],
-        [{'fiz': '11,49',
+          'yur': '12,14'}],
+        [{'fiz': '11,74',
           'for_declared_yur': '0,38',
-          'item_vat': '2,28',
+          'item_vat': '2,33',
           'notification': '',
-          'yur': '13,70'}]]
+          'yur': '14,00'}]]
     assert find_goods_cost(5, 21750, 0, 1, 4, "None") == [  # P30-P13 Дубровно-Кобрин
-        [{'fiz': '39,75',
+        [{'fiz': '39,75',  # не поменялось
           'for_declared_yur': '-',
           'item_vat': '7,95',
           'notification': '',
           'yur': '47,70'}],
-        [{'fiz': '40,80',
+        [{'fiz': '43,25',
           'for_declared_yur': '-',
-          'item_vat': '8,16',
+          'item_vat': '8,65',
           'notification': '',
-          'yur': '48,96'}]]
+          'yur': '51,90'}]]
     assert find_goods_cost(5, 21750, 12.58, 1, 4, "None") == [  # P30-P13 Дубровно-Кобрин
         [{'fiz': '40,20',
-          'for_declared_yur': '0,46',
+          'for_declared_yur': '0,46',  # сделать ОЦ для физ и юр отдельно?
           'item_vat': '8,03',
           'notification': '',
           'yur': '48,16'}],
-        [{'fiz': '41,25',
+        [{'fiz': '43,70',
           'for_declared_yur': '0,46',
-          'item_vat': '8,24',
+          'item_vat': '8,73',
           'notification': '',
-          'yur': '49,42'}]]
+          'yur': '52,36'}]]
 
 
 def test_letter_int():
