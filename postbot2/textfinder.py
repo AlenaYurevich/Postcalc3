@@ -84,6 +84,8 @@ if __name__ == "__main__":
             "//a[span[text()='Прейскурант РБ  с 01.03.2025 .pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/Tarifynauslugipochtovoysv0":
             "//a[span[text()='Прейскурант РБ  с 01.03.2025 .pdf']]",
+        "https://www.belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/oplachennaja-peresylka":
+            "//span[em[text()='В действии с 10.06.2025']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/vnutrennyayauskorennayapo0":
             "//a[span[text()='Прейскурант экспресс посылки физ с 10.07.2025.pdf']]",
         "https://www.belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/vnutrennyayauskorennayapo1":
@@ -93,7 +95,7 @@ if __name__ == "__main__":
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/mezhdunarodnyyepochtovyye0":
             "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД юр лица с 01.01.2025.pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/Mezhdunarodnyyeposylkidly":
-            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД  посылки физ лица с 01.01.2025).pdf']]",
+            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД  с 01.01.2025 физ лица.pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/Mezhdunarodnyyeposylkidly0":
             "//a[span[text()='2 ПРЕЙСКУРАНТ МЕЖД  посылки с 01.01.2025.pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/Mezhdunarodnayauskorennay":
