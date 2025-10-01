@@ -59,8 +59,11 @@ class TransferForm(forms.Form):
 class ParcelIntForm(forms.Form):
     destination = forms.TypedChoiceField(label="Страна назначения", choices=International_Choices,
                                          widget=forms.Select(attrs={'class': "form-control", 'autofocus': 'autofocus'}))
-    weight = forms.IntegerField(label="Введите вес отправления, грамм", min_value=1, widget=forms.NumberInput(attrs={
-        'class': "form-control"}))
+    weight = forms.IntegerField(
+        label="Введите вес отправления, грамм",
+        min_value=1,
+        initial=20,
+        widget=forms.NumberInput(attrs={'class': "form-control", 'step': '1'}))
     declared_value = forms.DecimalField(label="Введите объявленную ценность, рублей", min_value=0, required=False,
                                         decimal_places=2, widget=forms.NumberInput(attrs={'class': "form-control",
                                                                                           'placeholder': "нет"}))

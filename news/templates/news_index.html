@@ -1,14 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block seo %}
-  <title>Новости</title>
-  <meta name="description" content="Обновления на сайте {{ page_obj.number }}">
-  <meta name="keywords" content="Тарифы, рост тарифов, новые расчеты">
-  <link rel="canonical" href="https://posttarif.by/news/?page={{ page_obj.number }}"/>
-  <meta property="og:title" content="Новости"/>
-  <meta property="og:image" content="https://posttarif.by/apple-touch-icon.png"/>
-  <meta property="og:description" content="Обновления на сайте, повышение тарифов"/>
-  <meta property="og:type" content="article"/>
+  <title>Новости - страница {{ page_obj.number }}</title>
+  <meta name="description" content="Изменение тарифов на сайте {{ page_obj.number }}. Тарифы на письмо, посылку, EMS">
+  <meta name="keywords" content="Тарифы, рост тарифов, новые расчеты, изменение тарифов">
+  <link rel="canonical" href="https://posttarif.by/news/?page={{ page_obj.number }}">
+  <meta property="og:title" content="Новости - страница {{ page_obj.number }}">
+  <meta property="og:image" content="https://posttarif.by/apple-touch-icon.png">
+  <meta property="og:description" content="Обновления на сайте, повышение тарифов почты">
 {% endblock %}
 {% block page_content %}
  <main>
@@ -22,7 +21,7 @@
   {% for post in page_obj %}
  <div class="row">
     <div class="col-md-3 order-md-1">
-           <img src = "{{ post.image_min.url }}" alt = "{{ post.alt }}"/>
+           <img src = "{{ post.image_min.url }}" alt = "{{ post.alt }}">
      </div>
     <div class="col-md-7 order-md-2">
         <h2 class="featurette-heading"><a class ="text-info text-decoration-none" href="{% url 'news_detail' slug=post.slug %}">{{ post.title }}</a><span class="text-muted"></span></h2>
@@ -40,7 +39,7 @@
     {% endif %}
 
     <span class="current">
-<!--      Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}-->
+      Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
       Страница {{ page_obj.number }}
     </span>
 

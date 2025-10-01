@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% block seo %}
-  <title>Рассчитать стоимость посылки Белпочта на тарификаторе</title>
-  <meta name="description" content="Международные почтовые отправления">
-  <meta name="keywords" content="тарификатор, калькулятор Белпочта, посттариф, международные посылки, международные отправления">
-  <link rel="canonical" href="https://posttarif.by/international"/>
-  <meta property="og:title" content="Рассчитать стоимость посылки на тарификаторе"/>
-  <meta property="og:image" content="https://posttarif.by/apple-touch-icon.png"/>
-  <meta property="og:description" content="Международные почтовые отправления"/>
-  <meta property="og:type" content="article"/>
+  <title>Посылка в Россию из Беларуси: стоимость отправки | Тарификатор</title>
+  <meta name="description" content="Рассчитать стоимость посылки в Россию из Беларуси. Цены на международные отправления: письма в РФ, посылки в Израиль, Германию, Польшу. Калькулятор тарифов Белпочта для МПО">
+  <meta name="keywords" content="посылка в россию, письмо в россию, международная посылка, белпочта посылки в россию, посылка в израиль, письмо в польшу, письмо в германию, стоимость посылки в россию, международные отправления белпочта">
+  <link rel="canonical" href="https://posttarif.by/international">
+  <meta property="og:title" content="Посылка в Россию из Беларуси: рассчитать стоимость на тарификаторе">
+  <meta property="og:image" content="https://posttarif.by/apple-touch-icon.png">
+  <meta property="og:description" content="Калькулятор стоимости посылок и писем в Россию, Израиль, Германию, Польшу. Тарифы Белпочта на международные отправления">
+  <meta property="og:url" content="https://posttarif.by/international">
 {% endblock %}
 {% block page_content %}
  <main>
@@ -54,7 +54,7 @@
         </thead>
         <tbody>
         <tr>
-            <th scope="row" class="text-start table-info" colspan="7">Письма, бандероли простые:</th>
+            <th scope="row" class="text-start table-info" colspan="5">Письма, бандероли простые:</th>
         </tr>
         <tr>
             <th scope="row" class="text-start">Неприоритетные</th>
@@ -75,7 +75,7 @@
             {% endfor %}
         </tr>
         <tr>
-            <th scope="row" class="text-start table-info" colspan="7">Мелкие пакеты простые:</th>
+            <th scope="row" class="text-start table-info" colspan="5">Мелкие пакеты простые:</th>
         </tr>
         <tr>
             <th scope="row" class="text-start">Неприоритетные</th>
@@ -96,7 +96,7 @@
             {% endfor %}
         </tr>
         <tr>
-            <th scope="row" class="text-start table-info" colspan="7">Письма, бандероли отслеживаемые:</th>
+            <th scope="row" class="text-start table-info" colspan="5">Письма, бандероли отслеживаемые:</th>
         </tr>
         <tr>
             <th scope="row" class="text-start">Приоритетные</th>
@@ -108,7 +108,7 @@
             {% endfor %}
         </tr>
         <tr>
-            <th scope="row" class="text-start table-info" colspan="7">Мелкие пакеты отслеживаемые:</th>
+            <th scope="row" class="text-start table-info" colspan="5">Мелкие пакеты отслеживаемые:</th>
         </tr>
         <tr>
             <th scope="row" class="text-start">Приоритетные</th>
@@ -120,7 +120,7 @@
             {% endfor %}
         </tr>
         <tr>
-            <th scope="row" class="text-start table-info" colspan="7">Письма, бандероли заказные:</th>
+            <th scope="row" class="text-start table-info" colspan="5">Письма, бандероли заказные:</th>
         </tr>
         <tr>
             <th scope="row" class="text-start">Неприоритетные</th>
@@ -141,7 +141,7 @@
             {% endfor %}
         </tr>
         <tr>
-            <th scope="row" class="text-start table-info" colspan="7">Мелкие пакеты заказные:</th>
+            <th scope="row" class="text-start table-info" colspan="5">Мелкие пакеты заказные:</th>
         </tr>
         <tr>
             <th scope="row" class="text-start">Неприоритетные</th>
@@ -162,7 +162,7 @@
             {% endfor %}
         </tr>
         <tr>
-            <th scope="row" class="text-start table-info" colspan="7">Письма с объявленной ценностью:</th>
+            <th scope="row" class="text-start table-info" colspan="5">Письма с объявленной ценностью:</th>
         </tr>
         <tr>
             <th scope="row" class="text-start">Неприоритетные</th>
@@ -183,7 +183,7 @@
             {% endfor %}
         </tr>
         <tr>
-            <th scope="row" class="text-start table-info" colspan="7">Посылки:</th>
+            <th scope="row" class="text-start table-info" colspan="5">Посылки:</th>
         </tr>
          <tr>
             <th scope="row" class="text-start">Неприоритетные</th>
@@ -206,7 +206,7 @@
         <tr class="border-info table-info">
             <th scope="row" class="text-start"><a class="me-3 py-2 link-body-emphasis text-decoration-none text-info"
                                                   href="ems_int" target="blank">EMS экспресс-доставка</a></th>
-             <td colspan="6"><a class="me-3 py-2 link-body-emphasis text-info" href="ems_int"
+             <td colspan="5"><a class="me-3 py-2 text-info" href="ems_int"
                                   target="blank">Для расчета экспресс-доставки EMS перейдите по ссылке</a></td>
         </tr>
 
@@ -216,6 +216,20 @@
 
     <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
     </div>
-     <p>Отслеживаются все категории международных отправлений за исключением простых писем, бандеролей, мелких пакетов</p>
+     <p>Отслеживаются все категории международных отправлений за исключением простых писем, бандеролей, простых мелких пакетов</p>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Калькулятор стоимости посылок Белпочта",
+  "description": "Расчет стоимости международных почтовых отправлений из Беларуси",
+  "provider": {
+    "@type": "Organization",
+    "name": "PostTarif.by"
+  },
+  "areaServed": ["BY", "RU", "IL", "DE", "PL", "US", "KZ", "LT"],
+  "serviceType": "Почтовые услуги"
+}
+</script>
   </main>
  {% endblock %}
