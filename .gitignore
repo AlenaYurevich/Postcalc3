@@ -13,3 +13,4 @@ db.sqlite3
 /.pytest_cache/
 /postcalc2/settings.py
 /postbot/access.py
+/venv_to_remove/
