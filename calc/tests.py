@@ -19,6 +19,7 @@ def test_simple():
             'for_declared': '',
             'tracking': 'нет',
             'rub': " руб.",
+            'sep': '/',
     }]
     assert cost_of_simple(2002) == [{
         'fiz': 'Макс. вес 2 кг'
@@ -347,21 +348,21 @@ def test_letter_int():
 
 def test_package_int():
     assert cost_of_package_int(11, 1045) == [  # в Австралию - destination 11
-        [{'fiz': '88,10', 'yur': '88,10', 'item_vat': '14,68'}],
-        [{'fiz': '88,10', 'yur': '88,10', 'item_vat': '14,68'}],
-        [{'fiz': '90,49', 'yur': '90,49', 'item_vat': '15,08'}],  # tracked_priority
+        [{'fiz': '88,35', 'yur': '88,36', 'item_vat': '14,73'}],
+        [{'fiz': '88,35', 'yur': '88,36', 'item_vat': '14,73'}],
+        [{'fiz': '94,41', 'yur': '94,42', 'item_vat': '15,74'}],  # tracked_priority
         [{'fiz': 'Отправления не принимаются'}],
-        [{'fiz': '96,01', 'yur': '96,01', 'item_vat': '16,00'}]
+        [{'fiz': '96,26', 'yur': '96,25', 'item_vat': '16,04'}]
     ]
 
 
 def test_package_int2():
     assert cost_of_package_int(162, 1035) == [  # в Россию - destination 162
-        [{'fiz': '27,41', 'yur': '27,41', 'item_vat': '4,57'}],
-        [{'fiz': '42,58', 'yur': '42,58', 'item_vat': '7,10'}],
-        [{'fiz': '46,67', 'yur': '46,67', 'item_vat': '7,78'}],
-        [{'fiz': '37,80', 'yur': '37,80', 'item_vat': '6,30'}],
-        [{'fiz': '52,19', 'yur': '52,19', 'item_vat': '8,70'}]
+        [{'fiz': '29,61', 'yur': '29,62', 'item_vat': '4,94'}],
+        [{'fiz': '43,47', 'yur': '43,48', 'item_vat': '7,25'}],
+        [{'fiz': '49,53', 'yur': '49,54', 'item_vat': '8,26'}],
+        [{'fiz': '39,98', 'yur': '39,98', 'item_vat': '6,66'}],
+        [{'fiz': '53,09', 'yur': '53,09', 'item_vat': '8,85'}]
     ]
 
 

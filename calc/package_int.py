@@ -44,20 +44,22 @@ def find_numbers_by_country(row_number, priority):
 def find_package_int(destination, item_weight, track, priority):
     data = find_numbers_by_country(destination, priority)
     if type(data[0]) is str:
-        return [{'fiz': "Мелкие пакеты не принимаются"}]
+        return {'fiz': "Отправления не принимаются"}
     if track == "registered":
         add_cost = REGISTERED_RATE
     elif track == "tracked":
         add_cost = TRACKED_RATE
     else:
         add_cost = 0
-    if track == "simple":
-        fiz = data[0] + data[1] * weight(item_weight, False)
+    if track == "simple" or track == "tracked":
+        fiz = (data[0] + data[1] * weight(item_weight, False) + add_cost) * 1.2
+        yur = data[0] + data[1] * weight(item_weight, False) + add_cost
     else:
-        fiz = data[0] + data[1] * weight(item_weight, True) + add_cost
-    item_vat = vat(fiz)
-    fiz = round_as_excel(fiz) + item_vat
-    yur = fiz
+        fiz = (data[0] + data[1] * weight(item_weight, True) + add_cost) * 1.2
+        yur = data[0] + data[1] * weight(item_weight, True) + add_cost
+    item_vat = vat(yur)
+    fiz = round_as_excel(fiz)
+    yur = round_as_excel(yur) + item_vat
     rate = {
         'fiz': fiz,
         'yur': yur,
@@ -71,7 +73,8 @@ def find_package_int(destination, item_weight, track, priority):
 def cost_of_package_int(destination, item_weight):
     if item_weight > 2000:
         limit_message = "Макс. вес 2 кг"
-        return [{'fiz': limit_message, 'yur': "-"}] * 5
+        limit_result = {'fiz': limit_message, 'yur': "-"}
+        return [[limit_result] for _ in range(5)]
     else:
         simple_non_priority = find_package_int(destination, item_weight, "simple", "non_priority")
         simple_priority = find_package_int(destination, item_weight, "simple", "priority")

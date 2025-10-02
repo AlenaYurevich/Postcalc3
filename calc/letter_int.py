@@ -99,15 +99,8 @@ def calculate_registered(item_weight, priority, is_registered):
 def cost_of_letter_int(item_weight, declared_value, destination):
     if item_weight > 2000:
         limit_message = "Макс. вес 2 кг"
-        return [
-            [{'fiz': limit_message, 'yur': "-"}],
-            [{'fiz': limit_message, 'yur': "-"}],
-            [{'fiz': limit_message, 'yur': "-"}],
-            [{'fiz': limit_message, 'yur': "-"}],
-            [{'fiz': limit_message, 'yur': "-"}],
-            [{'fiz': limit_message, 'yur': "-"}],
-            [{'fiz': limit_message, 'yur': "-"}],
-        ]
+        limit_result = {'fiz': limit_message, 'yur': "-"}
+        return [[limit_result] for _ in range(7)]
     else:
         simple_non_priority = calculate_rates(item_weight, declared_value, "non_priority", False)
         simple_priority = calculate_rates(item_weight, declared_value, "priority", False)

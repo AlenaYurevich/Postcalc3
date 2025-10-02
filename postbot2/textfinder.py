@@ -91,9 +91,9 @@ if __name__ == "__main__":
         "https://www.belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/vnutrennyayauskorennayapo1":
             "//a[span[text()='Прейскурант экспресс посылки юр. с 10.07.2025.pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/mezhdunarodnyyepochtovyye1":
-            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД физ лица с 01.01.2025.pdf']]",
+            "//a[span[text()='Прейскурант на межд. по с 01.01.2025 физ лица.pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/mezhdunarodnyyepochtovyye0":
-            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД юр лица с 01.01.2025.pdf']]",
+            "//a[span[text()='Прейскурант на международные ПО с 01.01.2025 юр лица.pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/Mezhdunarodnyyeposylkidly":
             "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД  с 01.01.2025 физ лица.pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/Mezhdunarodnyyeposylkidly0":

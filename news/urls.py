@@ -8,5 +8,5 @@ urlpatterns = [
     path('', views.news_index, name='news_index'),
     path('post/<slug:slug>/', views.news_detail, name='news_detail'),
     path('category/<slug:category_slug>/', views.news_category, name='news_category'),
-    path('markitup/', include('markitup.urls')),
+    # path('markitup/', include('markitup.urls')),
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
