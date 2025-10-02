@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
-from markitup.fields import MarkupField
+# from markitup.fields import MarkupField
 
 
 class Category(models.Model):
@@ -18,7 +18,7 @@ class Category(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=250)
-    content = MarkupField(blank=True)
+    content = models.CharField(max_length=500, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
     image = models.FileField(upload_to='static/images/')
