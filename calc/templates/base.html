@@ -4,12 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name = "viewport" content="width=device-width, initial-scale=1, maximum-scale=6, minimum-scale=1 shrink-to-fit=no">
-    <meta http-equiv ="X-UA-Compatible" content = "ie-edge">
+    <meta http-equiv ="X-UA-Compatible" content = "IE=edge">
     {% block seo %}
     {% endblock %}
-    <meta name="google-site-verification" content="tk4qpuwEg0oCcqwDJimqQPVlufw_jyqJ2Oukma59cH8"/>
-    <meta name="yandex-verification" content="fa7b2bea76fff0e0"/>
-    <meta name="robots" content="index,follow"/>
+    <meta name="google-site-verification" content="tk4qpuwEg0oCcqwDJimqQPVlufw_jyqJ2Oukma59cH8">
+    <meta name="yandex-verification" content="fa7b2bea76fff0e0">
+    <meta name="robots" content="index,follow">
+    <meta name="language" content="ru">
+    <meta name="geo.region" content="BY">
+    <meta name="geo.placename" content="Беларусь">
+    <meta property="og:type" content="website">
     <link rel="icon" href="{% static '/images/favicon.ico' %}" type="image/x-icon" sizes="any"><!-- 32×32 -->
     <link rel="icon" href="https://posttarif.by/favicon.ico" type="image/x-icon" sizes="any"><!-- 32×32 -->
     <link rel="apple-touch-icon" href="https://posttarif.by/apple-touch-icon.png" type="image/png">
@@ -34,12 +38,12 @@
     </style>
 <!-- Yandex.RTB -->
 <script>window.yaContextCb=window.yaContextCb||[]</script>
-<script src="https://yandex.ru/ads/system/context.js" async></script>
+<script src="https://yandex.ru/ads/system/context.js"></script>
 </head>
 <body>
 <div class="container py-3">
   <header>
-  <nav class="navbar navbar-expand-sm navbar-light bg-light">
+  <nav class="navbar navbar-expand-sm navbar-light">
   <div class="container-fluid">
   <a href="{% url 'main' %}" class="d-flex align-items-center link-body-emphasis text-decoration-none">
         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-calculator text-info" role="img" viewBox="0 0 16 16">
@@ -77,7 +81,7 @@
             <div class="lang_choose_cont">
             <div id="bxdynamic_jmonnO_start" style="display:none"></div>
             <div id="google_translate_element"></div>
-      <script async>
+      <script>
     function googleTranslateElementInit() {
         new google.translate.TranslateElement({
             lang: 'ru',
@@ -236,7 +240,7 @@ window.yaContextCb.push(() => {
   <path d="M12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
   <path d="M4 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z"/>
         </svg>
-        <time class="d-block  text-body-secondary">&copy; 2025</time>
+        <p class="d-block  text-body-secondary">&copy; 2025</p>
         <a class ="text-info " href="mailto:info@posttarif.by" rel="nofollow">info@posttarif.by</a>
       </div>
       <div class="col-6 col-md">

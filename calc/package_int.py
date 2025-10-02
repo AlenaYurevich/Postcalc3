@@ -1,5 +1,5 @@
 import math
-from .sheets import sheet4
+from .sheets import sheet9
 from .vat import vat
 from .round_as_excel import round_as_excel
 from .format import formatted
@@ -8,9 +8,9 @@ from .constants import TRACKED_RATE, REGISTERED_RATE
 
 """
 для мелких пакетов стоимость складывается из стоимости за посылку и стоимости за килограмм
-Тарификация  за  массу  нерегистрируемых пакетов осуществляется  с точностью до сотен 
+Тарификация  за  массу  простого мелкого пакет осуществляется с точностью до сотен 
 граммов. Любое количество граммов округляется до сотни граммов в большую сторону
-Тарификация  за  массу  регистрируемых пакетов  осуществляется  с точностью  до  
+Тарификация  за  массу  регистрируемого мелкого пакета  осуществляется  с точностью  до  
 десятков  граммов.  Любое  количество  граммов  округляется  до  десятков  граммов  в
 большую сторону
 """
@@ -23,24 +23,28 @@ def weight(item_weight, is_registered):
         return math.ceil(item_weight / 100) / 10
 
 
-def get_rates_from_sheet(destination, priority):
-    # Сопоставление кода назначения с номером строки ячеек
-    country_rows = {
-        11: (21, 22),  # Австралия
-        92: (24, 25),  # Канада
-        132: (27, 28),  # Мексика
-        165: (30, 31)  # США
-    }
-    # Получение индексов строк для указанной страны
-    start_row, end_row = country_rows.get(destination, (18, 19))
-    # Определяем столбец в зависимости от приоритета
-    column = 'D' if priority == 'non_priority' else 'E'
-    # Получаем данные из таблицы
-    return [sheet4[f'{column}{start_row}'].value, sheet4[f'{column}{end_row}'].value]
+def find_numbers_by_country(row_number, priority):
+    if row_number < 11:
+        # Если номер строки меньше 11, возвращаем None, потому что строки выше 11 не обрабатываются.
+        # в файле добавила строку сверху чтобы соответствовало посылкам
+        return None
+        # Получаем строку по её индексу.
+    row_data = list(sheet9.iter_rows(min_row=row_number, max_row=row_number, values_only=True))
+    if row_data:  # Проверка, что строка не пустая
+        row_data = row_data[0]  # Извлекаем данные строки (поскольку iter_rows возвращает список кортежей)
+        if priority == "non_priority":
+            data = (row_data[3], row_data[4])  # Получаем данные из 4-й и 5-й колонок
+        else:
+            data = (row_data[5], row_data[6])  # Получаем данные из 6-й и 7-й колонок
+        return data
+    # Если row_data пустой или None, возвращаем None, None
+    return None
 
 
 def find_package_int(destination, item_weight, track, priority):
-    data = get_rates_from_sheet(destination, priority)
+    data = find_numbers_by_country(destination, priority)
+    if type(data[0]) is str:
+        return [{'fiz': "Мелкие пакеты не принимаются"}]
     if track == "registered":
         add_cost = REGISTERED_RATE
     elif track == "tracked":
@@ -48,16 +52,16 @@ def find_package_int(destination, item_weight, track, priority):
     else:
         add_cost = 0
     if track == "simple":
-        fiz = round_as_excel(data[0] + data[1] * weight(item_weight, False))
+        fiz = data[0] + data[1] * weight(item_weight, False)
     else:
-        fiz = round_as_excel(data[0] + data[1] * weight(item_weight, True)) + add_cost
+        fiz = data[0] + data[1] * weight(item_weight, True) + add_cost
     item_vat = vat(fiz)
-    fiz = round_as_excel(fiz + item_vat)
+    fiz = round_as_excel(fiz) + item_vat
     yur = fiz
     rate = {
         'fiz': fiz,
         'yur': yur,
-        'item_vat': item_vat
+        'item_vat': item_vat,
     }
     for key in rate:
         rate[key] = formatted(rate[key])
