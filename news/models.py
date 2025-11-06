@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
-# from markitup.fields import MarkupField
+from django.urls import reverse
 
 
 class Category(models.Model):
@@ -11,6 +11,9 @@ class Category(models.Model):
         if not self.slug:
             self.slug = slugify(self.name)
         super(Category, self).save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('news_category', kwargs={'category_slug': self.slug})
 
     def __str__(self):
         return self.name
@@ -26,6 +29,9 @@ class Post(models.Model):
     alt = models.CharField(max_length=30)
     categories = models.ManyToManyField('Category', related_name='posts')
     slug = models.SlugField(max_length=250, unique=True, blank=True)
+
+    def get_absolute_url(self):
+        return reverse('news_detail', kwargs={'slug': self.slug})
 
     def save(self, *args, **kwargs):
         if not self.slug:
