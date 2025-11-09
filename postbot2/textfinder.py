@@ -81,7 +81,7 @@ if __name__ == "__main__":
     # Словарь URL-адресов и соответствующих XPath
     url_xpath_map = {
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/fiz":
-            "//a[span[text()='Прейскурант РБ  с 01.03.2025 .pdf']]",
+            "//a[span[text()='Прейскурант физ лица с 03.11.2025.pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/Tarifynauslugipochtovoysv0":
             "//a[span[text()='Прейскурант РБ  с 01.03.2025 .pdf']]",
         "https://www.belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/oplachennaja-peresylka":

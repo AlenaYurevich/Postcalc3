@@ -267,5 +267,19 @@ window.yaContextCb.push(() => {
   </footer>
 </div>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
+<script>
+(function (w, d, t, u, i) {
+        w.aiChat = w.aiChat || function () {
+            (w.aiChat.q = w.aiChat.q || []).push(arguments);
+        };
+        var s = d.createElement(t);
+        s.async = true;
+        s.src = u;
+        s.onload = function () {
+            w.aiChat('init', {id: i});
+        };
+        d.head.appendChild(s);
+    })(window, document, 'script', 'https://ulteh.com/js/chat-widget.js', 'RzxRLWryZr9md9I5roUv8');
+</script>
 </body>
 </html>

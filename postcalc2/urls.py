@@ -16,11 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.sitemaps.views import sitemap
+from .sitemaps import sitemaps  # пример
 
 
 urlpatterns = [
     path('', include('calc.urls')),
     path('admin/', admin.site.urls),
     path('news/', include('news.urls')),
-    # path('telegram/', include('postbot.urls')),
-]
+    path('markitup/', include('markitup.urls')),  # Добавьте эту строку
+    path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="django.contrib.sitemaps.views.sitemap",)
+   ]
