@@ -1,6 +1,6 @@
 from django.contrib import sitemaps
 from django.urls import reverse
-from django.core.paginator import Paginator
+# from django.core.paginator import Paginator
 from .models import Post, Category  # ваши модели
 
 
@@ -30,10 +30,10 @@ class NewsPaginatedSitemap(sitemaps.Sitemap):
 
 class CategorySitemap(sitemaps.Sitemap):
     changefreq = 'weekly'
-    priority = 0.8
+    priority = 0.7
 
     def items(self):
-        return Category.objects.all()
+        return Category.objects.all().order_by('id')  # или 'name', 'slug'
 
     def lastmod(self, obj):
         # Возвращаем дату последнего поста в этой категории
@@ -49,14 +49,13 @@ class NewsDynamicSitemap(sitemaps.Sitemap):
     priority = 0.8
 
     def items(self):
-        return Post.objects.all()
+        return Post.objects.all().order_by('-created_on')  # или 'id', '-last_modified'
 
     def lastmod(self, obj):
         return obj.last_modified  # используем ваше существующее поле
 
 
 sitemaps = {
-    # 'news_static': NewsStaticSitemap,
     'news_pages': NewsPaginatedSitemap,
     'news_categories': CategorySitemap,
     'news_posts': NewsDynamicSitemap,

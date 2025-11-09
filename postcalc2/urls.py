@@ -24,5 +24,6 @@ urlpatterns = [
     path('', include('calc.urls')),
     path('admin/', admin.site.urls),
     path('news/', include('news.urls')),
+    path('markitup/', include('markitup.urls')),  # Добавьте эту строку
     path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="django.contrib.sitemaps.views.sitemap",)
    ]
