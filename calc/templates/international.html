@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block seo %}
-  <title>Посылка в Россию из Беларуси: стоимость отправки | Тарификатор</title>
-  <meta name="description" content="Рассчитать стоимость посылки в Россию из Беларуси. Цены на международные отправления: письма в РФ, посылки в Израиль, Германию, Польшу. Калькулятор тарифов Белпочта для МПО">
+  <title>Посылка из Беларуси в Россию: стоимость отправки | Тарификатор</title>
+  <meta name="description" content="Рассчитать стоимость посылки в Россию из Беларуси. Цены на международные отправления: письма в РФ, посылки в Израиль, Германию, Польшу. Калькулятор тарифов Белпочта для международных отправлений белпочтой">
   <meta name="keywords" content="посылка в россию, письмо в россию, международная посылка, белпочта посылки в россию, посылка в израиль, письмо в польшу, письмо в германию, стоимость посылки в россию, международные отправления белпочта">
   <link rel="canonical" href="https://posttarif.by/international">
   <meta property="og:title" content="Посылка в Россию из Беларуси: рассчитать стоимость на тарификаторе">
@@ -96,18 +96,6 @@
             {% endfor %}
         </tr>
         <tr>
-            <th scope="row" class="text-start table-info" colspan="5">Письма, бандероли отслеживаемые:</th>
-        </tr>
-        <tr>
-            <th scope="row" class="text-start">Приоритетные</th>
-            {% for rate in tracked_priority %}
-            <td> {{ rate.fiz }}</td>
-            <td> {{ rate.yur }}</td>
-            <td> {{ rate.item_vat }}</td>
-            <td></td>
-            {% endfor %}
-        </tr>
-        <tr>
             <th scope="row" class="text-start table-info" colspan="5">Мелкие пакеты отслеживаемые:</th>
         </tr>
         <tr>
@@ -135,27 +123,6 @@
             <th scope="row" class="text-start">Приоритетные</th>
             {% for rate in registered_priority %}
              <td> {{ rate.fiz }}</td>
-            <td> {{ rate.yur }}</td>
-            <td> {{ rate.item_vat }}</td>
-            <td></td>
-            {% endfor %}
-        </tr>
-        <tr>
-            <th scope="row" class="text-start table-info" colspan="5">Мелкие пакеты заказные:</th>
-        </tr>
-        <tr>
-            <th scope="row" class="text-start">Неприоритетные</th>
-            {% for rate in registered_non_priority_pack %}
-            <td> {{ rate.fiz }}</td>
-            <td> {{ rate.yur }}</td>
-            <td> {{ rate.item_vat }}</td>
-            <td></td>
-            {% endfor %}
-        </tr>
-        <tr>
-            <th scope="row" class="text-start">Приоритетные</th>
-            {% for rate in registered_priority_pack %}
-            <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat }}</td>
             <td></td>
@@ -217,7 +184,7 @@
     <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
     </div>
      <p>Отслеживаются все категории международных отправлений за исключением простых писем, бандеролей, простых мелких пакетов</p>
-      <p>последнее изменение 01.10.2025</p>
+      <p>последнее изменение 10.11.2025</p>
      <script type="application/ld+json">
 {
   "@context": "https://schema.org",
