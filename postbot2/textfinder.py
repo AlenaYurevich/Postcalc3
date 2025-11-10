@@ -91,9 +91,13 @@ if __name__ == "__main__":
         "https://www.belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/vnutrennyayauskorennayapo1":
             "//a[span[text()='Прейскурант экспресс посылки юр. с 10.07.2025.pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/mezhdunarodnyyepochtovyye1":
-            "//a[span[text()='Прейскурант на межд. по с 01.01.2025 физ лица.pdf']]",
+            "//a[span[text()='Прейскурант физ лица с 10.11.2025 .pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/mezhdunarodnyyepochtovyye0":
-            "//a[span[text()='Прейскурант на международные ПО с 01.01.2025 юр лица.pdf']]",
+            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД юр лица с 10.11.2025 .pdf']]",
+        "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/Tarify-na-peresylku-mezdu":
+            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД  МП физ лица .pdf']]",
+        "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/Tarify-na-peresylku-mezdu0":
+            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД  мп  юр лица с 10.11.2025 .pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/Mezhdunarodnyyeposylkidly":
             "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД  с 01.01.2025 физ лица.pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/Mezhdunarodnyyeposylkidly0":
@@ -103,6 +107,8 @@ if __name__ == "__main__":
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/Mezhdunarodnayauskorennay0":
             "//a[span[text()='EN EMS юр).pdf']]",
     }
+
+    check_elements_on_pages(url_xpath_map)
     # Поиск текста "тариф" на странице блога
     search_text_on_page("https://blog.belpost.by/", "тариф")
-    check_elements_on_pages(url_xpath_map)
+    search_text_on_page("https://blog.belpost.by/", "об изменении")
