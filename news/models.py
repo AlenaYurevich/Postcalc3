@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from django.urls import reverse
-from markitup.fields import MarkupField
+from ckeditor.fields import RichTextField
 
 
 class Category(models.Model):
@@ -22,8 +22,8 @@ class Category(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=250)
-    content = models.TextField(max_length=2000, blank=True)
-    # content = MarkupField(blank=True)  # Заменяем TextField на MarkupField
+    # content = models.RichTextField(max_length=2000, blank=True)
+    content = RichTextField(config_name='awesome_ckeditor')
     created_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
     image = models.FileField(upload_to='static/images/')

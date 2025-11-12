@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block seo %}
-    <title>{{ post.title }}</title>
+    <title>{{ post.title }} | Расчет стоимости почтовых отправлений</title>
     <meta name="description" content='{{ post.content | safe | slice:":150" }}'>
-    <meta name="keywords" content="Тарифы, рост тарифов, новые расчеты">
+    <meta name="keywords" content="посылка, письмо, бандероль, мелкий пакет, заказное письмо, экспресс посылка, EMS">
     <link rel="canonical" href="{% url 'news_detail' slug=post.slug %}"/>
     <meta property="og:title" content="{{ post.title }}"/>
     <meta property="og:image" content="{{ post.image }}"/>
@@ -30,7 +30,7 @@
       </a> |
       {% endfor %}
         </p>
-        <p>{{ post.content }}</p>
+        <p>{{ post.content | safe }}</p>
         <img class = "img-fluid" src = "{{ post.image.url}}" alt = "{{ post.alt }}"/>
     </div>
   </div>

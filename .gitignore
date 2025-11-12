@@ -14,3 +14,4 @@ db.sqlite3
 /postcalc2/settings.py
 /postbot/access.py
 /venv_to_remove/
+/postbot2/access.py
