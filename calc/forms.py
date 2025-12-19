@@ -47,7 +47,7 @@ class EmsForm(forms.Form):
     notification = forms.TypedChoiceField(label="Уведомление о вручении:", choices=Choices_notice,
                                           widget=forms.RadioSelect(attrs={'checked': Choices_notice[0]}))
     fragile = forms.BooleanField(label="С отметкой за прием хрупких и (или) громоздких", required=False,
-                                 widget=forms.CheckboxInput(attrs={'class': "form-check-input"}))
+                                 widget=forms.CheckboxInput(attrs={'class': "form-check-input border-info"}))
 
 
 class TransferForm(forms.Form):
