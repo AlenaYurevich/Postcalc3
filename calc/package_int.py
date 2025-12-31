@@ -1,4 +1,3 @@
-
 import math
 from .sheets import sheet9
 from .vat import vat
@@ -60,7 +59,6 @@ def find_package_int(destination, item_weight, track, priority):
 
 
 def cost_of_package_int(destination, item_weight):
-    print(destination)
     if item_weight > 2000:
         limit_message = "Макс. вес 2 кг"
         limit_result = {'fiz': limit_message, 'yur': "-"}

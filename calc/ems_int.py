@@ -42,12 +42,12 @@ def find_item_cost(destination, weight, declared_value, item):
     col = find_numbers_by_country(destination, item)
     if type(col[0]) is str:
         return [{'fiz': "отправления не принимаются"}]
-    if weight <= col[3] * 1000:
-        fiz = col[1] + ems_weight(weight) * col[2]
+    if weight <= 500:
+        fiz = col[0]
     elif weight <= 1000:
         fiz = col[1]
-    elif weight <= 500:
-        fiz = col[0]
+    elif weight > 1000:
+        fiz = col[1] + ems_weight(weight) * col[2]
     else:
         fiz = 0
     if declared_value in ("нет", "", 0, "0"):
