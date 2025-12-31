@@ -105,7 +105,7 @@ if __name__ == "__main__":
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/Mezhdunarodnayauskorennay":
             "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД  EMS физ лица с 01.01.2025.pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/Mezhdunarodnayauskorennay0":
-            "//a[span[text()='EN EMS юр).pdf']]",
+            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД EMS с 01.01.2026.pdf']]",
     }
 
     check_elements_on_pages(url_xpath_map)

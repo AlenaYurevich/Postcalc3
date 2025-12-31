@@ -2,9 +2,9 @@
 Плата за внутренние уведомления, руб. без НДС
 """
 notification_costs = {
-    1: 0.70,
-    2: 2.20,
-    3: 0.45,
+    1: 0.80,
+    2: 2.50,
+    3: 0.50,
     4: 0.00,
 }
 
@@ -19,6 +19,6 @@ def notification_cost(notification):
 Плата за отслеживание и дополнительную обработку международных писем, мелких пакетов, посылок руб.без НДС
 """
 TRACKED_RATE = 5.05
-REGISTERED_RATE = 9.65
-VALUE_RATE = 11.45
-PARCEL_VALUE_RATE = 6.15
+REGISTERED_RATE = 11.50
+VALUE_RATE = 13.75
+PARCEL_VALUE_RATE = 6.75

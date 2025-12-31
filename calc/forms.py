@@ -4,9 +4,9 @@ from .sheets import sheet3, sheet5, sheet8
 from .countries import read_the_country
 
 
-Choices_notice = [(1, f'простое 0,84 руб.'),
-                  (2, f'заказное 2,64 руб. '),
-                  (3, f'электронное (посредством Viber, SMS, email) 0,54 руб.'),
+Choices_notice = [(1, f'простое 0,96 руб.'),
+                  (2, f'заказное 3,00 руб. '),
+                  (3, f'электронное (посредством Viber, SMS, email) 0,60 руб.'),
                   (4, 'без уведомления',)]
 
 
@@ -34,20 +34,20 @@ Ems_Int_Choices = read_the_country(sheet8)
 
 class EmsForm(forms.Form):
     departure = forms.TypedChoiceField(label="Выберите пункт отправления", choices=Choices,
-                                       widget=forms.Select(attrs={'class': "form-control", 'autofocus': 'autofocus'}))
+                                       widget=forms.Select(attrs={'class': "form-control border-info", 'autofocus': 'autofocus'}))
     destination = forms.TypedChoiceField(label="Выберите пункт назначения", choices=Choices,
-                                         widget=forms.Select(attrs={'class': "form-control"}))
+                                         widget=forms.Select(attrs={'class': "form-control border-info"}))
     weight = forms.IntegerField(label="Введите вес отправления, грамм", min_value=1, widget=forms.NumberInput(attrs={
-        'class': "form-control"}))
+        'class': "form-control border-info"}))
     declared_value = forms.DecimalField(label="Введите объявленную ценность, рублей", min_value=0, required=False,
-                                        decimal_places=2, widget=forms.NumberInput(attrs={'class': "form-control",
+                                        decimal_places=2, widget=forms.NumberInput(attrs={'class': "form-control border-info",
                                                                                           'placeholder': "нет"}))
     delivery = forms.ChoiceField(label="Доставка:", choices=Choices2,
                                  widget=forms.RadioSelect(attrs={'checked': Choices2[3]}))
     notification = forms.TypedChoiceField(label="Уведомление о вручении:", choices=Choices_notice,
                                           widget=forms.RadioSelect(attrs={'checked': Choices_notice[0]}))
     fragile = forms.BooleanField(label="С отметкой за прием хрупких и (или) громоздких", required=False,
-                                 widget=forms.CheckboxInput(attrs={'class': "form-check-input"}))
+                                 widget=forms.CheckboxInput(attrs={'class': "form-check-input border-info"}))
 
 
 class TransferForm(forms.Form):
