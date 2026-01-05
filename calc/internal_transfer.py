@@ -1,6 +1,7 @@
 from .round_as_excel import round_as_excel
 from .format import formatted
 from .vat import vat
+from .constants import TRANSFER_HOME
 
 
 def amount_match(amount):
@@ -18,14 +19,14 @@ def cost_of_internal_transfer(amount):
         'fiz': 1.00,
         'yur': 1.20,
         'item_vat': 0.20,
-        'fiz_home': 1.35,
+        'fiz_home': 1.40,
 
             }
     multiplier = amount_match(amount)
     fiz = round_as_excel(amount * multiplier / 100)
     item_vat = round_as_excel(vat(fiz))
     yur = fiz + item_vat
-    fiz_home = fiz + 0.35
+    fiz_home = fiz + TRANSFER_HOME
     if fiz >= 1.00:
         rate = {
             'fiz': fiz,

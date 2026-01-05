@@ -12,9 +12,11 @@ Choices_notice = [(1, f'простое 0,96 руб.'),
 
 class PostForm(forms.Form):
     weight = forms.IntegerField(label="Введите вес отправления, грамм", min_value=1, initial=20,
-                                widget=forms.NumberInput(attrs={'class': "form-control", 'autofocus': 'autofocus'}))
+                                widget=forms.NumberInput(attrs={'class': "form-control border-info", 'autofocus':
+                                                                'autofocus'}))
     declared_value = forms.DecimalField(label="Введите объявленную ценность, рублей", min_value=0, required=False,
-                                        decimal_places=2, widget=forms.NumberInput(attrs={'class': "form-control",
+                                        decimal_places=2, widget=forms.NumberInput(attrs={'class': "form-control "
+                                                                                          "border-info",
                                                                                           'placeholder': "нет"}))
     notification = forms.TypedChoiceField(label="Уведомление о вручении:", choices=Choices_notice, initial=4,
                                           widget=forms.RadioSelect())
@@ -34,13 +36,15 @@ Ems_Int_Choices = read_the_country(sheet8)
 
 class EmsForm(forms.Form):
     departure = forms.TypedChoiceField(label="Выберите пункт отправления", choices=Choices,
-                                       widget=forms.Select(attrs={'class': "form-control border-info", 'autofocus': 'autofocus'}))
+                                       widget=forms.Select(attrs={'class': "form-control border-info",
+                                                                  'autofocus': 'autofocus'}))
     destination = forms.TypedChoiceField(label="Выберите пункт назначения", choices=Choices,
                                          widget=forms.Select(attrs={'class': "form-control border-info"}))
     weight = forms.IntegerField(label="Введите вес отправления, грамм", min_value=1, widget=forms.NumberInput(attrs={
         'class': "form-control border-info"}))
     declared_value = forms.DecimalField(label="Введите объявленную ценность, рублей", min_value=0, required=False,
-                                        decimal_places=2, widget=forms.NumberInput(attrs={'class': "form-control border-info",
+                                        decimal_places=2, widget=forms.NumberInput(attrs={'class': "form-control "
+                                                                                          "border-info",
                                                                                           'placeholder': "нет"}))
     delivery = forms.ChoiceField(label="Доставка:", choices=Choices2,
                                  widget=forms.RadioSelect(attrs={'checked': Choices2[3]}))
@@ -58,22 +62,26 @@ class TransferForm(forms.Form):
 
 class ParcelIntForm(forms.Form):
     destination = forms.TypedChoiceField(label="Страна назначения", choices=International_Choices,
-                                         widget=forms.Select(attrs={'class': "form-control", 'autofocus': 'autofocus'}))
+                                         widget=forms.Select(attrs={'class': "form-control border-info", 'autofocus':
+                                                                    'autofocus'}))
     weight = forms.IntegerField(
         label="Введите вес отправления, грамм",
         min_value=1,
         initial=20,
-        widget=forms.NumberInput(attrs={'class': "form-control", 'step': '1'}))
+        widget=forms.NumberInput(attrs={'class': "form-control border-info", 'step': '1'}))
     declared_value = forms.DecimalField(label="Введите объявленную ценность, рублей", min_value=0, required=False,
-                                        decimal_places=2, widget=forms.NumberInput(attrs={'class': "form-control",
+                                        decimal_places=2, widget=forms.NumberInput(attrs={'class': "form-control"
+                                                                                          " border-info",
                                                                                           'placeholder': "нет"}))
 
 
 class EmsIntForm(forms.Form):
     destination = forms.TypedChoiceField(label="Страна назначения", choices=Ems_Int_Choices,
-                                         widget=forms.Select(attrs={'class': "form-control", 'autofocus': 'autofocus'}))
+                                         widget=forms.Select(attrs={'class': "form-control border-info", 'autofocus':
+                                                                    'autofocus'}))
     weight = forms.IntegerField(label="Введите вес отправления, грамм", min_value=1, widget=forms.NumberInput(attrs={
-        'class': "form-control"}))
+        'class': "form-control border-info"}))
     declared_value = forms.DecimalField(label="Введите объявленную ценность, рублей", min_value=0, required=False,
-                                        decimal_places=2, widget=forms.NumberInput(attrs={'class': "form-control",
+                                        decimal_places=2, widget=forms.NumberInput(attrs={'class': "form-control "
+                                                                                          "border-info",
                                                                                           'placeholder': "нет"}))

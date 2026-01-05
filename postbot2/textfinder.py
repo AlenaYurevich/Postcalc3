@@ -81,29 +81,29 @@ if __name__ == "__main__":
     # Словарь URL-адресов и соответствующих XPath
     url_xpath_map = {
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/fiz":
-            "//a[span[text()='Прейскурант физ лица с 03.11.2025.pdf']]",
+            "//a[span[text()='Прейскурант физ лица  с 01.01.2026.pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/Tarifynauslugipochtovoysv0":
-            "//a[span[text()='Прейскурант РБ  с 01.03.2025 .pdf']]",
+            "//a[span[text()='Прейскурант   с 01.01.2026 .pdf']]",
         "https://www.belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/oplachennaja-peresylka":
-            "//span[em[text()='В действии с 10.06.2025']]",
+            "//span[em[text()='В действии с 01.01.2026']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/vnutrennyayauskorennayapo0":
-            "//a[span[text()='Прейскурант экспресс посылки физ с 10.07.2025.pdf']]",
+            "//a[span[text()='Прейскурант экспресс посылка с 01.01.2026.pdf']]",
         "https://www.belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/vnutrennyayauskorennayapo1":
-            "//a[span[text()='Прейскурант экспресс посылки юр. с 10.07.2025.pdf']]",
+            "//a[span[text()='Прейскурант экспресс посылки  с 01.01.2026.pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/mezhdunarodnyyepochtovyye1":
-            "//a[span[text()='Прейскурант физ лица с 10.11.2025 .pdf']]",
+            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД с 01.01.2026.pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/mezhdunarodnyyepochtovyye0":
-            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД юр лица с 10.11.2025 .pdf']]",
+            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД с 01.01.2026.pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/Tarify-na-peresylku-mezdu":
-            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД  МП физ лица .pdf']]",
+            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД  МП с 01.1.2026.pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/Tarify-na-peresylku-mezdu0":
-            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД  мп  юр лица с 10.11.2025 .pdf']]",
+            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД. МП с 01.01.2026.pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/Mezhdunarodnyyeposylkidly":
-            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД  с 01.01.2025 физ лица.pdf']]",
+            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД посылки с 01.1.2026.pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/Mezhdunarodnyyeposylkidly0":
-            "//a[span[text()='2 ПРЕЙСКУРАНТ МЕЖД  посылки с 01.01.2025.pdf']]",
+            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД посылки с 01.01.2026.pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/Mezhdunarodnayauskorennay":
-            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД  EMS физ лица с 01.01.2025.pdf']]",
+            "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД EMS  с 01.01.2026.pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/Mezhdunarodnayauskorennay0":
             "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД EMS с 01.01.2026.pdf']]",
     }
