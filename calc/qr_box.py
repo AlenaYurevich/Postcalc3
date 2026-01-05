@@ -20,7 +20,7 @@ def cost_of_qr_box(declared_value, notification):
         yur += for_declared_yur
         for_declared_yur = for_declared_fiz * 1.2
         sep1, sep2 = "/", "/"
-    if notification == 0.45:
+    if notification == notification_cost(3):
         fiz += notification * 1.2
         yur += notification
         notification = notification * 1.2

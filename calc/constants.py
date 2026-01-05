@@ -22,3 +22,7 @@ TRACKED_RATE = 5.05
 REGISTERED_RATE = 11.50
 VALUE_RATE = 13.75
 PARCEL_VALUE_RATE = 6.75
+"""
+Прием на дому денежных переводов за одно отправление
+"""
+TRANSFER_HOME = 0.40
