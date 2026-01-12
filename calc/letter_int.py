@@ -105,7 +105,7 @@ def cost_of_letter_int(item_weight, declared_value, destination):
         registered_priority = calculate_registered(item_weight, "priority")
         declared_non_priority = {'fiz': "-", 'yur': "-"}
         declared_priority = {'fiz': "-", 'yur': "-"}
-    if declared_value not in ("", "0"):
+    if declared_value not in ("", "0", 0):
         declared_priority = calculate_rates(item_weight, declared_value, "priority", True)
         if destination == 162:
             registered_non_priority = calculate_registered(item_weight, "non_priority")
