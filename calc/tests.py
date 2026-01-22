@@ -349,10 +349,6 @@ def test_letter_int():
           }]
     ]
 
-"""
-Здесь не должно быть с ОЦ
-"""
-
 
 def test_letter_int2():
     assert cost_of_letter_int(40, 0, 162) == [
@@ -370,9 +366,8 @@ def test_letter_int2():
           'tracking': "нет", }],
         [{'fiz': '18,00', 'yur': '18,00', 'item_vat': '3,00'}],
         [{'fiz': '19,20', 'yur': '19,20', 'item_vat': '3,20'}],
-        [{'fiz': '-'}],
-        [{'fiz': '-',
-          }]
+        [{'fiz': '-', 'yur': '-'}],
+        [{'fiz': '-', 'yur': '-'}]
     ]
 
 
@@ -416,7 +411,7 @@ def test_package_int5():
     ]
 
 
-def test_ems_int():
+def test_ems_int1():
     assert cost_of_ems_int(153, 1035, 12.24) == [  # в Москву- destination 153
         [{'fiz': '61,16', 'yur': '61,16', 'item_vat': '10,19', 'for_declared': '0,44'}],
         [{'fiz': '63,86', 'yur': '63,86', 'item_vat': '10,64', 'for_declared': '0,44'}]
@@ -431,6 +426,8 @@ def test_ems_int():
     ]
 
 
-"""
-написать тест емс с весом ниже 500
-"""
+def test_ems_int2():
+    assert cost_of_ems_int(89, 245, 12.24) == [  # в Канаду - destination 89
+        [{'fiz': '90,92', 'yur': '90,92', 'item_vat': '15,15', 'for_declared': '0,44'}],
+        [{'fiz': '98,48', 'yur': '98,48', 'item_vat': '16,41', 'for_declared': '0,44'}]
+    ]
