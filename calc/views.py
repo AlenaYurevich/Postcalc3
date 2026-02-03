@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .forms import PostForm, EmsForm, TransferForm, ParcelIntForm, EmsIntForm
 from .letter import cost_of_simple, cost_of_registered
+from .registered import cost_of_registered
 from .package import cost_of_package, cost_of_value_package
 from .first_class import cost_of_first_class
 from .parcel import cost_of_parcel
@@ -44,10 +45,25 @@ def calculation_view(request):
                        'qr_box': qr_box,
                        'notification': notification
                        }
-            return render(request, 'index.html', context)  # Внутри фигурных скобок
+            return render(request, 'index.html', context)
     else:
         form = PostForm()
         return render(request, 'index.html', {'form': form})  # внутри фигурных скобок
+
+
+def registered_view(request):
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            item_weight = int(request.POST.get('weight'))
+            registered = cost_of_registered(item_weight)
+            context = {'form': form,
+                       'registered': registered,
+                       }
+            return render(request, 'registered.html', context)
+    else:
+        form = PostForm()
+        return render(request, 'registered.html', {'form': form})  # внутри фигурных скобок
 
 
 def ems_view(request):
