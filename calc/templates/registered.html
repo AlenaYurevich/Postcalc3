@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block seo %}
+    <title>Стоимость заказного письма с уведомлением РБ</title>
+    <meta name="description" content="Отправка заказного письма с уведомлением. Актуальные тарифы, сколько стоит и как долго идет по РБ. Узнайте, что такое заказное республиканское письмо и сколько оно хранится на почте. Калькулятор стоимости доставки">
+    <meta name="keywords" content="тарифы белпочта, рассчитать доставку, доставка, сколько стоит, тарификатор, калькулятор, заказное письмо, Посттариф, Posttarif, РБ, по Беларуси">
+    <link rel="canonical" href="https://posttarif.by/registered">
+    <meta property="og:title" content="Стоимость заказного письма с уведомлением РБ">
+    <meta property="og:image" content="https://posttarif.by/apple-touch-icon.png">
+    <meta property="og:description" content="Отправка заказного письма с уведомлением. Актуальные тарифы, сколько стоит и как долго идет по РБ. Узнайте, что такое заказное республиканское письмо и сколько оно хранится на почте. Калькулятор стоимости доставки">
+    <meta property="og:type" content="article">
+{% endblock %}
+{% block page_content %}
+ <main>
+  <header>
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+      <h1 class="display-4 fw-normal text-body-emphasis">Расчет стоимости<br>заказного письма по Беларуси</h1>
+      <p class="fs-5 text-body-secondary">
+        <p>Введите вес отправления в граммах, нажмите <b>Рассчитать</b> и таблица покажет стоимость пересылки РУП <q>Белпочта</q> </p>
+    </div>
+  </header>
+    <div class="row row-cols-1 row-cols-md-3 mb-3">
+    <form method="POST" class="PostForm">{% csrf_token %}
+      <div class="col">
+         {{ form.weight.label }}
+         {{ form.weight }}
+         {{ form.weight.error_messages }}
+         <p></p>
+        <p>
+          <button class="btn btn-lg btn-info text-white mt-4 mb-4" type="submit" name="send">Рассчитать</button>
+         </p>
+      </div>
+
+    </form>
+    </div>
+
+    <h2 class="display-6 text-center mb-4">Стоимость пересылки заказного письма, руб.</h2>
+    <div class="table-responsive">
+      <table class="table text-center mb-5">
+        <thead>
+          <tr class="border-info">
+            <th style="width: 40%;"></th>
+            <th style="width: 20%;">Физ. лица</th>
+            <th style="width: 20%;">Юр. лица, ИП</th>
+            <th style="width: 20%;">в т.ч. за уведомление</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td scope="row" class="text-start">Заказное письмо, бандероль, мелкий пакет без уведомления</td>
+            {% for rate in registered %}
+            <td> {{ rate.fiz }}</td>
+            <td> {{ rate.yur }}</td>
+            <td> </td>
+            <td> {{ rate.tracking }}</td>
+            {% endfor %}
+          </tr>
+           <tr>
+            <td scope="row" class="text-start">Заказное письмо, бандероль, мелкий пакет с простым уведомлением</td>
+            {% for rate in registered %}
+            <td> {{ rate.fiz }} </td>
+            <td> {{ rate.yur }}</td>
+            <td> {{ rate.notification }}</td>
+            <td> {{ rate.tracking }}</td>
+            {% endfor %}
+          </tr>
+        </tbody>
+      </table>
+        <p>Расчет по тарифам, действующим с 01.01.2026</p>
+    </div>
+     <h2 class="display-6 text-center mt-4 mb-4">О заказных письмах</h2>
+<p class="text-center">Д + 3 означает срок доставки 3 дня, включая день отправки</p>
+    <div class="row row-cols-1 row-cols-md-3 mb-3">
+      <div class="col">
+        <div class="card mb-5 rounded-3 shadow-sm border-info">
+          <div class="card-body">
+              <p>нет отслеживания</p>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>нет отслеживания</li>
+              <li>оплата марками</li>
+              <li>прием в почтовый ящик</li>
+              <li>Д + 3</li>
+              <li>вручение в почтовый ящик</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+ {% endblock %}

@@ -4,11 +4,11 @@
     <title>Тарификатор почтовых отправлений Белпочта</title>
     <meta name="description" content="Рассчитать стоимость посылки по тарифам Белпочта. Сколько стоит посылка, заказное письмо, заказной мелкий пакет, посылка с оплаченной упаковкой, 1 класс">
     <meta name="keywords" content="тарифы белпочта, рассчитать доставку, доставка, сколько посылка, тарификатор, калькулятор, заказное письмо, первый класс, Посттариф, Posttarif, РБ, по Беларуси, QR box">
-    <link rel="canonical" href="https://posttarif.by"/>
-    <meta property="og:title" content="Рассчитать стоимость доставки по Беларуси"/>
-    <meta property="og:image" content="https://posttarif.by/apple-touch-icon.png"/>
-    <meta property="og:description" content="Рассчитай на тарификаторе стоимость доставки любых видов почтовых отправлений: заказной мелкий пакет, посылка, с оплаченной упаковкой, 1 класс"/>
-    <meta property="og:type" content="article"/>
+    <link rel="canonical" href="https://posttarif.by">
+    <meta property="og:title" content="Рассчитать стоимость доставки по Беларуси">
+    <meta property="og:image" content="https://posttarif.by/apple-touch-icon.png">
+    <meta property="og:description" content="Рассчитай на тарификаторе стоимость доставки любых видов почтовых отправлений: заказной мелкий пакет, посылка, с оплаченной упаковкой, 1 класс">
+    <meta property="og:type" content="article">
 {% endblock %}
 {% block page_content %}
  <main>
@@ -184,7 +184,7 @@
       </table>
         <p>Расчет по тарифам, действующим с 01.01.2026</p>
     </div>
-     <h2 class="display-6 text-center mt-4 mb-4">Подробнее об отправлениях</h2>
+     <h2 class="display-6 text-center mt-4 mb-4">Подробнее о почтовых отправлениях</h2>
 <p class="text-center">Д + 3 означает срок доставки 3 дня, включая день отправки</p>
     <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
       <div class="col">
@@ -193,12 +193,12 @@
             <h4 class="my-0 fw-normal">Простое письмо, бандероль</h4>
           </div>
           <div class="card-body">
-            <h2 class="card-title pricing-card-title">
+            <h4 class="card-title pricing-card-title">
              {% for rate in simple %}
             {{ rate.fiz }} {{ rate.sep}} {{ rate.yur }}
              <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
              {% endfor %}
-            </h2>
+            </h4>
             <ul class="list-unstyled mt-3 mb-4">
               <li>нет отслеживания</li>
               <li>оплата марками</li>
@@ -216,12 +216,12 @@
             <h4 class="my-0 fw-normal">Простой мелкий пакет</h4>
           </div>
           <div class="card-body">
-            <h2 class="card-title pricing-card-title">
+            <h4 class="card-title pricing-card-title">
              {% for rate in package %}
             {{ rate.fiz }} {{ rate.sep}} {{ rate.yur }}
              <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
              {% endfor %}
-            </h2>
+            </h4>
             <ul class="list-unstyled mt-3 mb-4">
               <li>нет отслеживания</li>
               <li>оплата марками</li>
@@ -239,12 +239,12 @@
             <h4 class="my-0 fw-normal">Заказное письмо, бандероль, мелкий пакет</h4>
           </div>
           <div class="card-body">
-            <h2 class="card-title pricing-card-title">
+            <h4 class="card-title pricing-card-title">
               {% for rate in registered %}
               {{ rate.fiz }}
               <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
               {% endfor %}
-            </h2>
+            </h4>
             <ul class="list-unstyled mt-3 mb-4">
               <li>отслеживание</li>
               <li>прием оператором</li>
@@ -262,12 +262,12 @@
             <h4 class="my-0 fw-normal">Мелкий пакет с объявленной ценностью</h4>
           </div>
           <div class="card-body">
-            <h2 class="card-title pricing-card-title">
+            <h4 class="card-title pricing-card-title">
               {% for rate in value_package %}
            {{ rate.fiz }} {{ rate.sep}} {{ rate.yur }}
               <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
               {% endfor %}
-              </h2>
+              </h4>
             <ul class="list-unstyled mt-3 mb-4">
               <li>отслеживание</li>
               <li>прием оператором</li>
@@ -287,12 +287,12 @@
             <h4 class="my-0 fw-normal">Письмо «1 класс»</h4>
           </div>
           <div class="card-body">
-            <h2 class="card-title pricing-card-title">
+            <h4 class="card-title pricing-card-title">
               {% for rate in first_class %}
               {{ rate.fiz }}
               <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
               {% endfor %}
-            </h2>
+            </h4>
             <ul class="list-unstyled mt-3 mb-4">
               <li>отслеживание</li>
               <li>оплата марками</li>
@@ -311,12 +311,12 @@
             <h4 class="my-0 fw-normal">Посылка</h4>
           </div>
           <div class="card-body">
-            <h2 class="card-title pricing-card-title">
+            <h4 class="card-title pricing-card-title">
               {% for rate in parcel %}
               {{ rate.fiz }} {{ rate.sep2 }} {{ rate.yur }}
               <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
               {% endfor %}
-            </h2>
+            </h4>
             <ul class="list-unstyled mt-3 mb-4">
               <li>прием оператором</li>
               <li>отслеживание</li>
@@ -335,12 +335,12 @@
             <h4 class="my-0 fw-normal">Оплаченная пересылка S/M/L<br>заказной мелкий пакет</h4>
           </div>
           <div class="card-body">
-            <h2 class="card-title pricing-card-title">
+            <h4 class="card-title pricing-card-title">
               {% for rate in sml %}
               {{ rate.fiz1 }}/ {{ rate.fiz2 }}/ {{ rate.fiz3 }}
               {% endfor %}
               <small class="text-body-secondary fw-light">руб.</small>
-            </h2>
+            </h4>
             <ul class="list-unstyled mt-3 mb-4">
             <li>Размер S	229х324 мм</li>
             <li>Размер M	280х380 мм</li>
@@ -361,12 +361,12 @@
             <h4 class="my-0 fw-normal">Оплаченная пересылка S/M/L<br>посылка</h4>
           </div>
           <div class="card-body">
-            <h2 class="pricing-card-title">
+            <h4 class="pricing-card-title">
               {% for rate in sml %}
               {{ rate.parcel_fiz1 }}/ {{ rate.parcel_fiz2 }}/ {{ rate.parcel_fiz3 }}
               {% endfor %}
               <small class="text-body-secondary fw-light">руб.</small>
-            </h2>
+            </h4>
             <ul class="list-unstyled mt-3 mb-4">
             <li>Размер S	270х175х60 мм</li>
             <li>Размер M	320х220х110 мм</li>
@@ -388,15 +388,15 @@
       <div class="col">
         <div class="card mb-5 rounded-3 shadow-sm border-info">
           <div class="card-header py-3 text-bg-info text-white border-info">
-            <h4 class="my-0 fw-normal">Посылка <br>&#171Тариф Предпочтовый&#187</h4>
+            <h4 class="my-0 fw-normal">Посылка <br>&#171;Тариф Предпочтовый&#187;</h4>
           </div>
           <div class="card-body">
-            <h2 class="card-title pricing-card-title">
+            <h4 class="card-title pricing-card-title">
               {% for rate in parcel_3_4_5 %}
               {{ rate.fiz }}
               <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
               {% endfor %}
-            </h2>
+            </h4>
             <ul class="list-unstyled mt-3 mb-4">
               <li>online оформление <br>в личном кабинете интернет-портала или
 мобильном приложении</li>
@@ -414,15 +414,15 @@
       <div class="col">
         <div class="card mb-5 rounded-3 shadow-sm border-info">
           <div class="card-header py-3 text-bg-info text-white border-info">
-            <h4 class="my-0 fw-normal">Посылка <br>&#171QR box&#187</h4>
+            <h4 class="my-0 fw-normal">Посылка <br>&#171;QR box&#187;</h4>
           </div>
           <div class="card-body">
-            <h2 class="card-title pricing-card-title">
+            <h4 class="card-title pricing-card-title">
               {% for rate in qr_box %}
               {{ rate.fiz }} {{ rate.sep2}} {{ rate.yur }}
               <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
               {% endfor %}
-            </h2>
+            </h4>
             <ul class="list-unstyled mt-3 mb-4">
               <li>online оформление <br>в личном кабинете интернет-портала или
 мобильном приложении</li>

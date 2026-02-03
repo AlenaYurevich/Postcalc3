@@ -39,9 +39,9 @@
     </style>
 <!-- Yandex.RTB -->
 <script>window.yaContextCb=window.yaContextCb||[]</script>
-<script src="https://yandex.ru/ads/system/context.js"></script>
+<script src="https://yandex.ru/ads/system/context.js async"></script>
 <!-- Yandex.Metrika counter -->
-<script type="text/javascript">
+<script>
     (function(m,e,t,r,i,k,a){
         m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
         m[i].l=1*new Date();
@@ -51,7 +51,7 @@
 
     ym(105905891, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
 </script>
-<noscript><div><img src="https://mc.yandex.ru/watch/105905891" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<noscript><img src="https://mc.yandex.ru/watch/105905891" style="position:absolute; left:-9999px;" alt=""></noscript>
 <!-- /Yandex.Metrika counter -->
 </head>
 <body>
@@ -237,13 +237,14 @@ window.yaContextCb.push(() => {
     })
 })
 </script>
-<!-- Yandex.RTB R-A-13159426-2 -->
+<!-- Yandex.RTB R-A-13159426-3 -->
+<div id="yandex_rtb_R-A-13159426-3"></div>
 <script>
 window.yaContextCb.push(() => {
     Ya.Context.AdvManager.render({
-        "blockId": "R-A-13159426-2",
-        "type": "floorAd",
-        "platform": "touch"
+        "blockId": "R-A-13159426-3",
+        "renderTo": "yandex_rtb_R-A-13159426-3",
+        "type": "feed"
     })
 })
 </script>
@@ -261,6 +262,7 @@ window.yaContextCb.push(() => {
         <h5>По Беларуси</h5>
         <ul class="list-unstyled text-small">
           <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'main' %}">доставка по Беларуси</a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'registered' %}">заказное письмо</a></li>
           <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'ems_express_dostavka' %}">экспресс-посылка</a></li>
           <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'internal_transfer' %}">денежный перевод</a></li>
         </ul>
@@ -280,7 +282,7 @@ window.yaContextCb.push(() => {
     </div>
   </footer>
 </div>
-{% include 'adv.html' %}
+
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
