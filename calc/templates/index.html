@@ -235,9 +235,11 @@
       </div>
       <div class="col">
         <div class="card mb-5 rounded-3 shadow-sm border-info">
+            <a class="text-black text-decoration-none" href="{% url 'registered' %}">
           <div class="card-header py-3 border-info">
             <h4 class="my-0 fw-normal">Заказное письмо, бандероль, мелкий пакет</h4>
           </div>
+            </a>
           <div class="card-body">
             <h4 class="card-title pricing-card-title">
               {% for rate in registered %}
@@ -252,7 +254,7 @@
               <li>возмещение при утрате</li>
               <li>вручение лично в руки</li>
             </ul>
-            <button type="button" class="w-100 btn btn-lg btn-info text-white">надежный вариант</button>
+            <a class="text-decoration-none" href="{% url 'registered' %}"><button type="button" class="w-100 btn btn-lg btn-info text-white">надежный вариант</button></a>
           </div>
         </div>
       </div>

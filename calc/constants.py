@@ -8,11 +8,24 @@ notification_costs = {
     4: 0.00,
 }
 
+notification_costs2 = {
+    1: 0.96,
+    2: 3.00,
+    3: 0.60,
+    4: 0.00,
+}
+
 
 def notification_cost(notification):
     if not isinstance(notification, int) or notification not in notification_costs:
         raise ValueError("Invalid notification type. Must be one of: 1, 2, 3, 4.")
     return notification_costs.get(notification)
+
+
+def notification_cost2(notification):
+    if not isinstance(notification, int) or notification not in notification_costs2:
+        raise ValueError("Invalid notification type. Must be one of: 1, 2, 3, 4.")
+    return notification_costs2.get(notification)
 
 
 """
