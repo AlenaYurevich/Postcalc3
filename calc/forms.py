@@ -22,6 +22,12 @@ class PostForm(forms.Form):
                                           widget=forms.RadioSelect())
 
 
+class RegForm(forms.Form):
+    weight = forms.IntegerField(label="Введите вес отправления, грамм", min_value=1, initial=20,
+                                widget=forms.NumberInput(attrs={'class': "form-control border-info", 'autofocus':
+                                                                'autofocus'}))
+
+
 Choices = read_ems_points(sheet5)
 Choices2 = [(3, 'до 10 часов рабочего дня, следующего за днем приема'),
             (2, 'в указанное время рабочего дня, следующего за днем приема'),
