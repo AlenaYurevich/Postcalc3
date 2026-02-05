@@ -109,13 +109,7 @@ def cost_of_value_package(item_weight, declared_value, notification):
             price_row.append(rate)
         else:
             rate = {
-                'fiz': "",
-                'yur': "",
-                'item_vat': "",
-                'for_declared': "",
-                'rub': "",
-                'sep': "",
-                'notification': ""
+                'fiz': "введите объявленную ценность",
             }
             price_row.append(rate)
     else:

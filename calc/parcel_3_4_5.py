@@ -48,7 +48,6 @@ def cost_of_parcel_declared(item_weight, declared_value, notification):
     rate = {
         'fiz': fiz,
         'for_declared': for_declared,
-        'rub': " руб.",
         'notification': notification,
             }
     for i in rate:

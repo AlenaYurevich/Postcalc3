@@ -58,26 +58,28 @@
         <tbody>
           <tr>
             <th scope="row" class="text-start">Простое письмо, бандероль</th>
-            {% for rate in simple %}
+               {% for rate in simple %}
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat }}</td>
             <td> {{ rate.for_declared }}</td>
             <td> </td>
             <td> {{ rate.tracking }}</td>
-            {% endfor %}
+               {% endfor %}
           </tr>
+
           <tr>
             <th scope="row" class="text-start">Простой мелкий пакет</th>
-            {% for rate in package %}
+               {% for rate in package %}
             <td> {{ rate.fiz }}</td>
             <td> {{ rate.yur }}</td>
             <td> {{ rate.item_vat }}</td>
             <td> {{ rate.for_declared }}</td>
             <td> </td>
             <td> {{ rate.tracking }}</td>
-            {% endfor %}
+               {% endfor %}
           </tr>
+
           <tr>
             <th scope="row" class="text-start">Заказное письмо, бандероль, мелкий пакет</th>
             {% for rate in registered %}
@@ -190,15 +192,20 @@
       <div class="col">
         <div class="card mb-5 rounded-3 shadow-sm border-info">
           <div class="card-header py-3 border-info">
-            <h4 class="my-0 fw-normal">Простое письмо, бандероль</h4>
+            <h3 class="my-0 fw-normal text-info">Простое письмо, бандероль</h3>
           </div>
           <div class="card-body">
-            <h4 class="card-title pricing-card-title">
-             {% for rate in simple %}
-            {{ rate.fiz }} {{ rate.sep}} {{ rate.yur }}
-             <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
-             {% endfor %}
-            </h4>
+                <h4 class="card-title pricing-card-title">
+                <span class="visually-hidden">Стоимость доставки: </span>
+                {% if simple %}
+                    {% for rate in simple %}
+                        {{ rate.fiz }} {{ rate.sep}} {{ rate.yur }}
+                        <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
+                    {% endfor %}
+                {% else %}
+                    <span class="text-muted">укажите вес для расчета</span>
+                {% endif %}
+                </h4>
             <ul class="list-unstyled mt-3 mb-4">
               <li>нет отслеживания</li>
               <li>оплата марками</li>
@@ -213,15 +220,20 @@
       <div class="col">
         <div class="card mb-5 rounded-3 shadow-sm border-info">
           <div class="card-header py-3 border-info">
-            <h4 class="my-0 fw-normal">Простой мелкий пакет</h4>
+            <h3 class="my-0 fw-normal text-info">Простой мелкий пакет</h3>
           </div>
           <div class="card-body">
-            <h4 class="card-title pricing-card-title">
-             {% for rate in package %}
+    <h4 class="card-title pricing-card-title">
+    <span class="visually-hidden">Стоимость доставки: </span>
+    {% if package %}
+        {% for rate in package %}
             {{ rate.fiz }} {{ rate.sep}} {{ rate.yur }}
-             <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
-             {% endfor %}
-            </h4>
+            <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
+        {% endfor %}
+    {% else %}
+        <span class="text-muted">укажите вес для расчета</span>
+    {% endif %}
+    </h4>
             <ul class="list-unstyled mt-3 mb-4">
               <li>нет отслеживания</li>
               <li>оплата марками</li>
@@ -235,18 +247,23 @@
       </div>
       <div class="col">
         <div class="card mb-5 rounded-3 shadow-sm border-info">
-            <a class="text-black text-decoration-none" href="{% url 'registered' %}">
+            <a class="text-decoration-none" href="{% url 'registered' %}">
           <div class="card-header py-3 border-info">
-            <h4 class="my-0 fw-normal">Заказное письмо, бандероль, мелкий пакет</h4>
+            <h3 class="my-0 fw-normal text-info">Заказное письмо, бандероль, мелкий пакет</h3>
           </div>
             </a>
           <div class="card-body">
-            <h4 class="card-title pricing-card-title">
-              {% for rate in registered %}
-              {{ rate.fiz }}
-              <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
-              {% endfor %}
-            </h4>
+       <h4 class="card-title pricing-card-title">
+    <span class="visually-hidden">Стоимость доставки: </span>
+    {% if registered %}
+        {% for rate in registered %}
+            {{ rate.fiz }} {{ rate.sep}} {{ rate.yur }}
+            <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
+        {% endfor %}
+    {% else %}
+        <span class="text-muted">укажите вес для расчета</span>
+    {% endif %}
+        </h4>
             <ul class="list-unstyled mt-3 mb-4">
               <li>отслеживание</li>
               <li>прием оператором</li>
@@ -254,22 +271,29 @@
               <li>возмещение при утрате</li>
               <li>вручение лично в руки</li>
             </ul>
-            <a class="text-decoration-none" href="{% url 'registered' %}"><button type="button" class="w-100 btn btn-lg btn-info text-white">надежный вариант</button></a>
+        <a href="{% url 'registered' %}" class="w-100 btn btn-lg btn-info text-white text-decoration-none">
+            надежный вариант
+        </a>
           </div>
         </div>
       </div>
       <div class="col">
         <div class="card mb-5 rounded-3 shadow-sm border-info">
           <div class="card-header py-3 text-bg-info text-white border-info">
-            <h4 class="my-0 fw-normal">Мелкий пакет с объявленной ценностью</h4>
+            <h3 class="my-0 fw-normal">Мелкий пакет с объявленной ценностью</h3>
           </div>
           <div class="card-body">
-            <h4 class="card-title pricing-card-title">
-              {% for rate in value_package %}
-           {{ rate.fiz }} {{ rate.sep}} {{ rate.yur }}
-              <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
-              {% endfor %}
-              </h4>
+<h4 class="card-title pricing-card-title">
+    <span class="visually-hidden">Стоимость доставки: </span>
+    {% if value_package %}
+        {% for rate in value_package %}
+        {{ rate.fiz }} {{ rate.sep}} {{ rate.yur }}
+            <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
+        {% endfor %}
+    {% else %}
+        <span class="text-muted">введите объявленную ценность</span>
+    {% endif %}
+</h4>
             <ul class="list-unstyled mt-3 mb-4">
               <li>отслеживание</li>
               <li>прием оператором</li>
@@ -281,20 +305,23 @@
           </div>
         </div>
       </div>
-
-
     <div class="col">
         <div class="card mb-5 rounded-3 shadow-sm border-info">
           <div class="card-header py-3 border-info">
-            <h4 class="my-0 fw-normal">Письмо «1 класс»</h4>
+            <h3 class="my-0 fw-normal text-info">Письмо «1 класс»</h3>
           </div>
           <div class="card-body">
-            <h4 class="card-title pricing-card-title">
-              {% for rate in first_class %}
-              {{ rate.fiz }}
-              <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
-              {% endfor %}
-            </h4>
+<h4 class="card-title pricing-card-title">
+    <span class="visually-hidden">Стоимость доставки: </span>
+    {% if first_class %}
+    {% for rate in first_class %}
+    {{ rate.fiz }}
+        <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
+    {% endfor %}
+    {% else %}
+        <span class="text-muted">укажите вес для расчета</span>
+    {% endif %}
+</h4>
             <ul class="list-unstyled mt-3 mb-4">
               <li>отслеживание</li>
               <li>оплата марками</li>
@@ -310,15 +337,20 @@
       <div class="col">
         <div class="card mb-5 rounded-3 shadow-sm border-info">
           <div class="card-header py-3 border-info">
-            <h4 class="my-0 fw-normal">Посылка</h4>
+            <h3 class="my-0 fw-normal">Посылка</h3>
           </div>
           <div class="card-body">
-            <h4 class="card-title pricing-card-title">
-              {% for rate in parcel %}
-              {{ rate.fiz }} {{ rate.sep2 }} {{ rate.yur }}
-              <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
-              {% endfor %}
-            </h4>
+<h4 class="card-title pricing-card-title">
+    <span class="visually-hidden">Стоимость доставки: </span>
+    {% if parcel %}
+    {% for rate in parcel %}
+    {{ rate.fiz }} {{ rate.sep2 }} {{ rate.yur }}
+        <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
+    {% endfor %}
+    {% else %}
+        <span class="text-muted">укажите вес для расчета</span>
+    {% endif %}
+</h4>
             <ul class="list-unstyled mt-3 mb-4">
               <li>прием оператором</li>
               <li>отслеживание</li>
@@ -334,15 +366,20 @@
       <div class="col">
         <div class="card mb-5 rounded-3 shadow-sm border-info">
           <div class="card-header py-3 text-bg-info text-white border-info">
-            <h4 class="my-0 fw-normal">Оплаченная пересылка S/M/L<br>заказной мелкий пакет</h4>
+            <h3 class="my-0 fw-normal">Оплаченная пересылка S/M/L<br>заказной мелкий пакет</h3>
           </div>
           <div class="card-body">
-            <h4 class="card-title pricing-card-title">
-              {% for rate in sml %}
-              {{ rate.fiz1 }}/ {{ rate.fiz2 }}/ {{ rate.fiz3 }}
-              {% endfor %}
-              <small class="text-body-secondary fw-light">руб.</small>
-            </h4>
+<h4 class="card-title pricing-card-title">
+    <span class="visually-hidden">Стоимость доставки: </span>
+    {% if sml %}
+    {% for rate in sml %}
+    {{ rate.fiz1 }}/ {{ rate.fiz2 }}/ {{ rate.fiz3 }}
+        <small class="text-body-secondary fw-light">руб.</small>
+    {% endfor %}
+    {% else %}
+        <span class="text-muted">укажите вес для расчета</span>
+    {% endif %}
+</h4>
             <ul class="list-unstyled mt-3 mb-4">
             <li>Размер S	229х324 мм</li>
             <li>Размер M	280х380 мм</li>
@@ -360,15 +397,20 @@
       <div class="col">
         <div class="card mb-5 rounded-3 shadow-sm border-info">
           <div class="card-header py-3 text-bg-info text-white border-info">
-            <h4 class="my-0 fw-normal">Оплаченная пересылка S/M/L<br>посылка</h4>
+            <h3 class="my-0 fw-normal">Оплаченная пересылка S/M/L<br>посылка</h3>
           </div>
           <div class="card-body">
-            <h4 class="pricing-card-title">
-              {% for rate in sml %}
-              {{ rate.parcel_fiz1 }}/ {{ rate.parcel_fiz2 }}/ {{ rate.parcel_fiz3 }}
-              {% endfor %}
-              <small class="text-body-secondary fw-light">руб.</small>
-            </h4>
+<h4 class="card-title pricing-card-title">
+    <span class="visually-hidden">Стоимость доставки: </span>
+    {% if sml %}
+    {% for rate in sml %}
+    {{ rate.parcel_fiz1 }}/ {{ rate.parcel_fiz2 }}/ {{ rate.parcel_fiz3 }}
+        <small class="text-body-secondary fw-light">руб.</small>
+    {% endfor %}
+    {% else %}
+        <span class="text-muted">укажите вес для расчета</span>
+    {% endif %}
+</h4>
             <ul class="list-unstyled mt-3 mb-4">
             <li>Размер S	270х175х60 мм</li>
             <li>Размер M	320х220х110 мм</li>
@@ -390,18 +432,23 @@
       <div class="col">
         <div class="card mb-5 rounded-3 shadow-sm border-info">
           <div class="card-header py-3 text-bg-info text-white border-info">
-            <h4 class="my-0 fw-normal">Посылка <br>&#171;Тариф Предпочтовый&#187;</h4>
+            <h3 class="my-0 fw-normal">Посылка <br>&#171;Тариф Предпочтовый&#187;</h3>
           </div>
           <div class="card-body">
-            <h4 class="card-title pricing-card-title">
-              {% for rate in parcel_3_4_5 %}
-              {{ rate.fiz }}
-              <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
-              {% endfor %}
-            </h4>
+<h4 class="card-title pricing-card-title">
+    <span class="visually-hidden">Стоимость доставки: </span>
+    {% if parcel_3_4_5 %}
+    {% for rate in parcel_3_4_5 %}
+    {{ rate.fiz }}
+        <small class="text-body-secondary fw-light">руб.</small>
+    {% endfor %}
+    {% else %}
+        <span class="text-muted">укажите вес для расчета</span>
+    {% endif %}
+</h4>
             <ul class="list-unstyled mt-3 mb-4">
               <li>online оформление <br>в личном кабинете интернет-портала или
-мобильном приложении</li>
+                мобильном приложении</li>
               <li>прием оператором</li>
               <li>отслеживание</li>
               <li>Д + 3</li>
@@ -416,18 +463,23 @@
       <div class="col">
         <div class="card mb-5 rounded-3 shadow-sm border-info">
           <div class="card-header py-3 text-bg-info text-white border-info">
-            <h4 class="my-0 fw-normal">Посылка <br>&#171;QR box&#187;</h4>
+              <h3 class="my-0 fw-normal">Посылка <br><q>QR box</q></h3>
           </div>
           <div class="card-body">
             <h4 class="card-title pricing-card-title">
-              {% for rate in qr_box %}
-              {{ rate.fiz }} {{ rate.sep2}} {{ rate.yur }}
-              <small class="text-body-secondary fw-light">{{ rate.rub }}</small>
-              {% endfor %}
+                <span class="visually-hidden">Стоимость доставки: </span>
+                {% if qr_box %}
+                {% for rate in qr_box %}
+                {{ rate.fiz }} {{ rate.sep2}} {{ rate.yur }}
+                    <small class="text-body-secondary fw-light">руб.</small>
+                {% endfor %}
+                {% else %}
+                    <span class="text-muted">укажите вес для расчета</span>
+                {% endif %}
             </h4>
             <ul class="list-unstyled mt-3 mb-4">
               <li>online оформление <br>в личном кабинете интернет-портала или
-мобильном приложении</li>
+                мобильном приложении</li>
               <li><strong>прием в месте самообслуживания</strong></li>
               <li>отслеживание</li>
               <li>Д + 3</li>
@@ -439,10 +491,6 @@
         </div>
       </div>
 
-        <div class="col">
-        <!-- пустой див-->
-        </div>
     </div>
   </main>
-
  {% endblock %}

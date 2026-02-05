@@ -34,7 +34,6 @@ def cost_of_qr_box(declared_value, notification):
         'item_vat_yur': item_vat_yur,
         'for_declared_fiz': for_declared_fiz,
         'for_declared_yur': for_declared_yur,
-        'rub': " руб.",
         'tracking': "да",
         'sep1': sep1,
         'sep2': "/",
