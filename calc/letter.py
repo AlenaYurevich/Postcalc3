@@ -61,6 +61,7 @@ def cost_of_registered(item_weight, notification):
             'for_declared': "",
             'rub': " руб.",
             'tracking': "да",
+            'sep': '/',
             'notification': notification,
         }
         for i in rate:

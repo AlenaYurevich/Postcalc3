@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% block seo %}
     <title>Стоимость заказного письма с уведомлением РБ</title>
     <meta name="description" content="Отправка заказного письма с уведомлением. Актуальные тарифы, сколько стоит и как долго идет по РБ. Узнайте, что такое заказное республиканское письмо и сколько оно хранится на почте. Калькулятор стоимости доставки">
@@ -30,7 +29,6 @@
           <button class="btn btn-lg btn-info text-white mt-4 mb-4" type="submit" name="send">Рассчитать</button>
          </p>
       </div>
-
     </form>
     </div>
 
@@ -49,25 +47,25 @@
             {% with rate=registered.0 %}
         <tbody>
           <tr>
-            <td scope="row" class="text-start">Заказное письмо, бандероль, мелкий пакет без уведомления</td>
+            <td class="text-start">Заказное письмо, бандероль, мелкий пакет без уведомления</td>
             <td> {{ rate.fiz }} </td>
             <td> {{ rate.yur }} </td>
             <td> </td>
           </tr>
           <tr>
-            <td scope="row" class="text-start">Заказное письмо, бандероль, мелкий пакет с простым уведомлением</td>
+            <td class="text-start">Заказное письмо, бандероль, мелкий пакет с простым уведомлением</td>
             <td> {{ rate.fiz2 }} </td>
             <td> {{ rate.yur2 }} </td>
             <td> {{ rate.notification2 }}</td>
           </tr>
           <tr>
-            <td scope="row" class="text-start">Заказное письмо, бандероль, мелкий пакет с заказным уведомлением</td>
+            <td class="text-start">Заказное письмо, бандероль, мелкий пакет с заказным уведомлением</td>
             <td> {{ rate.fiz3 }} </td>
             <td> {{ rate.yur3 }} </td>
             <td> {{ rate.notification3 }} </td>
           </tr>
           <tr>
-            <td scope="row" class="text-start">Заказное письмо, бандероль, мелкий пакет с электронным уведомлением
+            <td class="text-start">Заказное письмо, бандероль, мелкий пакет с электронным уведомлением
                 (Viber, sms, email)</td>
             <td> {{ rate.fiz4 }} </td>
             <td> {{ rate.yur4 }} </td>
