@@ -29,13 +29,15 @@
     .goog-logo-link {
         display: none;}
     .goog-te-combo, .goog-te-banner *, .goog-te-ftab *, .goog-te-menu *, .goog-te-menu2 *, .goog-te-balloon * {
-        text-transform: capitalize;}
-    .skiptranslate goog-te-gadget {
+        text-transform: capitalize; }
+    .skiptranslate .goog-te-gadget {
         display: none;}
     .goog-te-combo {
         border: 0;
         outline: 0;}
     </style>
+
+
 <!-- Yandex.RTB -->
 <script>window.yaContextCb=window.yaContextCb||[]</script>
 <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -53,6 +55,53 @@
 <!-- /Yandex.Metrika counter -->
 </head>
 <body>
+<div class="modal fade cookie_notice" id="cookieModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Использование cookie</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Мы используем cookie для улучшения работы сайта</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="cookie_close">Принять все</button>
+        <button type="button" class="btn btn-primary">Политика конфиденциальности</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+ document.addEventListener('DOMContentLoaded', function() {
+  function getCookie(name) {
+    let matches = document.cookie.match(new RegExp(
+      "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+  }
+
+  let cookiecook = getCookie("cookiecook");
+  let cookieModalEl = document.getElementById('cookieModal');
+
+  if (cookiecook != "no" && cookieModalEl) {
+    // Инициализируем модальное окно Bootstrap
+    let cookieModal = new bootstrap.Modal(cookieModalEl);
+    cookieModal.show();
+
+    // Закрытие по кнопке
+    document.getElementById("cookie_close").addEventListener("click", function() {
+      cookieModal.hide();
+
+      let date = new Date();
+      date.setDate(date.getDate() + 1);
+      document.cookie = "cookiecook=no; path=/; expires=" + date.toUTCString();
+    });
+  }
+});
+</script>
+
 <noscript><img src="https://mc.yandex.ru/watch/105905891" style="position:absolute; left:-9999px;" alt=""></noscript>
 <div class="container py-3">
   <header>
@@ -226,16 +275,7 @@
 
    <footer class="footer my-md-5 pt-md-5 border-top mt-auto">
        <div class="row">
-<!-- Yandex.RTB R-A-13159426-1 -->
-<script>
-window.yaContextCb.push(() => {
-    Ya.Context.AdvManager.render({
-        "blockId": "R-A-13159426-1",
-        "type": "floorAd",
-        "platform": "desktop"
-    })
-})
-</script>
+
 <!-- Yandex.RTB R-A-13159426-3 -->
 <div id="yandex_rtb_R-A-13159426-3"></div>
 <script>
