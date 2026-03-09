@@ -3,6 +3,7 @@ from django.views.generic import TemplateView
 from .views import calculation_view, registered_view
 from .views import ems_view, about_view, internal_transfer_view
 from .views import international_view, ems_int_view
+from .views import politika_cookie_view
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -16,5 +17,6 @@ urlpatterns = [
     path('international', international_view, name='international'),
     path('ems_int', ems_int_view, name='ems_int'),
     path('about', about_view, name='about'),
+    path('politika_cookie', politika_cookie_view, name='politika_cookie'),
     path('robots.txt', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
