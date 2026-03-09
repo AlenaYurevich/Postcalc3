@@ -196,5 +196,9 @@ def about_view(request):
     return render(request, 'about.html')
 
 
+def politika_cookie_view(request):
+    return render(request, 'politika_cookie.html')
+
+
 def page_not_found_view(request):
     return render(request, '404/404.html', status=404)

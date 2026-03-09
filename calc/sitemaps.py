@@ -15,6 +15,7 @@ class CalcStaticSitemap(sitemaps.Sitemap):
             {'name': 'international', 'priority': 0.8},
             {'name': 'ems_int', 'priority': 0.7},
             {'name': 'about', 'priority': 0.7},
+            {'name': 'politika_cookie', 'priority': 0.1},
 
         ]
 

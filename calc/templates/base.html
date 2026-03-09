@@ -29,18 +29,79 @@
     .goog-logo-link {
         display: none;}
     .goog-te-combo, .goog-te-banner *, .goog-te-ftab *, .goog-te-menu *, .goog-te-menu2 *, .goog-te-balloon * {
-        text-transform: capitalize;}
-    .skiptranslate goog-te-gadget {
+        text-transform: capitalize; }
+    .skiptranslate .goog-te-gadget {
         display: none;}
     .goog-te-combo {
         border: 0;
         outline: 0;}
     </style>
-<!-- Yandex.RTB -->
+
+</head>
+<body>
+<div class="modal fade cookie_notice" id="cookieModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Использование cookie</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Для обеспечения удобства пользователей сайта используются cookies</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="cookie_close">Принять</button>
+        <button type="button" class="btn btn-primary" id="cookie_close2">Отклонить</button>
+        <a class="link-secondary text-decoration-none" href="{% url 'politika_cookie' %}">Подробнее</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    function getCookie(name) {
+        let matches = document.cookie.match(new RegExp(
+            "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+        ));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+    }
+
+    let cookiecook = getCookie("cookiecook");
+    let cookieModalEl = document.getElementById('cookieModal');
+
+    // Показываем окно, если cookie нет или её значение не "accepted"/"rejected"
+    if ((!cookiecook || (cookiecook !== "accepted" && cookiecook !== "rejected")) && cookieModalEl) {
+        let cookieModal = new bootstrap.Modal(cookieModalEl);
+        cookieModal.show();
+
+        // Кнопка "Принять"
+        document.getElementById("cookie_close").addEventListener("click", function() {
+            cookieModal.hide();
+            let date = new Date();
+            date.setDate(date.getDate() + 1);
+            document.cookie = "cookiecook=accepted; path=/; expires=" + date.toUTCString();
+        });
+
+        // Кнопка "Отклонить"
+        document.getElementById("cookie_close2").addEventListener("click", function() {
+            cookieModal.hide();
+            let date = new Date();
+            date.setDate(date.getDate() + 1);
+            document.cookie = "cookiecook=rejected; path=/; expires=" + date.toUTCString();
+        });
+    }
+});
+</script>
+
+<noscript><img src="https://mc.yandex.ru/watch/105905891" style="position:absolute; left:-9999px;" alt=""></noscript>
+  <!-- Yandex.RTB -->
 <script>window.yaContextCb=window.yaContextCb||[]</script>
 <script src="https://yandex.ru/ads/system/context.js" async></script>
 <!-- Yandex.Metrika counter -->
 <script>
+let consent = getCookie("cookiecook");
+if (consent === "accepted") {
     (function(m,e,t,r,i,k,a){
         m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
         m[i].l=1*new Date();
@@ -49,11 +110,11 @@
     })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105905891', 'ym');
 
     ym(105905891, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+
+} else if (consent === "rejected") {
+    // не загружаем ничего лишнего
+}
 </script>
-<!-- /Yandex.Metrika counter -->
-</head>
-<body>
-<noscript><img src="https://mc.yandex.ru/watch/105905891" style="position:absolute; left:-9999px;" alt=""></noscript>
 <div class="container py-3">
   <header>
   <nav class="navbar navbar-expand-sm navbar-light">
@@ -226,16 +287,7 @@
 
    <footer class="footer my-md-5 pt-md-5 border-top mt-auto">
        <div class="row">
-<!-- Yandex.RTB R-A-13159426-1 -->
-<script>
-window.yaContextCb.push(() => {
-    Ya.Context.AdvManager.render({
-        "blockId": "R-A-13159426-1",
-        "type": "floorAd",
-        "platform": "desktop"
-    })
-})
-</script>
+
 <!-- Yandex.RTB R-A-13159426-3 -->
 <div id="yandex_rtb_R-A-13159426-3"></div>
 <script>
@@ -276,6 +328,9 @@ window.yaContextCb.push(() => {
       <div class="col-6 col-md">
         <h5><a class="link-dark text-decoration-none" href="{% url 'about' %}">О сайте</a></h5>
         <h5><a class="link-dark text-decoration-none" href="{% url 'news_index' %}">Новости</a></h5>
+        <ul class="list-unstyled text-small">
+            <li class="mb-1"><a class="link-secondary text-decoration-none" href="{% url 'politika_cookie' %}">Политика cookie</a></li>
+        </ul>
         <a class="text-info" href="#">Вверх</a>
       </div>
     </div>
