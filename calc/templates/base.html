@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let cookiecook = getCookie("cookiecook");
     let cookieModalEl = document.getElementById('cookieModal');
 
-    // Показываем окно, если cookie нет или её значение не "accepted"/"rejected"
+    // Показываем окно, если cookie нет или она не принята/отклонена
     if ((!cookiecook || (cookiecook !== "accepted" && cookiecook !== "rejected")) && cookieModalEl) {
         let cookieModal = new bootstrap.Modal(cookieModalEl);
         cookieModal.show();
@@ -81,15 +81,30 @@ document.addEventListener('DOMContentLoaded', function() {
             let date = new Date();
             date.setDate(date.getDate() + 1);
             document.cookie = "cookiecook=accepted; path=/; expires=" + date.toUTCString();
+
+            // Перезагружаем страницу, чтобы загрузились скрипты аналитики
+            location.reload();
         });
 
         // Кнопка "Отклонить"
         document.getElementById("cookie_close2").addEventListener("click", function() {
             cookieModal.hide();
             let date = new Date();
-            date.setDate(date.getDate() + 1);
+            date.setDate(date.getDate()  + 1);
             document.cookie = "cookiecook=rejected; path=/; expires=" + date.toUTCString();
         });
+    }
+
+    // Загружаем скрипты аналитики, если есть согласие
+    if (getCookie("cookiecook") === "accepted") {
+         (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105905891', 'ym');
+
+    ym(105905891, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
     }
 });
 </script>
@@ -98,23 +113,6 @@ document.addEventListener('DOMContentLoaded', function() {
   <!-- Yandex.RTB -->
 <script>window.yaContextCb=window.yaContextCb||[]</script>
 <script src="https://yandex.ru/ads/system/context.js" async></script>
-<!-- Yandex.Metrika counter -->
-<script>
-let consent = getCookie("cookiecook");
-if (consent === "accepted") {
-    (function(m,e,t,r,i,k,a){
-        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105905891', 'ym');
-
-    ym(105905891, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
-
-} else if (consent === "rejected") {
-    // не загружаем ничего лишнего
-}
-</script>
 <div class="container py-3">
   <header>
   <nav class="navbar navbar-expand-sm navbar-light">
@@ -137,6 +135,7 @@ if (consent === "accepted") {
           <a class="nav-link dropdown-toggle text-info" href="#" id="dropdown03" data-toggle="dropdown" aria-expanded="false">по Беларуси</a>
           <ul class="dropdown-menu" aria-labelledby="dropdown03">
             <li><a class="dropdown-item" href="{% url 'main' %}">доставка по Беларуси</a></li>
+            <li><a class="dropdown-item" href="{% url 'registered' %}">заказное письмо</a></li>
             <li><a class="dropdown-item" href="{% url 'ems_express_dostavka' %}">экспресс-посылка</a></li>
             <li><a class="dropdown-item" href="{% url 'internal_transfer' %}">денежный перевод</a></li>
           </ul>
