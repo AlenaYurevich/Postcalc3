@@ -35,23 +35,34 @@
     .goog-te-combo {
         border: 0;
         outline: 0;}
+    .modal-dialog-bottom {
+    display: flex;
+    align-items: flex-end; /* прижимаем содержимое к низу */
+    min-height: calc(100% - 1rem);
+}
+
+@media (min-width: 576px) {
+    .modal-dialog-bottom {
+        min-height: calc(100% - 3.5rem);
+    }
+}
     </style>
 
 </head>
 <body>
 <div class="modal fade cookie_notice" id="cookieModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
+  <div class="modal-dialog modal-dialog-bottom">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Использование cookie</h5>
+        <h5 class="modal-title">Использование cookies</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <p>Для обеспечения удобства пользователей сайта используются cookies</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="cookie_close">Принять</button>
         <button type="button" class="btn btn-primary" id="cookie_close2">Отклонить</button>
+        <button type="button" class="btn btn-primary" id="cookie_close">Принять</button>
         <a class="link-secondary text-decoration-none" href="{% url 'politika_cookie' %}">Подробнее</a>
       </div>
     </div>
@@ -92,6 +103,10 @@ document.addEventListener('DOMContentLoaded', function() {
             let date = new Date();
             date.setDate(date.getDate()  + 1);
             document.cookie = "cookiecook=rejected; path=/; expires=" + date.toUTCString();
+        });
+         // Крестик (btn-close) – просто закрываем без сохранения выбора
+        document.querySelector('#cookieModal .btn-close').addEventListener('click', function() {
+            cookieModal.hide();
         });
     }
 
