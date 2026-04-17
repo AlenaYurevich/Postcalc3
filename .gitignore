@@ -15,3 +15,5 @@ db.sqlite3
 /postbot/access.py
 /venv_to_remove/
 /postbot2/access.py
+/postbot2/recipients.txt
+/postbot2/message.txt

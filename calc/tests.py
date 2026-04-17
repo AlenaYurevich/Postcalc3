@@ -4,7 +4,7 @@ from .parcel import cost_of_parcel
 from .parcel_3_4_5 import cost_of_parcel_3_4_5
 from .qr_box import cost_of_parcel_qr
 from .internal_transfer import cost_of_internal_transfer
-from .ems_cost import find_documents_cost, find_goods_cost
+from .ems_cost import find_goods_cost
 from .parcel_int import cost_of_parcel_int
 from .letter_int import cost_of_letter_int
 from .package_int import cost_of_package_int
@@ -13,9 +13,9 @@ from .ems_int import cost_of_ems_int
 
 def test_simple():
     assert cost_of_simple(300) == [{
-            'fiz': '1,84',
-            'yur': '1,87',
-            'item_vat': '0,31',
+            'fiz': '2,16',
+            'yur': '2,22',
+            'item_vat': '0,37',
             'for_declared': '',
             'tracking': 'нет',
             'rub': " руб.",
@@ -34,6 +34,7 @@ def test_registered():  # письмо, бандероль, мелкий пак�
             'for_declared': '',
             'tracking': 'да',
             'rub': " руб.",
+            'sep': '/',
             'notification': ""}]
     assert cost_of_registered(30000, 4) == [{
         'fiz': 'Макс. вес 2 кг'
@@ -186,19 +187,16 @@ def test_parcel_3_4_5():
     assert cost_of_parcel_3_4_5(6545, 1.55, 4) == [{
         'fiz': '10,90',
         'for_declared': '0,50',
-        'rub': " руб.",
         'notification': ""
     }]
     assert cost_of_parcel_3_4_5(6545, 50.00, 4) == [{
         'fiz': '10,90',
         'for_declared': '0,50',
-        'rub': " руб.",
         'notification': ""
     }]
     assert cost_of_parcel_3_4_5(915, 1.25, 3) == [{
         'fiz': '5,60',
         'for_declared': '0,50',
-        'rub': " руб.",
         'notification': "0,60"
     }]
 
@@ -210,7 +208,6 @@ def test_parcel_qr():
         'item_vat_yur': '1,20',
         'for_declared_fiz': '0,50',
         'for_declared_yur': '0,60',
-        'rub': " руб.",
         'sep1': '/',
         'sep2': '/',
         'notification': '0,60',
@@ -275,30 +272,8 @@ def test_parcel_int2():
 
 def test_express_parcel():  # 4 зона P12 - P1 Орша - Брест
     """
-    (zone, weight, declared_value, delivery, notification, fragile)
-    """
-    assert find_documents_cost(4, 1750, 0, 1, 4, "None") == [
-        [{'fiz': '10,80',
-          'for_declared_yur': '-',
-          'item_vat': '2,16',
-          'notification': '',
-          'yur': '12,96'}],
-        [{'fiz': '12,50',
-          'for_declared_yur': '-',
-          'item_vat': '2,50',
-          'notification': '',
-          'yur': '15,00'}]]
-    assert find_documents_cost(4, 1750, 10.75, 1, 4, "None") == [
-        [{'fiz': '11,19',
-          'for_declared_yur': '0,38',  # С ОЦ физлица также 3,6%
-          'item_vat': '2,22',
-          'notification': '',
-          'yur': '13,34'}],
-        [{'fiz': '12,89',
-          'for_declared_yur': '0,38',
-          'item_vat': '2,56',
-          'notification': '',
-          'yur': '15,38'}]]
+    (zone, weight, declared_value, delivery, notification, fragile)    """
+
     assert find_goods_cost(5, 21750, 0, 1, 4, "None") == [  # P30-P13 Дубровно-Кобрин
         [{'fiz': '43,75',
           'for_declared_yur': '-',
@@ -321,6 +296,11 @@ def test_express_parcel():  # 4 зона P12 - P1 Орша - Брест
           'item_vat': '9,60',
           'notification': '',
           'yur': '57,58'}]]
+
+
+"""
+Добавить тест до 2 кг и тест хрупкие, громоздкик
+"""
 
 
 def test_letter_int():

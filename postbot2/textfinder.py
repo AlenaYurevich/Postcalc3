@@ -80,6 +80,10 @@ def search_text_on_page(url, search_text):
 if __name__ == "__main__":
     # Словарь URL-адресов и соответствующих XPath
     url_xpath_map = {
+        "https://www.belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/prostoefiz":
+            "//a[span[text()='Постановление от 15.09.2023 №60 .pdf']]",
+        "https://www.belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/prostoeur":
+            "//a[span[text()='Постановление от 15.09.2023 №60 .pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/fiz":
             "//a[span[text()='Прейскурант физ лица  с 01.01.2026.pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/Tarifynauslugipochtovoysv0":
@@ -87,9 +91,9 @@ if __name__ == "__main__":
         "https://www.belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/oplachennaja-peresylka":
             "//span[em[text()='В действии с 01.01.2026']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/vnutrennyayauskorennayapo0":
-            "//a[span[text()='Прейскурант экспресс посылка с 01.01.2026.pdf']]",
+            "//a[span[text()='Прейскурант экспресс посылки физ лица  с 01.04.2026 .pdf']]",
         "https://www.belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/vnutrennyayauskorennayapo1":
-            "//a[span[text()='Прейскурант экспресс посылки  с 01.01.2026.pdf']]",
+            "//a[span[text()='Прейскурант экспресс посылки юр лица  с 01.04.2026 .pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyfiz/mezhdunarodnyyepochtovyye1":
             "//a[span[text()='ПРЕЙСКУРАНТ МЕЖД  с 01.01.2026.pdf']]",
         "https://belpost.by/Tarify2/TarifyRUPBelpochta/Tarifyyur/mezhdunarodnyyepochtovyye0":
