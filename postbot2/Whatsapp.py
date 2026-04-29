@@ -15,17 +15,17 @@ from selenium.webdriver.common.action_chains import ActionChains
 
 # ========== НАСТРОЙКИ ==========
 CONFIG = {
-    "375": ("belarus.txt", "02.jpg"),
-    "79":  ("russia.txt", "01.jpg"),
+    "375": ("belarus.txt", "012.jpg"),
+    "79":  ("russia.txt", "011.jpg"),
     "77":  ("kazakh.txt", "03.jpg"),
 }
-DEFAULT_CONFIG = ("russia.txt", "01.jpg")
+DEFAULT_CONFIG = ("russia.txt", "011.jpg")
 
 RECIPIENTS_FILE = "recipients.txt"
 SENT_LOG_FILE = "sent.txt"
 MIN_DELAY_SEC = 45
-MAX_DELAY_SEC = 90
-MAX_SEND_COUNT = 5
+MAX_DELAY_SEC = 76
+MAX_SEND_COUNT = 6
 
 
 def read_file_text(filepath):
@@ -90,7 +90,7 @@ def send_whatsapp_message(driver, phone: str, full_message: str, image_path: str
     try:
         driver.get(f"https://web.whatsapp.com/send?phone={phone}")
         print(f"  Открыт чат с {phone}")
-        wait = WebDriverWait(driver, 180)
+        wait = WebDriverWait(driver, 60)
 
         # Проверка на незарегистрированный номер
         try:
@@ -126,12 +126,12 @@ def send_whatsapp_message(driver, phone: str, full_message: str, image_path: str
             time.sleep(0.3)
             ActionChains(driver).key_down(Keys.CONTROL).send_keys('v').key_up(Keys.CONTROL).perform()
             print("  Изображение вставлено. Ждём предпросмотр...")
-            time.sleep(4)
+            time.sleep(2)
 
         # Отправляем сообщение
         try:
             # Основной селектор
-            send_btn = WebDriverWait(driver, 20).until(
+            send_btn = WebDriverWait(driver, 8).until(
                 EC.element_to_be_clickable((By.XPATH, "//button[@data-testid='compose-btn-send']"))
             )
             send_btn.click()
