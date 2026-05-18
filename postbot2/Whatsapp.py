@@ -15,22 +15,35 @@ from selenium.webdriver.common.action_chains import ActionChains
 
 # ========== НАСТРОЙКИ ==========
 CONFIG = {
-    "375": ("belarus.txt", "012.jpg"),
-    "79":  ("russia.txt", "011.jpg"),
-    "77":  ("kazakh.txt", "03.jpg"),
+    "375": ("belarus.txt", "02.jpg"),   # Беларусь
+    "79":  ("russia.txt", "01.jpg"),    # Россия
+    "77":  ("kazakh.txt", "03.jpg"),    # Казахстан
+    "996": ("russia.txt", "01.jpg"),    # Киргизия (если нужна)
 }
-DEFAULT_CONFIG = ("russia.txt", "011.jpg")
+DEFAULT_CONFIG = ("russia.txt", "01.jpg")
 
 RECIPIENTS_FILE = "recipients.txt"
 SENT_LOG_FILE = "sent.txt"
+FAILED_LOG_FILE = "failed.txt"          # новый файл для неудачных отправок
 MIN_DELAY_SEC = 45
-MAX_DELAY_SEC = 76
-MAX_SEND_COUNT = 6
+MAX_DELAY_SEC = 90
+MAX_SEND_COUNT = 7
+
+# ========== ФУНКЦИИ ==========
 
 
 def read_file_text(filepath):
     with open(filepath, "r", encoding="utf-8") as f:
         return f.read()
+
+
+def extract_phone_number(text):
+    """Извлекает номер телефона из строки (ищет цифры, возможно с +) и возвращает только цифры."""
+    # Ищем последовательность цифр длиной от 10 до 15 (с возможным + в начале)
+    match = re.search(r'\+?(\d{10,15})', text)
+    if match:
+        return match.group(1)  # возвращаем только цифры
+    return None
 
 
 def parse_recipients(filepath):
@@ -40,22 +53,42 @@ def parse_recipients(filepath):
             line = line.strip()
             if not line:
                 continue
-            parts = line.rsplit(' ', 1)
-            if len(parts) != 2:
-                print(f"Ошибка: {line} - пропускаем")
+            # 1. Пробуем найти ссылку wa.me/...
+            wa_match = re.search(r'wa\.me/(\d+)', line)
+            if wa_match:
+                phone = wa_match.group(1)
+                # ФИО — всё до ссылки
+                fio_part = line[:line.find('https://')].strip()
+                name_parts = fio_part.split()
+                if len(name_parts) >= 2:
+                    first_name = name_parts[1]  # второе слово — имя
+                elif len(name_parts) == 1:
+                    first_name = name_parts[0]
+                else:
+                    first_name = "Клиент"
+                recipients.append({'name': first_name, 'phone': phone, 'raw': line})
                 continue
-            fio, link = parts
-            name_parts = fio.split()
-            if len(name_parts) < 2:
-                print(f"Не удалось извлечь имя из: {fio}")
-                continue
-            first_name = name_parts[1]
-            match = re.search(r'wa\.me/(\d+)', link)
-            if not match:
-                print(f"Не удалось извлечь номер из ссылки: {link}")
-                continue
-            phone = match.group(1)
-            recipients.append({'name': first_name, 'phone': phone})
+            # 2. Если ссылки нет, пробуем извлечь номер из конца строки
+            phone = extract_phone_number(line)
+            if phone:
+                # Удаляем номер из строки, оставляем ФИО
+                # Заменяем найденный номер (с возможным +) на пустоту
+                line_without_phone = re.sub(r'\+?\d{10,15}', '', line).strip()
+                # Избавляемся от лишних пробелов
+                line_without_phone = re.sub(r'\s+', ' ', line_without_phone).strip()
+                name_parts = line_without_phone.split()
+                if len(name_parts) >= 2:
+                    first_name = name_parts[1]  # второе слово — имя
+                elif len(name_parts) == 1:
+                    first_name = name_parts[0]
+                else:
+                    first_name = "Клиент"
+                recipients.append({'name': first_name, 'phone': phone, 'raw': line})
+            else:
+                print(f"Не удалось извлечь номер из строки: {line} — пропускаем")
+                # Записываем в failed сразу? Лучше позже, но можно и здесь
+                with open(FAILED_LOG_FILE, "a", encoding="utf-8") as f_err:
+                    f_err.write(f"Ошибка парсинга: {line}\n")
     return recipients
 
 
@@ -76,6 +109,12 @@ def mark_sent(phone, sent_log, log_file):
         f.write(f"{phone}\n")
 
 
+def mark_failed(recipient, reason, log_file):
+    """Записывает неудачную отправку в файл."""
+    with open(log_file, "a", encoding="utf-8") as f:
+        f.write(f"{recipient['name']} | {recipient['phone']} | {reason} | {recipient.get('raw', '')}\n")
+
+
 def copy_image_to_clipboard(image_path):
     abs_path = os.path.abspath(image_path)
     ps_command = f'''
@@ -86,11 +125,12 @@ def copy_image_to_clipboard(image_path):
     subprocess.run(["powershell", "-Command", ps_command], capture_output=True)
 
 
-def send_whatsapp_message(driver, phone: str, full_message: str, image_path: str = None):
+def send_whatsapp_message(driver, recipient, full_message, image_path=None):
+    phone = recipient['phone']
     try:
         driver.get(f"https://web.whatsapp.com/send?phone={phone}")
         print(f"  Открыт чат с {phone}")
-        wait = WebDriverWait(driver, 60)
+        wait = WebDriverWait(driver, 180)
 
         # Проверка на незарегистрированный номер
         try:
@@ -101,6 +141,7 @@ def send_whatsapp_message(driver, phone: str, full_message: str, image_path: str
             ok_button = driver.find_element(By.XPATH, "//div[@role='dialog']//button")
             ok_button.click()
             time.sleep(1)
+            mark_failed(recipient, "Номер не зарегистрирован в WhatsApp", FAILED_LOG_FILE)
             return False
         except:
             pass
@@ -126,34 +167,33 @@ def send_whatsapp_message(driver, phone: str, full_message: str, image_path: str
             time.sleep(0.3)
             ActionChains(driver).key_down(Keys.CONTROL).send_keys('v').key_up(Keys.CONTROL).perform()
             print("  Изображение вставлено. Ждём предпросмотр...")
-            time.sleep(2)
+            time.sleep(4)
 
         # Отправляем сообщение
         try:
-            # Основной селектор
-            send_btn = WebDriverWait(driver, 8).until(
+            send_btn = WebDriverWait(driver, 20).until(
                 EC.element_to_be_clickable((By.XPATH, "//button[@data-testid='compose-btn-send']"))
             )
             send_btn.click()
             print("  Сообщение отправлено через кнопку.")
         except:
             try:
-                # Альтернативный селектор (aria-label)
                 send_btn = driver.find_element(By.XPATH, "//div[@aria-label='Отправить']")
                 send_btn.click()
                 print("  Сообщение отправлено через aria-label.")
             except:
-                # Запасной вариант: Enter
                 ActionChains(driver).send_keys(Keys.ENTER).perform()
                 print("  Сообщение отправлено через Enter.")
         time.sleep(2)
         return True
     except Exception as e:
         print(f"  Ошибка: {e}")
+        mark_failed(recipient, f"Исключение: {str(e)[:100]}", FAILED_LOG_FILE)
         return False
 
 
 def main():
+    # Загружаем шаблоны текстов для всех префиксов
     templates = {}
     for prefix, (msg_file, _) in CONFIG.items():
         try:
@@ -201,12 +241,15 @@ def main():
             phone = rec['phone']
             cfg = get_config_for_phone(phone)
             msg_file, img_file = cfg
+            # Выбираем шаблон в зависимости от префикса
             if phone.startswith("375"):
                 template = templates.get("375", default_template)
             elif phone.startswith("79"):
                 template = templates.get("79", default_template)
             elif phone.startswith("77"):
                 template = templates.get("77", default_template)
+            elif phone.startswith("996"):
+                template = templates.get("996", default_template)
             else:
                 template = default_template
 
@@ -215,7 +258,7 @@ def main():
             print(f"Получатель: {name}, номер: {phone}")
             print(f"Текст: {msg_file}, картинка: {img_file}")
 
-            ok = send_whatsapp_message(driver, phone, full_message, img_file)
+            ok = send_whatsapp_message(driver, rec, full_message, img_file)
             if ok:
                 success_count += 1
                 mark_sent(phone, sent_phones, SENT_LOG_FILE)
@@ -226,6 +269,7 @@ def main():
             else:
                 print(f"Пропускаем {phone}. Продолжаем без паузы.")
         print(f"\nРассылка завершена. Отправлено: {success_count} из {len(pending)}")
+        print(f"Неудачные отправки записаны в {FAILED_LOG_FILE}")
     except Exception as e:
         print(f"Общая ошибка: {e}")
     finally:

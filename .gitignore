@@ -23,3 +23,4 @@ db.sqlite3
 /postbot2/belarus.txt
 /postbot2/kazakh.txt
 /postbot2/sent.txt
+/postbot2/failed.txt
